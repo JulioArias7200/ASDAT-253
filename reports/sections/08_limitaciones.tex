@@ -1,0 +1,80 @@
+\section{Limitaciones y amenazas a la validez}
+\label{sec:limitaciones}
+
+Ninguna conclusi\'on de este informe debe leerse sin atender a sus l\'\i{}mites. Siguiendo
+la distinci\'on cl\'asica en metodolog\'\i{}a, organizamos las amenazas seg\'un la
+validez a la que afectan.
+
+\subsection{Limitaciones del diccionario}
+
+El diccionario consta de 320 términos, construidos para el dominio de la gesti\'on
+acad\'emica en espa\~nol. Esto implica al menos tres restricciones. Primero, el
+vocabulario recoge el espa\~nol est\'andar y algunas variantes regionales, pero puede no
+cubrir dialectos o jergas locales espec\'ificas. Segundo, el diccionario es finito: los
+términos fuera de \'el no contribuyen a la se\~nal, lo que explica en parte la cobertura
+del \pctCobertura{}\%. Tercero, la ponderaci\'on de los términos es fija y no se adapta al
+contexto m\'as all\'a de la negaci\'on.
+
+Ampliar el diccionario es posible, pero no trivial: cada término nuevo debe validarse
+para no introducir ruido. Un aumento indiscriminado de la cobertura a costa de la
+precisi\'on ser\'\i{}a un mal negocio metodol\'ogico.
+
+\subsection{Ironía, sarcasmo y negaci\'on compleja}
+
+El m\'etodo detecta la negaci\'on mediante una ventana contextual de tres tokens. Esta
+regla captura los casos simples (``\emph{no est\'a bien}'') pero falla ante
+construcciones complejas: la negaci\'on de largo alcance, la ironía y el sarcasmo
+escapan a cualquier regla l\'exica. La literatura reconoce que la ironía es una frontera
+dif\'\i{}cil incluso para modelos supervisados \citep{liu2012sentiment}. Los resultados
+deben interpretarse, por tanto, como una aproximaci\'on agregada, robusta en promedio pero
+falible en casos individuales.
+
+\subsection{Validez de constructo}
+
+Etiquetar ``polaridad'' o ``emoci\'on'' a partir de un l\'exico asume que las palabras
+son indicadores v\'alidos de estados afectivos. Esta asunci\'on es razonable en promedio,
+pero cuestionable a nivel individual: una misma palabra puede expresar afecto o
+simplemente describir un hecho. El esquema de dieciocho emociones es ecl\'ectico y no
+corresponde a una teor\'\i{}a psicol\'ogica \'unica, lo que limita las inferencias de
+car\'acter psicol\'ogico.
+
+\subsection{Validez externa y generalizaci\'on}
+
+El corpus corresponde a un \'unico grupo, de un \'unico programa, en un \'unico per\'\i{}odo
+y en un \'unico idioma. Los hallazgos no son directamente generalizables a otros grupos,
+instituciones o culturas. La elevada proporci\'on de indeterminados es, adem\'as, una
+propiedad del \emph{g\'enero} del corpus (coordinaci\'on operativa) y no necesariamente
+de otros entornos de conversaci\'on.
+
+\subsection{Sesgos de selecci\'on y de registro}
+
+El registro de Telegram solo captura lo que se escribe en el grupo. Las interacciones
+privadas, las conversaciones orales y las emociones no verbalizadas quedan fuera. Esto
+introduce un sesgo de selecci\'on: el clima emocional medido es el \emph{visible}, no el
+\emph{real}. Adicionalmente, los mensajes con contenido multimedia sin texto ---que
+pudieran contener carga afectiva--- fueron excluidos por carecer de material analizable.
+
+\subsection{Reacciones y multimedia}
+
+Las reacciones se registran pero no se integran plenamente en la puntuaci\'on por
+defecto, ya que una reacción no siempre se refiere al mensaje inmediatamente anterior ni
+a su texto. Los mensajes multimedia sin texto quedan fuera del an\'alisis. Ambas
+omisiones implican que la se\~nal afectiva real del grupo es probablemente algo mayor que
+la medida.
+
+\subsection{Ausencia de validaci\'on supervisada}
+
+La limitaci\'on m\'as importante es la falta de etiquetas manuales. Sin ellas, no es
+posible calcular precisi\'on, exhaustividad ni $F_1$, ni medir el acuerdo entre
+anotadores. Las m\'etricas reportadas ---cobertura y nivel de evidencia--- son internas y
+no dicen nada sobre la correcci\'on de las etiquetas. La infraestructura para la
+anotaci\'on manual existe y est\'a lista para usarse; su explotaci\'on queda como trabajo
+futuro prioritario.
+
+\subsection{Limitaciones del an\'alisis de tópicos y Markov}
+
+El n\'umero de tópicos $k$ se fija por configuraci\'on y no se optimiza autom\'aticamente
+mediante m\'etricas de coherencia, lo que deja abierta la posibilidad de soluciones
+alternativas. La cadena de Markov asume el primer orden y trata los mensajes como
+secuencia lineal, ignorando la estructura de hilos de respuesta y la heterogeneidad de
+emisores. El an\'alisis por usuario est\'a previsto pero desactivado por defecto.

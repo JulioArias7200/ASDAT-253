@@ -1,0 +1,96 @@
+\section{Introducción}
+\label{sec:intro}
+
+\subsection{Contexto}
+
+La comunicación digital se ha convertido en el canal primario de coordinación en
+entornos educativos. Grupos de mensajería instantánea como Telegram, WhatsApp o Discord
+albergan hoy una parte sustancial de la interacción informal entre estudiantes,
+docentes y personal administrativo. Estos espacios no solo transmiten información
+logística ---fechas, requisitos, procedimientos--- sino que también vehiculan estados
+afectivos: dudas ansiosas ante plazos, gratitud por la ayuda recibida, frustración ante
+trámites fallidos o entusiasmo colectivo por logros compartidos.
+
+El proyecto AS\_Telegram se propone analizar, de manera exploratoria y sistemática, la
+carga emocional y la estructura temática de uno de esos espacios: el grupo privado de
+Telegram ``Curso de Temporada Invierno 2026'', dedicado a la gestión académica de un
+programa universitario. El objetivo no es evaluar a personas ni instituciones, sino
+caracterizar el clima emocional agregado y comprender qué tipos de intercambio dominan
+la conversación.
+
+\subsection{Problema de investigación}
+
+El análisis de sentimiento en español aplicado a contextos operativos plantea tres
+dificultades que motivan este trabajo. En primer lugar, la mayor parte del contenido de
+un grupo de gestión académica es \emph{factual} y no \emph{afectivo}: preguntas por
+horarios, enlaces a formularios o confirmaciones de pago rara vez contienen palabras
+cargadas de sentimiento. Un método que fuerce una etiqueta en todos los mensajes
+producirá una proporción artificialmente alta de \emph{neutro}, confundiendo la ausencia
+de señal con la neutralidad. En segundo lugar, el texto informal está poblado de emojis,
+jerga, abreviaturas y errores tipográficos que los métodos entrenados sobre texto formal
+manejan mal. En tercer lugar, la negación y las construcciones irónicas pueden invertir
+el sentido de un término léxico.
+
+Este informe sostiene que un análisis honesto debe (i) distinguir explícitamente entre
+\emph{ausencia de evidencia} y \emph{neutralidad}, (ii) aprovechar los emojis como
+señal informativa en lugar de descartarlos y (iii) reportar la cobertura del método como
+un resultado de primer orden, no como una nota al pie.
+
+\subsection{Objetivos}
+
+El objetivo general es dise\~nar, ejecutar y documentar un \emph{pipeline} reproducible
+de análisis de sentimiento y emociones para un corpus real de Telegram en español. Los
+objetivos específicos son:
+
+\begin{enumerate}[label=\textbf{O\arabic*.}]
+  \item Construir una infraestructura ETL trazable que importe, valide, limpie y
+        persista el corpus, registrando cada operación en una base de datos de
+        auditoría.
+  \item Desarrollar un clasificador léxico multietiqueta en español que integre las
+        señales del léxico, los emojis y las reacciones, y que modele la negación de
+        forma contextual.
+  \item Caracterizar la distribución de polaridad y emociones, prestando especial
+        atención a la cobertura del diccionario y a los mensajes indeterminados.
+  \item Describir la evolución temporal y los patrones de actividad (día y hora).
+  \item Descubrir la estructura temática latente del corpus mediante LDA.
+  \item Modelar las transiciones entre estados de polaridad mediante cadenas de Markov.
+  \item Generar de forma automática un informe reproducible que se actualice con los
+        datos.
+\end{enumerate}
+
+\subsection{Preguntas de investigación}
+
+El estudio se guía por las siguientes preguntas:
+
+\begin{description}[style=nextline,leftmargin=1.2cm]
+  \item[PI1.] ¿Qué proporción del corpus contiene evidencia afectiva suficiente y, por
+        tanto, qué fracción queda indeterminada?
+  \item[PI2.] Entre los mensajes con evidencia, ¿cuál es el balance entre polaridad
+        positiva y negativa, y qué emociones predominan?
+  \item[PI3.] ¿Cómo se distribuye la actividad y la polaridad a lo largo del tiempo?
+  \item[PI4.] ¿Qué temas latentes estructuran la conversación?
+  \item[PI5.] ¿Cómo se transita entre estados emocionales y qué estados son más
+        persistentes?
+\end{description}
+
+\subsection{Contribuciones}
+
+Este trabajo realiza cuatro contribuciones. Primero, ofrece un \emph{pipeline} completo,
+abierto y reproducible para el análisis de sentimiento en grupos de Telegram en español,
+incluyendo el tratamiento de emojis, reacciones y negación. Segundo, propone una
+convención explícita para el manejo de la evidencia que evita la imputación de
+neutralidad. Tercero, aplica el método a un corpus real de más de veinte mil mensajes,
+ofreciendo estadísticas descriptivas detalladas. Cuarto, integra la generación
+automática del informe en el propio \emph{pipeline}, de modo que las cifras del documento
+se derivan directamente de los datos.
+
+\subsection{Estructura del documento}
+
+El resto del informe se organiza así. La Sección~\ref{sec:marco} presenta el marco
+teórico. La Sección~\ref{sec:metodologia} describe la metodología. La
+Sección~\ref{sec:datos} caracteriza los datos. La Sección~\ref{sec:resultados} presenta
+los resultados. La Sección~\ref{sec:discusion} los discute. La
+Sección~\ref{sec:limitaciones} aborda las limitaciones. La Sección~\ref{sec:conclusiones}
+concluye. La Sección~\ref{sec:etica} trata la ética, la
+Sección~\ref{sec:reproducibilidad} la reproducibilidad, y el apéndice recoge material
+complementario.

@@ -1,0 +1,58 @@
+\section*{Resumen ejecutivo}
+\addcontentsline{toc}{section}{Resumen ejecutivo}
+
+El presente documento describe, de forma metodológica y reproducible, el análisis de
+sentimiento y emociones aplicado a la conversación de un grupo privado de Telegram
+vinculado a la gestión académica de un programa universitario. El corpus comprende
+\nMensajes{} mensajes recuperados desde una exportación en formato JSON de Telegram
+Desktop, de los cuales \nAnalizados{} resultaron aptos para el análisis tras descartar
+mensajes de servicio y contenidos multimedia sin texto. La ventana temporal abarca desde
+\manualInicio{} hasta \manualFin{}.
+
+El trabajo se articula en torno a un \emph{pipeline} ETL explícito con diez etapas
+encadenadas: importación, validación, limpieza, procesamiento de emojis, detección de
+negación, análisis léxico de sentimiento, análisis temporal, modelado de tópicos,
+modelado de cadenas de Markov y generación automática del informe. Cada etapa registra su
+ejecución en una base de datos SQLite de auditoría, lo que permite reconstruir el
+linaje de cada mensaje y cada artefacto.
+
+El método de clasificación es de naturaleza léxica multietiqueta y opera en español.
+A diferencia de los enfoques que reducen el sentimiento a un único número, el método
+separa explícitamente tres fuentes de evidencia: (i) el léxico, mediante un diccionario
+de términos ponderados; (ii) los emojis, que nunca se eliminan y que aportan polaridad y
+emociones propias; y (iii) las reacciones, que se registran aunque no se ponderan por
+defecto. Además, se modela la negación con una ventana contextual de tres tokens y se
+expande la contracción de dobles negaciones según configuración. Cuando un mensaje no
+aporta evidencia suficiente, se etiqueta como \emph{indeterminado} y nunca como
+\emph{neutro} por defecto, evitando así imputar neutralidad donde solo hay silencio
+informativo.
+
+La cobertura efectiva del diccionario es del \pctCobertura{}\%. Esto implica que
+\pctIndeterminado{}\% de los mensajes queda sin evidencia suficiente y, por tanto,
+indeterminado. Lejos de ocultarse, este resultado se presenta como un hallazgo principal:
+un corpus de naturaleza operativa y logística ---consultas de trámites, avisos de fechas
+y coordinación de asignaturas--- contiene un volumen muy alto de enunciados factuales que,
+por diseño, no expresan carga afectiva explícita. Entre los mensajes que sí aportan
+evidencia, el balance es marcadamente positivo: \pctPositivos{}\% se clasifican como
+positivos frente a \pctNegativos{}\% como negativos. La emoción más frecuente es
+\emph{\emocionTop{}}, coherente con un entorno de ayuda mutua y cooperación académica.
+
+El análisis temporal muestra \diasActividad{} días con actividad distribuidos en \meses{}
+meses. La actividad se concentra en el día \diaPico{} y en torno a las \horaPico{}. El
+modelado de tópicos con asignación latente de Dirichlet (LDA) recupera \nTemas{} temas
+interpretables, relacionados con pagos y matrículas, horarios y paralelos, procesos de
+inscripción, comunicación institucional y consultas generales. El análisis de cadenas de
+Markov sobre la secuencia de estados de polaridad revela que el estado neutro es
+fuertemente persistente (permanencia media de \permanenciaNeutro{} turnos), mientras que
+los episodios negativos tienden a disiparse con relativa rapidez (recuperación media de
+\recuperacionNegativa{} turnos).
+
+El documento se organiza de la siguiente manera. La Sección~\ref{sec:intro} presenta el
+contexto y los objetivos. La Sección~\ref{sec:marco} desarrolla el marco teórico. La
+Sección~\ref{sec:metodologia} describe la metodología y la arquitectura del pipeline. La
+Sección~\ref{sec:datos} caracteriza el corpus. La Sección~\ref{sec:resultados} expone los
+resultados. La Sección~\ref{sec:discusion} discute los hallazgos y la
+Sección~\ref{sec:limitaciones} explicita sus limitaciones. La Sección~\ref{sec:conclusiones}
+cierra con las conclusiones y el trabajo futuro. La Sección~\ref{sec:etica} aborda las
+consideraciones éticas y la Sección~\ref{sec:reproducibilidad} detalla los mecanismos de
+reproducción. El apéndice reúne las figuras y tablas complementarias.

@@ -1,0 +1,81 @@
+\section{Reproducibilidad}
+\label{sec:reproducibilidad}
+
+La reproducibilidad es un requisito de dise\~no, no un a\~nadido. Todo el an\'alisis se
+organiza como una sucesi\'on de etapas independientes, deterministas y auditadas, de modo
+que cualquier tercero pueda reconstruir los resultados desde el corpus original.
+
+\subsection{Estructura del proyecto}
+
+El repositorio se organiza en directorios con responsabilidades claras: \texttt{R/}
+contiene los m\'odulos del \emph{pipeline}; \texttt{scripts/} los puntos de entrada
+numerados; \texttt{data/} los datos en sus distintos niveles de procesamiento;
+\texttt{database/} el esquema y la base de datos de auditor\'ia; \texttt{dashboard/} el
+panel interactivo; \texttt{tests/} la suite de pruebas; y \texttt{reports/} los
+artefactos y el presente informe.
+
+\subsection{Pipeline de ejecuci\'on}
+
+La ejecuci\'on completa se realiza mediante diez scripts encadenados:
+
+\begin{verbatim}
+Rscript scripts/01_import.R
+Rscript scripts/02_validate.R
+Rscript scripts/03_clean.R
+Rscript scripts/04_sentiment.R
+Rscript scripts/05_topics.R
+Rscript scripts/06_temporal.R
+Rscript scripts/07_markov.R
+Rscript scripts/08_evaluate.R
+Rscript scripts/09_generate_report.R
+Rscript scripts/10_test.R
+\end{verbatim}
+
+Cada script imprime una marca de finalizaci\'on (\texttt{OK <etapa>}) y registra su
+ejecuci\'on en la base de datos.
+
+\subsection{Gesti\'on del entorno}
+
+Las dependencias de R se fijan mediante \texttt{renv}, con el archivo \texttt{renv.lock}
+como fuente de verdad de las versiones de los paquetes. La configuraci\'on se define en
+un archivo \texttt{YAML} de ejemplo que el usuario copia y ajusta. Los par\'ametros
+clave ---ventana de negaci\'on, umbral de evidencia, n\'umero de t\'opicos, semilla---
+están centralizados en esa configuraci\'on, lo que permite reproducir experimentos bajo
+condiciones controladas.
+
+\subsection{Determinismo y semillas}
+
+El modelado de t\'opicos emplea una semilla fija, de modo que la estimaci\'on de LDA es
+reproducible. Las operaciones de anonimizaci\'on aplican funciones de \emph{hash}
+deterministas. Las marcas temporales se almacenan en UTC para evitar ambig\"uedades de
+zona horaria.
+
+\subsection{Trazabilidad}
+
+Cada etapa registra en la base SQLite la versi\'on del diccionario, los par\'ametros
+empleados, el n\'umero de elementos procesados y los artefactos producidos. Esto permite
+responder preguntas como ``¿qu\'e versi\'on del diccionario gener\'o esta figura?'' o
+``¿cu\'antos mensajes se procesaron en la \'ultima ejecuci\'on?''.
+
+\subsection{Generaci\'on autom\'atica del informe}
+
+Este documento no contiene cifras escritas a mano. Todas las macros num\'ericas
+(\texttt{\textbackslash nMensajes}, \texttt{\textbackslash pctCobertura},
+\texttt{\textbackslash emocionTop}, etc.), las tablas y las figuras se generan a partir
+de los resultados de la \'ultima ejecuci\'on. Recompilar despu\'es de una nueva ejecuci\'on
+actualiza autom\'aticamente el informe, garantizando la coherencia entre datos y texto.
+
+\subsection{Pruebas automatizadas}
+
+La suite de pruebas, construida con \texttt{testthat}, cubre la importaci\'on, la
+validaci\'on, la limpieza, el procesamiento de emojis, la detecci\'on de negaci\'on, el
+an\'alisis de sentimiento, el modelado de t\'opicos y de Markov, la base de datos y los
+m\'odulos del panel. Su ejecuci\'on (\texttt{scripts/10\_test.R}) forma parte del
+\emph{pipeline} y sirve como red de seguridad frente a regresiones.
+
+\subsection{Panel interactivo}
+
+El panel Shiny (\texttt{dashboard/run.R}) ofrece una exploraci\'on interactiva de los
+resultados: visi\'on general, sentimiento, temporal, t\'opicos, Markov, auditor\'ia y un
+avatar emocional agregado. El panel lee los mismos artefactos que el informe, de modo que
+ambas salidas son consistentes por construcci\'on.

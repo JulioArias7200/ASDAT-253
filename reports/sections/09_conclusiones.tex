@@ -1,0 +1,53 @@
+\section{Conclusiones y trabajo futuro}
+\label{sec:conclusiones}
+
+\subsection{Conclusiones}
+
+Este informe ha documentado de forma exhaustiva un an\'alisis de sentimiento y emociones
+sobre \nAnalizados{} mensajes de un grupo de Telegram de gesti\'on acad\'emica. Las
+conclusiones principales son las siguientes.
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{El grupo es un espacio primordialmente operativo.} El
+        \pctIndeterminado{}\% de los mensajes no contiene evidencia afectiva suficiente.
+        Este resultado, lejos de ser un defecto, caracteriza la funci\'on referencial del
+        canal y justifica una convenci\'on expl\'icita que distingue la ausencia de
+        evidencia de la neutralidad.
+  \item \textbf{Cuando emerge el afecto, es mayoritariamente positivo.} Entre los
+        mensajes con evidencia, el \pctPositivos{}\% se clasifica como positivo frente al
+        \pctNegativos{}\% negativo. La emoci\'on dominante es \emph{\emocionTop{}},
+        propia de un entorno de ayuda mutua.
+  \item \textbf{La actividad sigue el calendario acad\'emico.} Con \diasActividad{} días
+        activos, \meses{} meses de historia y una concentraci\'on de la actividad en
+        \diaPico{} y en torno a las \horaPico{}, el ritmo del grupo reproduce los ciclos
+        de inscripci\'on, matr\'\i{}cula y ex\'amenes.
+  \item \textbf{La estructura tem\'atica es administrativa.} Los \nTemas{} tópicos
+        recuperados giran en torno a pagos, horarios, inscripciones, comunicados y
+        consultas generales, confirmando la vocaci\'on de servicio del grupo.
+  \item \textbf{La dinámica emocional es estable y autorregulada.} El estado neutro
+        act\'ua como atractor (\pctNeutro{}\% de la masa estacionaria; permanencia media
+        de \permanenciaNeutro{} turnos), mientras que los episodios negativos se disipan
+        con rapidez (recuperaci\'on de \recuperacionNegativa{} turnos).
+  \item \textbf{La honestidad estad\'istica y la trazabilidad son viables.} El
+        \emph{pipeline} demuestra que es posible producir un an\'alisis completo,
+        reproducible y autom\'aticamente informado sin sacrificar el rigor en el manejo
+        de la incertidumbre.
+\end{enumerate}
+
+\subsection{Trabajo futuro}
+
+Las l\'\i{}neas de trabajo futuro que se derivan de este estudio son cinco. Primero,
+incorporar validaci\'on humana para medir precisi\'on, exhaustividad y $F_1$, y para
+estimar el acuerdo entre anotadores mediante la $\kappa$ de Cohen. Segundo, ampliar y
+refinar el diccionario con léxico extra\'\i{}do del propio corpus, empleando técnicas
+semiautom\'aticas pero siempre con revisi\'on manual. Tercero, integrar modelos
+contextuales preentrenados en espa\~nol como se\~nal complementaria, manteniendo la
+separaci\'on de fuentes y sin convertir el sistema en una caja negra. Cuarto, incorporar
+las reacciones y los contenidos multimedia en la puntuaci\'on, resolviendo el problema de
+la referencia temporal de la reacción. Quinto, extender el an\'alisis por usuario y por
+hilo de conversaci\'on, respetando escrupulosamente las garant\'\i{}as de privacidad.
+
+En t\'erminos m\'as amplios, este trabajo sugiere que la miner\'\i{}a de opiniones en
+canales educativos informales ofrece un valor real ---anticipar fricciones, mejorar la
+comunicaci\'on, entender el clima del grupo--- siempre que se practique con transparencia
+metodol\'ogica y respeto por las personas cuyos mensajes constituyen los datos.

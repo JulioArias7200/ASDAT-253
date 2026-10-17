@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Si usas este software, cita el repositorio."
+title: "AS_Telegram: análisis de sentimiento y emociones en un grupo de Telegram"
+abstract: >-
+  Pipeline en R para el análisis léxico multietiqueta de sentimiento y emociones
+  en mensajes de un grupo de Telegram, con análisis temporal, temático (LDA) y de
+  transiciones (Markov), dashboard Shiny e informe LaTeX reproducible.
+type: software
+authors:
+  - family-names: "AS_Telegram contributors"
+    name: "AS_Telegram contributors"
+license: MIT
+keywords:
+  - sentiment-analysis
+  - emotion-detection
+  - spanish
+  - telegram
+  - R
+  - shiny
+  - reproducible-research
+version: "1.0.0"
+date-released: "2026-10-16"

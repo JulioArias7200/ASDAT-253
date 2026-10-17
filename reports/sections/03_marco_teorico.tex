@@ -1,0 +1,93 @@
+\section{Marco teórico}
+\label{sec:marco}
+
+\subsection{Análisis de sentimiento}
+
+El análisis de sentimiento, también llamado minería de opiniones, es el campo que estudia
+la extracción automática de actitudes, opiniones y emociones a partir de texto
+\citep{liu2012sentiment}. La literatura distingue dos grandes familias de métodos: los
+enfoques supervisados, que entrenan clasificadores sobre corpus etiquetados, y los
+enfoques léxicos, que combinan un diccionario de términos con una regla de agregación
+\citep{taboada2011socal}. Los métodos léxicos, pese a su simplicidad, presentan ventajas
+notables en contextos de dominio específico y de escasez de datos etiquetados: son
+transparentes, interpretables y no requieren entrenamiento.
+
+Ejemplos representativos de la familia léxica son SO-CAL \citep{taboada2011socal} y
+VADER \citep{hutto2014vader}. Este último fue dise\~nado específicamente para texto de
+redes sociales e incorpora reglas para el manejo de emojis, mayúsculas, puntuación y
+grado de amplificación. El método implementado en este trabajo sigue esa tradición, pero
+se adapta al espa\~nol y se extiende con un esquema multietiqueta de emociones.
+
+\subsection{Enfoques léxicos en espa\~nol}
+
+El espa\~nol ha recibido atención creciente en la literatura de sentimiento.
+\citet{perez2012spanish} construyeron léxicos de sentimiento en espa\~nol mediante
+traducción y validación de recursos en inglés, mientras que \citet{mohammad2013emolex}
+desarrollaron el léxico NRC de asociación palabra--emoción, posteriormente adaptado a
+múltiples idiomas. Estos recursos subrayan un problema central: la traducción directa
+introduce ruido y pierde matices culturales. Por ello, un diccionario específico del
+dominio, construido y revisado manualmente, suele superar a los recursos genéricos en
+tareas aplicadas.
+
+El diccionario de este proyecto consta de 320 términos ponderados, organizados en 18
+categorías emocionales y una escala de polaridad que va de $-3$ a $+5$. Cada término
+aporta simultáneamente una contribución a la polaridad y una o varias contribuciones
+emocionales, lo que permite el etiquetado multietiqueta.
+
+\subsection{Tratamiento de la negación}
+
+La negación es uno de los fenómenos que más degrada el rendimiento de los métodos
+léxicos. Una frase como ``\emph{no es buen\'\i simo}'' contiene un término positivo
+(``buen\'\i simo'') cuyo sentido se invierte por el negador. La literatura ha abordado
+el problema mediante reglas de alcance \citep{brooke2009negation} o modelos de
+meta-aprendizaje \citep{morante2012negation}. La solución adoptada aquí es una ventana
+contextual de tres tokens: si un término léxico aparece precedido por un negador dentro
+de esa ventana, su polaridad se invierte. Los negadores reconocidos incluyen ``no'',
+``ni'', ``nunca'', ``jam\'as'', ``tampoco'', ``sin'', ``nada'', ``nadie'' y variantes
+coloquiales como ``jama''.
+
+\subsection{Emojis y reacciones como señal}
+
+Los emojis no son ruido: constituyen una forma paralela de comunicación afectiva. El
+estudio de referencia \citet{novak2015emojis} asignó puntuaciones de sentimiento a más
+de mil emojis y demostró que su distribución es sistemática y culturalmente consistente.
+En consecuencia, este trabajo \emph{nunca} elimina los emojis: los procesa como una
+señal independiente que contribuye a la polaridad y a las emociones. Análogamente, las
+reacciones (los \emph{stickers} con contador) se registran como una tercera señal,
+aunque por defecto se les asigna peso cero para evitar doble conteo, dado que una
+reacción no siempre se refiere al mensaje inmediato.
+
+\subsection{Modelos de emociones}
+
+La psicología ha propuesto varios modelos de la estructura emocional. El modelo de
+emociones básicas de \citet{ekman1992emotions} postula un conjunto reducido de
+emociones universales (alegría, tristeza, miedo, ira, sorpresa y asco). El modelo
+psicoevolucionario de \citet{plutchik1980emotions} organiza las emociones en una rueda
+de ocho dimensiones con intensidades graduadas. El modelo circunflejo de
+\citet{russell1980circumplex} representa el afecto en dos ejes ortogonales: valencia
+(agrado--desagrado) y activación (activación--desactivación). El esquema multietiqueta
+de dieciocho categorías empleado aquí es ecléctico: recoge emociones básicas, matices
+sociales (gratitud, confianza, empatía) y estados relacionados con la tarea académica
+(ansiedad ante plazos, frustración procedimental), inspirados en la rueda de Plutchik y
+en el léxico NRC.
+
+\subsection{Modelado de tópicos}
+
+Para descubrir la estructura temática sin supervisión se utiliza la asignación latente
+de Dirichlet (LDA), introducida por \citet{blei2003lda} y popularizada por
+\citet{blei2012topicmodels}. LDA representa cada documento como una mezcla de tópicos y
+cada tópico como una distribución sobre el vocabulario. La advertencia metodológica de
+\citet{grimmer2013text} es pertinente: los tópicos son construcciones estadísticas que
+deben interpretarse con cautela y validarse cualitativamente, no como categorías
+objetivas preexistentes.
+
+\subsection{Cadenas de Markov}
+
+Para modelar la dinámica de los estados emocionales se emplean cadenas de Markov, un
+formalismo clásico para procesos estocásticos sobre un espacio de estados finito
+\citep{norris1997markov}. Cada mensaje se asigna a un estado (positivo, negativo o
+neutro) y se estima la matriz de transición a partir de las frecuencias observadas. La
+distribución estacionaria describe la proporción de tiempo que el sistema pasa en cada
+estado a largo plazo, y el tiempo medio de primer retorno o de permanencia caracteriza
+la estabilidad de cada estado. Este análisis añade una dimensión dinámica que la mera
+distribución estática de polaridad no captura.

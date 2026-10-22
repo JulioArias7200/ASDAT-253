@@ -1,0 +1,303 @@
+            <!-- SECTION 2: Advanced Interactive Visualizations Grid (ECharts / SVG Analytical Engine) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Visualization 1: Donut Chart - Distribución Multimodal (5 cols on lg) -->
+                <div
+                    class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-sm">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">donut_large</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Distribución Multimodal</h2>
+                        </div>
+                        <span
+                            class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{{ "{:,}".format(modalidad.total) }} procesados</span>
+                    </div>
+                    <div class="relative flex items-center justify-center my-space-md">
+                        <!-- Standalone High-Precision SVG Donut Visualization with Interactive Polar Coordinates -->
+                        <svg class="w-64 h-64 transform -rotate-90" viewbox="0 0 280 280">
+                            <!-- Background base circle track -->
+                            <circle class="text-surface-container-highest" cx="140" cy="140" fill="transparent" r="100"
+                                stroke="currentColor" stroke-width="26"></circle>
+                            <!-- Texto puro (Verde esmeralda) -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#4edea3" stroke-dasharray="{{ modalidad.len_texto }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="0" stroke-width="26">
+                            </circle>
+                            <!-- Preguntas Académicas (Cian) -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#4cd7f6" stroke-dasharray="{{ modalidad.len_preguntas }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_preguntas }}" stroke-width="26">
+                            </circle>
+                            <!-- Capturas OCR (Ámbar) -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#fbbf24" stroke-dasharray="{{ modalidad.len_ocr }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_ocr }}" stroke-width="26">
+                            </circle>
+                            <!-- Stickers afectivos (Rosa/Púrpura) -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#f472b6" stroke-dasharray="{{ modalidad.len_stickers }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_stickers }}" stroke-width="26">
+                            </circle>
+                        </svg>
+                        <!-- Donut Hole Content (Metric Callout) -->
+                        <div
+                            class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total</span>
+                            <span
+                                class="font-headline-lg text-headline-lg text-tertiary font-bold tracking-tight mt-0.5">{{ "{:,}".format(modalidad.total) }}</span>
+                            <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">Mensajes Telegram</span>
+                        </div>
+                    </div>
+                    <!-- Legend and Breakdown Rows -->
+                    <div
+                        class="grid grid-cols-2 gap-space-xs pt-space-sm bg-surface-container-low p-space-sm rounded-lg">
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#4edea3]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Texto Puro</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-tertiary">{{ modalidad.pct_texto }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.texto_puro) }} msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#4cd7f6]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Preguntas</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-secondary">{{ modalidad.pct_preguntas }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.preguntas) }} msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#fbbf24]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Imágenes OCR</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-amber-400">{{ modalidad.pct_ocr }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.ocr) }} msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#f472b6]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Stickers</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span
+                                    class="font-code-sm text-code-sm font-semibold text-pink-400">{{ modalidad.pct_stickers }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.stickers) }} msgs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization 2: Ranking de Docentes con Mayor Interacción Estudiantil (7 cols on lg) -->
+                <div
+                    class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-xs">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-primary text-[20px]">person_celebrate</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Docentes Más Comentados</h2>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-surface-container-high px-space-xs py-0.5 rounded text-outline font-label-sm text-label-sm">
+                            <span class="material-symbols-outlined text-[13px] text-tertiary">bolt</span>
+                            <span>Fuente: vista_ranking_docentes (Neon)</span>
+                        </div>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de 3,734 menciones estudiantiles y consultas catalogadas por docente.</p>
+                    
+                    <!-- Horizontal Bar List Dinámico -->
+                    <div class="flex flex-col gap-space-sm">
+                        {% for doc in ranking_docentes %}
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span class="font-code-sm text-[11px] text-outline font-mono">#{{ loop.index }}</span>
+                                    <span class="material-symbols-outlined text-[15px] {% if loop.index == 1 %}text-amber-400{% elif loop.index <= 3 %}text-tertiary{% else %}text-secondary{% endif %}">school</span>
+                                    <span class="truncate max-w-[260px] sm:max-w-md">{{ doc.docente }}</span>
+                                </span>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-code-sm text-code-sm text-outline hidden sm:inline">{{ doc.consultas_estudiantiles }} preguntas</span>
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant font-semibold">{{ doc.total_menciones }} menciones</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="{% if loop.index == 1 %}bg-amber-400{% elif loop.index <= 3 %}bg-tertiary{% else %}bg-secondary{% endif %} h-full rounded-full transition-all duration-500"
+                                    style="width: {{ doc.width_pct }}%"></div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="py-space-lg text-center text-outline font-body-sm">Cargando ranking de docentes desde Neon...</div>
+                        {% endfor %}
+                    </div>
+
+                    <div
+                        class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-code-sm text-code-sm">
+                        <span>* Métricas agregadas en vivo desde 23,462 mensajes analizados</span>
+                        <span class="text-secondary hover:underline cursor-pointer">Ver todos los {{ kpis.total_docentes }} docentes</span>
+                    </div>
+                </div>
+
+                <!-- Visualization 3: Línea de Área - Evolución Cronológica (8 cols on lg) -->
+                <div
+                    class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
+                            <div class="flex flex-col">
+                                <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Histórica de Conversaciones</h2>
+                                <span class="font-label-sm text-label-sm text-outline">Serie cronológica de 47 cohortes mensuales (2020 - 2024)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg">
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-tertiary"></span> Total Mensajes
+                            </span>
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-secondary px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-secondary"></span> Preguntas Académicas
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Analytical Area + Spline Chart SVG with Real Event Annotations -->
+                    <div class="w-full relative py-space-sm">
+                        <svg class="w-full h-56 overflow-visible" viewbox="0 0 740 240">
+                            <defs>
+                                <lineargradient id="volumeArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.25"></stop>
+                                    <stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.0"></stop>
+                                </lineargradient>
+                                <lineargradient id="posArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4edea3" stop-opacity="0.2"></stop>
+                                    <stop offset="100%" stop-color="#4edea3" stop-opacity="0.0"></stop>
+                                </lineargradient>
+                            </defs>
+                            <!-- Grid horizontal reference lines -->
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="30" y2="30"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="80" y2="80"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="130" y2="130"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="180" y2="180"></line>
+                            <line class="text-outline-variant" stroke="currentColor" x1="40" x2="720" y1="210" y2="210">
+                            </line>
+                            <!-- Y Axis Labels -->
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="34">2k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="84">1.5k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="134">1k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="184">500</text>
+                            
+                            <!-- Volume Area Path -->
+                            <path
+                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55 L 700,210 L 60,210 Z"
+                                fill="url(#volumeArea)"></path>
+                            <!-- Activity Path (Cyan Line) -->
+                            <path
+                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55"
+                                fill="none" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
+                            <!-- Questions / Consultas Path (Green Line) -->
+                            <path
+                                d="M 60,195 C 120,185 180,165 240,150 C 300,140 360,160 420,145 C 480,115 540,130 600,120 C 650,110 680,115 700,118"
+                                fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2"></path>
+
+                            <!-- Academic Event Annotation 1: Inscripciones I-2022 -->
+                            <line opacity="0.6" stroke="#4cd7f6" stroke-dasharray="2 2" stroke-width="1" x1="240"
+                                x2="240" y1="40" y2="210"></line>
+                            <circle cx="240" cy="90" fill="#4cd7f6" r="4"></circle>
+                            <g transform="translate(200, 15)">
+                                <rect class="shadow-sm" fill="#1c1f2a" height="18" rx="4" width="80"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#4cd7f6" text-anchor="middle"
+                                    x="40" y="12">Inscripciones</text>
+                            </g>
+
+                            <!-- Academic Event Annotation 2: Exámenes Parciales -->
+                            <line opacity="0.6" stroke="#f472b6" stroke-dasharray="2 2" stroke-width="1" x1="480"
+                                x2="480" y1="35" y2="210"></line>
+                            <circle cx="480" cy="50" fill="#f472b6" r="4"></circle>
+                            <g transform="translate(440, 12)">
+                                <rect fill="#831843" height="18" opacity="0.9" rx="4" width="80"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#fbcfe8" text-anchor="middle"
+                                    x="40" y="12">Parciales</text>
+                            </g>
+
+                            <!-- Academic Event Annotation 3: Pico de Consultas 2024 -->
+                            <circle class="animate-ping" cx="600" cy="60" fill="#4edea3" opacity="0.7" r="4.5">
+                            </circle>
+                            <circle cx="600" cy="60" fill="#4edea3" r="4.5"></circle>
+                            <g transform="translate(560, 8)">
+                                <rect fill="#065f46" height="18" opacity="0.9" rx="4" width="80"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#6ffbbe" text-anchor="middle"
+                                    x="40" y="12">Pico Consultas</text>
+                            </g>
+
+                            <!-- X Axis Timestamps -->
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="60" y="228">2021</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="180" y="228">2022-I</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4cd7f6" text-anchor="middle" x="240" y="228">2022-II</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="360" y="228">2023-I</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#f472b6" text-anchor="middle" x="480" y="228">2023-II</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4edea3" text-anchor="middle" x="600" y="228">2024-I</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="700" y="228">2024-II</text>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs bg-surface-container-low p-space-sm rounded-lg">
+                        <div class="flex items-center gap-space-sm">
+                            <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            <span class="font-body-sm text-body-sm text-on-surface">Picos Estacionales: Las consultas se cuadruplican durante periodos de inscripción y semanas de exámenes parciales.</span>
+                        </div>
+                        <span class="font-code-sm text-code-sm text-outline">47 Meses Históricos</span>
+                    </div>
+                </div>
+
+                <!-- Visualization 4: Top Emojis Más Utilizados en Chats (4 cols on lg) -->
+                <div
+                    class="lg:col-span-4 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-xs">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-tertiary text-[20px]">add_reaction</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Reacciones Telegram</h2>
+                        </div>
+                        <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(kpis.total_reacciones) }} totales</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de reacciones granulares recibidas en los mensajes.</p>
+                    
+                    <!-- Vertical frequency columns grid Dinámico -->
+                    <div class="grid grid-cols-4 gap-space-xs h-56 items-end pb-space-sm pt-space-xs">
+                        {% for r in reacciones %}
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">{{ "{:,}".format(r.total) }}</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: {{ r.height_pct }}%;">
+                                <div class="w-full bg-tertiary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-xl mt-1.5 select-none">{{ r.emoji }}</span>
+                            <span
+                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5 font-mono">#{{ loop.index }}</span>
+                        </div>
+                        {% else %}
+                        <div class="col-span-4 text-center py-space-lg text-outline font-body-sm">Cargando reacciones desde Neon...</div>
+                        {% endfor %}
+                    </div>
+
+                    <div
+                        class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-label-sm">
+                        <span>Reacciones Sociales Nativas</span>
+                        <span class="text-tertiary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">bolt</span>
+                            Neon Live
+                        </span>
+                    </div>
+                </div>
+            </div>

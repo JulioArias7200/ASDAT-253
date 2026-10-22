@@ -46,6 +46,19 @@ default_config <- function() {
       emoji_weight = 1.0,
       lexical_weight = 1.0
     ),
+    ngrams = list(
+      sizes = c(1L, 2L, 3L),
+      min_count = 2L,
+      top = 30L,
+      remove_stopwords = TRUE,
+      preserve_negators = TRUE
+    ),
+    features = list(
+      text_col = "text_original"
+    ),
+    tfidf = list(
+      tf_scheme = "raw", min_df = 2L, top = 10L, export = TRUE
+    ),
     topics = list(
       method = "lda", k = 5L, k_range = c(3L, 10L), min_df = 3L,
       max_df = 0.85, ngram_range = c(1L, 2L), seed = 42L

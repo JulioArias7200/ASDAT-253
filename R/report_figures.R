@@ -42,6 +42,8 @@ emoji_shortcode <- function(x) {
     if (s %in% names(EMOJI_SHORTCODE)) return(unname(EMOJI_SHORTCODE[[s]]))
     cp <- utf8ToInt(s)
     if (all(cp < 128)) return(s)
+    # Texto normal con acentos u otros caracteres: no es un emoji.
+    if (grepl("[A-Za-z]", s)) return(s)
     paste(sprintf("U+%X", cp), collapse = "+")
   }, character(1), USE.NAMES = FALSE)
 }
@@ -397,6 +399,63 @@ generate_extra_tables <- function(messages, sentiments, temporal,
   arts
 }
 
+#' Genera las tablas del informe a partir de los artefactos V2.
+#' @export
+generate_v2_tables <- function(tab_dir = proj_path("reports", "tables")) {
+  dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
+  rd <- function(f) {
+    p <- proj_path("data", "results", "v2", f)
+    if (file.exists(p)) readRDS(p) else NULL
+  }
+  ng <- rd("ngrams.rds"); fe <- rd("linguistic_features.rds"); tf <- rd("tfidf.rds")
+  arts <- character(0)
+  fmt_int <- function(x) format(as.integer(x), big.mark = ".", decimal.mark = ",")
+  fmt_dec <- function(x, dec = 2) format(round(x, dec), nsmall = dec,
+                                         big.mark = ".", decimal.mark = ",")
+
+  if (!is.null(ng) && nrow(ng$table)) {
+    d <- do.call(rbind, lapply(ng$sizes, function(s) {
+      x <- ng$table[ng$table$size == s, , drop = FALSE]
+      utils::head(x[order(-x$count), c("size", "ngram", "count")], 3L)
+    }))
+    names(d) <- c("Tamaño", "N-grama", "Frecuencia")
+    d$Frecuencia <- fmt_int(d$Frecuencia)
+    tot <- tapply(ng$table$count, ng$table$size, sum)
+    tot_txt <- paste(sprintf("N=%s: %s", names(tot), fmt_int(tot)), collapse = "; ")
+    arts <- c(arts, write_table(d, "v2_ngrams", tab_dir, colspec = "llr",
+      caption = sprintf("N-gramas más frecuentes del corpus (documento = mensaje). Totales por nivel: %s.", tot_txt)))
+  }
+
+  if (!is.null(fe$features) && nrow(fe$summary)) {
+    labs <- c(n_chars = "Caracteres", n_tokens = "Tokens", n_words = "Palabras",
+              n_unique_words = "Palabras únicas", unique_ratio = "Proporción de únicas",
+              mean_word_len = "Longitud media de palabra", n_questions = "Interrogaciones",
+              n_exclamations = "Exclamaciones", n_upper_words = "Palabras en mayúsculas",
+              upper_ratio = "Proporción de mayúsculas", n_emojis = "Emojis",
+              n_hashtags = "Hashtags", n_mentions = "Menciones", n_urls = "URLs",
+              n_repeated_chars = "Repeticiones de caracteres",
+              n_repeated_punct = "Repeticiones de puntuación", n_intensity = "Intensidad")
+    d <- fe$summary
+    d$feature <- ifelse(d$feature %in% names(labs), labs[d$feature], d$feature)
+    d <- d[, c("feature", "mean", "median", "p90", "max")]
+    names(d) <- c("Característica", "Media", "Mediana", "P90", "Máximo")
+    for (j in 2:5) d[[j]] <- fmt_dec(d[[j]])
+    arts <- c(arts, write_table(d, "v2_features", tab_dir, colspec = "lrrrr",
+      caption = sprintf("Resumen de características lingüísticas superficiales (%s mensajes).",
+                        fmt_int(nrow(fe$features)))))
+  }
+
+  if (!is.null(tf$global) && nrow(tf$global)) {
+    d <- utils::head(tf$global, 10L)[, c("term", "df", "sum_tfidf")]
+    names(d) <- c("Término", "df", "Suma de TF-IDF")
+    d$df <- fmt_int(d$df)
+    d[["Suma de TF-IDF"]] <- fmt_dec(d[["Suma de TF-IDF"]], 1)
+    arts <- c(arts, write_table(d, "v2_tfidf", tab_dir, colspec = "lrr",
+      caption = "Términos con mayor suma de TF-IDF en el corpus"))
+  }
+  arts
+}
+
 #' Escribe un archivo de macros con cifras clave para el informe
 #' @export
 write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
@@ -455,6 +514,23 @@ write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
       sprintf("\\renewcommand{\\permanenciaPositivo}{%.2f}", unname(r$residence[["positivo"]])),
       sprintf("\\renewcommand{\\permanenciaNegativo}{%.2f}", unname(r$residence[["negativo"]])),
       sprintf("\\renewcommand{\\permanenciaNeutro}{%.2f}", unname(r$residence[["neutro"]])))
+  }
+  # Métricas V2 (si existen los artefactos en data/results/v2/)
+  v2_fe <- tryCatch(readRDS(proj_path("data", "results", "v2", "linguistic_features.rds")),
+                    error = function(e) NULL)
+  v2_ng <- tryCatch(readRDS(proj_path("data", "results", "v2", "ngrams.rds")),
+                    error = function(e) NULL)
+  v2_tf <- tryCatch(readRDS(proj_path("data", "results", "v2", "tfidf.rds")),
+                    error = function(e) NULL)
+  if (!is.null(v2_fe$features)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoMensajes}{%s}",
+                      fmt(nrow(v2_fe$features))))
+  }
+  if (!is.null(v2_ng$n_documents)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoDocs}{%s}", fmt(v2_ng$n_documents)))
+  }
+  if (!is.null(v2_tf$global)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoTerms}{%s}", fmt(nrow(v2_tf$global))))
   }
   writeLines(m, path, useBytes = TRUE)
   invisible(path)

@@ -35,12 +35,14 @@ mod_sentiment_ui <- function(id) {
 mod_sentiment_server <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    s <- data$sentiments; m <- data$messages
-    if (!is.null(m)) {
-      rng <- range(as.Date(substr(m$timestamp_utc, 1, 10)), na.rm = TRUE)
-      shiny::updateDateRangeInput(session, "dates", start = rng[1], end = rng[2],
-                                  min = rng[1], max = rng[2])
-    }
+    shiny::observeEvent(data$messages, {
+      m <- data$messages
+      if (!is.null(m) && nrow(m)) {
+        rng <- range(as.Date(substr(m$timestamp_utc, 1, 10)), na.rm = TRUE)
+        shiny::updateDateRangeInput(session, "dates", start = rng[1], end = rng[2],
+                                    min = rng[1], max = rng[2])
+      }
+    })
 
     filtered <- shiny::reactive({
       ev <- if (identical(input$evidence, "todas")) NULL else input$evidence

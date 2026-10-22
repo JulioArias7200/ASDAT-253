@@ -37,15 +37,18 @@ mod_avatar_ui <- function(id) {
 
 mod_avatar_server <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
-    s <- data$sentiments; m <- data$messages
-    if (!is.null(m)) {
-      rng <- range(as.Date(substr(m$timestamp_utc, 1, 10)), na.rm = TRUE)
-      shiny::updateDateRangeInput(session, "dates", start = rng[1], end = rng[2],
-                                  min = rng[1], max = rng[2])
-    }
+    ns <- session$ns
+    shiny::observeEvent(data$messages, {
+      m <- data$messages
+      if (!is.null(m) && nrow(m)) {
+        rng <- range(as.Date(substr(m$timestamp_utc, 1, 10)), na.rm = TRUE)
+        shiny::updateDateRangeInput(session, "dates", start = rng[1], end = rng[2],
+                                    min = rng[1], max = rng[2])
+      }
+    })
 
     agg <- shiny::reactive({
-      if (is.null(s)) return(NULL)
+      if (is.null(data$sentiments)) return(NULL)
       df <- filter_messages(data, date_range = input$dates)
       if (!nrow(df)) return(NULL)
       tot <- emotion_totals(df)
@@ -63,12 +66,13 @@ mod_avatar_server <- function(id, data) {
       DT::datatable(d, options = list(pageLength = 8, dom = "tp"), rownames = FALSE)
     })
 
-    shiny::observeEvent(list(input$override, input$dates, agg()), {
+    shiny::observeEvent(list(input$override, input$dates, input$animate, agg()), {
       a <- agg(); if (is.null(a)) return(invisible(NULL))
-      emo <- if (nzchar(input$override)) input$override else names(a$props)[which.max(a$props)]
+      emo <- if (nzchar(input$override %||% "")) input$override else names(a$props)[which.max(a$props)]
       lab <- .EMO_LABEL[[emo]] %||% emo
       session$sendCustomMessage("avatar_state", list(
-        emotion = emo, label = lab, n = a$n, proportions = as.list(a$props)))
+        emotion = emo, label = lab, n = a$n, proportions = as.list(a$props),
+        target = ns("host"), animated = isTRUE(input$animate)))
     })
   })
 }

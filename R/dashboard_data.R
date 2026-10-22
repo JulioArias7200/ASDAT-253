@@ -19,7 +19,13 @@ load_dashboard_data <- function(cfg = load_config()) {
   out$topics <- rd(results_path("topics.rds"), "topics.rds")
   out$markov <- rd(results_path("markov.rds"), "markov.rds")
   out$evaluation <- rd(results_path("evaluation.rds"), "evaluation.rds")
+  out$v2_ngrams <- rd(results_path(file.path("v2", "ngrams.rds")), "v2/ngrams.rds")
+  out$v2_features <- rd(results_path(file.path("v2", "linguistic_features.rds")),
+                        "v2/linguistic_features.rds")
+  out$v2_tfidf <- rd(results_path(file.path("v2", "tfidf.rds")), "v2/tfidf.rds")
   out$dictionary <- tryCatch(load_dictionary(cfg = cfg), error = function(e) NULL)
+  out$dictionary_versions <- tryCatch(list_dictionary_versions(cfg),
+                                      error = function(e) NULL)
   out$dictionary_version <- dictionary_version(cfg = cfg)
   out$code_version <- code_version()
   out$import_report <- tryCatch(

@@ -130,7 +130,7 @@ opt_donut <- function(df, name_col = 1, value_col = 2, title = NULL, palette = N
       emphasis = list(scale = TRUE, scaleSize = 8,
                       itemStyle = list(shadowBlur = 20, shadowColor = "rgba(99,102,241,.55)")),
       data = .as_data_pairs(df, name_col, value_col))))
-  if (!is.null(palette)) o$color <- palette
+  if (!is.null(palette)) o$color <- as.character(unname(palette))
   if (!is.null(title)) o$title <- list(text = title, left = "center", top = 0, textStyle = list(fontSize = 13))
   o
 }

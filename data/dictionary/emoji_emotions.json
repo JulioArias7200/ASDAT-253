@@ -1,0 +1,394 @@
+{
+  "✅": {
+    "shortcode": "confirmación",
+    "category": "confianza",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "❤": {
+    "shortcode": "afecto",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "❤️": {
+    "shortcode": "afecto",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "⭐": {
+    "shortcode": "U+2B50",
+    "category": "orgullo",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🎉": {
+    "shortcode": "U+1F389",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "👍": {
+    "shortcode": "aprobación",
+    "category": "confianza",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "👎": {
+    "shortcode": "desaprobación",
+    "category": "ira",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "💔": {
+    "shortcode": "U+1F494",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "💕": {
+    "shortcode": "U+1F495",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "💖": {
+    "shortcode": "U+1F496",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "💪": {
+    "shortcode": "U+1F4AA",
+    "category": "orgullo",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🔥": {
+    "shortcode": "popular",
+    "category": "orgullo",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤔": {
+    "shortcode": "U+1F914",
+    "category": "ansiedad",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤗": {
+    "shortcode": "U+1F917",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤞": {
+    "shortcode": "U+1F91E",
+    "category": "esperanza",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤢": {
+    "shortcode": "U+1F922",
+    "category": "asco",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤣": {
+    "shortcode": "risa",
+    "category": "diversion",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤬": {
+    "shortcode": "U+1F92C",
+    "category": "ira",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤮": {
+    "shortcode": "rechazo",
+    "category": "asco",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🤯": {
+    "shortcode": "U+1F92F",
+    "category": "sorpresa",
+    "polarity": "neutro",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🥰": {
+    "shortcode": "U+1F970",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🥳": {
+    "shortcode": "U+1F973",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🥺": {
+    "shortcode": "U+1F97A",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😀": {
+    "shortcode": "U+1F600",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😁": {
+    "shortcode": "alegría",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😂": {
+    "shortcode": "U+1F602",
+    "category": "diversion",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😃": {
+    "shortcode": "U+1F603",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😄": {
+    "shortcode": "U+1F604",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😅": {
+    "shortcode": "U+1F605",
+    "category": "diversion",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😆": {
+    "shortcode": "U+1F606",
+    "category": "diversion",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😊": {
+    "shortcode": "U+1F60A",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😌": {
+    "shortcode": "U+1F60C",
+    "category": "alivio",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😍": {
+    "shortcode": "U+1F60D",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😎": {
+    "shortcode": "U+1F60E",
+    "category": "orgullo",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😔": {
+    "shortcode": "U+1F614",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😘": {
+    "shortcode": "U+1F618",
+    "category": "amor",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😞": {
+    "shortcode": "U+1F61E",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😠": {
+    "shortcode": "U+1F620",
+    "category": "ira",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😡": {
+    "shortcode": "U+1F621",
+    "category": "ira",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😢": {
+    "shortcode": "tristeza",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😤": {
+    "shortcode": "U+1F624",
+    "category": "ira",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😥": {
+    "shortcode": "U+1F625",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😨": {
+    "shortcode": "U+1F628",
+    "category": "miedo",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😩": {
+    "shortcode": "U+1F629",
+    "category": "frustracion",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😫": {
+    "shortcode": "U+1F62B",
+    "category": "frustracion",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😭": {
+    "shortcode": "U+1F62D",
+    "category": "tristeza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😮": {
+    "shortcode": "U+1F62E",
+    "category": "sorpresa",
+    "polarity": "neutro",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😰": {
+    "shortcode": "U+1F630",
+    "category": "ansiedad",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😱": {
+    "shortcode": "sorpresa",
+    "category": "miedo",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😲": {
+    "shortcode": "U+1F632",
+    "category": "sorpresa",
+    "polarity": "neutro",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😳": {
+    "shortcode": "U+1F633",
+    "category": "verguenza",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "😴": {
+    "shortcode": "U+1F634",
+    "category": "aburrimiento",
+    "polarity": "negativo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🙂": {
+    "shortcode": "U+1F642",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🙌": {
+    "shortcode": "U+1F64C",
+    "category": "alegria",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🙏": {
+    "shortcode": "gratitud",
+    "category": "gratitud",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  },
+  "🚀": {
+    "shortcode": "impulso",
+    "category": "anticipacion",
+    "polarity": "positivo",
+    "weight": 1,
+    "negation_sensitive": false
+  }
+}

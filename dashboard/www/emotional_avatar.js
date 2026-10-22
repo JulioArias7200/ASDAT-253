@@ -49,6 +49,8 @@
     var prof = PROFILES[emo] || PROFILES.sin_evidencia;
     var label = (state && state.label) || emo;
     var n = (state && state.n) ? state.n : 0;
+    var anim = (state && state.animated === false) ? "none" : prof.anim;
+    host.classList.toggle("as-anim-off", anim === "none");
 
     host.innerHTML = "";
     host.setAttribute("data-emotion", emo);
@@ -56,7 +58,7 @@
     var ns = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 200 220");
-    svg.setAttribute("class", "as-avatar-svg as-anim-" + prof.anim);
+    svg.setAttribute("class", "as-avatar-svg as-anim-" + anim);
     svg.setAttribute("role", "img");
     svg.setAttribute("aria-label", "Avatar emocional: " + label);
 
@@ -132,7 +134,8 @@
 
   if (window.Shiny && Shiny.addCustomMessageHandler) {
     Shiny.addCustomMessageHandler("avatar_state", function (msg) {
-      var hosts = document.querySelectorAll(".as-avatar-host");
+      var host = msg.target ? document.getElementById(msg.target) : null;
+      var hosts = host ? [host] : document.querySelectorAll(".as-avatar-host");
       for (var i = 0; i < hosts.length; i++) renderAvatar(hosts[i], msg);
     });
   }

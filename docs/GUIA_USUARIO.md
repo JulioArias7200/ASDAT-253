@@ -17,14 +17,17 @@ ejecutado. Los avisos de artefactos ausentes se muestran en el objeto `data$warn
 
 | Pestaña | Para qué sirve |
 |---|---|
-| **Resumen** | métricas globales, distribución de polaridad y emociones, última ejecución |
+| **Resumen** | métricas globales, distribución de polaridad y emociones |
 | **Cargar corpus** | subir un `result.json`, validarlo en vista previa e importarlo |
 | **Sentimientos** | filtrar por emoción, período, polaridad y evidencia; exportar CSV |
 | **Temporal** | polaridad y volumen por día/semana/mes, con media móvil |
 | **Temas** | términos más probables por tópico (LDA) |
-| **Transiciones** | matriz de Markov, distribución estacionaria y métricas |
-| **Avatar emocional** | emoción predominante del período, como expresión SVG |
-| **Diccionario** | buscar y añadir términos; cada cambio crea una versión |
+| **N-gramas** | unigramas/bigramas/trigramas del grupo (V2) |
+| **Frecuencias** | exploración léxica de un término por período (V2) |
+| **Características** | métricas superficiales del texto (palabras, emojis, mayúsculas…) (V2) |
+| **TF-IDF** | términos más ponderados por TF, IDF y TF-IDF (V2) |
+| **Avatar emocional** | emoción predominante del período, como expresión SVG animada |
+| **Diccionario** | buscar, añadir e importar diccionarios; activarlos recalcula el dashboard |
 | **Bitácora** | eventos y ejecuciones registradas en SQLite |
 | **Informe** | regenerar figuras/tablas y compilar el PDF |
 
@@ -37,6 +40,7 @@ ejecutado. Los avisos de artefactos ausentes se muestran en el objeto `data$warn
 ## Avatar emocional
 
 - Elige un período o fuerza una emoción con el selector.
+- El avatar vive en su propia pestaña (no está en el Resumen).
 - El avatar resume la emoción **predominante** del período; la tabla muestra las
   proporciones.
 - Respeta `prefers-reduced-motion` (sin animación si el sistema lo pide).

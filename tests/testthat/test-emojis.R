@@ -31,3 +31,9 @@ test_that("parse_emoji_list tolera NA y JSON vacío", {
   expect_length(parse_emoji_list("[]"), 0)
   expect_equal(parse_emoji_list('["\U0001F60A"]'), "\U0001F60A")
 })
+
+test_that("emoji_shortcode describe emojis y preserva texto con acentos", {
+  expect_equal(emoji_shortcode("\U0001F44D"), "aprobación")
+  expect_equal(emoji_shortcode("mañana"), "mañana")
+  expect_equal(emoji_shortcode("diseño de sistemas"), "diseño de sistemas")
+})

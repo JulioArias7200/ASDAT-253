@@ -35,6 +35,13 @@
 .as-anim-droop  { animation: as-droop 3s ease-in-out infinite; }
 .as-anim-none   { animation: none; }
 
+/* Toggle "Animación" desactivado desde el módulo */
+.as-anim-off .as-avatar-svg { animation: none !important; }
+
+/* Avatar compacto (Resumen) */
+.as-avatar-host-sm .as-avatar-svg { width: 150px; height: 165px; }
+.as-avatar-host-sm { padding: 0.8rem; }
+
 @keyframes as-bounce {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }

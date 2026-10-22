@@ -88,3 +88,55 @@ test_that("mod_overview renderiza sus gráficos ECharts", {
   })
 })
 
+test_that("mod_overview ya no incluye el avatar (vive solo en su pestaña)", {
+  ui_html <- as.character(mod_overview_ui("ov"))
+  expect_false(grepl("as-avatar-host", ui_html, fixed = TRUE))
+  expect_false(grepl("avatar_emo", ui_html, fixed = TRUE))
+  expect_false(grepl("Estado de la última ejecución", ui_html, fixed = TRUE))
+  expect_false(grepl("last_run", ui_html, fixed = TRUE))
+})
+
+test_that("apply_dashboard_recompute copia sólo las claves del dashboard", {
+  rv <- shiny::reactiveValues()
+  apply_dashboard_recompute(rv, list(sentiments = data.frame(x = 1),
+                                     temporal = list(daily = 1),
+                                     desconocida = "ignoralo"))
+  expect_equal(shiny::isolate(nrow(rv$sentiments)), 1)
+  expect_equal(shiny::isolate(names(rv$temporal)), "daily")
+  expect_null(shiny::isolate(rv$desconocida))
+})
+
+test_that("los módulos de datos funcionan con reactiveValues (diccionario re-activado)", {
+  d <- make_fake_data()
+  rv <- shiny::reactiveValues(messages = d$messages, sentiments = d$sentiments,
+                              topics = NULL, markov = NULL)
+  shiny::testServer(mod_sentiment_server, args = list(data = rv), {
+    session$setInputs()
+    expect_error(session$flushReact(), NA)
+  })
+  shiny::testServer(mod_avatar_server, args = list(data = rv), {
+    session$setInputs()
+    expect_error(session$flushReact(), NA)
+  })
+  shiny::testServer(mod_overview_server, args = list(data = rv, con = NULL), {
+    session$setInputs()
+    expect_error(session$flushReact(), NA)
+  })
+})
+
+test_that("opt_donut envia la paleta sin nombres (jsonlite)", {
+  d <- data.frame(label = c("positivo", "negativo"), Freq = c(2, 1))
+  o <- opt_donut(d, palette = c(positivo = "#10b981", negativo = "#ef4444"))
+  expect_type(o$color, "character")
+  expect_null(names(o$color))
+})
+
+test_that("mod_topics funciona con reactiveValues (bug tt)", {
+  tv <- shiny::reactiveValues()
+  tv$topics <- list(topics = data.frame(topic = 1:2, top_words = c("a, b", "c, d")))
+  shiny::testServer(mod_topics_server, args = list(data = tv), {
+    session$setInputs(topic = "1")
+    expect_error(session$flushReact(), NA)
+  })
+})
+

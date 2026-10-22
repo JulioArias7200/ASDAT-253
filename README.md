@@ -55,17 +55,28 @@ tlmgr install babel-spanish lm booktabs caption enumitem
 ### Pipeline completo
 
 ```bash
+Rscript scripts/00_run_all.R         # V1 + V2 en orden
+```
+
+O paso a paso:
+
+```bash
 Rscript scripts/01_import.R          # importa y persiste el corpus
 Rscript scripts/02_validate.R        # validación estructural
 Rscript scripts/03_clean.R           # normalización (conserva original y emojis)
 Rscript scripts/04_sentiment.R       # polaridad + emociones
 Rscript scripts/05_topics.R          # temas (LDA)
+Rscript scripts/05n_ngrams.R         # n-gramas (V2)
+Rscript scripts/05f_features.R       # características superficiales (V2)
 Rscript scripts/06_temporal.R        # agregados diario/semanal/mensual
+Rscript scripts/06t_tfidf.R          # TF-IDF por mensaje (V2)
 Rscript scripts/07_markov.R          # transiciones de estado
 Rscript scripts/08_evaluate.R        # cobertura y evaluación
 Rscript scripts/09_generate_report.R # figuras, tablas y PDF
 Rscript scripts/10_test.R            # suite de pruebas
 ```
+
+Las salidas de V2 se escriben únicamente en `data/results/v2/`.
 
 Si `topicmodels` no encuentra GSL, exportar antes de ejecutar:
 

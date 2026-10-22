@@ -39,6 +39,11 @@ reports/*.aux
 reports/*.log
 reports/*.out
 reports/*.toc
+reports/*.synctex.gz
+reports/*.fls
+reports/*.fdb_latexmk
+reports/*.bbl
+reports/*.blg
 
 # --- Logs -------------------------------------------------------------------
 logs/*
@@ -62,6 +67,7 @@ renv/sandbox/
 
 # --- Temporales -------------------------------------------------------------
 _*.R
+_*.sh
 _*.log
 *.tmp
 *.bak

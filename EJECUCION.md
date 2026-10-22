@@ -244,10 +244,19 @@ Es lo que hace todo el trabajo. Copia y pega este bloque completo:
 export LD_LIBRARY_PATH="$HOME/opt/gsl/usr/lib/x86_64-linux-gnu"
 
 for s in 01_import 02_validate 03_clean 04_sentiment 05_topics \
-         06_temporal 07_markov 08_evaluate 09_generate_report 10_test; do
+         05n_ngrams 05f_features 06_temporal 06t_tfidf 07_markov \
+         08_evaluate 09_generate_report 10_test; do
   echo "================ $s ================"
   Rscript "scripts/$s.R" || { echo "FALLÓ $s"; break; }
 done
+```
+
+También puedes usar el orquestador, que ejecuta todo en procesos independientes:
+
+```bash
+export LD_LIBRARY_PATH="$HOME/opt/gsl/usr/lib/x86_64-linux-gnu"
+Rscript scripts/00_run_all.R            # V1 + V2
+Rscript scripts/00_run_all.R 04 09      # solo pasos que coincidan
 ```
 
 Qué hace cada paso:
@@ -259,7 +268,10 @@ Qué hace cada paso:
 | `03_clean` | Limpia el texto (sin borrar emojis ni negaciones). |
 | `04_sentiment` | Calcula sentimiento y emociones de cada mensaje. |
 | `05_topics` | Descubre los temas de conversación. |
+| `05n_ngrams` | Cuenta unigramas, bigramas y trigramas por mensaje. |
+| `05f_features` | Calcula 17 características superficiales por mensaje. |
 | `06_temporal` | Calcula tendencias por día / semana / mes. |
+| `06t_tfidf` | Pondera los términos con TF--IDF (documento = mensaje). |
 | `07_markov` | Analiza cómo se encadenan los estados. |
 | `08_evaluate` | Mide la cobertura y calidad del análisis. |
 | `09_generate_report` | Crea gráficos, tablas y el PDF. |
@@ -268,12 +280,43 @@ Qué hace cada paso:
 ✅ **Señal de éxito:** cada paso imprime una línea `OK <paso>` y el bloque termina con
 `OK 10_test`.
 
+Los resultados de V2 se guardan **solo** en `data/results/v2/` (`ngrams.rds`,
+`linguistic_features.rds`, `tfidf.rds` y `tfidf.csv`); los artefactos de V1 no se
+sobrescriben. El dashboard los muestra en las pestañas **N-gramas**,
+**Frecuencias**, **Características** y **TF-IDF**.
+
 💡 Si quieres ejecutar un solo paso (por ejemplo el sentimiento):
 
 ```bash
 export LD_LIBRARY_PATH="$HOME/opt/gsl/usr/lib/x86_64-linux-gnu"
 Rscript scripts/04_sentiment.R
 ```
+
+---
+
+## 9.1 Importar un diccionario externo (V2)
+
+Desde el dashboard (**Diccionario → Importar**): elige CSV, JSON o TXT, revisa el mapeo
+de columnas, valida la vista previa e importa. La importación crea una versión nueva en
+`data/dictionary/versions/` y **nunca** sobrescribe el diccionario activo; para usarla hay
+que pulsar **Activar** (se guarda un respaldo de la versión anterior).
+
+Desde R:
+
+```r
+source("R/bootstrap.R"); bootstrap()
+imp <- import_external_dictionary("mi_diccionario.csv")
+activate_dictionary_version(imp$version)
+list_dictionary_versions()
+```
+
+Esquema canónico: `term, category, polarity, weight, language, notes, source`. Las
+categorías deben pertenecer a las 18 emociones del proyecto.
+
+> ⚡ **Auto-actualización**: si al importar marcas **Activar al importar** (o activas una
+> versión en «Versiones del diccionario»), el dashboard recalcula en caliente todo el
+> análisis (sentimientos, temporal, transiciones, evaluación y avatar) con las palabras
+> del grupo y guarda un respaldo del análisis anterior en `data/results/backups/`.
 
 ---
 

@@ -20,10 +20,14 @@ mod_topics_ui <- function(id) {
 mod_topics_server <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    tt <- data$topics$topics
-    if (!is.null(tt)) shiny::updateSelectInput(session, "topic", choices = tt$topic)
+    tt <- shiny::reactive(data$topics$topics)
+    shiny::observe({
+      t <- tt()
+      if (!is.null(t)) shiny::updateSelectInput(session, "topic", choices = t$topic)
+    })
 
     as_render_echart(session, ns("words"), {
+      tt <- tt()
       if (is.null(tt) || is.null(input$topic)) return(NULL)
       sel <- tt[tt$topic == as.integer(input$topic), ]
       if (!nrow(sel)) return(NULL)
@@ -33,8 +37,9 @@ mod_topics_server <- function(id, data) {
     })
 
     output$table <- DT::renderDT({
-      if (is.null(tt)) return(NULL)
-      DT::datatable(tt, options = list(pageLength = 5, dom = "tp"), rownames = FALSE)
+      t <- tt()
+      if (is.null(t)) return(NULL)
+      DT::datatable(t, options = list(pageLength = 5, dom = "tp"), rownames = FALSE)
     })
   })
 }

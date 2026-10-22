@@ -1,0 +1,820 @@
+emoji,rango,count_total,count_texto,count_reacciones,significado_es,categoria_emocional,polaridad
+👍,1,4415,58,4357,Pulgar arriba (aprobación),aprobación,positivo
+👎,2,831,0,831,Pulgar abajo (desaprobación),desaprobación,negativo
+👉,3,211,211,0,Dedo apuntando a la derecha,dirección,neutro
+🤣,4,209,15,194,Cara revolcándose de risa,alegría,positivo
+❤,5,197,0,197,sin definición registrada,sin clasificar,neutro
+✅,6,189,189,0,Aprobado/correcto,positivo,positivo
+🔹,7,162,162,0,sin definición registrada,sin clasificar,neutro
+❤‍🔥,8,144,0,144,sin definición registrada,sin clasificar,neutro
+📍,9,143,143,0,Chincheta azul,neutral,neutro
+🚀,10,123,123,0,Cohete (éxito/rapidez),entusiasmo,positivo
+📅,11,115,115,0,sin definición registrada,sin clasificar,neutro
+🔥,12,113,98,15,Fuego (tendencia/ardiente),intensidad,intenso
+👀,13,106,92,14,sin definición registrada,sin clasificar,neutro
+📢,14,102,102,0,sin definición registrada,sin clasificar,neutro
+😢,15,97,70,27,Cara triste llorando,tristeza,negativo
+😁,16,90,32,58,Cara con amplia sonrisa,alegría,positivo
+🔗,17,89,89,0,sin definición registrada,sin clasificar,neutro
+🙏,18,85,82,3,Manos juntas (gracias / por favor),gratitud,positivo
+🎓,19,82,82,0,Birrete (graduación),logro,positivo
+📚,20,79,79,0,Libros (estudio),neutral,neutro
+✨,21,68,68,0,Destellos,positivo,positivo
+👏,22,65,3,62,Aplausos,aprobación,positivo
+📌,23,62,62,0,Chincheta roja,neutral,neutro
+😅,24,60,60,0,Cara con sudor frío (alivio nervioso),alivio,positivo
+🤡,25,56,5,51,Cara de payaso (ridículo),humor,neutro
+💡,26,55,55,0,sin definición registrada,sin clasificar,neutro
+⏰,27,52,52,0,sin definición registrada,sin clasificar,neutro
+😔,28,52,52,0,Cara reflexiva/pensativa,reflexión,neutro
+💻,29,51,51,0,Computadora portátil,neutral,neutro
+🥲,30,50,50,0,Cara llorando de emoción,emoción_mixta,positivo
+🤔,31,47,34,13,Cara pensativa,reflexión,neutro
+😊,32,46,46,0,Cara sonriente con ojos cerrados,alegría,positivo
+🎉,33,45,41,4,Celebración con confeti,celebración,positivo
+👌,34,45,37,8,sin definición registrada,sin clasificar,neutro
+🎯,35,40,40,0,Diana (meta lograda),logro,positivo
+😭,36,37,36,1,Cara llorando con fuerza,tristeza,negativo
+💰,37,35,35,0,sin definición registrada,sin clasificar,neutro
+️,38,34,34,0,sin definición registrada,sin clasificar,neutro
+📲,39,34,34,0,sin definición registrada,sin clasificar,neutro
+😱,40,34,15,19,sin definición registrada,sin clasificar,neutro
+🌟,41,32,32,0,Estrella brillante,positivo,positivo
+😂,42,32,32,0,Cara llorando de risa,alegría,positivo
+🏆,43,31,31,0,Trofeo,logro,positivo
+🥺,44,31,31,0,Cara con ojos de súplica,súplica,negativo
+🙌,45,26,26,0,sin definición registrada,sin clasificar,neutro
+🤖,46,26,26,0,sin definición registrada,sin clasificar,neutro
+🥹,47,26,26,0,Cara conteniendo lágrimas,emoción,positivo
+⚠️,48,25,25,0,Advertencia,advertencia,negativo
+🎁,49,25,25,0,Regalo,gratitud,positivo
+👇,50,25,25,0,Dedo apuntando abajo,dirección,neutro
+📝,51,25,25,0,Libreta,neutral,neutro
+🚩,52,25,25,0,sin definición registrada,sin clasificar,neutro
+💬,53,24,24,0,sin definición registrada,sin clasificar,neutro
+🖥️,54,24,24,0,Monitor de computadora,neutral,neutro
+🚨,55,23,23,0,sin definición registrada,sin clasificar,neutro
+😐,56,20,10,10,Cara neutral,neutral,neutro
+🥳,57,20,20,0,Cara de fiesta/celebración,celebración,positivo
+🎃,58,19,14,5,sin definición registrada,sin clasificar,neutro
+👥,59,19,19,0,sin definición registrada,sin clasificar,neutro
+🔴,60,19,19,0,sin definición registrada,sin clasificar,neutro
+🗓️,61,19,19,0,sin definición registrada,sin clasificar,neutro
+📱,62,16,16,0,Teléfono móvil,neutral,neutro
+😞,63,16,16,0,Cara decepcionada,decepción,negativo
+🤝,64,16,16,0,Apretón de manos (acuerdo),acuerdo,positivo
+🥳🥳🎉🎉🎉🎉,65,16,16,0,sin definición registrada,sin clasificar,neutro
+🎤,66,15,15,0,sin definición registrada,sin clasificar,neutro
+🐧,67,15,15,0,sin definición registrada,sin clasificar,neutro
+🐧⚙️,68,15,15,0,sin definición registrada,sin clasificar,neutro
+🗓,69,15,15,0,sin definición registrada,sin clasificar,neutro
+😃,70,15,15,0,Cara alegre con boca abierta,alegría,positivo
+😉,71,15,15,0,sin definición registrada,sin clasificar,neutro
+🙏🙏,72,15,15,0,sin definición registrada,sin clasificar,neutro
+🎉👍,73,14,14,0,sin definición registrada,sin clasificar,neutro
+👋,74,14,14,0,Saludo con la mano,saludo,positivo
+💪,75,14,14,0,Bíceps / fuerza,fuerza,positivo
+🌍,76,13,13,0,sin definición registrada,sin clasificar,neutro
+📈,77,13,13,0,Gráfico ascendente,neutral,neutro
+🕛,78,13,13,0,sin definición registrada,sin clasificar,neutro
+🌐,79,12,12,0,sin definición registrada,sin clasificar,neutro
+🎮,80,12,12,0,sin definición registrada,sin clasificar,neutro
+🕒,81,12,12,0,sin definición registrada,sin clasificar,neutro
+🙏🏻,82,12,12,0,sin definición registrada,sin clasificar,neutro
+🥇,83,12,12,0,Medalla de oro,logro,positivo
+🥈,84,12,12,0,Medalla de plata,logro,positivo
+🥲🥲,85,12,12,0,sin definición registrada,sin clasificar,neutro
+👀👀,86,11,11,0,sin definición registrada,sin clasificar,neutro
+👆,87,11,11,0,Dedo apuntando arriba,dirección,neutro
+💚,88,11,11,0,Corazón verde,amor,positivo
+💸,89,11,11,0,sin definición registrada,sin clasificar,neutro
+🕗,90,11,11,0,sin definición registrada,sin clasificar,neutro
+🫠,91,11,11,0,Cara derritiéndose (vergüenza),vergüenza,neutro
+🤮,92,11,0,11,sin definición registrada,sin clasificar,neutro
+♟️🔥,93,10,10,0,sin definición registrada,sin clasificar,neutro
+🇧🇴,94,10,10,0,sin definición registrada,sin clasificar,neutro
+💵,95,10,10,0,sin definición registrada,sin clasificar,neutro
+📄,96,10,10,0,sin definición registrada,sin clasificar,neutro
+📋,97,10,10,0,Portapapeles,neutral,neutro
+📞,98,10,10,0,sin definición registrada,sin clasificar,neutro
+🕙,99,10,10,0,sin definición registrada,sin clasificar,neutro
+🖥,100,10,10,0,sin definición registrada,sin clasificar,neutro
+😬,101,10,10,0,Cara de mueca incómoda,incomodidad,negativo
+😳,102,10,10,0,sin definición registrada,sin clasificar,neutro
+🤭,103,10,10,0,Cara tapando la boca (risita),humor,neutro
+🤯,104,10,1,9,sin definición registrada,sin clasificar,neutro
+🥉,105,10,10,0,Medalla de bronce,logro,positivo
+🧐,106,10,10,0,Cara con monóculo (crítico),curioso,positivo
+⚙️📊,107,9,9,0,sin definición registrada,sin clasificar,neutro
+🎟️,108,9,9,0,sin definición registrada,sin clasificar,neutro
+👨‍🏫,109,9,9,0,Profesor,neutral,neutro
+💻✨,110,9,9,0,sin definición registrada,sin clasificar,neutro
+📊,111,9,9,0,Gráfico de barras,neutral,neutro
+🔐,112,9,9,0,sin definición registrada,sin clasificar,neutro
+🔵,113,9,9,0,sin definición registrada,sin clasificar,neutro
+🔺,114,9,9,0,sin definición registrada,sin clasificar,neutro
+🔻,115,9,9,0,sin definición registrada,sin clasificar,neutro
+🕐,116,9,9,0,sin definición registrada,sin clasificar,neutro
+😂😂,117,9,9,0,sin definición registrada,sin clasificar,neutro
+🙄,118,9,9,0,sin definición registrada,sin clasificar,neutro
+🤨,119,9,1,8,sin definición registrada,sin clasificar,neutro
+🥰,120,9,0,9,Cara con tres corazones (afecto),amor,positivo
+⚠,121,8,8,0,sin definición registrada,sin clasificar,neutro
+🎓✨,122,8,8,0,sin definición registrada,sin clasificar,neutro
+💀,123,8,8,0,Calavera (muerto de risa/peligro),humor_negro,positivo
+📆,124,8,8,0,sin definición registrada,sin clasificar,neutro
+📜,125,8,8,0,sin definición registrada,sin clasificar,neutro
+📣,126,8,8,0,sin definición registrada,sin clasificar,neutro
+🙂,127,8,8,0,Cara ligeramente sonriente,alegría,positivo
+🤩,128,8,8,0,Cara con estrellas en los ojos (fascinado),admiración,positivo
+🧠,129,8,8,0,sin definición registrada,sin clasificar,neutro
+🫂,130,8,8,0,sin definición registrada,sin clasificar,neutro
+☁️,131,7,7,0,sin definición registrada,sin clasificar,neutro
+♟️,132,7,7,0,sin definición registrada,sin clasificar,neutro
+❗✨,133,7,7,0,sin definición registrada,sin clasificar,neutro
+☕,134,7,7,0,Café,neutro,neutro
+⭐,135,7,7,0,Estrella,positivo,positivo
+🐉,136,7,7,0,sin definición registrada,sin clasificar,neutro
+🐧🔩,137,7,7,0,sin definición registrada,sin clasificar,neutro
+👤,138,7,7,0,sin definición registrada,sin clasificar,neutro
+👩‍💻,139,7,7,0,sin definición registrada,sin clasificar,neutro
+📘,140,7,7,0,sin definición registrada,sin clasificar,neutro
+🔐📡,141,7,7,0,sin definición registrada,sin clasificar,neutro
+🔩✨,142,7,7,0,sin definición registrada,sin clasificar,neutro
+😎,143,7,6,1,Cara con lentes (cool/confiado),confianza,positivo
+😑,144,7,7,0,Cara inexpresiva,neutral,neutro
+😢😢,145,7,7,0,sin definición registrada,sin clasificar,neutro
+🤙,146,7,7,0,Llamada telefónica,comunicación,neutro
+☝️,147,6,6,0,Dedo índice arriba (ojo),énfasis,neutro
+♟️🧠,148,6,6,0,sin definición registrada,sin clasificar,neutro
+❓,149,6,6,0,sin definición registrada,sin clasificar,neutro
+⚙️🐧,150,6,6,0,sin definición registrada,sin clasificar,neutro
+🏆💻,151,6,6,0,sin definición registrada,sin clasificar,neutro
+🐍,152,6,6,0,sin definición registrada,sin clasificar,neutro
+👩‍🏫,153,6,6,0,Profesora,neutral,neutro
+👻,154,6,6,0,sin definición registrada,sin clasificar,neutro
+💫,155,6,6,0,Destellos girando,positivo,positivo
+💻📚,156,6,6,0,sin definición registrada,sin clasificar,neutro
+📎,157,6,6,0,sin definición registrada,sin clasificar,neutro
+🕕,158,6,6,0,sin definición registrada,sin clasificar,neutro
+🕘,159,6,6,0,sin definición registrada,sin clasificar,neutro
+😂😂😂,160,6,6,0,sin definición registrada,sin clasificar,neutro
+😿,161,6,6,0,sin definición registrada,sin clasificar,neutro
+🛑,162,6,6,0,sin definición registrada,sin clasificar,neutro
+🤓,163,6,6,0,Cara de nerd/estudioso,intelectual,positivo
+⏳,164,5,5,0,sin definición registrada,sin clasificar,neutro
+➡️,165,5,5,0,sin definición registrada,sin clasificar,neutro
+✔️,166,5,5,0,sin definición registrada,sin clasificar,neutro
+🌎,167,5,5,0,sin definición registrada,sin clasificar,neutro
+🌐💻,168,5,5,0,sin definición registrada,sin clasificar,neutro
+🎈,169,5,5,0,Globo,celebración,positivo
+🎊,170,5,5,0,Fiesta,celebración,positivo
+🏅,171,5,5,0,sin definición registrada,sin clasificar,neutro
+🏫,172,5,5,0,Escuela/Universidad,neutral,neutro
+💛,173,5,5,0,Corazón amarillo,amor,positivo
+🔄⚙️,174,5,5,0,sin definición registrada,sin clasificar,neutro
+🔒🔑,175,5,5,0,sin definición registrada,sin clasificar,neutro
+🕓,176,5,5,0,sin definición registrada,sin clasificar,neutro
+🕔,177,5,5,0,sin definición registrada,sin clasificar,neutro
+🕵️‍♂️🔍,178,5,5,0,sin definición registrada,sin clasificar,neutro
+🖼🔒,179,5,5,0,sin definición registrada,sin clasificar,neutro
+😀,180,5,5,0,Cara ampliamente sonriente,alegría,positivo
+😄,181,5,5,0,Cara sonriente con ojos abiertos,alegría,positivo
+😈,182,5,5,0,Cara de diablillo sonriente,malicia,negativo
+😕,183,5,5,0,Cara confundida,confusión,neutro
+😪,184,5,5,0,Cara con sueño,sueño,neutro
+🙈,185,5,4,1,sin definición registrada,sin clasificar,neutro
+🟡,186,5,5,0,sin definición registrada,sin clasificar,neutro
+🤗,187,5,4,1,Cara de abrazo cálido,calidez,positivo
+🤣🤣,188,5,5,0,sin definición registrada,sin clasificar,neutro
+🥳✨,189,5,5,0,sin definición registrada,sin clasificar,neutro
+🥳🥳🥳,190,5,5,0,sin definición registrada,sin clasificar,neutro
+🫡,191,5,5,0,Cara saludando militarmente,respeto,positivo
+🌚,192,5,0,5,sin definición registrada,sin clasificar,neutro
+🤬,193,5,0,5,Cara furiosa con insultos,enojo,negativo
+☺️,194,4,4,0,sin definición registrada,sin clasificar,neutro
+✳️,195,4,4,0,sin definición registrada,sin clasificar,neutro
+❗❗,196,4,4,0,sin definición registrada,sin clasificar,neutro
+⚡,197,4,4,0,Rayo (energía),energía,positivo
+🆕,198,4,4,0,sin definición registrada,sin clasificar,neutro
+🌸,199,4,4,0,sin definición registrada,sin clasificar,neutro
+🎮🎮🎮,200,4,4,0,sin definición registrada,sin clasificar,neutro
+🎶,201,4,4,0,sin definición registrada,sin clasificar,neutro
+👩‍💻👨‍💻,202,4,4,0,sin definición registrada,sin clasificar,neutro
+👴,203,4,4,0,sin definición registrada,sin clasificar,neutro
+💙❤️,204,4,4,0,sin definición registrada,sin clasificar,neutro
+💻🎓,205,4,4,0,sin definición registrada,sin clasificar,neutro
+📕,206,4,4,0,sin definición registrada,sin clasificar,neutro
+🔊,207,4,4,0,sin definición registrada,sin clasificar,neutro
+🔴🔵🔴🔵🔴🔵🔴🔵🔴🔵,208,4,4,0,sin definición registrada,sin clasificar,neutro
+🔵🔴,209,4,4,0,sin definición registrada,sin clasificar,neutro
+🔸,210,4,4,0,sin definición registrada,sin clasificar,neutro
+🕖,211,4,4,0,sin definición registrada,sin clasificar,neutro
+😂😂😂😂,212,4,4,0,sin definición registrada,sin clasificar,neutro
+😏,213,4,4,0,sin definición registrada,sin clasificar,neutro
+😓,214,4,4,0,sin definición registrada,sin clasificar,neutro
+😢😢😢😢,215,4,4,0,sin definición registrada,sin clasificar,neutro
+😮‍💨,216,4,4,0,sin definición registrada,sin clasificar,neutro
+🙌🏻,217,4,4,0,sin definición registrada,sin clasificar,neutro
+🟢,218,4,4,0,sin definición registrada,sin clasificar,neutro
+🟢⚽,219,4,4,0,sin definición registrada,sin clasificar,neutro
+⚽🟢,220,4,4,0,sin definición registrada,sin clasificar,neutro
+🤓💻,221,4,4,0,sin definición registrada,sin clasificar,neutro
+🤧,222,4,4,0,sin definición registrada,sin clasificar,neutro
+🥲🥲🥲,223,4,4,0,sin definición registrada,sin clasificar,neutro
+🫠🫠,224,4,4,0,sin definición registrada,sin clasificar,neutro
+⏱️,225,3,3,0,sin definición registrada,sin clasificar,neutro
+⌛,226,3,3,0,sin definición registrada,sin clasificar,neutro
+⬇️,227,3,3,0,sin definición registrada,sin clasificar,neutro
+❄️,228,3,3,0,Nieve,neutral,neutro
+✨️,229,3,3,0,sin definición registrada,sin clasificar,neutro
+⚡️,230,3,3,0,sin definición registrada,sin clasificar,neutro
+⚔️,231,3,3,0,sin definición registrada,sin clasificar,neutro
+🍄,232,3,3,0,sin definición registrada,sin clasificar,neutro
+🎉✨,233,3,3,0,sin definición registrada,sin clasificar,neutro
+🎙️,234,3,3,0,sin definición registrada,sin clasificar,neutro
+🎟,235,3,3,0,sin definición registrada,sin clasificar,neutro
+🎮✨,236,3,3,0,sin definición registrada,sin clasificar,neutro
+🎮🔥,237,3,3,0,sin definición registrada,sin clasificar,neutro
+🎲🧩,238,3,3,0,sin definición registrada,sin clasificar,neutro
+🏐,239,3,3,0,sin definición registrada,sin clasificar,neutro
+🏐💻,240,3,3,0,sin definición registrada,sin clasificar,neutro
+🏛️,241,3,3,0,sin definición registrada,sin clasificar,neutro
+👈,242,3,3,0,Dedo apuntando a la izquierda,dirección,neutro
+👉🏻,243,3,3,0,sin definición registrada,sin clasificar,neutro
+👍🏻,244,3,3,0,sin definición registrada,sin clasificar,neutro
+👍👍👍,245,3,3,0,sin definición registrada,sin clasificar,neutro
+👑,246,3,3,0,Corona,logro,positivo
+👑♟️,247,3,3,0,sin definición registrada,sin clasificar,neutro
+👨‍💻,248,3,3,0,sin definición registrada,sin clasificar,neutro
+👾,249,3,3,0,sin definición registrada,sin clasificar,neutro
+💃🕺,250,3,3,0,sin definición registrada,sin clasificar,neutro
+💪🏻,251,3,3,0,sin definición registrada,sin clasificar,neutro
+💪💻,252,3,3,0,sin definición registrada,sin clasificar,neutro
+💯,253,3,3,0,100 puntos (perfecto),perfección,positivo
+💻🏐,254,3,3,0,sin definición registrada,sin clasificar,neutro
+💼,255,3,3,0,sin definición registrada,sin clasificar,neutro
+📗,256,3,3,0,sin definición registrada,sin clasificar,neutro
+📚✨,257,3,3,0,sin definición registrada,sin clasificar,neutro
+📚🤝,258,3,3,0,sin definición registrada,sin clasificar,neutro
+📩,259,3,3,0,sin definición registrada,sin clasificar,neutro
+🔔,260,3,3,0,sin definición registrada,sin clasificar,neutro
+🔢,261,3,3,0,sin definición registrada,sin clasificar,neutro
+🔥♟️,262,3,3,0,sin definición registrada,sin clasificar,neutro
+🔩,263,3,3,0,sin definición registrada,sin clasificar,neutro
+🕑,264,3,3,0,sin definición registrada,sin clasificar,neutro
+😁👍,265,3,3,0,sin definición registrada,sin clasificar,neutro
+😅😅,266,3,3,0,sin definición registrada,sin clasificar,neutro
+😌,267,3,3,0,sin definición registrada,sin clasificar,neutro
+😒,268,3,3,0,Cara de disgusto/desinterés,desagrado,negativo
+😔😔,269,3,3,0,sin definición registrada,sin clasificar,neutro
+😥,270,3,3,0,sin definición registrada,sin clasificar,neutro
+😫,271,3,3,0,Cara exhausta,agotamiento,negativo
+😬😬😬,272,3,3,0,sin definición registrada,sin clasificar,neutro
+😭😭😭,273,3,3,0,sin definición registrada,sin clasificar,neutro
+🙃,274,3,3,0,sin definición registrada,sin clasificar,neutro
+🙌🏼👇🏻,275,3,3,0,sin definición registrada,sin clasificar,neutro
+🙏🏻🙏🏻🙏🏻,276,3,3,0,sin definición registrada,sin clasificar,neutro
+🤑👌,277,3,3,0,sin definición registrada,sin clasificar,neutro
+🤓😎,278,3,3,0,sin definición registrada,sin clasificar,neutro
+🤔🤔🤔,279,3,3,0,sin definición registrada,sin clasificar,neutro
+🤩🤩🥳🥳,280,3,3,0,sin definición registrada,sin clasificar,neutro
+🥃,281,3,3,0,sin definición registrada,sin clasificar,neutro
+🥺🥺🥺,282,3,3,0,sin definición registrada,sin clasificar,neutro
+🧠📊,283,3,3,0,sin definición registrada,sin clasificar,neutro
+🪙,284,3,3,0,sin definición registrada,sin clasificar,neutro
+🪪,285,3,3,0,sin definición registrada,sin clasificar,neutro
+🫥,286,3,3,0,sin definición registrada,sin clasificar,neutro
+😨,287,3,0,3,sin definición registrada,sin clasificar,neutro
+☄,288,2,2,0,sin definición registrada,sin clasificar,neutro
+☠️,289,2,2,0,sin definición registrada,sin clasificar,neutro
+♟️💻,290,2,2,0,sin definición registrada,sin clasificar,neutro
+♦,291,2,2,0,sin definición registrada,sin clasificar,neutro
+✍,292,2,2,0,sin definición registrada,sin clasificar,neutro
+✍️,293,2,2,0,sin definición registrada,sin clasificar,neutro
+✏️,294,2,2,0,Lápiz,neutral,neutro
+❤️,295,2,2,0,Corazón rojo,amor,positivo
+❤️💛,296,2,2,0,sin definición registrada,sin clasificar,neutro
+✅🚀,297,2,2,0,sin definición registrada,sin clasificar,neutro
+✨🎉,298,2,2,0,sin definición registrada,sin clasificar,neutro
+✨🚀,299,2,2,0,sin definición registrada,sin clasificar,neutro
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️,300,2,2,0,sin definición registrada,sin clasificar,neutro
+⚡🏆,301,2,2,0,sin definición registrada,sin clasificar,neutro
+⚖️,302,2,2,0,sin definición registrada,sin clasificar,neutro
+⚙️,303,2,2,0,sin definición registrada,sin clasificar,neutro
+⚛️,304,2,2,0,sin definición registrada,sin clasificar,neutro
+⭐️,305,2,2,0,sin definición registrada,sin clasificar,neutro
+🇰🇷,306,2,2,0,sin definición registrada,sin clasificar,neutro
+🇺🇸,307,2,2,0,sin definición registrada,sin clasificar,neutro
+🌑,308,2,2,0,sin definición registrada,sin clasificar,neutro
+🌴,309,2,2,0,sin definición registrada,sin clasificar,neutro
+🍬,310,2,2,0,sin definición registrada,sin clasificar,neutro
+🍸,311,2,2,0,sin definición registrada,sin clasificar,neutro
+🍺🍻🥃,312,2,2,0,sin definición registrada,sin clasificar,neutro
+🍾,313,2,2,0,sin definición registrada,sin clasificar,neutro
+🎃🔥,314,2,2,0,sin definición registrada,sin clasificar,neutro
+🎇,315,2,2,0,sin definición registrada,sin clasificar,neutro
+🎓💻,316,2,2,0,sin definición registrada,sin clasificar,neutro
+🎥,317,2,2,0,sin definición registrada,sin clasificar,neutro
+🎨,318,2,2,0,sin definición registrada,sin clasificar,neutro
+🎨💡,319,2,2,0,sin definición registrada,sin clasificar,neutro
+🎪,320,2,2,0,sin definición registrada,sin clasificar,neutro
+🎫,321,2,2,0,sin definición registrada,sin clasificar,neutro
+🎭,322,2,2,0,sin definición registrada,sin clasificar,neutro
+🎲,323,2,2,0,sin definición registrada,sin clasificar,neutro
+🏆⚡,324,2,2,0,sin definición registrada,sin clasificar,neutro
+🏴‍☠️,325,2,2,0,sin definición registrada,sin clasificar,neutro
+🐲,326,2,2,0,sin definición registrada,sin clasificar,neutro
+👆👆👆👆,327,2,2,0,sin definición registrada,sin clasificar,neutro
+👉👈,328,2,2,0,sin definición registrada,sin clasificar,neutro
+👋🏻,329,2,2,0,sin definición registrada,sin clasificar,neutro
+👌🏻,330,2,2,0,sin definición registrada,sin clasificar,neutro
+👍👍,331,2,2,0,sin definición registrada,sin clasificar,neutro
+👍😁,332,2,2,0,sin definición registrada,sin clasificar,neutro
+👏👏,333,2,2,0,sin definición registrada,sin clasificar,neutro
+👨‍🏫👏,334,2,2,0,sin definición registrada,sin clasificar,neutro
+💁🏻‍♀️,335,2,2,0,sin definición registrada,sin clasificar,neutro
+💁🏻‍♂️,336,2,2,0,sin definición registrada,sin clasificar,neutro
+💎,337,2,2,0,sin definición registrada,sin clasificar,neutro
+💙🐍💛,338,2,2,0,sin definición registrada,sin clasificar,neutro
+💚💙🤍,339,2,2,0,sin definición registrada,sin clasificar,neutro
+💛❤️,340,2,2,0,sin definición registrada,sin clasificar,neutro
+💥,341,2,2,0,Explosión,sorpresa,neutro
+💩,342,2,1,1,sin definición registrada,sin clasificar,neutro
+💻♟️,343,2,2,0,sin definición registrada,sin clasificar,neutro
+💻📈,344,2,2,0,sin definición registrada,sin clasificar,neutro
+💻🔥,345,2,2,0,sin definición registrada,sin clasificar,neutro
+📌📌,346,2,2,0,sin definición registrada,sin clasificar,neutro
+📖,347,2,2,0,Libro abierto,neutral,neutro
+📝📌,348,2,2,0,sin definición registrada,sin clasificar,neutro
+📸,349,2,2,0,sin definición registrada,sin clasificar,neutro
+🔊🔊🔊,350,2,2,0,sin definición registrada,sin clasificar,neutro
+🔍,351,2,2,0,sin definición registrada,sin clasificar,neutro
+🔒🛡,352,2,2,0,sin definición registrada,sin clasificar,neutro
+🔥💻,353,2,2,0,sin definición registrada,sin clasificar,neutro
+🔧,354,2,2,0,sin definición registrada,sin clasificar,neutro
+🔮,355,2,2,0,sin definición registrada,sin clasificar,neutro
+🔷,356,2,2,0,sin definición registrada,sin clasificar,neutro
+🕹️,357,2,2,0,sin definición registrada,sin clasificar,neutro
+🗣️,358,2,2,0,sin definición registrada,sin clasificar,neutro
+🗨️,359,2,2,0,sin definición registrada,sin clasificar,neutro
+🗿,360,2,1,1,sin definición registrada,sin clasificar,neutro
+😆,361,2,2,0,Cara sonriente radiante,alegría,positivo
+😉👌,362,2,2,0,sin definición registrada,sin clasificar,neutro
+😏🤭,363,2,2,0,sin definición registrada,sin clasificar,neutro
+😓😓,364,2,2,0,sin definición registrada,sin clasificar,neutro
+😜,365,2,2,0,sin definición registrada,sin clasificar,neutro
+😡,366,2,2,0,Cara muy enojada,enojo,negativo
+😣,367,2,2,0,sin definición registrada,sin clasificar,neutro
+😭😭😭😭,368,2,2,0,sin definición registrada,sin clasificar,neutro
+😶,369,2,2,0,sin definición registrada,sin clasificar,neutro
+🙂‍,370,2,2,0,sin definición registrada,sin clasificar,neutro
+🙏🙏🙏,371,2,2,0,sin definición registrada,sin clasificar,neutro
+🙏🙏🙏🙏,372,2,2,0,sin definición registrada,sin clasificar,neutro
+🚀✨,373,2,2,0,sin definición registrada,sin clasificar,neutro
+🚀🔥,374,2,2,0,sin definición registrada,sin clasificar,neutro
+🟠,375,2,2,0,sin definición registrada,sin clasificar,neutro
+🟣,376,2,2,0,sin definición registrada,sin clasificar,neutro
+🤑,377,2,2,0,Cara de dinero,codicia,neutro
+🤔🤔,378,2,2,0,sin definición registrada,sin clasificar,neutro
+🤔🤔🤔🤔,379,2,2,0,sin definición registrada,sin clasificar,neutro
+🤖✨,380,2,2,0,sin definición registrada,sin clasificar,neutro
+🤖💻,381,2,2,0,sin definición registrada,sin clasificar,neutro
+🤖🚀,382,2,2,0,sin definición registrada,sin clasificar,neutro
+🤠,383,2,2,0,sin definición registrada,sin clasificar,neutro
+🤣🤣🤣,384,2,2,0,sin definición registrada,sin clasificar,neutro
+🤧🙃,385,2,2,0,sin definición registrada,sin clasificar,neutro
+🤧🤧,386,2,2,0,sin definición registrada,sin clasificar,neutro
+🤷,387,2,2,0,sin definición registrada,sin clasificar,neutro
+🤷‍♂,388,2,2,0,sin definición registrada,sin clasificar,neutro
+🥵,389,2,2,0,sin definición registrada,sin clasificar,neutro
+️🥵,390,2,2,0,sin definición registrada,sin clasificar,neutro
+🥺🥺,391,2,2,0,sin definición registrada,sin clasificar,neutro
+🧐🧐🧐,392,2,2,0,sin definición registrada,sin clasificar,neutro
+🧑‍🏫,393,2,2,0,sin definición registrada,sin clasificar,neutro
+🧑‍💻,394,2,2,0,sin definición registrada,sin clasificar,neutro
+🧩,395,2,2,0,sin definición registrada,sin clasificar,neutro
+🪪📢,396,2,2,0,sin definición registrada,sin clasificar,neutro
+🫣,397,2,2,0,Cara asomándose tímidamente,timidez,neutro
+🦄,398,2,0,2,sin definición registrada,sin clasificar,neutro
+⚽,399,1,1,0,sin definición registrada,sin clasificar,neutro
+➕,400,1,1,0,sin definición registrada,sin clasificar,neutro
+⏱️✅,401,1,1,0,sin definición registrada,sin clasificar,neutro
+⏳⚡,402,1,1,0,sin definición registrada,sin clasificar,neutro
+⌚,403,1,1,0,sin definición registrada,sin clasificar,neutro
+⌚⌚⌚⌚⌚,404,1,1,0,sin definición registrada,sin clasificar,neutro
+⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️,405,1,1,0,sin definición registrada,sin clasificar,neutro
+⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️,406,1,1,0,sin definición registrada,sin clasificar,neutro
+☝,407,1,1,0,sin definición registrada,sin clasificar,neutro
+☁️️,408,1,1,0,sin definición registrada,sin clasificar,neutro
+☃️,409,1,1,0,sin definición registrada,sin clasificar,neutro
+☑️,410,1,1,0,sin definición registrada,sin clasificar,neutro
+☠🤡,411,1,1,0,sin definición registrada,sin clasificar,neutro
+☹,412,1,1,0,sin definición registrada,sin clasificar,neutro
+♀,413,1,1,0,sin definición registrada,sin clasificar,neutro
+♂,414,1,1,0,sin definición registrada,sin clasificar,neutro
+✈️,415,1,1,0,sin definición registrada,sin clasificar,neutro
+✌🏻,416,1,1,0,sin definición registrada,sin clasificar,neutro
+✌🏼,417,1,1,0,sin definición registrada,sin clasificar,neutro
+✌🏼😅,418,1,1,0,sin definición registrada,sin clasificar,neutro
+❇️,419,1,1,0,sin definición registrada,sin clasificar,neutro
+❎,420,1,1,0,sin definición registrada,sin clasificar,neutro
+❔,421,1,1,0,sin definición registrada,sin clasificar,neutro
+❓❓❓,422,1,1,0,sin definición registrada,sin clasificar,neutro
+❓❓❓❓,423,1,1,0,sin definición registrada,sin clasificar,neutro
+❗,424,1,1,0,Signo de exclamación,énfasis,neutro
+❗❗❗,425,1,1,0,sin definición registrada,sin clasificar,neutro
+❗❗❗❗❗,426,1,1,0,sin definición registrada,sin clasificar,neutro
+❤️‍🔥,427,1,1,0,Corazón en llamas (pasión),amor,positivo
+❤️🖤💙,428,1,1,0,sin definición registrada,sin clasificar,neutro
+❤️‍🩹,429,1,1,0,Corazón vendado,amor,positivo
+❤️‍🩹🎓,430,1,1,0,sin definición registrada,sin clasificar,neutro
+✅️,431,1,1,0,sin definición registrada,sin clasificar,neutro
+✅✅✅✅✅✅✅✅✅✅✅,432,1,1,0,sin definición registrada,sin clasificar,neutro
+✋,433,1,1,0,Mano levantada (alto/hola),saludo,positivo
+✋🏼,434,1,1,0,sin definición registrada,sin clasificar,neutro
+✨✅,435,1,1,0,sin definición registrada,sin clasificar,neutro
+✨⭐,436,1,1,0,sin definición registrada,sin clasificar,neutro
+✨🎟,437,1,1,0,sin definición registrada,sin clasificar,neutro
+✨👑,438,1,1,0,sin definición registrada,sin clasificar,neutro
+✨👽🚀,439,1,1,0,sin definición registrada,sin clasificar,neutro
+✨📚,440,1,1,0,sin definición registrada,sin clasificar,neutro
+✨📢,441,1,1,0,sin definición registrada,sin clasificar,neutro
+✨️😁,442,1,1,0,sin definición registrada,sin clasificar,neutro
+✨😃🤗,443,1,1,0,sin definición registrada,sin clasificar,neutro
+✨🚨,444,1,1,0,sin definición registrada,sin clasificar,neutro
+⚠️✨,445,1,1,0,sin definición registrada,sin clasificar,neutro
+⚡⏳,446,1,1,0,sin definición registrada,sin clasificar,neutro
+♾️,447,1,1,0,sin definición registrada,sin clasificar,neutro
+⚔,448,1,1,0,sin definición registrada,sin clasificar,neutro
+⚙️⚡🔬,449,1,1,0,sin definición registrada,sin clasificar,neutro
+⚰,450,1,1,0,sin definición registrada,sin clasificar,neutro
+⛽💸,451,1,1,0,sin definición registrada,sin clasificar,neutro
+🇧🇴✨,452,1,1,0,sin definición registrada,sin clasificar,neutro
+🇧🇴⭐️,453,1,1,0,sin definición registrada,sin clasificar,neutro
+🇧🇴🌎,454,1,1,0,sin definición registrada,sin clasificar,neutro
+🇧🇴📚,455,1,1,0,sin definición registrada,sin clasificar,neutro
+🇫🇷,456,1,1,0,sin definición registrada,sin clasificar,neutro
+🇯🇵,457,1,1,0,sin definición registrada,sin clasificar,neutro
+🇲🇾,458,1,1,0,sin definición registrada,sin clasificar,neutro
+🌌,459,1,1,0,sin definición registrada,sin clasificar,neutro
+️🌍,460,1,1,0,sin definición registrada,sin clasificar,neutro
+🌍✈,461,1,1,0,sin definición registrada,sin clasificar,neutro
+🌍✨,462,1,1,0,sin definición registrada,sin clasificar,neutro
+🌍💻,463,1,1,0,sin definición registrada,sin clasificar,neutro
+🌎🇧🇴,464,1,1,0,sin definición registrada,sin clasificar,neutro
+🌐💡,465,1,1,0,sin definición registrada,sin clasificar,neutro
+🌟🚀,466,1,1,0,sin definición registrada,sin clasificar,neutro
+🌡,467,1,1,0,sin definición registrada,sin clasificar,neutro
+🌡🌠,468,1,1,0,sin definición registrada,sin clasificar,neutro
+🌳,469,1,1,0,sin definición registrada,sin clasificar,neutro
+🌷,470,1,1,0,sin definición registrada,sin clasificar,neutro
+🌻,471,1,1,0,sin definición registrada,sin clasificar,neutro
+🌿,472,1,1,0,sin definición registrada,sin clasificar,neutro
+🍀,473,1,1,0,sin definición registrada,sin clasificar,neutro
+🍃,474,1,1,0,sin definición registrada,sin clasificar,neutro
+🍪,475,1,1,0,sin definición registrada,sin clasificar,neutro
+🍫,476,1,1,0,Chocolate,satisfacción,positivo
+🍲🚨,477,1,1,0,sin definición registrada,sin clasificar,neutro
+🍷,478,1,1,0,sin definición registrada,sin clasificar,neutro
+🍹,479,1,1,0,sin definición registrada,sin clasificar,neutro
+🍺,480,1,1,0,Cerveza,neutro,neutro
+🍾🍻,481,1,1,0,sin definición registrada,sin clasificar,neutro
+🎀,482,1,1,0,sin definición registrada,sin clasificar,neutro
+🎁💰,483,1,1,0,sin definición registrada,sin clasificar,neutro
+🎃🎃🎃🎃🎃🎃🎃🎃🎃,484,1,1,0,sin definición registrada,sin clasificar,neutro
+🎃👨‍💻👩‍💻,485,1,1,0,sin definición registrada,sin clasificar,neutro
+🎄🎉,486,1,1,0,sin definición registrada,sin clasificar,neutro
+🎉🎉,487,1,1,0,sin definición registrada,sin clasificar,neutro
+🎉🎊,488,1,1,0,sin definición registrada,sin clasificar,neutro
+🎉👋,489,1,1,0,sin definición registrada,sin clasificar,neutro
+🎉💻,490,1,1,0,sin definición registrada,sin clasificar,neutro
+🎉📚,491,1,1,0,sin definición registrada,sin clasificar,neutro
+🎊🎉,492,1,1,0,sin definición registrada,sin clasificar,neutro
+🎓🇧🇴🏆,493,1,1,0,sin definición registrada,sin clasificar,neutro
+🎓🔊,494,1,1,0,sin definición registrada,sin clasificar,neutro
+🎙,495,1,1,0,sin definición registrada,sin clasificar,neutro
+🎛️💡,496,1,1,0,sin definición registrada,sin clasificar,neutro
+🎟✨,497,1,1,0,sin definición registrada,sin clasificar,neutro
+🎤💻,498,1,1,0,sin definición registrada,sin clasificar,neutro
+🎤🔥,499,1,1,0,sin definición registrada,sin clasificar,neutro
+🎤🚀,500,1,1,0,sin definición registrada,sin clasificar,neutro
+🎥🎞️,501,1,1,0,sin definición registrada,sin clasificar,neutro
+🎨💀,502,1,1,0,sin definición registrada,sin clasificar,neutro
+🎨🤖,503,1,1,0,sin definición registrada,sin clasificar,neutro
+🎮🇧🇴,504,1,1,0,sin definición registrada,sin clasificar,neutro
+🎮👊,505,1,1,0,sin definición registrada,sin clasificar,neutro
+🎮🔴,506,1,1,0,sin definición registrada,sin clasificar,neutro
+⚽🏀🏐,507,1,1,0,sin definición registrada,sin clasificar,neutro
+🏃🏻‍♂️,508,1,1,0,sin definición registrada,sin clasificar,neutro
+🏆💵,509,1,1,0,sin definición registrada,sin clasificar,neutro
+🏔✨,510,1,1,0,sin definición registrada,sin clasificar,neutro
+🏢,511,1,1,0,sin definición registrada,sin clasificar,neutro
+🐉🎮,512,1,1,0,sin definición registrada,sin clasificar,neutro
+🐉🐉,513,1,1,0,sin definición registrada,sin clasificar,neutro
+🐉🔥,514,1,1,0,sin definición registrada,sin clasificar,neutro
+🐍✨,515,1,1,0,sin definición registrada,sin clasificar,neutro
+🐍👩‍💻🧑‍💻,516,1,1,0,sin definición registrada,sin clasificar,neutro
+🐕🐕🐕,517,1,1,0,sin definición registrada,sin clasificar,neutro
+🐙🐙🐙,518,1,1,0,sin definición registrada,sin clasificar,neutro
+🐮🇧🇴,519,1,1,0,sin definición registrada,sin clasificar,neutro
+🐯,520,1,1,0,sin definición registrada,sin clasificar,neutro
+🐾,521,1,1,0,sin definición registrada,sin clasificar,neutro
+👀👀👀,522,1,1,0,sin definición registrada,sin clasificar,neutro
+👀👀🥹🥹,523,1,1,0,sin definición registrada,sin clasificar,neutro
+👀💻,524,1,1,0,sin definición registrada,sin clasificar,neutro
+👀😂,525,1,1,0,sin definición registrada,sin clasificar,neutro
+👁👁,526,1,1,0,sin definición registrada,sin clasificar,neutro
+👁️‍🗨️,527,1,1,0,sin definición registrada,sin clasificar,neutro
+👆🏽,528,1,1,0,sin definición registrada,sin clasificar,neutro
+👆👆,529,1,1,0,sin definición registrada,sin clasificar,neutro
+👆🤓,530,1,1,0,sin definición registrada,sin clasificar,neutro
+👇🏻,531,1,1,0,sin definición registrada,sin clasificar,neutro
+👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻,532,1,1,0,sin definición registrada,sin clasificar,neutro
+👇👇,533,1,1,0,sin definición registrada,sin clasificar,neutro
+👇👇👇👇👇👇👇👇👇👇,534,1,1,0,sin definición registrada,sin clasificar,neutro
+👉🏻👈🏻😬,535,1,1,0,sin definición registrada,sin clasificar,neutro
+👉🏼,536,1,1,0,sin definición registrada,sin clasificar,neutro
+👉🏼👈🏼,537,1,1,0,sin definición registrada,sin clasificar,neutro
+👋🏻👋🏻,538,1,1,0,sin definición registrada,sin clasificar,neutro
+👋🏼,539,1,1,0,sin definición registrada,sin clasificar,neutro
+👋👋,540,1,1,0,sin definición registrada,sin clasificar,neutro
+👌✨😀,541,1,1,0,sin definición registrada,sin clasificar,neutro
+👌🏻👌🏻👌🏻👌🏻,542,1,1,0,sin definición registrada,sin clasificar,neutro
+👌👌,543,1,1,0,sin definición registrada,sin clasificar,neutro
+👌😀,544,1,1,0,sin definición registrada,sin clasificar,neutro
+👌😁,545,1,1,0,sin definición registrada,sin clasificar,neutro
+👍👌,546,1,1,0,sin definición registrada,sin clasificar,neutro
+👏🏻,547,1,1,0,sin definición registrada,sin clasificar,neutro
+👏🏽,548,1,1,0,sin definición registrada,sin clasificar,neutro
+👏🏽👏🏽👏🏽,549,1,1,0,sin definición registrada,sin clasificar,neutro
+👏🏽👏🏽👏🏽👏🏽👏🏽👏🏽,550,1,1,0,sin definición registrada,sin clasificar,neutro
+👑✨,551,1,1,0,sin definición registrada,sin clasificar,neutro
+👑🤣,552,1,1,0,sin definición registrada,sin clasificar,neutro
+👨🏻‍💻👩‍💻,553,1,1,0,sin definición registrada,sin clasificar,neutro
+👨‍👩‍👧‍👦,554,1,1,0,sin definición registrada,sin clasificar,neutro
+👨‍💻👩‍💻,555,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍🎓👨‍🎓,556,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍🏫👨‍🏫,557,1,1,0,sin definición registrada,sin clasificar,neutro
+👩🏻‍🎓👨🏽‍🎓,558,1,1,0,sin definición registrada,sin clasificar,neutro
+👩🏻‍💻,559,1,1,0,sin definición registrada,sin clasificar,neutro
+👩🏻‍💻👨🏻‍💻,560,1,1,0,sin definición registrada,sin clasificar,neutro
+👩🏻‍🔬👨🏻‍🔬,561,1,1,0,sin definición registrada,sin clasificar,neutro
+👩🏼‍💻🧑🏻‍💻,562,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍💻🌟,563,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍💻🧑‍💻,564,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍🔬,565,1,1,0,sin definición registrada,sin clasificar,neutro
+👩‍🔬👨‍🔬,566,1,1,0,sin definición registrada,sin clasificar,neutro
+👸,567,1,1,0,sin definición registrada,sin clasificar,neutro
+👸🫅,568,1,1,0,sin definición registrada,sin clasificar,neutro
+👹,569,1,1,0,sin definición registrada,sin clasificar,neutro
+👺,570,1,1,0,sin definición registrada,sin clasificar,neutro
+👽👽👽👾👾👾,571,1,1,0,sin definición registrada,sin clasificar,neutro
+➖👾➖👾➖👾,572,1,1,0,sin definición registrada,sin clasificar,neutro
+💀💀💀,573,1,1,0,sin definición registrada,sin clasificar,neutro
+💀💀💀💀💀💀,574,1,1,0,sin definición registrada,sin clasificar,neutro
+💀💤,575,1,1,0,sin definición registrada,sin clasificar,neutro
+💔,576,1,1,0,Corazón roto (tristeza),tristeza,negativo
+💔🥲,577,1,1,0,sin definición registrada,sin clasificar,neutro
+💗,578,1,1,0,Corazón con destellos,amor,positivo
+💙,579,1,1,0,Corazón azul,amor,positivo
+💙💛,580,1,1,0,sin definición registrada,sin clasificar,neutro
+💙🖤❤️,581,1,1,0,sin definición registrada,sin clasificar,neutro
+💜,582,1,1,0,Corazón morado,amor,positivo
+💜🎉,583,1,1,0,sin definición registrada,sin clasificar,neutro
+💡✨,584,1,1,0,sin definición registrada,sin clasificar,neutro
+💡🌍,585,1,1,0,sin definición registrada,sin clasificar,neutro
+💡🎨,586,1,1,0,sin definición registrada,sin clasificar,neutro
+💡💻,587,1,1,0,sin definición registrada,sin clasificar,neutro
+💡🤓,588,1,1,0,sin definición registrada,sin clasificar,neutro
+💧,589,1,1,0,sin definición registrada,sin clasificar,neutro
+💪✨,590,1,1,0,sin definición registrada,sin clasificar,neutro
+💪🇧🇴,591,1,1,0,sin definición registrada,sin clasificar,neutro
+💪🔥,592,1,1,0,sin definición registrada,sin clasificar,neutro
+💪😃,593,1,1,0,sin definición registrada,sin clasificar,neutro
+💪🫂,594,1,1,0,sin definición registrada,sin clasificar,neutro
+💫🚀,595,1,1,0,sin definición registrada,sin clasificar,neutro
+💬✅,596,1,1,0,sin definición registrada,sin clasificar,neutro
+💵🚀,597,1,1,0,sin definición registrada,sin clasificar,neutro
+💸📈,598,1,1,0,sin definición registrada,sin clasificar,neutro
+💻🎉,599,1,1,0,sin definición registrada,sin clasificar,neutro
+💻💗,600,1,1,0,sin definición registrada,sin clasificar,neutro
+💻🤝,601,1,1,0,sin definición registrada,sin clasificar,neutro
+💼✨,602,1,1,0,sin definición registrada,sin clasificar,neutro
+💼🌟,603,1,1,0,sin definición registrada,sin clasificar,neutro
+📂,604,1,1,0,sin definición registrada,sin clasificar,neutro
+📅🍕,605,1,1,0,sin definición registrada,sin clasificar,neutro
+📈💸,606,1,1,0,sin definición registrada,sin clasificar,neutro
+📉,607,1,1,0,Gráfico descendente,neutral,neutro
+📊💡,608,1,1,0,sin definición registrada,sin clasificar,neutro
+📊📈,609,1,1,0,sin definición registrada,sin clasificar,neutro
+📚🎁📖✨,610,1,1,0,sin definición registrada,sin clasificar,neutro
+📚🚀,611,1,1,0,sin definición registrada,sin clasificar,neutro
+📚🤖,612,1,1,0,sin definición registrada,sin clasificar,neutro
+📝🤓,613,1,1,0,sin definición registrada,sin clasificar,neutro
+📡🔒,614,1,1,0,sin definición registrada,sin clasificar,neutro
+📧,615,1,1,0,sin definición registrada,sin clasificar,neutro
+📸🎬,616,1,1,0,sin definición registrada,sin clasificar,neutro
+📺,617,1,1,0,sin definición registrada,sin clasificar,neutro
+📺🎉,618,1,1,0,sin definición registrada,sin clasificar,neutro
+🔁,619,1,1,0,sin definición registrada,sin clasificar,neutro
+🔊🔊🔊🔊,620,1,1,0,sin definición registrada,sin clasificar,neutro
+🔌,621,1,1,0,sin definición registrada,sin clasificar,neutro
+🔌🎙️🖱️,622,1,1,0,sin definición registrada,sin clasificar,neutro
+🔎,623,1,1,0,Lupa,neutral,neutro
+🔑,624,1,1,0,sin definición registrada,sin clasificar,neutro
+🔒✅,625,1,1,0,sin definición registrada,sin clasificar,neutro
+🔓,626,1,1,0,sin definición registrada,sin clasificar,neutro
+️🔥,627,1,1,0,sin definición registrada,sin clasificar,neutro
+🔥🎮,628,1,1,0,sin definición registrada,sin clasificar,neutro
+🔥💙,629,1,1,0,sin definición registrada,sin clasificar,neutro
+🔥😏,630,1,1,0,sin definición registrada,sin clasificar,neutro
+🔥🤤,631,1,1,0,sin definición registrada,sin clasificar,neutro
+🔭,632,1,1,0,Telescopio,neutral,neutro
+🕚,633,1,1,0,sin definición registrada,sin clasificar,neutro
+🕞,634,1,1,0,sin definición registrada,sin clasificar,neutro
+🕵️‍♀️,635,1,1,0,sin definición registrada,sin clasificar,neutro
+🕸️,636,1,1,0,sin definición registrada,sin clasificar,neutro
+🕹️✨,637,1,1,0,sin definición registrada,sin clasificar,neutro
+🕹️🚀,638,1,1,0,sin definición registrada,sin clasificar,neutro
+🖊,639,1,1,0,sin definición registrada,sin clasificar,neutro
+🖋️,640,1,1,0,sin definición registrada,sin clasificar,neutro
+🖖🏻,641,1,1,0,sin definición registrada,sin clasificar,neutro
+🗄,642,1,1,0,sin definición registrada,sin clasificar,neutro
+🗓⏰,643,1,1,0,sin definición registrada,sin clasificar,neutro
+🗣️🔥,644,1,1,0,sin definición registrada,sin clasificar,neutro
+🗳️,645,1,1,0,sin definición registrada,sin clasificar,neutro
+😁😁,646,1,1,0,sin definición registrada,sin clasificar,neutro
+😁😁😁😁,647,1,1,0,sin definición registrada,sin clasificar,neutro
+😁😁😁😳,648,1,1,0,sin definición registrada,sin clasificar,neutro
+😁😄😅,649,1,1,0,sin definición registrada,sin clasificar,neutro
+😂✨,650,1,1,0,sin definición registrada,sin clasificar,neutro
+😂👍,651,1,1,0,sin definición registrada,sin clasificar,neutro
+😂😂😂😂😂😂,652,1,1,0,sin definición registrada,sin clasificar,neutro
+😂🤣,653,1,1,0,sin definición registrada,sin clasificar,neutro
+😂🤣😂🤣,654,1,1,0,sin definición registrada,sin clasificar,neutro
+😅😅😅,655,1,1,0,sin definición registrada,sin clasificar,neutro
+😅🙈,656,1,1,0,sin definición registrada,sin clasificar,neutro
+😅🤣,657,1,1,0,sin definición registrada,sin clasificar,neutro
+😇,658,1,1,0,Cara de inocente,bondad,positivo
+😇😇😇,659,1,1,0,sin definición registrada,sin clasificar,neutro
+😊👋,660,1,1,0,sin definición registrada,sin clasificar,neutro
+😊😉,661,1,1,0,sin definición registrada,sin clasificar,neutro
+😊😒😒😒,662,1,1,0,sin definición registrada,sin clasificar,neutro
+😊🫡,663,1,1,0,sin definición registrada,sin clasificar,neutro
+😌😌,664,1,1,0,sin definición registrada,sin clasificar,neutro
+😎✨,665,1,1,0,sin definición registrada,sin clasificar,neutro
+😑😑😑😑😑,666,1,1,0,sin definición registrada,sin clasificar,neutro
+😒😒😒😒,667,1,1,0,sin definición registrada,sin clasificar,neutro
+😔🔥,668,1,1,0,sin definición registrada,sin clasificar,neutro
+😔😔😔😔😔😔😔,669,1,1,0,sin definición registrada,sin clasificar,neutro
+😔😢,670,1,1,0,sin definición registrada,sin clasificar,neutro
+😕😞,671,1,1,0,sin definición registrada,sin clasificar,neutro
+😖,672,1,1,0,sin definición registrada,sin clasificar,neutro
+😝,673,1,1,0,sin definición registrada,sin clasificar,neutro
+😞😞,674,1,1,0,sin definición registrada,sin clasificar,neutro
+😞😞😞,675,1,1,0,sin definición registrada,sin clasificar,neutro
+😟,676,1,1,0,Cara preocupada,preocupación,negativo
+😡😡😡😡😡😡😡😡😡😡😡😡😡😡😡,677,1,1,0,sin definición registrada,sin clasificar,neutro
+😢💔,678,1,1,0,sin definición registrada,sin clasificar,neutro
+😢😢😢,679,1,1,0,sin definición registrada,sin clasificar,neutro
+😢😢😢😢😭😭😭,680,1,1,0,sin definición registrada,sin clasificar,neutro
+😢🥲,681,1,1,0,sin definición registrada,sin clasificar,neutro
+😦,682,1,1,0,sin definición registrada,sin clasificar,neutro
+😧,683,1,1,0,sin definición registrada,sin clasificar,neutro
+😩,684,1,1,0,Cara angustiada,angustia,negativo
+😫🥲,685,1,1,0,sin definición registrada,sin clasificar,neutro
+😬💀,686,1,1,0,sin definición registrada,sin clasificar,neutro
+😬😬😬😬,687,1,1,0,sin definición registrada,sin clasificar,neutro
+😭😅😅🥲🥲🥲,688,1,1,0,sin definición registrada,sin clasificar,neutro
+😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭,689,1,1,0,sin definición registrada,sin clasificar,neutro
+😮,690,1,1,0,Cara sorprendida,sorpresa,neutro
+😮‍💨🍀,691,1,1,0,sin definición registrada,sin clasificar,neutro
+😯,692,1,1,0,Cara boquiabierta,sorpresa,neutro
+😯😯😯,693,1,1,0,sin definición registrada,sin clasificar,neutro
+😱💀,694,1,1,0,sin definición registrada,sin clasificar,neutro
+😱😊,695,1,1,0,sin definición registrada,sin clasificar,neutro
+😱😱,696,1,1,0,sin definición registrada,sin clasificar,neutro
+😱😱😱,697,1,1,0,sin definición registrada,sin clasificar,neutro
+😲,698,1,1,0,Cara muy asombrada,sorpresa,neutro
+😳😔,699,1,1,0,sin definición registrada,sin clasificar,neutro
+😳😱😱,700,1,1,0,sin definición registrada,sin clasificar,neutro
+😴⚠️⚠️,701,1,1,0,sin definición registrada,sin clasificar,neutro
+😴😴😴,702,1,1,0,sin definición registrada,sin clasificar,neutro
+😵,703,1,1,0,Cara mareada,confusión,neutro
+😵‍💫😵‍💫😂,704,1,1,0,sin definición registrada,sin clasificar,neutro
+😶😶,705,1,1,0,sin definición registrada,sin clasificar,neutro
+😿☝️,706,1,1,0,sin definición registrada,sin clasificar,neutro
+🙂🙂🙂🙂,707,1,1,0,sin definición registrada,sin clasificar,neutro
+🙃🫠,708,1,1,0,sin definición registrada,sin clasificar,neutro
+🙄🤬,709,1,1,0,sin definición registrada,sin clasificar,neutro
+🙆‍♂,710,1,1,0,sin definición registrada,sin clasificar,neutro
+🙈☺️,711,1,1,0,sin definición registrada,sin clasificar,neutro
+🙈🙈,712,1,1,0,sin definición registrada,sin clasificar,neutro
+🙊,713,1,1,0,sin definición registrada,sin clasificar,neutro
+🙋‍♂,714,1,1,0,sin definición registrada,sin clasificar,neutro
+🙋🏻‍♂️,715,1,1,0,sin definición registrada,sin clasificar,neutro
+🙌🙌,716,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🏻😢,717,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🏻🥺,718,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🏼,719,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🏼🙏🏼🙏🏼,720,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🔴🔵,721,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏😢,722,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🙏🙏🙏🙏,723,1,1,0,sin definición registrada,sin clasificar,neutro
+🙏🥺,724,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🌎,725,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🌐,726,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🌟,727,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🎮,728,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀👽✨,729,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀💜,730,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀💫,731,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🔧,732,1,1,0,sin definición registrada,sin clasificar,neutro
+🚀🪐,733,1,1,0,sin definición registrada,sin clasificar,neutro
+🚨✨,734,1,1,0,sin definición registrada,sin clasificar,neutro
+🚨🍲,735,1,1,0,sin definición registrada,sin clasificar,neutro
+🛍️,736,1,1,0,sin definición registrada,sin clasificar,neutro
+🛒,737,1,1,0,sin definición registrada,sin clasificar,neutro
+🛠,738,1,1,0,sin definición registrada,sin clasificar,neutro
+🛰🤩,739,1,1,0,sin definición registrada,sin clasificar,neutro
+🛸🛸,740,1,1,0,sin definición registrada,sin clasificar,neutro
+🟡🟢,741,1,1,0,sin definición registrada,sin clasificar,neutro
+🟤,742,1,1,0,sin definición registrada,sin clasificar,neutro
+🤌,743,1,1,0,sin definición registrada,sin clasificar,neutro
+🤓☝️,744,1,1,0,sin definición registrada,sin clasificar,neutro
+🤓📉,745,1,1,0,sin definición registrada,sin clasificar,neutro
+🤓🖋️,746,1,1,0,sin definición registrada,sin clasificar,neutro
+🤓🤓,747,1,1,0,sin definición registrada,sin clasificar,neutro
+🤔💭🧮📝,748,1,1,0,sin definición registrada,sin clasificar,neutro
+🤔🫣🤔🫣🎼🎼🎼,749,1,1,0,sin definición registrada,sin clasificar,neutro
+🤖⚽,750,1,1,0,sin definición registrada,sin clasificar,neutro
+🤖🎨,751,1,1,0,sin definición registrada,sin clasificar,neutro
+🤗🤗,752,1,1,0,sin definición registrada,sin clasificar,neutro
+🤗🤗🤗,753,1,1,0,sin definición registrada,sin clasificar,neutro
+🤗🤗🤗🤗🤗,754,1,1,0,sin definición registrada,sin clasificar,neutro
+🤙🏻🫶,755,1,1,0,sin definición registrada,sin clasificar,neutro
+🤜🤛,756,1,1,0,sin definición registrada,sin clasificar,neutro
+🤝🏼,757,1,1,0,sin definición registrada,sin clasificar,neutro
+🤝💻,758,1,1,0,sin definición registrada,sin clasificar,neutro
+🤟,759,1,1,0,Amor y paz,energía,positivo
+🤡🤡,760,1,1,0,sin definición registrada,sin clasificar,neutro
+🤣👑,761,1,1,0,sin definición registrada,sin clasificar,neutro
+🤣🫵,762,1,1,0,sin definición registrada,sin clasificar,neutro
+🤦,763,1,1,0,sin definición registrada,sin clasificar,neutro
+🤦‍♂,764,1,1,0,sin definición registrada,sin clasificar,neutro
+🤦🏻‍♂️,765,1,1,0,sin definición registrada,sin clasificar,neutro
+🤨🤨,766,1,1,0,sin definición registrada,sin clasificar,neutro
+🤩🤩,767,1,1,0,sin definición registrada,sin clasificar,neutro
+🤩🤩🤩,768,1,1,0,sin definición registrada,sin clasificar,neutro
+🤫,769,1,1,0,sin definición registrada,sin clasificar,neutro
+🤭🤭,770,1,1,0,sin definición registrada,sin clasificar,neutro
+🤷‍♀,771,1,1,0,sin definición registrada,sin clasificar,neutro
+🤷🏻,772,1,1,0,sin definición registrada,sin clasificar,neutro
+🤷🏻‍♂️,773,1,1,0,sin definición registrada,sin clasificar,neutro
+🤷🏻😮‍💨,774,1,1,0,sin definición registrada,sin clasificar,neutro
+🥂,775,1,1,0,sin definición registrada,sin clasificar,neutro
+🥊,776,1,1,0,sin definición registrada,sin clasificar,neutro
+🥊⚡,777,1,1,0,sin definición registrada,sin clasificar,neutro
+🥳♟️👑,778,1,1,0,sin definición registrada,sin clasificar,neutro
+🥳❤️💙,779,1,1,0,sin definición registrada,sin clasificar,neutro
+🥳🎉,780,1,1,0,sin definición registrada,sin clasificar,neutro
+🥳🙌🏻,781,1,1,0,sin definición registrada,sin clasificar,neutro
+🥶,782,1,1,0,sin definición registrada,sin clasificar,neutro
+🥷🌚,783,1,1,0,sin definición registrada,sin clasificar,neutro
+🥹😆,784,1,1,0,sin definición registrada,sin clasificar,neutro
+🥹🙏,785,1,1,0,sin definición registrada,sin clasificar,neutro
+🥹🥹,786,1,1,0,sin definición registrada,sin clasificar,neutro
+🥹🫠,787,1,1,0,sin definición registrada,sin clasificar,neutro
+🥺📌👌,788,1,1,0,sin definición registrada,sin clasificar,neutro
+🥺🙏,789,1,1,0,sin definición registrada,sin clasificar,neutro
+🥺🦁,790,1,1,0,sin definición registrada,sin clasificar,neutro
+🦉💻,791,1,1,0,sin definición registrada,sin clasificar,neutro
+🦋,792,1,1,0,sin definición registrada,sin clasificar,neutro
+🦋☺️,793,1,1,0,sin definición registrada,sin clasificar,neutro
+🦕🦕🦕🦕🦕🦕,794,1,1,0,sin definición registrada,sin clasificar,neutro
+🦜,795,1,1,0,sin definición registrada,sin clasificar,neutro
+🦠🧫,796,1,1,0,sin definición registrada,sin clasificar,neutro
+🧐🍷,797,1,1,0,sin definición registrada,sin clasificar,neutro
+🧑🏻‍💻,798,1,1,0,sin definición registrada,sin clasificar,neutro
+🧑‍💻👩‍💻,799,1,1,0,sin definición registrada,sin clasificar,neutro
+🧑‍🦽‍➡️,800,1,1,0,sin definición registrada,sin clasificar,neutro
+🧠✨,801,1,1,0,sin definición registrada,sin clasificar,neutro
+🧠💥,802,1,1,0,sin definición registrada,sin clasificar,neutro
+🪐,803,1,1,0,sin definición registrada,sin clasificar,neutro
+🪐🚀,804,1,1,0,sin definición registrada,sin clasificar,neutro
+🫅,805,1,1,0,sin definición registrada,sin clasificar,neutro
+🫠😵‍💫,806,1,1,0,sin definición registrada,sin clasificar,neutro
+🫠🫠🫠,807,1,1,0,sin definición registrada,sin clasificar,neutro
+🫠🫠🫠🫠,808,1,1,0,sin definición registrada,sin clasificar,neutro
+🫠🫠🫠🫠🫠,809,1,1,0,sin definición registrada,sin clasificar,neutro
+🫢🫢,810,1,1,0,sin definición registrada,sin clasificar,neutro
+🫣🫣,811,1,1,0,sin definición registrada,sin clasificar,neutro
+🫦,812,1,1,0,sin definición registrada,sin clasificar,neutro
+🫩,813,1,1,0,sin definición registrada,sin clasificar,neutro
+🫵🏻,814,1,1,0,sin definición registrada,sin clasificar,neutro
+🫸🫷,815,1,1,0,sin definición registrada,sin clasificar,neutro
+🤪,816,1,0,1,sin definición registrada,sin clasificar,neutro
+🐳,817,1,0,1,sin definición registrada,sin clasificar,neutro
+🖕,818,1,0,1,sin definición registrada,sin clasificar,neutro
+🥴,819,1,0,1,sin definición registrada,sin clasificar,neutro

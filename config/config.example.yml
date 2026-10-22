@@ -48,6 +48,22 @@ sentiment:
   emoji_weight: 1.0
   lexical_weight: 1.0
 
+ngrams:
+  sizes: [1, 2, 3]                 # unigramas, bigramas, trigramas
+  min_count: 2                     # frecuencia mínima para mostrar
+  top: 30                          # términos por tabla/gráfico
+  remove_stopwords: true
+  preserve_negators: true          # no/nunca/jamás no se eliminan
+
+features:
+  text_col: "text_original"        # mayúsculas y signos se miden sobre el original
+
+tfidf:
+  tf_scheme: "raw"                 # raw | prop | log
+  min_df: 2                        # términos presentes en < 2 documentos se descartan
+  top: 10                          # términos por documento en la vista
+  export: true                     # exportar tabla larga a CSV
+
 topics:
   method: "lda"
   k: 5

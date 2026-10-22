@@ -85,3 +85,50 @@ quedan `NA`: no se inventan transiciones.
 `R/evaluate_models.R` reporta cobertura del diccionario, proporción de indeterminados y, si
 hay etiquetas manuales, concordancia con el modelo. Sin etiquetas humanas, la validación
 supervisada se declara **no disponible**.
+
+## 10. Minería de texto (V2)
+
+V2 añade cuatro módulos independientes que **no modifican** los resultados de V1 y escriben
+sus artefactos en `data/results/v2/`.
+
+### 10.1 N-gramas
+
+`ngram_tokenize()` y `ngram_frequencies()` (`R/ngrams.R`) tokenizan cada mensaje por
+separado con `quanteda`, de modo que ningún n-grama cruza el límite entre mensajes. Se
+eliminan las stopwords del español **conservando los negadores** configurados (`no`,
+`nunca`, `jamás`, `tampoco`, …) y se descartan los tokens de emoji, que se analizan como
+señal aparte. Se reportan frecuencia absoluta y relativa por tamaño (1--3 por defecto).
+`compare_stopword_effect()` documenta el efecto de quitar stopwords.
+
+### 10.2 Características superficiales
+
+`linguistic_features()` (`R/ling_features.R`) calcula 17 indicadores por mensaje sobre el
+texto original: caracteres, tokens, palabras, palabras únicas y su proporción, longitud
+media de palabra, interrogaciones, exclamaciones, palabras en mayúsculas y su proporción,
+emojis, hashtags, menciones, URLs, repeticiones de caracteres y de puntuación, e
+intensidad. Son medidas descriptivas, **no** un análisis sintáctico.
+
+### 10.3 TF--IDF
+
+`compute_tfidf()` (`R/tfidf.R`) trata cada mensaje como documento y aplica
+`IDF(t) = ln(N / df_t)`, con `TF` en conteo bruto, frecuencia relativa o escala
+logarítmica. Un término presente en todos los documentos obtiene `IDF = 0`. Los términos
+con `df` menor que `min_df` se descartan. La implementación se contrasta con un corpus
+manual en las pruebas.
+
+### 10.4 Diccionarios externos y versionado
+
+`R/dictionary_io.R` importa CSV, JSON o TXT con esquema canónico
+(`term, category, polarity, weight, language, notes, source`), detecta y permite mapear
+columnas, valida filas y crea **siempre una versión nueva** en
+`data/dictionary/versions/`; la activación es explícita y respalda la versión anterior.
+El diccionario activo nunca se sobrescribe durante la importación.
+
+### 10.5 Bitácora y dashboard
+
+Cada ejecución registra `run_id`, versión del diccionario y versión del código en la
+bitácora SQLite, con filtros por acción, estado y fechas y comparación campo a campo de
+dos ejecuciones. El dashboard expone los resultados V2 en el menú
+**V2 · Minería de texto** y mantiene el avatar emocional agregado, que no constituye un
+diagnóstico individual.
+n

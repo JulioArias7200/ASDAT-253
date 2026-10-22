@@ -17,9 +17,7 @@ mod_overview_ui <- function(id) {
         as_echart(ns("monthly"), "320px"))),
       shiny::column(5, as_card(title = "Emojis más usados", icon = "smile",
         as_echart(ns("emoji"), "320px")))
-    ),
-    shiny::div(class = "as-section-title", "Estado de la última ejecución"),
-    as_card(icon = "database", DT::DTOutput(ns("last_run")))
+    )
   )
 }
 
@@ -82,13 +80,6 @@ mod_overview_server <- function(id, data, con) {
       names(d) <- c("emoji", "n")
       d$label <- emoji_shortcode(as.character(d$emoji))
       opt_hbar(d, "label", "n")
-    })
-
-    output$last_run <- DT::renderDT({
-      if (is.null(con)) return(NULL)
-      d <- audit_recent(con, 10)
-      DT::datatable(d, options = list(pageLength = 5, scrollX = TRUE, dom = "tp"),
-                    rownames = FALSE)
     })
   })
 }

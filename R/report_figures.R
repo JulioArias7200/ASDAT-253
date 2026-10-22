@@ -42,6 +42,8 @@ emoji_shortcode <- function(x) {
     if (s %in% names(EMOJI_SHORTCODE)) return(unname(EMOJI_SHORTCODE[[s]]))
     cp <- utf8ToInt(s)
     if (all(cp < 128)) return(s)
+    # Texto normal con acentos u otros caracteres: no es un emoji.
+    if (grepl("[A-Za-z]", s)) return(s)
     paste(sprintf("U+%X", cp), collapse = "+")
   }, character(1), USE.NAMES = FALSE)
 }
@@ -77,8 +79,9 @@ sentiment_with_time <- function(messages, sentiments) {
   df$ts <- as.POSIXct(df$timestamp_utc, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
   df$year <- format(df$ts, "%Y")
   df$month <- format(df$ts, "%Y-%m")
-  dias_es <- c("lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo")
-  df$weekday <- factor(dias_es[as.integer(format(df$ts, "%u"))], levels = dias_es)
+  df$weekday <- factor(weekdays(df$ts),
+                       levels = c("Monday", "Tuesday", "Wednesday", "Thursday",
+                                  "Friday", "Saturday", "Sunday"))
   df$hour <- factor(format(df$ts, "%H"), levels = sprintf("%02d", 0:23))
   df
 }
@@ -188,10 +191,15 @@ plot_top_reactions <- function(messages, n = 12) {
 #' @export
 plot_weekday <- function(messages) {
   ts <- as.POSIXct(messages$timestamp_utc, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
-  dias_es <- c("lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo")
-  dia_vals <- dias_es[as.integer(format(ts, "%u"))]
-  d <- as.data.frame(table(dia = factor(dia_vals, levels = dias_es)))
-  names(d) <- c("dia", "n")
+  d <- as.data.frame(table(weekday = weekdays(ts)))
+  names(d)[2] <- "n"
+  d$weekday <- factor(d$weekday,
+                      levels = c("Monday", "Tuesday", "Wednesday", "Thursday",
+                                 "Friday", "Saturday", "Sunday"))
+  traductor <- c(Monday = "lunes", Tuesday = "martes", Wednesday = "miércoles",
+                 Thursday = "jueves", Friday = "viernes", Saturday = "sábado",
+                 Sunday = "domingo")
+  d$dia <- traductor[as.character(d$weekday)]
   ggplot2::ggplot(d, ggplot2::aes(x = stats::reorder(dia, n), y = n)) +
     ggplot2::geom_col(fill = "#00838f") +
     ggplot2::coord_flip() +
@@ -363,11 +371,10 @@ generate_extra_tables <- function(messages, sentiments, temporal,
   arts <- c(arts, write_table(yr, "mensajes_por_anio", tab_dir,
                               caption = "Mensajes por año"))
 
-  dias_es <- c("lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo")
-  dia_vals <- dias_es[as.integer(format(ts, "%u"))]
-  wd <- as.data.frame(table(dia = factor(dia_vals, levels = dias_es)))
-  names(wd) <- c("dia", "mensajes")
-  wd <- wd[order(-wd$mensajes), ]
+  wd <- as.data.frame(table(dia = weekdays(ts))); names(wd)[2] <- "mensajes"
+  tr <- c(Monday = "lunes", Tuesday = "martes", Wednesday = "miércoles",
+          Thursday = "jueves", Friday = "viernes", Saturday = "sábado", Sunday = "domingo")
+  wd$dia <- tr[as.character(wd$dia)]; wd <- wd[order(-wd$mensajes), ]
   wd$porcentaje <- pct(wd$mensajes / sum(wd$mensajes))
   arts <- c(arts, write_table(wd, "actividad_diasemana", tab_dir,
                               caption = "Actividad por día de la semana"))
@@ -392,6 +399,63 @@ generate_extra_tables <- function(messages, sentiments, temporal,
   arts
 }
 
+#' Genera las tablas del informe a partir de los artefactos V2.
+#' @export
+generate_v2_tables <- function(tab_dir = proj_path("reports", "tables")) {
+  dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
+  rd <- function(f) {
+    p <- proj_path("data", "results", "v2", f)
+    if (file.exists(p)) readRDS(p) else NULL
+  }
+  ng <- rd("ngrams.rds"); fe <- rd("linguistic_features.rds"); tf <- rd("tfidf.rds")
+  arts <- character(0)
+  fmt_int <- function(x) format(as.integer(x), big.mark = ".", decimal.mark = ",")
+  fmt_dec <- function(x, dec = 2) format(round(x, dec), nsmall = dec,
+                                         big.mark = ".", decimal.mark = ",")
+
+  if (!is.null(ng) && nrow(ng$table)) {
+    d <- do.call(rbind, lapply(ng$sizes, function(s) {
+      x <- ng$table[ng$table$size == s, , drop = FALSE]
+      utils::head(x[order(-x$count), c("size", "ngram", "count")], 3L)
+    }))
+    names(d) <- c("Tamaño", "N-grama", "Frecuencia")
+    d$Frecuencia <- fmt_int(d$Frecuencia)
+    tot <- tapply(ng$table$count, ng$table$size, sum)
+    tot_txt <- paste(sprintf("N=%s: %s", names(tot), fmt_int(tot)), collapse = "; ")
+    arts <- c(arts, write_table(d, "v2_ngrams", tab_dir, colspec = "llr",
+      caption = sprintf("N-gramas más frecuentes del corpus (documento = mensaje). Totales por nivel: %s.", tot_txt)))
+  }
+
+  if (!is.null(fe$features) && nrow(fe$summary)) {
+    labs <- c(n_chars = "Caracteres", n_tokens = "Tokens", n_words = "Palabras",
+              n_unique_words = "Palabras únicas", unique_ratio = "Proporción de únicas",
+              mean_word_len = "Longitud media de palabra", n_questions = "Interrogaciones",
+              n_exclamations = "Exclamaciones", n_upper_words = "Palabras en mayúsculas",
+              upper_ratio = "Proporción de mayúsculas", n_emojis = "Emojis",
+              n_hashtags = "Hashtags", n_mentions = "Menciones", n_urls = "URLs",
+              n_repeated_chars = "Repeticiones de caracteres",
+              n_repeated_punct = "Repeticiones de puntuación", n_intensity = "Intensidad")
+    d <- fe$summary
+    d$feature <- ifelse(d$feature %in% names(labs), labs[d$feature], d$feature)
+    d <- d[, c("feature", "mean", "median", "p90", "max")]
+    names(d) <- c("Característica", "Media", "Mediana", "P90", "Máximo")
+    for (j in 2:5) d[[j]] <- fmt_dec(d[[j]])
+    arts <- c(arts, write_table(d, "v2_features", tab_dir, colspec = "lrrrr",
+      caption = sprintf("Resumen de características lingüísticas superficiales (%s mensajes).",
+                        fmt_int(nrow(fe$features)))))
+  }
+
+  if (!is.null(tf$global) && nrow(tf$global)) {
+    d <- utils::head(tf$global, 10L)[, c("term", "df", "sum_tfidf")]
+    names(d) <- c("Término", "df", "Suma de TF-IDF")
+    d$df <- fmt_int(d$df)
+    d[["Suma de TF-IDF"]] <- fmt_dec(d[["Suma de TF-IDF"]], 1)
+    arts <- c(arts, write_table(d, "v2_tfidf", tab_dir, colspec = "lrr",
+      caption = "Términos con mayor suma de TF-IDF en el corpus"))
+  }
+  arts
+}
+
 #' Escribe un archivo de macros con cifras clave para el informe
 #' @export
 write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
@@ -405,10 +469,11 @@ write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
   ec <- emoji_counts(messages); rc <- reaction_counts(messages)
   tot <- emotion_totals(sentiments)
   top_emo <- names(tot)[which.max(tot)]
-  dias_es <- c("lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo")
-  dia_vals <- dias_es[as.integer(format(ts, "%u"))]
-  wd <- table(dia_vals); wd_top <- names(wd)[which.max(wd)]
+  wd <- table(weekdays(ts)); wd_top <- names(wd)[which.max(wd)]
   hr <- table(format(ts, "%H")); hr_top <- names(hr)[which.max(hr)]
+  wd_tr <- c(Monday = "lunes", Tuesday = "martes", Wednesday = "miércoles",
+             Thursday = "jueves", Friday = "viernes", Saturday = "sábado",
+             Sunday = "domingo")
   m <- c(
     sprintf("\\renewcommand{\\nMensajes}{%s}", fmt(nrow(messages))),
     sprintf("\\renewcommand{\\nAnalizados}{%s}", fmt(nrow(sentiments))),
@@ -435,7 +500,7 @@ write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
     sprintf("\\renewcommand{\\reactTop}{%s}", ifelse(length(rc), emoji_shortcode(names(rc)[1]), "--")),
     sprintf("\\renewcommand{\\reactTopN}{%s}", ifelse(length(rc), fmt(as.integer(rc[1])), "0")),
     sprintf("\\renewcommand{\\emocionTop}{%s}", ifelse(is.null(top_emo), "--", top_emo)),
-    sprintf("\\renewcommand{\\diaPico}{%s}", wd_top),
+    sprintf("\\renewcommand{\\diaPico}{%s}", wd_tr[[wd_top]]),
     sprintf("\\renewcommand{\\horaPico}{%s}", sprintf("%s:00", hr_top)),
     sprintf("\\renewcommand{\\polaridadMedia}{%.3f}", mean(sentiments$polarity, na.rm = TRUE))
   )
@@ -449,6 +514,23 @@ write_report_stats <- function(messages, sentiments, temporal, topics = NULL,
       sprintf("\\renewcommand{\\permanenciaPositivo}{%.2f}", unname(r$residence[["positivo"]])),
       sprintf("\\renewcommand{\\permanenciaNegativo}{%.2f}", unname(r$residence[["negativo"]])),
       sprintf("\\renewcommand{\\permanenciaNeutro}{%.2f}", unname(r$residence[["neutro"]])))
+  }
+  # Métricas V2 (si existen los artefactos en data/results/v2/)
+  v2_fe <- tryCatch(readRDS(proj_path("data", "results", "v2", "linguistic_features.rds")),
+                    error = function(e) NULL)
+  v2_ng <- tryCatch(readRDS(proj_path("data", "results", "v2", "ngrams.rds")),
+                    error = function(e) NULL)
+  v2_tf <- tryCatch(readRDS(proj_path("data", "results", "v2", "tfidf.rds")),
+                    error = function(e) NULL)
+  if (!is.null(v2_fe$features)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoMensajes}{%s}",
+                      fmt(nrow(v2_fe$features))))
+  }
+  if (!is.null(v2_ng$n_documents)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoDocs}{%s}", fmt(v2_ng$n_documents)))
+  }
+  if (!is.null(v2_tf$global)) {
+    m <- c(m, sprintf("\\renewcommand{\\nVTwoTerms}{%s}", fmt(nrow(v2_tf$global))))
   }
   writeLines(m, path, useBytes = TRUE)
   invisible(path)

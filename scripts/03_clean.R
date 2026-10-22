@@ -13,12 +13,10 @@ out <- cleaned$messages
 save_rds(out, processed_path("messages_clean.rds"))
 
 # Persistir text_norm en la base
-DBI::dbWithTransaction(con, {
-  for (i in seq_len(nrow(out))) {
-    DBI::dbExecute(con, "UPDATE messages SET text_norm = ? WHERE message_id = ? AND corpus_id = ?",
-                   params = list(out$text_norm[[i]], out$message_id[[i]], out$corpus_id[[i]]))
-  }
-})
+for (i in seq_len(nrow(out))) {
+  DBI::dbExecute(con, "UPDATE messages SET text_norm = ? WHERE message_id = ? AND corpus_id = ?",
+                 params = list(out$text_norm[[i]], out$message_id[[i]], out$corpus_id[[i]]))
+}
 
 audit_finish(con, handle, status = "completed", n_processed = nrow(out))
 cat(sprintf("Limpiados: %d mensajes\n", nrow(out)))

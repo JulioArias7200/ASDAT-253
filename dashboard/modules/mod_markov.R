@@ -22,15 +22,16 @@ mod_markov_ui <- function(id) {
 mod_markov_server <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    mk <- data$markov
 
     as_render_echart(session, ns("matrix"), {
+      mk <- data$markov
       if (is.null(mk)) return(NULL)
       r <- mk$results[[1]]
       opt_heatmap(mk$states, r$P)
     })
 
     as_render_echart(session, ns("stationary"), {
+      mk <- data$markov
       if (is.null(mk)) return(NULL)
       r <- mk$results[[1]]
       d <- data.frame(estado = names(r$stationary), pi = as.numeric(r$stationary))
@@ -40,6 +41,7 @@ mod_markov_server <- function(id, data) {
     })
 
     output$metrics <- DT::renderDT({
+      mk <- data$markov
       if (is.null(mk)) return(NULL)
       r <- mk$results[[1]]
       d <- data.frame(Estado = mk$states,

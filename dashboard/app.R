@@ -20,6 +20,10 @@ for (m in sort(list.files(file.path(.root, "dashboard", "modules"),
 }
 
 .data <- load_dashboard_data(.cfg)
+# Datos reactivos: al activar un diccionario nuevo desde el dashboard,
+# mod_dictionary actualiza estos valores y todos los módulos se refrescan.
+.rvdata <- shiny::reactiveValues()
+for (.nm in names(.data)) .rvdata[[.nm]] <- .data[[.nm]]
 .con <- tryCatch(db_connect(cfg = .cfg), error = function(e) NULL)
 shiny::onStop(function() {
   if (!is.null(.con)) db_disconnect(.con)
@@ -49,7 +53,7 @@ shiny::onStop(function() {
       shiny::p(class = "as-hero-sub",
                "Panel interactivo que visualizan los sentimientos y emociones de los mensajes de un grupo de Telegram, usando un diccionario de sentimientos y emociones."),
       shiny::div(class = "as-badges",
-        shiny::span(class = "as-chip", as_icon("chat", 14), sprintf("%s mensajes", format(.n_import, big.mark = "."))),
+        shiny::span(class = "as-chip", as_icon("chat", 14), sprintf("%s mensajes", format(.n_import, big.mark = ".", decimal.mark = ","))),
         shiny::span(class = "as-chip", as_icon("target", 14), paste("cobertura", .cov)),
         shiny::span(class = "as-chip", as_icon("calendar", 14), .periodo)
       )
@@ -99,7 +103,10 @@ shiny::onStop(function() {
   bslib::nav_panel(shiny::span(as_icon("heart", 16), " Sentimientos"), mod_sentiment_ui("sentiment")),
   bslib::nav_panel(shiny::span(as_icon("activity", 16), " Temporal"), mod_temporal_ui("temporal")),
   bslib::nav_panel(shiny::span(as_icon("layers", 16), " Temas"), mod_topics_ui("topics")),
-  bslib::nav_panel(shiny::span(as_icon("shuffle", 16), " Transiciones"), mod_markov_ui("markov")),
+  bslib::nav_panel(shiny::span(as_icon("list", 16), " N-gramas"), mod_ngrams_ui("ngrams")),
+  bslib::nav_panel(shiny::span(as_icon("activity", 16), " Frecuencias"), mod_frequencies_ui("frequencies")),
+  bslib::nav_panel(shiny::span(as_icon("file", 16), " Características"), mod_features_ui("features")),
+  bslib::nav_panel(shiny::span(as_icon("target", 16), " TF-IDF"), mod_tfidf_ui("tfidf")),
   bslib::nav_panel(shiny::span(as_icon("smile", 16), " Avatar emocional"), mod_avatar_ui("avatar")),
   bslib::nav_panel(shiny::span(as_icon("book", 16), " Diccionario"), mod_dictionary_ui("dictionary")),
   bslib::nav_panel(shiny::span(as_icon("list", 16), " Bitácora"), mod_audit_ui("audit")),
@@ -109,16 +116,19 @@ shiny::onStop(function() {
 ui <- .ui_content
 
 server <- function(input, output, session) {
-  mod_overview_server("overview", .data, .con)
+  mod_overview_server("overview", .rvdata, .con)
   mod_import_server("import", .con, .cfg)
-  mod_sentiment_server("sentiment", .data)
-  mod_temporal_server("temporal", .data)
-  mod_topics_server("topics", .data)
-  mod_markov_server("markov", .data)
-  mod_avatar_server("avatar", .data)
-  mod_dictionary_server("dictionary", .cfg, .con)
+  mod_sentiment_server("sentiment", .rvdata)
+  mod_temporal_server("temporal", .rvdata)
+  mod_topics_server("topics", .rvdata)
+  mod_ngrams_server("ngrams", .rvdata)
+  mod_frequencies_server("frequencies", .rvdata)
+  mod_features_server("features", .rvdata)
+  mod_tfidf_server("tfidf", .rvdata)
+  mod_avatar_server("avatar", .rvdata)
+  mod_dictionary_server("dictionary", .cfg, .con, .rvdata)
   mod_audit_server("audit", .con)
-  mod_report_server("report", .data, .con, .cfg)
+  mod_report_server("report", .rvdata, .con, .cfg)
 }
 
 shiny::shinyApp(ui, server)

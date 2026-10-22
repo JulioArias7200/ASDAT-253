@@ -1,0 +1,1001 @@
+capa,rango,termino,frecuencia,n_docs,pct_docs,tfidf_prom
+unigrama,1,alguien,2851,2831,12.884,NA
+unigrama,2,materia,1732,1441,6.558,NA
+unigrama,3,lic,1585,1510,6.872,NA
+unigrama,4,sabe,1303,1297,5.903,NA
+unigrama,5,materias,1020,945,4.301,NA
+unigrama,6,clases,855,819,3.727,NA
+unigrama,7,solo,709,681,3.099,NA
+unigrama,8,x2,695,695,3.163,NA
+unigrama,9,paralelo,664,640,2.913,NA
+unigrama,10,inf,651,554,2.521,NA
+unigrama,11,puede,624,601,2.735,NA
+unigrama,12,favor,614,597,2.717,NA
+unigrama,13,semestre,594,511,2.326,NA
+unigrama,14,saben,575,572,2.603,NA
+unigrama,15,temporada,573,528,2.403,NA
+unigrama,16,whatsapp,559,539,2.453,NA
+unigrama,17,hoy,555,537,2.444,NA
+unigrama,18,horario,511,481,2.189,NA
+unigrama,19,carrera,497,410,1.866,NA
+unigrama,20,horarios,469,460,2.093,NA
+unigrama,21,datos,469,406,1.848,NA
+unigrama,22,docente,468,445,2.025,NA
+unigrama,23,retiro,468,460,2.093,NA
+unigrama,24,disculpen,457,457,2.08,NA
+unigrama,25,día,456,430,1.957,NA
+unigrama,26,mañana,451,435,1.98,NA
+unigrama,27,inscripción,426,385,1.752,NA
+unigrama,28,nuevo,395,329,1.497,NA
+unigrama,29,tardes,388,388,1.766,NA
+unigrama,30,comunicado,383,377,1.716,NA
+unigrama,31,informática,381,272,1.238,NA
+unigrama,32,pasando,375,370,1.684,NA
+unigrama,33,sistemas,364,324,1.475,NA
+unigrama,34,curso,363,339,1.543,NA
+unigrama,35,link,363,351,1.597,NA
+unigrama,36,hacer,359,350,1.593,NA
+unigrama,37,kardex,357,350,1.593,NA
+unigrama,38,recomiendan,357,357,1.625,NA
+unigrama,39,hora,355,332,1.511,NA
+unigrama,40,pago,355,335,1.525,NA
+unigrama,41,plan,352,200,0.91,NA
+unigrama,42,pagar,346,336,1.529,NA
+unigrama,43,puedo,320,307,1.397,NA
+unigrama,44,sistema,319,313,1.424,NA
+unigrama,45,compañeros,318,314,1.429,NA
+unigrama,46,base,318,298,1.356,NA
+unigrama,47,enlace,318,314,1.429,NA
+unigrama,48,programación,311,269,1.224,NA
+unigrama,49,docentes,305,287,1.306,NA
+unigrama,50,ahora,298,284,1.292,NA
+unigrama,51,xd,291,289,1.315,NA
+unigrama,52,pasar,289,282,1.283,NA
+unigrama,53,algún,284,282,1.283,NA
+unigrama,54,bien,282,267,1.215,NA
+unigrama,55,pregunta,281,280,1.274,NA
+unigrama,56,cpt,280,271,1.233,NA
+unigrama,57,creo,278,270,1.229,NA
+unigrama,58,estudiantes,274,230,1.047,NA
+unigrama,59,tal,272,269,1.224,NA
+unigrama,60,verano,271,244,1.11,NA
+unigrama,61,sale,270,267,1.215,NA
+unigrama,62,porfavor,268,267,1.215,NA
+unigrama,63,antiguo,266,247,1.124,NA
+unigrama,64,formulario,262,244,1.11,NA
+unigrama,65,mismo,262,260,1.183,NA
+unigrama,66,aula,260,251,1.142,NA
+unigrama,67,únete,259,241,1.097,NA
+unigrama,68,dice,256,251,1.142,NA
+unigrama,69,tomar,256,249,1.133,NA
+unigrama,70,días,253,251,1.142,NA
+unigrama,71,así,249,240,1.092,NA
+unigrama,72,noches,248,248,1.129,NA
+unigrama,73,piso,245,234,1.065,NA
+unigrama,74,adicion,241,236,1.074,NA
+unigrama,75,ser,239,225,1.024,NA
+unigrama,76,información,239,228,1.038,NA
+unigrama,77,estadística,237,235,1.069,NA
+unigrama,78,carta,234,222,1.01,NA
+unigrama,79,adición,233,231,1.051,NA
+unigrama,80,álgebra,233,231,1.051,NA
+unigrama,81,invierno,233,222,1.01,NA
+unigrama,82,ssa,231,231,1.051,NA
+unigrama,83,inscripciones,230,222,1.01,NA
+unigrama,84,mejor,229,225,1.024,NA
+unigrama,85,aún,227,223,1.015,NA
+unigrama,86,oportunidad,227,199,0.906,NA
+unigrama,87,cómo,226,219,0.997,NA
+unigrama,88,ir,224,217,0.988,NA
+unigrama,89,ii,224,206,0.938,NA
+unigrama,90,calculo,221,215,0.978,NA
+unigrama,91,choque,220,215,0.978,NA
+unigrama,92,pueden,215,213,0.969,NA
+unigrama,93,igual,213,208,0.947,NA
+unigrama,94,pasa,210,208,0.947,NA
+unigrama,95,inscribirme,209,198,0.901,NA
+unigrama,96,web,209,199,0.906,NA
+unigrama,97,cupo,209,198,0.901,NA
+unigrama,98,esperar,207,205,0.933,NA
+unigrama,99,bueno,207,198,0.901,NA
+unigrama,100,cupos,203,197,0.897,NA
+unigrama,101,puedes,201,198,0.901,NA
+unigrama,102,inscribirse,200,197,0.897,NA
+unigrama,103,cursos,199,188,0.856,NA
+unigrama,104,aparece,196,193,0.878,NA
+unigrama,105,licenciado,195,190,0.865,NA
+unigrama,106,qr,193,186,0.846,NA
+unigrama,107,documentos,190,177,0.806,NA
+unigrama,108,grupos,190,181,0.824,NA
+unigrama,109,lineal,184,182,0.828,NA
+unigrama,110,cálculo,183,180,0.819,NA
+unigrama,111,mas,182,178,0.81,NA
+unigrama,112,pensum,182,149,0.678,NA
+unigrama,113,muchas,179,176,0.801,NA
+unigrama,114,lugar,179,134,0.61,NA
+unigrama,115,lunes,178,174,0.792,NA
+unigrama,116,consulta,177,177,0.806,NA
+unigrama,117,redes,177,167,0.76,NA
+unigrama,118,semana,176,170,0.774,NA
+unigrama,119,fecha,175,170,0.774,NA
+unigrama,120,dónde,175,174,0.792,NA
+unigrama,121,umsa,174,134,0.61,NA
+unigrama,122,cada,169,157,0.715,NA
+unigrama,123,estan,169,166,0.755,NA
+unigrama,124,convocatoria,166,161,0.733,NA
+unigrama,125,siempre,164,156,0.71,NA
+unigrama,126,dos,161,150,0.683,NA
+unigrama,127,entonces,159,158,0.719,NA
+unigrama,128,verdad,158,157,0.715,NA
+unigrama,129,deja,158,153,0.696,NA
+unigrama,130,normal,157,155,0.705,NA
+unigrama,131,caso,154,146,0.664,NA
+unigrama,132,vez,153,149,0.678,NA
+unigrama,133,aun,151,148,0.674,NA
+unigrama,134,ahí,150,147,0.669,NA
+unigrama,135,habilitar,149,139,0.633,NA
+unigrama,136,abre,149,121,0.551,NA
+unigrama,137,inscribir,148,145,0.66,NA
+unigrama,138,siguiente,146,143,0.651,NA
+unigrama,139,problema,144,138,0.628,NA
+unigrama,140,ver,144,137,0.623,NA
+unigrama,141,cambio,144,141,0.642,NA
+unigrama,142,seguridad,143,100,0.455,NA
+unigrama,143,oficial,142,128,0.583,NA
+unigrama,144,x3,141,141,0.642,NA
+unigrama,145,parte,140,124,0.564,NA
+unigrama,146,inscritos,140,137,0.623,NA
+unigrama,147,paso,140,130,0.592,NA
+unigrama,148,primer,140,135,0.614,NA
+unigrama,149,mención,140,110,0.501,NA
+unigrama,150,@s,139,132,0.601,NA
+unigrama,151,zeballos,139,131,0.596,NA
+unigrama,152,abrir,137,127,0.578,NA
+unigrama,153,examen,135,124,0.564,NA
+unigrama,154,pasaron,135,134,0.61,NA
+unigrama,155,virtual,133,124,0.564,NA
+unigrama,156,cuenta,132,127,0.578,NA
+unigrama,157,quieres,132,118,0.537,NA
+unigrama,158,huanca,132,129,0.587,NA
+unigrama,159,tiempo,130,129,0.587,NA
+unigrama,160,alguna,130,125,0.569,NA
+unigrama,161,aprobar,129,121,0.551,NA
+unigrama,162,todas,128,123,0.56,NA
+unigrama,163,enseña,127,124,0.564,NA
+unigrama,164,hace,125,125,0.569,NA
+unigrama,165,dia,123,117,0.532,NA
+unigrama,166,generar,122,116,0.528,NA
+unigrama,167,porfa,121,120,0.546,NA
+unigrama,168,dejar,121,120,0.546,NA
+unigrama,169,dijeron,120,118,0.537,NA
+unigrama,170,entregar,120,118,0.537,NA
+unigrama,171,asi,119,117,0.532,NA
+unigrama,172,exámenes,119,115,0.523,NA
+unigrama,173,quiero,117,114,0.519,NA
+unigrama,174,general,116,114,0.519,NA
+unigrama,175,menos,115,112,0.51,NA
+unigrama,176,software,115,110,0.501,NA
+unigrama,177,podría,113,113,0.514,NA
+unigrama,178,viernes,113,93,0.423,NA
+unigrama,179,electrónica,113,110,0.501,NA
+unigrama,180,cambiar,112,109,0.496,NA
+unigrama,181,comunidad,112,91,0.414,NA
+unigrama,182,aprender,109,101,0.46,NA
+unigrama,183,lab,108,106,0.482,NA
+unigrama,184,seguro,108,107,0.487,NA
+unigrama,185,operativa,108,106,0.482,NA
+unigrama,186,diseño,106,93,0.423,NA
+unigrama,187,cuándo,105,105,0.478,NA
+unigrama,188,aquí,105,100,0.455,NA
+unigrama,189,silva,104,104,0.473,NA
+unigrama,190,algebra,103,100,0.455,NA
+unigrama,191,ayer,103,101,0.46,NA
+unigrama,192,verificar,102,97,0.441,NA
+unigrama,193,tarde,102,96,0.437,NA
+unigrama,194,año,101,92,0.419,NA
+unigrama,195,código,100,94,0.428,NA
+unigrama,196,después,100,99,0.451,NA
+unigrama,197,según,99,99,0.451,NA
+unigrama,198,recién,99,98,0.446,NA
+unigrama,199,operativos,99,91,0.414,NA
+unigrama,200,comparte,99,97,0.441,NA
+unigrama,201,habilita,98,96,0.437,NA
+unigrama,202,luego,98,94,0.428,NA
+unigrama,203,podrían,97,97,0.441,NA
+unigrama,204,pierdas,97,96,0.437,NA
+unigrama,205,anterior,96,95,0.432,NA
+unigrama,206,interesados,96,90,0.41,NA
+unigrama,207,da,96,94,0.428,NA
+unigrama,208,debes,95,91,0.414,NA
+unigrama,209,sigue,95,94,0.428,NA
+unigrama,210,clase,95,93,0.423,NA
+unigrama,211,debe,94,87,0.396,NA
+unigrama,212,dias,94,93,0.423,NA
+unigrama,213,chicos,94,93,0.423,NA
+unigrama,214,martes,94,94,0.428,NA
+unigrama,215,taller,93,79,0.36,NA
+unigrama,216,análisis,93,81,0.369,NA
+unigrama,217,número,91,90,0.41,NA
+unigrama,218,física,91,90,0.41,NA
+unigrama,219,momento,91,88,0.4,NA
+unigrama,220,gestión,91,61,0.278,NA
+unigrama,221,dijo,90,88,0.4,NA
+unigrama,222,bro,90,90,0.41,NA
+unigrama,223,participar,90,73,0.332,NA
+unigrama,224,dirección,89,89,0.405,NA
+unigrama,225,pague,87,85,0.387,NA
+unigrama,226,cuál,87,87,0.396,NA
+unigrama,227,entrar,86,85,0.387,NA
+unigrama,228,falta,85,84,0.382,NA
+unigrama,229,gran,85,75,0.341,NA
+unigrama,230,tener,84,83,0.378,NA
+unigrama,231,sé,83,80,0.364,NA
+unigrama,232,paralelos,83,83,0.378,NA
+unigrama,233,saber,82,79,0.36,NA
+unigrama,234,boleta,82,77,0.35,NA
+unigrama,235,opción,82,81,0.369,NA
+unigrama,236,horas,81,73,0.332,NA
+unigrama,237,poder,81,73,0.332,NA
+unigrama,238,pasado,81,80,0.364,NA
+unigrama,239,atención,80,79,0.36,NA
+unigrama,240,investigación,80,78,0.355,NA
+unigrama,241,depende,79,76,0.346,NA
+unigrama,242,jueves,79,71,0.323,NA
+unigrama,243,algun,79,77,0.35,NA
+unigrama,244,matrícula,79,76,0.346,NA
+unigrama,245,nomas,77,75,0.341,NA
+unigrama,246,evento,77,56,0.255,NA
+unigrama,247,tarquino,77,77,0.35,NA
+unigrama,248,ingeniería,77,71,0.323,NA
+unigrama,249,director,76,67,0.305,NA
+unigrama,250,presencial,76,74,0.337,NA
+unigrama,251,artificial,76,61,0.278,NA
+unigrama,252,podemos,75,75,0.341,NA
+unigrama,253,inscríbete,75,72,0.328,NA
+unigrama,254,dar,75,75,0.341,NA
+unigrama,255,habilitado,74,69,0.314,NA
+unigrama,256,lista,74,72,0.328,NA
+unigrama,257,dinero,74,68,0.309,NA
+unigrama,258,primera,74,74,0.337,NA
+unigrama,259,toca,74,72,0.328,NA
+unigrama,260,nomás,74,73,0.332,NA
+unigrama,261,fotocopia,73,34,0.155,NA
+unigrama,262,posible,73,69,0.314,NA
+unigrama,263,depósito,73,73,0.332,NA
+unigrama,264,chic,73,73,0.332,NA
+unigrama,265,inscribirte,73,69,0.314,NA
+unigrama,266,habiliten,73,73,0.332,NA
+unigrama,267,invitamos,73,72,0.328,NA
+unigrama,268,unirte,72,72,0.328,NA
+unigrama,269,sorteo,72,71,0.323,NA
+unigrama,270,experiencia,72,63,0.287,NA
+unigrama,271,haber,71,65,0.296,NA
+unigrama,272,estadistica,71,70,0.319,NA
+unigrama,273,desarrollo,71,69,0.314,NA
+unigrama,274,aruquipa,71,71,0.323,NA
+unigrama,275,bs,70,48,0.218,NA
+unigrama,276,tampoco,70,69,0.314,NA
+unigrama,277,trabajo,70,67,0.305,NA
+unigrama,278,nadie,70,69,0.314,NA
+unigrama,279,debo,69,68,0.309,NA
+unigrama,280,personas,69,69,0.314,NA
+unigrama,281,duda,69,69,0.314,NA
+unigrama,282,tellez,69,68,0.309,NA
+unigrama,283,únanse,69,69,0.314,NA
+unigrama,284,mandar,68,67,0.305,NA
+unigrama,285,enero,68,66,0.3,NA
+unigrama,286,decir,68,67,0.305,NA
+unigrama,287,vas,68,58,0.264,NA
+unigrama,288,pm,68,57,0.259,NA
+unigrama,289,noche,68,67,0.305,NA
+unigrama,290,quién,67,66,0.3,NA
+unigrama,291,primero,67,66,0.3,NA
+unigrama,292,sabes,67,67,0.305,NA
+unigrama,293,ayuda,67,66,0.3,NA
+unigrama,294,esperamos,67,67,0.305,NA
+unigrama,295,par,67,59,0.269,NA
+unigrama,296,gente,67,66,0.3,NA
+unigrama,297,octubre,67,56,0.255,NA
+unigrama,298,inf-241,67,58,0.264,NA
+unigrama,299,veces,66,64,0.291,NA
+unigrama,300,compartir,66,64,0.291,NA
+unigrama,301,aulas,66,64,0.291,NA
+unigrama,302,inteligencia,66,59,0.269,NA
+unigrama,303,problemas,65,64,0.291,NA
+unigrama,304,pase,65,65,0.296,NA
+unigrama,305,salió,65,65,0.296,NA
+unigrama,306,aprovecha,65,63,0.287,NA
+unigrama,307,dispositivos,65,65,0.296,NA
+unigrama,308,cronograma,65,64,0.291,NA
+unigrama,309,licenciada,64,64,0.291,NA
+unigrama,310,correo,64,62,0.282,NA
+unigrama,311,proyectos,64,55,0.25,NA
+unigrama,312,cartas,64,63,0.287,NA
+unigrama,313,apertura,64,50,0.228,NA
+unigrama,314,mullisaca,64,64,0.291,NA
+unigrama,315,sis,64,57,0.259,NA
+unigrama,316,pueda,63,62,0.282,NA
+unigrama,317,inscrito,63,62,0.282,NA
+unigrama,318,carreras,63,61,0.278,NA
+unigrama,319,notas,63,62,0.282,NA
+unigrama,320,invitación,63,60,0.273,NA
+unigrama,321,móviles,63,63,0.287,NA
+unigrama,322,forma,62,60,0.273,NA
+unigrama,323,pre,62,57,0.259,NA
+unigrama,324,cualquier,62,62,0.282,NA
+unigrama,325,inscribí,62,62,0.282,NA
+unigrama,326,quieren,62,58,0.264,NA
+unigrama,327,lice,62,61,0.278,NA
+unigrama,328,tapia,62,62,0.282,NA
+unigrama,329,proyecto,62,54,0.246,NA
+unigrama,330,nunca,62,60,0.273,NA
+unigrama,331,todavía,61,60,0.273,NA
+unigrama,332,banco,61,61,0.278,NA
+unigrama,333,segundo,61,59,0.269,NA
+unigrama,334,sábado,61,58,0.264,NA
+unigrama,335,virtuales,60,56,0.255,NA
+unigrama,336,coordinación,60,60,0.273,NA
+unigrama,337,programacion,60,58,0.264,NA
+unigrama,338,fácil,59,59,0.269,NA
+unigrama,339,página,59,58,0.264,NA
+unigrama,340,inscripcion,59,57,0.259,NA
+unigrama,341,matricula,59,57,0.259,NA
+unigrama,342,compañero,59,59,0.269,NA
+unigrama,343,habilitemos,59,59,0.269,NA
+unigrama,344,nota,58,57,0.259,NA
+unigrama,345,facultad,58,52,0.237,NA
+unigrama,346,inscribanse,58,55,0.25,NA
+unigrama,347,sigla,58,37,0.168,NA
+unigrama,348,auditorio,58,56,0.255,NA
+unigrama,349,nuevos,58,54,0.246,NA
+unigrama,350,luisa,58,58,0.264,NA
+unigrama,351,iii,58,49,0.223,NA
+unigrama,352,innovación,58,50,0.228,NA
+unigrama,353,dicen,57,55,0.25,NA
+unigrama,354,ninguna,57,57,0.259,NA
+unigrama,355,adelantar,57,57,0.259,NA
+unigrama,356,medio,57,54,0.246,NA
+unigrama,357,hacen,57,57,0.259,NA
+unigrama,358,cyber7,57,26,0.118,NA
+unigrama,359,preguntar,56,55,0.25,NA
+unigrama,360,llenar,56,55,0.25,NA
+unigrama,361,actualización,56,56,0.255,NA
+unigrama,362,x4,56,56,0.255,NA
+unigrama,363,final,56,55,0.25,NA
+unigrama,364,ia,56,41,0.187,NA
+unigrama,365,cambiaron,56,56,0.255,NA
+unigrama,366,habilitada,55,55,0.25,NA
+unigrama,367,pasó,55,55,0.25,NA
+unigrama,368,amigos,55,53,0.241,NA
+unigrama,369,conoce,55,55,0.25,NA
+unigrama,370,habilitadas,54,54,0.246,NA
+unigrama,371,telegram,54,54,0.246,NA
+unigrama,372,informatica,54,49,0.223,NA
+unigrama,373,pasan,54,53,0.241,NA
+unigrama,374,años,54,47,0.214,NA
+unigrama,375,paz,54,42,0.191,NA
+unigrama,376,retirar,54,53,0.241,NA
+unigrama,377,classroom,54,54,0.246,NA
+unigrama,378,fechas,53,52,0.237,NA
+unigrama,379,realizar,53,53,0.241,NA
+unigrama,380,ven,53,50,0.228,NA
+unigrama,381,empieza,53,50,0.228,NA
+unigrama,382,error,53,52,0.237,NA
+unigrama,383,aunque,53,51,0.232,NA
+unigrama,384,mal,53,53,0.241,NA
+unigrama,385,invita,53,53,0.241,NA
+unigrama,386,habilitó,52,52,0.237,NA
+unigrama,387,miércoles,52,52,0.237,NA
+unigrama,388,casi,52,50,0.228,NA
+unigrama,389,edificio,52,52,0.237,NA
+unigrama,390,importante,52,50,0.228,NA
+unigrama,391,tecnología,52,48,0.218,NA
+unigrama,392,flores,52,50,0.228,NA
+unigrama,393,osea,51,50,0.228,NA
+unigrama,394,supongo,51,51,0.232,NA
+unigrama,395,digo,51,50,0.228,NA
+unigrama,396,depositar,51,51,0.232,NA
+unigrama,397,ve,51,51,0.232,NA
+unigrama,398,pagos,51,50,0.228,NA
+unigrama,399,saldrá,51,49,0.223,NA
+unigrama,400,presentar,51,45,0.205,NA
+unigrama,401,papeles,51,50,0.228,NA
+unigrama,402,además,51,51,0.232,NA
+unigrama,403,inicio,51,49,0.223,NA
+unigrama,404,conocimiento,51,47,0.214,NA
+unigrama,405,premios,50,43,0.196,NA
+unigrama,406,hurtado,50,50,0.228,NA
+unigrama,407,habilitaron,49,49,0.223,NA
+unigrama,408,paciencia,49,46,0.209,NA
+unigrama,409,deposito,49,49,0.223,NA
+unigrama,410,compañer,49,48,0.218,NA
+unigrama,411,tambien,49,49,0.223,NA
+unigrama,412,espera,49,47,0.214,NA
+unigrama,413,ahi,49,47,0.214,NA
+unigrama,414,queda,49,49,0.223,NA
+unigrama,415,examenes,49,49,0.223,NA
+unigrama,416,alcon,49,49,0.223,NA
+unigrama,417,ll,49,48,0.218,NA
+unigrama,418,mat,48,48,0.218,NA
+unigrama,419,tan,48,48,0.218,NA
+unigrama,420,último,48,47,0.214,NA
+unigrama,421,apoyo,48,46,0.209,NA
+unigrama,422,atendiendo,47,47,0.214,NA
+unigrama,423,varios,47,45,0.205,NA
+unigrama,424,anímense,47,47,0.214,NA
+unigrama,425,mayoría,47,47,0.214,NA
+unigrama,426,bolivia,47,32,0.146,NA
+unigrama,427,pasantía,47,46,0.209,NA
+unigrama,428,futuro,47,39,0.177,NA
+unigrama,429,quisiera,46,46,0.209,NA
+unigrama,430,misma,46,46,0.209,NA
+unigrama,431,⚠️,46,24,0.109,NA
+unigrama,432,funciona,46,46,0.209,NA
+unigrama,433,cosas,45,41,0.187,NA
+unigrama,434,info,45,45,0.205,NA
+unigrama,435,universidad,45,44,0.2,NA
+unigrama,436,amigo,45,45,0.205,NA
+unigrama,437,cantidad,45,45,0.205,NA
+unigrama,438,chapi,45,41,0.187,NA
+unigrama,439,juan,45,44,0.2,NA
+unigrama,440,cosa,45,44,0.2,NA
+unigrama,441,abierto,45,45,0.205,NA
+unigrama,442,seria,45,41,0.187,NA
+unigrama,443,gallardo,45,45,0.205,NA
+unigrama,444,dudas,44,44,0.2,NA
+unigrama,445,necesario,44,44,0.2,NA
+unigrama,446,enviar,44,44,0.2,NA
+unigrama,447,deben,44,44,0.2,NA
+unigrama,448,hice,44,43,0.196,NA
+unigrama,449,requisito,44,39,0.177,NA
+unigrama,450,devolución,44,43,0.196,NA
+unigrama,451,empiezan,44,43,0.196,NA
+unigrama,452,sera,44,44,0.2,NA
+unigrama,453,mundo,44,37,0.168,NA
+unigrama,454,ciencia,44,37,0.168,NA
+unigrama,455,suerte,44,44,0.2,NA
+unigrama,456,emprendimiento,44,39,0.177,NA
+unigrama,457,castaños,44,44,0.2,NA
+unigrama,458,reunión,43,40,0.182,NA
+unigrama,459,sacar,43,43,0.196,NA
+unigrama,460,am,43,40,0.182,NA
+unigrama,461,salio,43,43,0.196,NA
+unigrama,462,menciones,43,38,0.173,NA
+unigrama,463,inscribete,43,43,0.196,NA
+unigrama,464,nivel,43,33,0.15,NA
+unigrama,465,inf-162,43,43,0.196,NA
+unigrama,466,felipez,43,42,0.191,NA
+unigrama,467,oficina,42,42,0.191,NA
+unigrama,468,numero,42,40,0.182,NA
+unigrama,469,pude,42,42,0.191,NA
+unigrama,470,manera,42,41,0.187,NA
+unigrama,471,registro,42,40,0.182,NA
+unigrama,472,ingresar,42,42,0.191,NA
+unigrama,473,finalizar,42,42,0.191,NA
+unigrama,474,mes,42,41,0.187,NA
+unigrama,475,ciencias,42,36,0.164,NA
+unigrama,476,mencion,42,40,0.182,NA
+unigrama,477,menfy,42,39,0.177,NA
+unigrama,478,digital,42,37,0.168,NA
+unigrama,479,progra,42,41,0.187,NA
+unigrama,480,torneo,42,28,0.127,NA
+unigrama,481,recien,41,39,0.177,NA
+unigrama,482,hago,41,41,0.187,NA
+unigrama,483,fisica,41,40,0.182,NA
+unigrama,484,pdf,41,40,0.182,NA
+unigrama,485,llena,41,41,0.187,NA
+unigrama,486,ningún,41,41,0.187,NA
+unigrama,487,oficiales,41,41,0.187,NA
+unigrama,488,métodos,41,39,0.177,NA
+unigrama,489,casos,41,40,0.182,NA
+unigrama,490,técnico,41,34,0.155,NA
+unigrama,491,mientras,41,41,0.187,NA
+unigrama,492,actividades,41,36,0.164,NA
+unigrama,493,estudio,41,38,0.173,NA
+unigrama,494,com-242,41,41,0.187,NA
+unigrama,495,sis-241,41,41,0.187,NA
+unigrama,496,grover,41,41,0.187,NA
+unigrama,497,simulación,41,41,0.187,NA
+unigrama,498,presenciales,40,39,0.177,NA
+unigrama,499,entrega,40,40,0.182,NA
+unigrama,500,deberían,40,40,0.182,NA
+bigrama,1,alguien sabe,1195,1194,5.434,NA
+bigrama,2,base datos,298,279,1.27,NA
+bigrama,3,curso temporada,220,205,0.933,NA
+bigrama,4,retiro adicion,217,212,0.965,NA
+bigrama,5,retiro adición,203,202,0.919,NA
+bigrama,6,carrera informática,157,126,0.573,NA
+bigrama,7,plan antiguo,139,127,0.578,NA
+bigrama,8,plan nuevo,136,89,0.405,NA
+bigrama,9,pasando clases,131,130,0.592,NA
+bigrama,10,alguien link,127,127,0.578,NA
+bigrama,11,únete whatsapp,122,118,0.537,NA
+bigrama,12,tardes alguien,122,122,0.555,NA
+bigrama,13,disculpen alguien,113,113,0.514,NA
+bigrama,14,tal lic,106,106,0.482,NA
+bigrama,15,álgebra lineal,103,103,0.469,NA
+bigrama,16,sistemas operativos,95,87,0.396,NA
+bigrama,17,diseño sistemas,91,79,0.36,NA
+bigrama,18,nuevo pensum,87,85,0.387,NA
+bigrama,19,cursos temporada,86,85,0.387,NA
+bigrama,20,verificar pago,83,80,0.364,NA
+bigrama,21,puede pagar,82,82,0.373,NA
+bigrama,22,enseña bien,78,78,0.355,NA
+bigrama,23,análisis diseño,76,64,0.291,NA
+bigrama,24,electrónica general,74,72,0.328,NA
+bigrama,25,chic @s,73,73,0.332,NA
+bigrama,26,alguien enlace,70,70,0.319,NA
+bigrama,27,inf plan,69,52,0.237,NA
+bigrama,28,unirte whatsapp,65,65,0.296,NA
+bigrama,29,noches alguien,65,65,0.296,NA
+bigrama,30,enlace unirte,64,64,0.291,NA
+bigrama,31,sabe cómo,63,63,0.287,NA
+bigrama,32,inteligencia artificial,62,55,0.25,NA
+bigrama,33,sabe pasando,61,61,0.278,NA
+bigrama,34,estan pasando,60,60,0.273,NA
+bigrama,35,sabe lic,60,60,0.273,NA
+bigrama,36,comparte enlace,60,60,0.273,NA
+bigrama,37,días alguien,59,59,0.269,NA
+bigrama,38,programación web,57,57,0.259,NA
+bigrama,39,informática umsa,57,47,0.214,NA
+bigrama,40,dispositivos móviles,57,57,0.259,NA
+bigrama,41,dos materias,56,53,0.241,NA
+bigrama,42,link whatsapp,55,55,0.25,NA
+bigrama,43,pasaron clases,55,55,0.25,NA
+bigrama,44,sabe dónde,54,54,0.246,NA
+bigrama,45,antiguo pensum,52,50,0.228,NA
+bigrama,46,curso verano,51,48,0.218,NA
+bigrama,47,investigación operativa,51,50,0.228,NA
+bigrama,48,alguien puede,50,50,0.228,NA
+bigrama,49,abrir materia,50,48,0.218,NA
+bigrama,50,habilitar materia,49,47,0.214,NA
+bigrama,51,compañer @s,48,47,0.214,NA
+bigrama,52,puede hacer,48,48,0.218,NA
+bigrama,53,seguridad información,48,45,0.205,NA
+bigrama,54,pierdas oportunidad,46,46,0.209,NA
+bigrama,55,temporada invierno,46,43,0.196,NA
+bigrama,56,cómo lic,45,45,0.205,NA
+bigrama,57,inf paralelo,45,44,0.2,NA
+bigrama,58,puedo hacer,44,44,0.2,NA
+bigrama,59,tomar materia,44,44,0.2,NA
+bigrama,60,disculpen saben,44,44,0.2,NA
+bigrama,61,generar cpt,43,41,0.187,NA
+bigrama,62,boleta inscripción,43,43,0.196,NA
+bigrama,63,puede inscribir,43,43,0.196,NA
+bigrama,64,clases lic,43,43,0.196,NA
+bigrama,65,cada materia,42,42,0.191,NA
+bigrama,66,primer día,42,42,0.191,NA
+bigrama,67,cursos invierno,41,41,0.187,NA
+bigrama,68,alguien pasando,41,41,0.187,NA
+bigrama,69,ingeniería software,41,37,0.168,NA
+bigrama,70,sabe tal,40,40,0.182,NA
+bigrama,71,algebra lineal,40,40,0.182,NA
+bigrama,72,abre enlace,39,39,0.177,NA
+bigrama,73,docente recomiendan,39,39,0.177,NA
+bigrama,74,anterior semestre,39,39,0.177,NA
+bigrama,75,día alguien,38,38,0.173,NA
+bigrama,76,choque materias,38,38,0.173,NA
+bigrama,77,lenguajes formales,38,35,0.159,NA
+bigrama,78,dónde pasando,38,38,0.173,NA
+bigrama,79,esperar retiro,37,37,0.168,NA
+bigrama,80,saben lic,37,37,0.168,NA
+bigrama,81,formales autómatas,37,35,0.159,NA
+bigrama,82,sis-241 com-242,37,37,0.168,NA
+bigrama,83,com-242 seg-241,37,37,0.168,NA
+bigrama,84,seg-241 tic-243,37,37,0.168,NA
+bigrama,85,tic-243 iid-241,37,37,0.168,NA
+bigrama,86,enlace compañeros,37,37,0.168,NA
+bigrama,87,compañeros grupos,37,37,0.168,NA
+bigrama,88,código cpt,36,35,0.159,NA
+bigrama,89,materia inf,36,36,0.164,NA
+bigrama,90,lic tarquino,36,36,0.164,NA
+bigrama,91,ir kardex,35,35,0.159,NA
+bigrama,92,tardes disculpen,35,35,0.159,NA
+bigrama,93,alguien podría,35,35,0.159,NA
+bigrama,94,nuevo plan,35,30,0.137,NA
+bigrama,95,día hoy,34,34,0.155,NA
+bigrama,96,puedo inscribirme,34,34,0.155,NA
+bigrama,97,tomar materias,34,34,0.155,NA
+bigrama,98,alguien whatsapp,34,34,0.155,NA
+bigrama,99,recomiendan tomar,34,34,0.155,NA
+bigrama,100,inf lic,34,34,0.155,NA
+bigrama,101,ser parte,34,32,0.146,NA
+bigrama,102,inscribirse materia,33,33,0.15,NA
+bigrama,103,sabe cuándo,33,33,0.15,NA
+bigrama,104,alguien pasa,33,33,0.15,NA
+bigrama,105,alguien inf,33,33,0.15,NA
+bigrama,106,lic aruquipa,33,33,0.15,NA
+bigrama,107,formulario inscripción,33,31,0.141,NA
+bigrama,108,simulación sistemas,33,33,0.15,NA
+bigrama,109,entregar documentos,32,32,0.146,NA
+bigrama,110,dejar documentos,32,32,0.146,NA
+bigrama,111,ciencia datos,32,27,0.123,NA
+bigrama,112,quién recomiendan,32,32,0.146,NA
+bigrama,113,alguien horarios,32,32,0.146,NA
+bigrama,114,gran oportunidad,32,32,0.146,NA
+bigrama,115,alguien número,31,31,0.141,NA
+bigrama,116,todas materias,31,31,0.141,NA
+bigrama,117,clases hoy,31,31,0.141,NA
+bigrama,118,alguien conoce,31,31,0.141,NA
+bigrama,119,programación dispositivos,31,31,0.141,NA
+bigrama,120,pagar cpt,30,30,0.137,NA
+bigrama,121,materias habilitadas,30,30,0.137,NA
+bigrama,122,finalizar inscripción,30,30,0.137,NA
+bigrama,123,técnico superior,30,25,0.114,NA
+bigrama,124,lic huanca,30,30,0.137,NA
+bigrama,125,dias alguien,29,29,0.132,NA
+bigrama,126,tardes compañeros,29,29,0.132,NA
+bigrama,127,paralelo lic,29,29,0.132,NA
+bigrama,128,lic zeballos,29,29,0.132,NA
+bigrama,129,docente lic,29,25,0.114,NA
+bigrama,130,alguien lic,29,29,0.132,NA
+bigrama,131,lic grover,29,29,0.132,NA
+bigrama,132,siguiente formulario,28,28,0.127,NA
+bigrama,133,dirección carrera,28,28,0.127,NA
+bigrama,134,mención seguridad,28,25,0.114,NA
+bigrama,135,cuál recomiendan,28,28,0.127,NA
+bigrama,136,saben cómo,28,28,0.127,NA
+bigrama,137,recomiendan pasar,28,28,0.127,NA
+bigrama,138,enlace invitación,28,26,0.118,NA
+bigrama,139,datos ii,28,28,0.127,NA
+bigrama,140,adelantar materia,28,28,0.127,NA
+bigrama,141,innovación tecnológica,28,26,0.118,NA
+bigrama,142,clases virtuales,27,26,0.118,NA
+bigrama,143,sabe puedo,27,27,0.123,NA
+bigrama,144,mismo problema,27,27,0.123,NA
+bigrama,145,sabe aula,27,27,0.123,NA
+bigrama,146,convocatoria pasantía,27,27,0.123,NA
+bigrama,147,apertura materia,27,27,0.123,NA
+bigrama,148,choque horario,27,27,0.123,NA
+bigrama,149,antiguo nuevo,27,27,0.123,NA
+bigrama,150,oportunidad adelantar,27,27,0.123,NA
+bigrama,151,compañeros alguien,26,26,0.118,NA
+bigrama,152,director carrera,26,21,0.096,NA
+bigrama,153,pago cpt,26,26,0.118,NA
+bigrama,154,estudiantes carrera,26,21,0.096,NA
+bigrama,155,puede entregar,26,26,0.118,NA
+bigrama,156,edificio informática,26,26,0.118,NA
+bigrama,157,tal vez,26,25,0.114,NA
+bigrama,158,lic juan,26,26,0.118,NA
+bigrama,159,piso carrera,26,26,0.118,NA
+bigrama,160,siguiente semana,26,26,0.118,NA
+bigrama,161,lugar auditorio,26,26,0.118,NA
+bigrama,162,modelo carta,26,26,0.118,NA
+bigrama,163,programación ii,26,19,0.086,NA
+bigrama,164,choque materia,26,26,0.118,NA
+bigrama,165,operativa ii,26,25,0.114,NA
+bigrama,166,emprendimiento innovación,26,24,0.109,NA
+bigrama,167,ninguna materia,25,25,0.114,NA
+bigrama,168,primer semestre,25,25,0.114,NA
+bigrama,169,cambio paralelo,25,25,0.114,NA
+bigrama,170,oficina curso,25,25,0.114,NA
+bigrama,171,carlos mullisaca,25,25,0.114,NA
+bigrama,172,pasar oportunidad,25,25,0.114,NA
+bigrama,173,jose maria,25,25,0.114,NA
+bigrama,174,choque horarios,25,25,0.114,NA
+bigrama,175,5to semestre,25,20,0.091,NA
+bigrama,176,puede ser,24,23,0.105,NA
+bigrama,177,pasar link,24,24,0.109,NA
+bigrama,178,inf inf,24,24,0.109,NA
+bigrama,179,llenar formulario,24,24,0.109,NA
+bigrama,180,mandar carta,24,23,0.105,NA
+bigrama,181,recomiendan lic,24,24,0.109,NA
+bigrama,182,lic menfy,24,21,0.096,NA
+bigrama,183,enlace whatsapp,24,24,0.109,NA
+bigrama,184,materia sistemas,24,21,0.096,NA
+bigrama,185,oficial whatsapp,24,22,0.1,NA
+bigrama,186,pierdas gran,24,24,0.109,NA
+bigrama,187,noches disculpen,23,23,0.105,NA
+bigrama,188,pueden pasar,23,23,0.105,NA
+bigrama,189,sabe puede,23,23,0.105,NA
+bigrama,190,grupos oficiales,23,23,0.105,NA
+bigrama,191,oportunidad inscríbete,23,21,0.096,NA
+bigrama,192,tardes saben,23,23,0.105,NA
+bigrama,193,aprovecha oportunidad,23,21,0.096,NA
+bigrama,194,carrera informatica,23,20,0.091,NA
+bigrama,195,aula pasando,23,23,0.105,NA
+bigrama,196,luis zeballos,23,23,0.105,NA
+bigrama,197,martes jueves,23,23,0.105,NA
+bigrama,198,inf-241 análisis,23,15,0.068,NA
+bigrama,199,invitamos inscribirse,23,23,0.105,NA
+bigrama,200,generar código,22,22,0.1,NA
+trigrama,1,análisis diseño sistemas,73,61,0.278,NA
+trigrama,2,enlace unirte whatsapp,64,64,0.291,NA
+trigrama,3,alguien sabe cómo,62,62,0.282,NA
+trigrama,4,alguien sabe pasando,60,60,0.273,NA
+trigrama,5,alguien sabe lic,59,59,0.269,NA
+trigrama,6,alguien sabe dónde,54,54,0.246,NA
+trigrama,7,tardes alguien sabe,52,52,0.237,NA
+trigrama,8,disculpen alguien sabe,49,49,0.223,NA
+trigrama,9,inf plan antiguo,46,46,0.209,NA
+trigrama,10,carrera informática umsa,41,39,0.177,NA
+trigrama,11,abre enlace unirte,39,39,0.177,NA
+trigrama,12,alguien sabe tal,37,37,0.168,NA
+trigrama,13,lenguajes formales autómatas,37,35,0.159,NA
+trigrama,14,sis-241 com-242 seg-241,37,37,0.168,NA
+trigrama,15,com-242 seg-241 tic-243,37,37,0.168,NA
+trigrama,16,seg-241 tic-243 iid-241,37,37,0.168,NA
+trigrama,17,comparte enlace compañeros,37,37,0.168,NA
+trigrama,18,enlace compañeros grupos,37,37,0.168,NA
+trigrama,19,curso temporada invierno,33,30,0.137,NA
+trigrama,20,alguien sabe cuándo,32,32,0.146,NA
+trigrama,21,sabe cómo lic,30,30,0.137,NA
+trigrama,22,sabe dónde pasando,30,30,0.137,NA
+trigrama,23,sabe tal lic,29,29,0.132,NA
+trigrama,24,noches alguien sabe,29,29,0.132,NA
+trigrama,25,base datos ii,28,28,0.127,NA
+trigrama,26,programación dispositivos móviles,28,28,0.127,NA
+trigrama,27,alguien sabe puedo,27,27,0.123,NA
+trigrama,28,días alguien sabe,26,26,0.118,NA
+trigrama,29,alguien link whatsapp,26,26,0.118,NA
+trigrama,30,alguien sabe aula,25,25,0.114,NA
+trigrama,31,pierdas gran oportunidad,24,24,0.109,NA
+trigrama,32,emprendimiento innovación tecnológica,24,22,0.1,NA
+trigrama,33,oportunidad adelantar materia,24,24,0.109,NA
+trigrama,34,alguien sabe puede,23,23,0.105,NA
+trigrama,35,oficina curso temporada,23,23,0.105,NA
+trigrama,36,mención seguridad información,23,20,0.091,NA
+trigrama,37,inf plan nuevo,23,23,0.105,NA
+trigrama,38,inf-241 análisis diseño,23,15,0.068,NA
+trigrama,39,aprovecha oportunidad inscríbete,21,19,0.086,NA
+trigrama,40,inf lenguajes formales,21,19,0.086,NA
+trigrama,41,formales autómatas comparte,21,19,0.086,NA
+trigrama,42,autómatas comparte compañeros,21,19,0.086,NA
+trigrama,43,comparte compañeros asegura,21,19,0.086,NA
+trigrama,44,compañeros asegura cupo,21,19,0.086,NA
+trigrama,45,com plan nuevo,21,21,0.096,NA
+trigrama,46,sigla actual inf-241,21,21,0.096,NA
+trigrama,47,actual inf-241 sigla,21,21,0.096,NA
+trigrama,48,inf-241 sigla antigua,21,21,0.096,NA
+trigrama,49,sigla antigua inf-162,21,21,0.096,NA
+trigrama,50,carreras sis-241 com-242,21,21,0.096,NA
+trigrama,51,sabe pasando clases,20,20,0.091,NA
+trigrama,52,alguien sabe docente,20,20,0.091,NA
+trigrama,53,alguien sabe hora,20,20,0.091,NA
+trigrama,54,base datos lic,20,20,0.091,NA
+trigrama,55,seguridad base datos,20,20,0.091,NA
+trigrama,56,oportunidad inscríbete curso,20,18,0.082,NA
+trigrama,57,inscríbete curso verano,20,18,0.082,NA
+trigrama,58,curso verano inf,20,18,0.082,NA
+trigrama,59,verano inf lenguajes,20,18,0.082,NA
+trigrama,60,verano impulsa conocimiento,20,18,0.082,NA
+trigrama,61,seguridad bases datos,20,10,0.046,NA
+trigrama,62,invitamos inscribirse materia,20,20,0.091,NA
+trigrama,63,inteligencia artificial ciencia,20,19,0.086,NA
+trigrama,64,artificial ciencia datos,20,19,0.086,NA
+trigrama,65,tic-243 iid-241 comparte,20,20,0.091,NA
+trigrama,66,iid-241 comparte enlace,20,20,0.091,NA
+trigrama,67,debes verificar pago,19,19,0.086,NA
+trigrama,68,preparación evaluación proyectos,19,19,0.086,NA
+trigrama,69,comunicado curso temporada,19,19,0.086,NA
+trigrama,70,josé luis zeballos,19,19,0.086,NA
+trigrama,71,gran oportunidad aprender,19,19,0.086,NA
+trigrama,72,luis zeballos abasto,19,19,0.086,NA
+trigrama,73,cursos invierno plan,19,19,0.086,NA
+trigrama,74,invierno plan antiguo,19,19,0.086,NA
+trigrama,75,plan antiguo nuevo,19,19,0.086,NA
+trigrama,76,legislación informática ética,19,17,0.077,NA
+trigrama,77,alguien sabe horarios,18,18,0.082,NA
+trigrama,78,esperar retiro adición,18,18,0.082,NA
+trigrama,79,esperar retiro adicion,18,18,0.082,NA
+trigrama,80,investigación operativa ii,18,17,0.077,NA
+trigrama,81,alguien sabe pasaron,18,18,0.082,NA
+trigrama,82,lic josé luis,18,18,0.082,NA
+trigrama,83,analisis diseño sistemas,18,18,0.082,NA
+trigrama,84,whatsapp análisis diseño,18,18,0.082,NA
+trigrama,85,alguien sabe inf,17,17,0.077,NA
+trigrama,86,piso carrera informática,17,17,0.077,NA
+trigrama,87,estan pasando clases,17,17,0.077,NA
+trigrama,88,alguien sabe whatsapp,17,17,0.077,NA
+trigrama,89,asegura cupo ingresa,17,15,0.068,NA
+trigrama,90,cupo ingresa link,17,15,0.068,NA
+trigrama,91,ingresa link descripcion,17,15,0.068,NA
+trigrama,92,link descripcion completa,17,15,0.068,NA
+trigrama,93,descripcion completa datos,17,15,0.068,NA
+trigrama,94,completa datos verano,17,15,0.068,NA
+trigrama,95,datos verano impulsa,17,15,0.068,NA
+trigrama,96,estudiantes carrera informática,16,13,0.059,NA
+trigrama,97,día alguien sabe,16,16,0.073,NA
+trigrama,98,alguien sabe materia,16,16,0.073,NA
+trigrama,99,aprueba mes materia,16,16,0.073,NA
+trigrama,100,aprovecha ahora aprueba,16,16,0.073,NA
+tfidf,1,déjame,1,1,0.005,3.45194
+tfidf,2,heroes,1,1,0.005,3.45194
+tfidf,3,porfiiiiis,1,1,0.005,3.45194
+tfidf,4,facilitooo,1,1,0.005,3.45194
+tfidf,5,inscribanseee,1,1,0.005,3.45194
+tfidf,6,asustado,1,1,0.005,3.45194
+tfidf,7,actualizaran,1,1,0.005,3.45194
+tfidf,8,tmd,1,1,0.005,3.45194
+tfidf,9,extractos,1,1,0.005,3.45194
+tfidf,10,llink,1,1,0.005,3.45194
+tfidf,11,cobro,1,1,0.005,3.45194
+tfidf,12,lab-111,1,1,0.005,3.45194
+tfidf,13,weba,1,1,0.005,3.45194
+tfidf,14,graxx,1,1,0.005,3.45194
+tfidf,15,pulpin,1,1,0.005,3.45194
+tfidf,16,fsfhdhyedyehdsa,1,1,0.005,3.45194
+tfidf,17,redujeron,1,1,0.005,3.45194
+tfidf,18,admi,1,1,0.005,3.45194
+tfidf,19,comunicado-kardex,1,1,0.005,3.45194
+tfidf,20,113m,1,1,0.005,3.45194
+tfidf,21,mañama,1,1,0.005,3.45194
+tfidf,22,khe,1,1,0.005,3.45194
+tfidf,23,hpla,1,1,0.005,3.45194
+tfidf,24,milton,1,1,0.005,3.45194
+tfidf,25,pol2,1,1,0.005,3.45194
+tfidf,26,uuffaa,1,1,0.005,3.45194
+tfidf,27,lab121,1,1,0.005,3.45194
+tfidf,28,dezzzaparesssioh,1,1,0.005,3.45194
+tfidf,29,piénsenlo,1,1,0.005,3.45194
+tfidf,30,seun,1,1,0.005,3.45194
+tfidf,31,inscripsion,1,1,0.005,3.45194
+tfidf,32,danner,1,1,0.005,3.45194
+tfidf,33,diosito,1,1,0.005,3.45194
+tfidf,34,agostó,1,1,0.005,3.45194
+tfidf,35,uuf,1,1,0.005,3.45194
+tfidf,36,pozada,1,1,0.005,3.45194
+tfidf,37,sobretodo,1,1,0.005,3.45194
+tfidf,38,asustes,1,1,0.005,3.45194
+tfidf,39,acomoda,1,1,0.005,3.45194
+tfidf,40,5o,1,1,0.005,3.45194
+tfidf,41,confíen,1,1,0.005,3.45194
+tfidf,42,asistee,1,1,0.005,3.45194
+tfidf,43,fi,1,1,0.005,3.45194
+tfidf,44,holasa,1,1,0.005,3.45194
+tfidf,45,rescatados,1,1,0.005,3.45194
+tfidf,46,vendes,1,1,0.005,3.45194
+tfidf,47,enserió,1,1,0.005,3.45194
+tfidf,48,exhibiste,1,1,0.005,3.45194
+tfidf,49,x1,1,1,0.005,3.45194
+tfidf,50,xfis,1,1,0.005,3.45194
+tfidf,51,habrirá,1,1,0.005,3.45194
+tfidf,52,muchachosss,1,1,0.005,3.45194
+tfidf,53,fabian,1,1,0.005,3.45194
+tfidf,54,jhon,1,1,0.005,3.45194
+tfidf,55,mega,1,1,0.005,3.45194
+tfidf,56,mijo,1,1,0.005,3.45194
+tfidf,57,mushashos,1,1,0.005,3.45194
+tfidf,58,chistosita,1,1,0.005,3.45194
+tfidf,59,ojalaaaa,1,1,0.005,3.45194
+tfidf,60,gra,1,1,0.005,3.45194
+tfidf,61,dx,1,1,0.005,3.45194
+tfidf,62,chalesss,1,1,0.005,3.45194
+tfidf,63,confundido,1,1,0.005,3.45194
+tfidf,64,alcanzas,1,1,0.005,3.45194
+tfidf,65,siuuu,1,1,0.005,3.45194
+tfidf,66,urgentemente,1,1,0.005,3.45194
+tfidf,67,f5,1,1,0.005,3.45194
+tfidf,68,dormír,1,1,0.005,3.45194
+tfidf,69,batman,1,1,0.005,3.45194
+tfidf,70,provincia,1,1,0.005,3.45194
+tfidf,71,vava,1,1,0.005,3.45194
+tfidf,72,recuerdes,1,1,0.005,3.45194
+tfidf,73,siaumsa,1,1,0.005,3.45194
+tfidf,74,cagaste.jpg,1,1,0.005,3.45194
+tfidf,75,siiii,1,1,0.005,3.45194
+tfidf,76,moverse,1,1,0.005,3.45194
+tfidf,77,muuuuuuuuuuuuuuuuuuuuu,1,1,0.005,3.45194
+tfidf,78,cho,1,1,0.005,3.45194
+tfidf,79,lic.gladys,1,1,0.005,3.45194
+tfidf,80,lolsito,1,1,0.005,3.45194
+tfidf,81,labo9,1,1,0.005,3.45194
+tfidf,82,nones,1,1,0.005,3.45194
+tfidf,83,𝐺𝑟𝑎𝑐𝑖𝑎𝑠,1,1,0.005,3.45194
+tfidf,84,x200,1,1,0.005,3.45194
+tfidf,85,x201,1,1,0.005,3.45194
+tfidf,86,mocoso,1,1,0.005,3.45194
+tfidf,87,zzzz,1,1,0.005,3.45194
+tfidf,88,dondeee,1,1,0.005,3.45194
+tfidf,89,horariooos,1,1,0.005,3.45194
+tfidf,90,x20,1,1,0.005,3.45194
+tfidf,91,xd'nt,1,1,0.005,3.45194
+tfidf,92,shhh,1,1,0.005,3.45194
+tfidf,93,nn,1,1,0.005,3.45194
+tfidf,94,jajajjaja,1,1,0.005,3.45194
+tfidf,95,ayudo,1,1,0.005,3.45194
+tfidf,96,x222,1,1,0.005,3.45194
+tfidf,97,madres,1,1,0.005,3.45194
+tfidf,98,wilkerman,1,1,0.005,3.45194
+tfidf,99,jejejje,1,1,0.005,3.45194
+tfidf,100,acostumbra,1,1,0.005,3.45194
+tfidf,101,simón,1,1,0.005,3.45194
+tfidf,102,hablaba,1,1,0.005,3.45194
+tfidf,103,19-21,1,1,0.005,3.45194
+tfidf,104,p3-lab2,1,1,0.005,3.45194
+tfidf,105,ss4,1,1,0.005,3.45194
+tfidf,106,🖖🏻,1,1,0.005,3.45194
+tfidf,107,naa,1,1,0.005,3.45194
+tfidf,108,formulario.pdf,1,1,0.005,3.45194
+tfidf,109,porf,1,1,0.005,3.45194
+tfidf,110,xfaaaaaaaa,1,1,0.005,3.45194
+tfidf,111,graciassss,1,1,0.005,3.45194
+tfidf,112,dodi,1,1,0.005,3.45194
+tfidf,113,gun,1,1,0.005,3.45194
+tfidf,114,pacienciaaaaa,1,1,0.005,3.45194
+tfidf,115,👆🏽,1,1,0.005,3.45194
+tfidf,116,entiendeeeeee,1,1,0.005,3.45194
+tfidf,117,hi,1,1,0.005,3.45194
+tfidf,118,empezaba,1,1,0.005,3.45194
+tfidf,119,ardido,1,1,0.005,3.45194
+tfidf,120,@.@,1,1,0.005,3.45194
+tfidf,121,gracie,1,1,0.005,3.45194
+tfidf,122,grasias,1,1,0.005,3.45194
+tfidf,123,veranooo,1,1,0.005,3.45194
+tfidf,124,neo,1,1,0.005,3.45194
+tfidf,125,curse,1,1,0.005,3.45194
+tfidf,126,holaaaaaa,1,1,0.005,3.45194
+tfidf,127,holaaaaaaaaa,1,1,0.005,3.45194
+tfidf,128,trushe,1,1,0.005,3.45194
+tfidf,129,netaa,1,1,0.005,3.45194
+tfidf,130,irresponsable,1,1,0.005,3.45194
+tfidf,131,atenciom,1,1,0.005,3.45194
+tfidf,132,informarte,1,1,0.005,3.45194
+tfidf,133,ahaha,1,1,0.005,3.45194
+tfidf,134,canon,1,1,0.005,3.45194
+tfidf,135,yup,1,1,0.005,3.45194
+tfidf,136,tenkiu,1,1,0.005,3.45194
+tfidf,137,pulse,1,1,0.005,3.45194
+tfidf,138,materia_,1,1,0.005,3.45194
+tfidf,139,hagooo,1,1,0.005,3.45194
+tfidf,140,ayudaaaaaaaaaaaa,1,1,0.005,3.45194
+tfidf,141,hahahahah,1,1,0.005,3.45194
+tfidf,142,2⃣,1,1,0.005,3.45194
+tfidf,143,algebra1,1,1,0.005,3.45194
+tfidf,144,cursarlo,1,1,0.005,3.45194
+tfidf,145,klmm3ar,1,1,0.005,3.45194
+tfidf,146,escogieron,1,1,0.005,3.45194
+tfidf,147,raioz,1,1,0.005,3.45194
+tfidf,148,🙋🏻‍♂️,1,1,0.005,3.45194
+tfidf,149,patín,2,1,0.005,3.45194
+tfidf,150,acasoooo,1,1,0.005,3.45194
+tfidf,151,socio,1,1,0.005,3.45194
+tfidf,152,catacoraaaaaa,1,1,0.005,3.45194
+tfidf,153,saquenle,1,1,0.005,3.45194
+tfidf,154,enfermo,1,1,0.005,3.45194
+tfidf,155,reportenlo,1,1,0.005,3.45194
+tfidf,156,sio,1,1,0.005,3.45194
+tfidf,157,mantuvo,1,1,0.005,3.45194
+tfidf,158,comprendido,1,1,0.005,3.45194
+tfidf,159,ahhhhhhh,1,1,0.005,3.45194
+tfidf,160,lados,1,1,0.005,3.45194
+tfidf,161,graaaaaaciaas,1,1,0.005,3.45194
+tfidf,162,papu,1,1,0.005,3.45194
+tfidf,163,preguntaa,1,1,0.005,3.45194
+tfidf,164,esperate,1,1,0.005,3.45194
+tfidf,165,activaron,1,1,0.005,3.45194
+tfidf,166,ush,1,1,0.005,3.45194
+tfidf,167,xw,1,1,0.005,3.45194
+tfidf,168,graciaas,1,1,0.005,3.45194
+tfidf,169,lanzó,1,1,0.005,3.45194
+tfidf,170,ojaalaa,1,1,0.005,3.45194
+tfidf,171,ojalaaaaa,1,1,0.005,3.45194
+tfidf,172,πππ,1,1,0.005,3.45194
+tfidf,173,facto,1,1,0.005,3.45194
+tfidf,174,webada,1,1,0.005,3.45194
+tfidf,175,saludó,1,1,0.005,3.45194
+tfidf,176,ventajas,1,1,0.005,3.45194
+tfidf,177,jubilara,1,1,0.005,3.45194
+tfidf,178,pofa,1,1,0.005,3.45194
+tfidf,179,segur@,1,1,0.005,3.45194
+tfidf,180,xfaaaaa,1,1,0.005,3.45194
+tfidf,181,sho,1,1,0.005,3.45194
+tfidf,182,postulo,1,1,0.005,3.45194
+tfidf,183,piñataaaaa,1,1,0.005,3.45194
+tfidf,184,x67,1,1,0.005,3.45194
+tfidf,185,recurdso,1,1,0.005,3.45194
+tfidf,186,vrp,1,1,0.005,3.45194
+tfidf,187,lo.ampliaron,1,1,0.005,3.45194
+tfidf,188,info121,1,1,0.005,3.45194
+tfidf,189,graciass,1,1,0.005,3.45194
+tfidf,190,dividen,1,1,0.005,3.45194
+tfidf,191,mullisaco,1,1,0.005,3.45194
+tfidf,192,huye,1,1,0.005,3.45194
+tfidf,193,wau,1,1,0.005,3.45194
+tfidf,194,pasaria,1,1,0.005,3.45194
+tfidf,195,hajajjsjjshsh,1,1,0.005,3.45194
+tfidf,196,recominedan,1,1,0.005,3.45194
+tfidf,197,beniito,1,1,0.005,3.45194
+tfidf,198,peorcito,1,1,0.005,3.45194
+tfidf,199,basadisimo,1,1,0.005,3.45194
+tfidf,200,noes,1,1,0.005,3.45194

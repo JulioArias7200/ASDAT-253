@@ -21,7 +21,7 @@ reports/
 ├── main.tex              # documento principal
 ├── preamble.tex          # paquetes, estilo y macros
 ├── references.bib        # bibliografía (BibTeX)
-├── sections/             # 12 secciones del informe
+├── sections/             # 13 secciones del informe (V1 + ampliación V2)
 ├── tables/               # tablas .tex y .csv generadas por el pipeline
 ├── figures/              # figuras .png generadas por el pipeline
 └── generated/            # values.tex y stats.tex (macros numéricas)
@@ -29,9 +29,10 @@ reports/
 
 ## Cifras automáticas
 
-El informe no contiene números escritos a mano. Todas las cifras provienen de
-`generated/values.tex` y `generated/stats.tex`, reescritos en cada ejecución del
-pipeline. Para actualizar el informe tras reanalizar los datos:
+Las cifras de V1 provienen de `generated/values.tex` y `generated/stats.tex`, reescritos
+en cada ejecución del pipeline. La sección de V2 usa tablas generadas a partir de
+`data/results/v2/` (`tables/v2_ngrams.tex`, `v2_features.tex` y `v2_tfidf.tex`). Para
+actualizar el informe tras reanalizar los datos:
 
 ```
 Rscript scripts/09_generate_report.R

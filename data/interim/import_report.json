@@ -1,0 +1,11 @@
+{
+  "source_file": "result.json",
+  "n_total": 28310,
+  "n_imported": 21981,
+  "n_rejected": 6329,
+  "n_duplicated": 0,
+  "n_duplicated_content": 2,
+  "n_service": 4826,
+  "n_media_no_text": 1503,
+  "reasons": []
+}

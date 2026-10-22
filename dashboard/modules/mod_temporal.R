@@ -26,6 +26,7 @@ mod_temporal_server <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
     ns <- session$ns
     tbl <- shiny::reactive({
+      if (is.null(input$gran)) return(NULL)
       key <- switch(input$gran, daily = "daily", weekly = "weekly", monthly = "monthly")
       t <- data$temporal[[key]]
       if (is.null(t)) return(NULL)

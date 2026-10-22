@@ -1,0 +1,25 @@
+{
+  "k": 5,
+  "topics": [
+    {
+      "id": 1,
+      "top_words": ["si", "solo", "puede", "materias", "horario", "hacer", "pago", "pagar", "kardex", "puedo", "sistema", "pregunta"]
+    },
+    {
+      "id": 2,
+      "top_words": ["si", "gracias", "x2", "clases", "hoy", "retiro", "mañana", "q", "horarios", "comunicado", "docentes", "bien"]
+    },
+    {
+      "id": 3,
+      "top_words": ["carrera", "día", "informática", "hora", "inscripción", "formulario", "piso", "ser", "cómo", "estudiantes", "lugar", "fecha"]
+    },
+    {
+      "id": 4,
+      "top_words": ["grupo", "materia", "inf", "semestre", "temporada", "whatsapp", "datos", "materias", "nuevo", "i", "curso", "sistemas"]
+    },
+    {
+      "id": 5,
+      "top_words": ["alguien", "lic", "sabe", "buenas", "paralelo", "favor", "saben", "disculpen", "tardes", "pasando", "clases", "recomiendan"]
+    }
+  ]
+}

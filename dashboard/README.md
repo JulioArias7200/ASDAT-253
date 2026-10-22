@@ -125,6 +125,27 @@ El botón de la cabecera llama a `window.ASApp.toggle()` (definido en `as_app.js
 tema se guarda en `localStorage` y ECharts se re-renderiza automáticamente. Para cambiar
 los colores, edita las variables CSS `--as-*` en `:root` y `[data-bs-theme="dark"]`.
 
+## Avatar emocional animado
+
+El avatar vive en la pestaña **Avatar emocional** (con filtros y forzar emoción);
+el Resumen ya no lo incluye. La expresión y
+la animación se definen en `www/emotional_avatar.js` (`PROFILES`: `anim` ∈ `bounce`,
+`pulse`, `shake`, `droop`, `none`) y las animaciones CSS en
+`www/emotional_avatar.css`. El checkbox **Animación** detiene o reanuda el movimiento;
+el icono del host viaja en el mensaje (`target`) para actualizar un avatar concreto.
+Para cambiar caras o animaciones: edita `PROFILES` y las `@keyframes`.
+
+## Actualización automática al cambiar el diccionario
+
+Al importar un diccionario con **Activar al importar** (o al pulsar **Activar versión**
+enDiccionario) el módulo `mod_dictionary` recalcula en caliente con
+`recompute_dashboard_results()` (`R/dashboard_recompute.R`): reanaliza el corpus con el
+diccionario activo, regenera sentimientos, agregados temporales, transiciones,
+evaluación, hace respaldo en `data/results/backups/` y actualiza los `reactiveValues`
+que alimentan **todos** los módulos (`apply_dashboard_recompute`), incluido el avatar
+animado del Resumen. Cada recálculo queda en la bitácora con etapa `recompute`.
+Si la versión activada ya era la vigente, no se recalcula nada.
+
 ## Ejecutar
 
 ```bash

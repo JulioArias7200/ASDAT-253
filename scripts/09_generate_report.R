@@ -21,8 +21,9 @@ artifacts <- generate_report_artifacts(
 
 extra_figs <- generate_extra_figures(messages, sentiments, temporal, topics)
 extra_tabs <- generate_extra_tables(messages, sentiments, temporal)
+v2_tabs <- generate_v2_tables()
 stats <- write_report_stats(messages, sentiments, temporal, topics, markov)
-artifacts <- c(artifacts, extra_figs, extra_tabs, stats)
+artifacts <- c(artifacts, extra_figs, extra_tabs, v2_tabs, stats)
 
 audit_finish(con, handle, status = "completed", n_processed = nrow(sentiments),
              artifacts = artifacts)

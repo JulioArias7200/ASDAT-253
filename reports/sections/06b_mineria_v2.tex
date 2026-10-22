@@ -1,0 +1,111 @@
+\section{Ampliación V2: minería de texto}
+\label{sec:v2}
+
+La versión V2 conserva el análisis de sentimientos de V1 y añade un conjunto de
+técnicas de minería de texto: n-gramas, características lingüísticas superficiales,
+TF--IDF e importación de diccionarios externos. Todas las salidas nuevas se guardan
+en \texttt{data/results/v2/} para no mezclarlas con los resultados históricos de V1.
+
+\subsection{Arquitectura y separación de versiones}
+
+La ampliación se implementó como módulos independientes que reutilizan el
+\texttt{bootstrap} y la configuración existentes: \texttt{R/ngrams.R},
+\texttt{R/ling\_features.R}, \texttt{R/tfidf.R} y \texttt{R/dictionary\_io.R}, con las
+etapas ejecutables \texttt{scripts/05n\_ngrams.R}, \texttt{05f\_features.R} y
+\texttt{06t\_tfidf.R}. El orquestador \texttt{scripts/00\_run\_all.R} ejecuta el
+pipeline completo (V1 y V2) en orden. Cada ejecución registra su
+\texttt{run\_id}, la versión del diccionario y la versión del código en la bitácora
+SQLite, de modo que una ejecución V2 no altera los resultados de V1.
+
+\subsection{Unigramas, bigramas y n-gramas}
+
+Cada mensaje se tokeniza por separado con \texttt{quanteda} \citep{benoit2018quanteda};
+por construcción, ningún n-grama cruza el límite entre mensajes. Se eliminan las
+stopwords del español conservando los negadores (\emph{no}, \emph{nunca}, \emph{jamás},
+\emph{tampoco}), y se descartan los emojis de la secuencia porque se analizan como
+señal independiente. Para un n-grama $t$ se reportan la frecuencia absoluta $c(t)$ y la
+frecuencia relativa
+\begin{equation}
+  f(t) = \frac{c(t)}{\sum_{t'} c(t')}.
+\end{equation}
+
+La Tabla~\ref{tab:v2_ngrams} resume los n-gramas más frecuentes. El unigrama más frecuente
+es \emph{no} (4.124 apariciones), lo que confirma la importancia de preservar la
+negación; le siguen \emph{si}, \emph{alguien}, \emph{grupo} y \emph{materia}. Entre los
+bigramas dominan \emph{alguien sabe} (1.192) y \emph{grupo whatsapp} (456), y entre los
+trigramas \emph{alguien sabe si} (425), patrones propios de consultas académicas.
+
+\input{tables/v2_ngrams}
+
+\subsection{Características lingüísticas superficiales}
+
+Se calcularon diecisiete indicadores verificables por mensaje sobre el texto
+\emph{original} (para conservar mayúsculas y signos): caracteres, tokens, palabras,
+palabras únicas y su proporción, longitud media de palabra, signos de interrogación y
+exclamación, palabras en mayúsculas y su proporción, emojis, hashtags, menciones, URLs,
+repeticiones de caracteres y de puntuación, e intensidad expresiva. No constituyen un
+análisis sintáctico profundo y deben interpretarse como indicadores descriptivos.
+
+La Tabla~\ref{tab:v2_features} muestra el resumen sobre \nVTwoMensajes{} mensajes. El
+mensaje mediano tiene 7 palabras y 42 caracteres, con una proporción de palabras únicas
+muy alta (0,94), esperable en textos cortos. Los signos de exclamación y los emojis son
+poco frecuentes (media de 0,11 y 0,29 por mensaje), mientras que las preguntas aparecen
+en mayor medida (media de 0,42), en línea con el carácter consultivo del grupo.
+
+\input{tables/v2_features}
+
+\subsection{TF, IDF y TF--IDF}
+
+Se adopta como documento un mensaje individual. Sea $N$ el número de documentos y
+$df_t$ el número de documentos que contienen el término $t$:
+\begin{equation}
+  \mathrm{IDF}(t) = \ln\!\left(\frac{N}{df_t}\right), \qquad
+  \mathrm{TFIDF}(t,d) = \mathrm{TF}(t,d)\cdot \mathrm{IDF}(t).
+\end{equation}
+La frecuencia de término puede ser el conteo bruto, la frecuencia relativa al número de
+tokens del documento o la forma logarítmica $1+\log_{10} c(t,d)$; por defecto se usa el
+conteo bruto. Un término presente en todos los documentos obtiene
+$\mathrm{IDF}=0$ y, por tanto, no aporta peso, lo que ilustra el efecto de la frecuencia
+inversa de documentos. El cálculo se contrastó con un corpus de prueba de tres documentos
+y dos apariciones por término ($\mathrm{IDF}=\ln(3/2)$), verificado en las pruebas
+automatizadas.
+
+Con $N=\nVTwoDocs{}$ documentos y \nVTwoTerms{} términos tras aplicar
+$\min df=2$, la Tabla~\ref{tab:v2_tfidf} presenta los términos de mayor peso global. El
+resultado es coherente con los n-gramas: predominan \emph{no}, \emph{si}, \emph{alguien},
+\emph{materia} y \emph{grupo}, es decir, vocabulario de gestión académica y de consulta.
+
+\input{tables/v2_tfidf}
+
+\subsection{Importación y versionado de diccionarios}
+
+V2 permite importar diccionarios externos en CSV, JSON o TXT con un esquema canónico:
+\texttt{term}, \texttt{category}, \texttt{polarity}, \texttt{weight}, \texttt{language},
+\texttt{notes} y \texttt{source}. El sistema detecta automáticamente sinónimos de
+encabezado, permite mapear columnas manualmente, muestra una vista previa y valida filas
+vacías, categorías desconocidas, polaridades y pesos inválidos, y términos duplicados
+(conservando el primero). La importación crea siempre una nueva versión en
+\texttt{data/dictionary/versions/} y no sobrescribe el diccionario vigente; la activación
+es una acción explícita que respalda la versión anterior. El diccionario propio mantiene
+sus dieciocho categorías y 320 términos, y cada modificación queda registrada en la
+bitácora.
+
+\subsection{Dashboard V2 y avatar emocional}
+
+El dashboard incorpora un menú \emph{V2 · Minería de texto} con cuatro módulos:
+N-gramas, Frecuencias, Características y TF--IDF. Cada módulo declara el motivo cuando no
+hay resultados, permite filtrar y exporta sus tablas. La versión V1 sigue accesible en sus
+pestañas originales. El avatar emocional existente se conserva: su expresión se deriva de
+la distribución agregada de los mensajes filtrados, muestra la proporción de la emoción
+dominante y permanece neutral ante empates o evidencia insuficiente; no constituye un
+diagnóstico psicológico de ninguna persona.
+
+\subsection{Bitácora, pruebas y reproducibilidad}
+
+La bitácora amplía sus filtros por acción, estado y rango de fechas, e incorpora la
+comparación campo a campo de dos ejecuciones, señalando las diferencias en parámetros y
+en la versión del diccionario. Las pruebas automatizadas cubren la tokenización, los
+límites entre mensajes al formar n-gramas, la conservación de negaciones, el cálculo
+manual de TF--IDF, la validación e importación de diccionarios y el funcionamiento de los
+módulos del dashboard. Los datos sintéticos se emplean únicamente en las pruebas y se
+mantienen separados del corpus real.

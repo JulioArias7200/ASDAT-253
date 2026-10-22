@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "n": 21981,
+  "n_duplicates": 0,
+  "issues": [
+    {
+      "type": "duplicate_content",
+      "detail": "2 mensajes con contenido duplicado",
+      "severity": "warning"
+    }
+  ],
+  "utf8": {
+    "ok": true,
+    "n_invalid": 0
+  }
+}

@@ -8,17 +8,7 @@
 *.session-journal
 .credentials*
 
-# --- Corpus y datos (privados / generados localmente) -----------------------
-data/raw/*
-data/interim/*
-data/processed/*
-data/results/*
-!data/raw/.gitkeep
-!data/interim/.gitkeep
-!data/processed/.gitkeep
-!data/results/.gitkeep
-# El diccionario SÍ se versiona (es un artefacto editable y auditable)
-!data/dictionary/
+# --- Corpus y datos (privados / generados localmente) ----------------------
 
 # --- Base de datos local ----------------------------------------------------
 database/*.sqlite

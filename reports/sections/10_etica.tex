@@ -1,0 +1,61 @@
+\section{Consideraciones éticas}
+\label{sec:etica}
+
+El trabajo con datos generados por personas exige un cuidado adicional. Este proyecto
+asume expl\'\i{}citamente un marco \'etico basado en la minimizaci\'on, la anonimizaci\'on,
+la transparencia y la interpretaci\'on prudente.
+
+\subsection{Finalidad y consentimiento}
+
+El an\'alisis se realiza con fines exclusivamente acad\'emicos y sobre agregados. No
+persigue evaluar individuos, vigilar conductas ni tomar decisiones que afecten a
+personas. Los participantes del grupo no fueron informados individualmente del estudio;
+esta circunstancia, com\'un en la investigaci\'on de datos observacionales, impone una
+obligaci\'on reforzada de no da\~nar y de limitar el an\'alisis a lo estrictamente
+necesario. La literatura sobre \'etica en investigaci\'on con redes sociales
+\citep{townsend2016social,freelon2019computational} subraya precisamente este punto:
+la ausencia de consentimiento expl\'\i{}cito no exime, sino que acrecienta, la
+responsabilidad del investigador.
+
+\subsection{Anonimización y minimizaci\'on}
+
+Los identificadores de emisor se transforman en \emph{hashes} en todas las salidas. El
+informe no reproduce mensajes completos atribuibles a personas y se limita a ejemplos
+genéricos o construidos. El corpus bruto no se versiona en el repositorio p\'ublico y se
+mantiene fuera de \'el mediante reglas de exclusi\'on. Se aplica el principio de
+minimizaci\'on: solo se conservan las variables necesarias para el an\'alisis.
+
+\subsection{Interpretaci\'on prudente}
+
+Una etiqueta emocional autom\'atica no es un diagn\'ostico ni una afirmaci\'on sobre el
+estado real de una persona. El avatar emocional del panel interactivo y todas las
+visualizaciones representan agregados del modelo, no mediciones psicol\'ogicas. Esta
+distinci\'on se documenta de forma visible en las herramientas y se reitera en el
+informe para prevenir interpretaciones abusivas.
+
+\subsection{Transparencia}
+
+Se documentan p\'ublicamente el m\'etodo, los par\'ametros, las versiones del diccionario
+y del software, las limitaciones y los sesgos conocidos. La reproducibilidad
+(Secci\'on~\ref{sec:reproducibilidad}) no es solo una virtud t\'ecnica, sino una
+condici\'on \'etica: permite que terceros auditen y cuestionen los resultados.
+
+\subsection{Riesgos y mitigaciones}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Reidentificaci\'on.} Mitigada mediante el uso exclusivo de hashes y la
+        no publicaci\'on de mensajes atribuibles.
+  \item \textbf{Uso indebido de las etiquetas.} Mitigada mediante advertencias expl\'\i{}citas
+        sobre el carácter aproximado y agregado de las etiquetas.
+  \item \textbf{Sesgo del diccionario.} Mitigada mediante documentaci\'on abierta y la
+        l\'\i{}nea de trabajo futuro dedicada a su ampliaci\'on validada.
+  \item \textbf{Vigilancia.} Mitigada mediante el an\'alisis exclusivamente agregado y la
+        ausencia de perfilado individual por defecto.
+\end{itemize}
+
+\subsection{Cumplimiento normativo}
+
+El tratamiento se alinea con los principios de las normas de protecci\'on de datos
+aplicables (finalidad, minimizaci\'on, limitaci\'on del plazo de conservaci\'on y
+seguridad), entendiendo que el uso es de investigaci\'on acad\'emica y con datos
+anonimizados. Cualquier publicaci\'on derivada respetar\'a estas mismas garant\'\i{}as.

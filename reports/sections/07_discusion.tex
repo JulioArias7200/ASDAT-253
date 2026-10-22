@@ -1,0 +1,74 @@
+\section{Discusión}
+\label{sec:discusion}
+
+\subsection{La cobertura baja como hallazgo, no como defecto}
+
+El resultado más llamativo es también el más fácil de malinterpretar: \pctIndeterminado{}\%
+de los mensajes no recibe etiqueta de polaridad. Una lectura ingenua lo tomar\'\i{}a por
+un fallo del m\'etodo. Sostenemos lo contrario. El corpus es, antes que nada, un canal
+operativo: sus mensajes sirven para coordinar, informar y resolver dudas. La funci\'on
+primordial del lenguaje en ese contexto es referencial, no expresiva. Un m\'etodo que
+forzara una etiqueta en cada mensaje estar\'\i{}a, en el mejor de los casos, adivinando, y
+en el peor, imputando neutralidad a enunciados que simplemente no hablan de afecto.
+
+La distinci\'on entre \emph{indeterminado} y \emph{neutro} es, por tanto, sustantiva.
+Neutro describe un mensaje con se\~nal afectiva cuyo balance es cero (por ejemplo,
+``\emph{me gusta pero me preocupa}''); indeterminado describe la ausencia de se\~nal. La
+decisi\'on de reservar la etiqueta neutra para el primer caso evita el sesgo m\'as com\'un
+en los estudios de sentimiento aplicado: la sobreestimaci\'on de la neutralidad por
+defecto. La contrapartida es una cobertura modesta; la asumimos como el precio de una
+medici\'on honesta.
+
+\subsection{Un clima predominantemente positivo}
+
+Entre los mensajes que s\'\i{} aportan evidencia, la proporci\'on de positivos
+(\pctPositivos{}\%) duplica con creces la de negativos (\pctNegativos{}\%). Este hallazgo
+es consistente con la funci\'on social del grupo: un espacio de ayuda mutua donde la
+gratitud y el reconocimiento son moneda corriente. La emoci\'on dominante,
+\emph{\emocionTop{}}, y la presencia destacada de reacciones como \reactTop{} refuerzan
+esa interpretaci\'on. Cabe se\~nalar, sin embargo, un posible sesgo de deseabilidad: los
+mensajes con carga negativa fuerte (quejas, conflictos) pueden haberse canalizado por
+v\'\i{}as privadas y no aparecer en el registro p\'ublico del grupo.
+
+\subsection{Temas y estructura latente}
+
+El modelado de tópicos confirma la vocaci\'on administrativa de la comunidad. Los temas
+recuperados ---pagos y matr\'\i{}culas, horarios y paralelos, inscripciones, comunicados y
+consultas--- se corresponden con los hitos del ciclo acad\'emico. Es notable que los
+términos asociados a trámites aparezcan pr\'oximos a vocabulario de urgencia, lo que
+explica por qué la ansiedad y la frustraci\'on, aun siendo minoritarias, se concentran en
+esos temas. La interpretaci\'on debe ser prudente: tal como advierte
+\citet{grimmer2013text}, los tópicos son artefactos estad\'isticos y su etiquetado es una
+construcci\'on del analista.
+
+\subsection{Dinámica de estados}
+
+Las cadenas de Markov a\~naden una dimensi\'on temporal a la fotograf\'\i{}a est\'atica de
+la polaridad. El estado neutro funciona como un atractor: con una permanencia media de
+\permanenciaNeutro{} turnos y \pctNeutro{}\% de la masa estacionaria, la conversaci\'on
+regresa una y otra vez a su régimen operativo. Los episodios negativos, en cambio, son
+breves (recuperaci\'on de \recuperacionNegativa{} turnos). Este patr\'on sugiere un
+sistema autorregulado: las irrupciones emocionales no se cronifican, sino que se disuelven
+en el flujo cotidiano de la coordinaci\'on acad\'emica.
+
+\subsection{Implicaciones pr\'acticas}
+
+Los resultados tienen aplicaciones concretas. Un coordinador acad\'emico podr\'\i{}a
+monitorizar la proporci\'on de mensajes negativos como indicador temprano de fricciones,
+prestando atenci\'on a los picos coincidentes con per\'\i{}odos de inscripci\'on o pago.
+La identificaci\'on de los temas m\'as asociados a emociones negativas permitir\'\i{}a
+anticipar dudas y mejorar la comunicaci\'on institucional. En t\'erminos m\'as generales,
+el estudio demuestra que es posible obtener inteligencia cualitativa de un canal
+informal sin incurrir en la vigilancia individual: toda la anal\'\i{}tica se realiza sobre
+agregados an\'onimos.
+
+\subsection{Comparaci\'on con la literatura}
+
+El balance positivo observado es coherente con los hallazgos de
+\citet{golder2011diurnal} y \citet{bollen2011twitter}, quienes documentan una tendencia
+general hacia la positividad en redes sociales, con modulaci\'on por hora y día. La
+distribuci\'on horaria concentrada en la franja laboral reproduce el patr\'on diurno
+descrito por esos trabajos. La contribuci\'on espec\'\i{}fica de este estudio es el
+\'enfasis en la separaci\'on de se\~nales y en la honestidad de la cobertura, aspectos
+menos atendidos en la literatura orientada a maximizar \emph{accuracy} sobre corpus
+etiquetados.

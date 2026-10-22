@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: apalike.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+Warning--empty booktitle in ekman1992emotions
+Warning--can't use both volume and number fields in ekman1992emotions
+Warning--empty publisher in ekman1992emotions
+Warning--can't use both volume and number fields in hutto2014vader
+Warning--empty booktitle in novak2015emojis
+Warning--can't use both volume and number fields in novak2015emojis
+Warning--can't use both volume and number fields in landis1977kappa
+Warning--empty publisher in landis1977kappa
+Warning--empty booktitle in mohammad2013emolex
+Warning--can't use both volume and number fields in mohammad2013emolex
+Warning--can't use both volume and number fields in russell1980circumplex
+Warning--empty publisher in russell1980circumplex
+You've used 24 entries,
+            1935 wiz_defined-function locations,
+            619 strings with 7137 characters,
+and the built_in function-call counts, 9660 in all, are:
+= -- 962
+> -- 328
+< -- 29
++ -- 116
+- -- 106
+* -- 788
+:= -- 1609
+add.period$ -- 71
+call.type$ -- 24
+change.case$ -- 167
+chr.to.int$ -- 24
+cite$ -- 36
+duplicate$ -- 408
+empty$ -- 694
+format.name$ -- 146
+if$ -- 1933
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 28
+newline$ -- 121
+num.names$ -- 72
+pop$ -- 157
+preamble$ -- 1
+purify$ -- 173
+quote$ -- 0
+skip$ -- 337
+stack$ -- 0
+substring$ -- 684
+swap$ -- 96
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 134
+warning$ -- 12
+while$ -- 83
+width$ -- 0
+write$ -- 308
+(There were 12 warnings)

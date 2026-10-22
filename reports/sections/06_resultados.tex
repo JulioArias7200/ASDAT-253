@@ -1,0 +1,218 @@
+\section{Resultados}
+\label{sec:resultados}
+
+Esta sección presenta los resultados siguiendo el orden de las preguntas de
+investigación. Cada subsección combina estad\'\i{}sticas descriptivas, tablas y
+figuras generadas automáticamente por el \emph{pipeline}.
+
+\subsection{Cobertura del diccionario y nivel de evidencia}
+\label{sec:res-cobertura}
+
+La primera pregunta (PI1) indaga cuánta evidencia afectiva contiene el corpus. La
+respuesta es contundente: de los \nAnalizados{} mensajes analizados, únicamente
+\nSuficiente{} alcanzan el nivel de evidencia \emph{suficiente}, mientras que
+\nSinEvidencia{} no contienen ningún término o emoji reconocido. La cobertura efectiva
+del diccionario es del \pctCobertura{}\%, de modo que el \pctIndeterminado{}\% de los
+mensajes queda como \emph{indeterminado}. La Tabla~\ref{tab:nivel_evidencia} y la
+Figura~\ref{fig:evidencia} ilustran esta distribuci\'on.
+
+\input{tables/nivel_evidencia}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.62\textwidth]{nivel_evidencia.png}
+  \caption{Nivel de evidencia disponible por mensaje.}
+  \label{fig:evidencia}
+\end{figure}
+
+Este resultado debe leerse con cuidado. No implica que cuatro de cada cinco mensajes
+sean emocionalmente neutros, sino que cuatro de cada cinco \emph{no contienen
+vocabulario ni emojis afectivos explícitos}. El corpus está compuesto, en gran medida,
+por enunciados procedimentales (``\emph{¿cuál es el enlace del formulario?}'',
+``\emph{el pago vence el viernes}'') que, por su propia función informativa, no
+expresan afecto. La decisi\'on de etiquetarlos como \emph{indeterminado} y no como
+\emph{neutro} preserva esta distinci\'on y evita inflar artificialmente la categor\'\i{}a
+neutra.
+
+\subsection{Distribución de polaridad}
+\label{sec:res-polaridad}
+
+La segunda pregunta (PI2) se refiere a la polaridad de los mensajes con evidencia. La
+Tabla~\ref{tab:distribucion_polaridad} presenta la distribuci\'on completa. Entre los \nSuficiente{}
+mensajes con evidencia suficiente, \nPositivos{} (\pctPositivos{}\%) son positivos,
+\nNegativos{} (\pctNegativos{}\%) negativos y \nNeutros{} neutros. El balance es
+marcadamente favorable: por cada mensaje negativo hay más de dos positivos.
+
+\input{tables/distribucion_polaridad}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{distribucion_polaridad.png}
+  \caption{Distribución de la polaridad de los mensajes.}
+  \label{fig:pol_dist}
+\end{figure}
+
+La puntuaci\'on de polaridad l\'exica tiene media \polaridadMedia{} y un rango que va de
+$-3$ a $+5$. La Figura~\ref{fig:hist_pol} muestra su distribuci\'on para los mensajes
+con se\~nal distinta de cero, donde se aprecia una asimetr\'\i{}a hacia valores positivos
+en los polos moderados y una concentraci\'on de la masa negativa en valores de menor
+magnitud. La Figura~\ref{fig:intensidad} presenta la distribuci\'on de la intensidad (el
+valor absoluto de la puntuaci\'on) para los mensajes con evidencia: la mayor\'\i{}a
+corresponde a intensidades bajas, lo que indica que predominan las expresiones afectivas
+moderadas sobre las extremas.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{hist_polaridad.png}
+  \caption{Distribución de la puntuación de polaridad léxica (mensajes con señal distinta de cero).}
+  \label{fig:hist_pol}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{intensidad.png}
+  \caption{Distribución de la intensidad de la señal emocional.}
+  \label{fig:intensidad}
+\end{figure}
+
+\subsection{Frecuencia de emociones}
+\label{sec:res-emociones}
+
+La Tabla~\ref{tab:frecuencia_emociones} recoge las dieciocho categor\'\i{}as emocionales ordenadas por
+frecuencia, expresada como n\'umero de ocurrencias y como porcentaje sobre los mensajes
+con evidencia. Predominan las emociones de valencia positiva y carácter social: la
+categor\'\i{}a más frecuente es \emph{\emocionTop{}}, seguida de otras formas de
+reconocimiento, satisfacci\'on y cooperaci\'on. Las categor\'\i{}as negativas, asociadas a
+ansiedad ante plazos y frustraci\'on procedimental, aparecen en proporciones
+apreciablemente menores.
+
+\input{tables/frecuencia_emociones}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\textwidth]{frecuencia_emociones.png}
+  \caption{Frecuencia de emociones detectadas.}
+  \label{fig:emo_freq}
+\end{figure}
+
+La Figura~\ref{fig:emo_anio} presenta un mapa de calor de las emociones por año, que
+permite observar la estabilidad relativa del perfil emocional a lo largo del tiempo: la
+estructura general se mantiene, con variaciones de intensidad ligadas a los ciclos
+acad\'emicos.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{emociones_por_anio.png}
+  \caption{Emociones detectadas por año.}
+  \label{fig:emo_anio}
+\end{figure}
+
+\subsection{Emojis y reacciones como señal afectiva}
+
+Una parte de la carga afectiva se canaliza a través de emojis, que el método conserva
+como unidades l\'exicas. La Tabla~\ref{tab:top_emojis} lista los quince emojis más
+frecuentes (identificados por un descriptor textual). La presencia de emojis con polaridad
+clara (afecto, aplauso, alegr\'\i{}a) junto a s\'\i{}mbolos de se\~nalizaci\'on confirma que
+el canal emoji cumple una doble funci\'on: expresiva y organizativa. Las reacciones
+(Tabla~\ref{tab:top_reacciones}) muestran un patrón similar, con \reactTop{} dominando
+claramente el repertorio.
+
+\input{tables/top_emojis}
+\input{tables/top_reacciones}
+
+\subsection{Evolución temporal}
+\label{sec:res-temporal}
+
+La tercera pregunta (PI3) concierne a la evoluci\'on temporal. La
+Figura~\ref{fig:pol_temp} muestra la polaridad media diaria junto con su media m\'ovil.
+El rasgo más destacado es la fluctuaci\'on en torno a cero con episodios positivos
+definidos y ca\'\i{}das transitorias. La Figura~\ref{fig:vol_temp} presenta el volumen
+diario, cuya variabilidad refleja el ritmo del calendario acad\'emico.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{polaridad_temporal.png}
+  \caption{Evolución temporal de la polaridad media.}
+  \label{fig:pol_temp}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{volumen_temporal.png}
+  \caption{Volumen de mensajes por período.}
+  \label{fig:vol_temp}
+\end{figure}
+
+La Figura~\ref{fig:pol_apilada} descompone la composici\'on mensual de la polaridad en
+sus cuatro categor\'\i{}as. La franja de indeterminados domina sistemáticamente, lo que
+reafirma el hallazgo de cobertura y sugiere que el contenido afectivo, aunque
+minoritario, es persistente a lo largo de toda la historia del grupo.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{polaridad_mensual_apilada.png}
+  \caption{Composición mensual de la polaridad por categoría.}
+  \label{fig:pol_apilada}
+\end{figure}
+
+\subsection{Modelado de tópicos}
+\label{sec:res-topicos}
+
+La cuarta pregunta (PI4) busca la estructura tem\'atica latente. El modelo LDA con
+$k=\nTemas{}$ tópicos recupera agrupaciones interpretables que la
+Tabla~\ref{tab:topicos} resume mediante sus términos más probables. Los temas giran en
+torno a: (i) pagos, matr\'\i{}culas y procedimientos administrativos; (ii) horarios,
+paralelos y gesti\'on de asignaturas; (iii) procesos de inscripci\'on y formularios;
+(iv) comunicaci\'on institucional y coordinaci\'on; y (v) consultas generales y
+solicitudes de ayuda.
+
+\input{tables/topicos}
+
+La Figura~\ref{fig:topicos_prev} muestra la prevalencia de cada tópico, es decir, la
+proporci\'on de documentos cuyo tópico dominante es cada uno. La distribuci\'on es
+razonablemente equilibrada, sin un tópico que absorba la mayor\'\i{}a del corpus.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{prevalencia_topicos.png}
+  \caption{Prevalencia de tópicos (documentos con tópico dominante).}
+  \label{fig:topicos_prev}
+\end{figure}
+
+\subsection{Transiciones de estado (cadenas de Markov)}
+\label{sec:res-markov}
+
+La quinta pregunta (PI5) aborda la dinámica entre estados. La
+Figura~\ref{fig:markov} presenta la matriz de transici\'on estimada, donde cada celda
+$(i,j)$ es la probabilidad de pasar del estado $i$ al estado $j$ entre mensajes
+consecutivos. La diagonal está dominada por el estado neutro, lo que indica una fuerte
+persistencia: la conversaci\'on tiende a permanecer en un régimen operativo.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.62\textwidth]{transicion_markov.png}
+  \caption{Matriz de transici\'on entre estados de polaridad.}
+  \label{fig:markov}
+\end{figure}
+
+La Tabla~\ref{tab:markov} resume la distribuci\'on estacionaria $\pi$ y los tiempos
+medios de permanencia. El estado neutro concentra \pctNeutro{}\% de la masa estacionaria,
+frente a \pctPositivoEst{}\% del positivo y \pctNegativoEst{}\% del negativo. Los
+tiempos de permanencia son elocuentes: \permanenciaNeutro{} turnos para el neutro,
+frente a \permanenciaPositivo{} y \permanenciaNegativo{} para los estados con carga
+afectiva. Los episodios negativos se disipan con relativa rapidez (recuperaci\'on media
+de \recuperacionNegativa{} turnos), lo que sugiere una capacidad de recuperaci\'on del
+clima conversacional.
+
+\input{tables/markov}
+
+\subsection{S\'intesis de hallazgos}
+
+Los resultados convergen en un retrato coherente. El grupo es, ante todo, un espacio
+operativo: la mayor parte de sus mensajes son informativos y no expresan afecto
+expl\'\i{}cito, de ah\'\i{} la elevada proporci\'on de indeterminados. Cuando emerge
+se\~nal afectiva, esta es predominantemente positiva y de carácter social
+(\emph{\emocionTop{}}), aunque coexisten focos de ansiedad y frustraci\'on vinculados a
+trámites y plazos. Temporalmente, la actividad sigue el calendario acad\'emico y la
+dinámica de estados se caracteriza por la estabilidad del régimen neutro y la rápida
+disipaci\'on de los episodios negativos.

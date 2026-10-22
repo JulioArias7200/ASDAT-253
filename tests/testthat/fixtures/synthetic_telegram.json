@@ -1,0 +1,172 @@
+{
+  "name": "CORPUS SINTETICO DE PRUEBAS - NO ES DATO REAL",
+  "type": "private_supergroup",
+  "id": 999999999,
+  "messages": [
+    {
+      "id": 1,
+      "type": "service",
+      "date": "2022-12-16T17:54:05",
+      "date_unixtime": "1671227645",
+      "actor": "Grupo Sintetico",
+      "actor_id": "channel999999999",
+      "action": "migrate_from_group",
+      "title": "Grupo Sintetico",
+      "text": "",
+      "text_entities": []
+    },
+    {
+      "id": 2,
+      "type": "message",
+      "date": "2023-01-10T09:00:00",
+      "date_unixtime": "1673341200",
+      "from": "Usuario Uno",
+      "from_id": "user1001",
+      "text": "Estoy muy feliz 😊",
+      "text_entities": [{"type": "plain", "text": "Estoy muy feliz 😊"}]
+    },
+    {
+      "id": 3,
+      "type": "message",
+      "date": "2023-01-10T09:05:00",
+      "date_unixtime": "1673341500",
+      "from": "Usuario Dos",
+      "from_id": "user1002",
+      "text": "No estoy feliz",
+      "text_entities": [{"type": "plain", "text": "No estoy feliz"}]
+    },
+    {
+      "id": 4,
+      "type": "message",
+      "date": "2023-01-11T10:00:00",
+      "date_unixtime": "1673431200",
+      "from": "Usuario Uno",
+      "from_id": "user1001",
+      "reply_to_message_id": 3,
+      "text": "¡Qué alegría! 😂",
+      "text_entities": [{"type": "plain", "text": "¡Qué alegría! 😂"}]
+    },
+    {
+      "id": 5,
+      "type": "message",
+      "date": "2023-01-11T10:10:00",
+      "date_unixtime": "1673431800",
+      "from": "Usuario Tres",
+      "from_id": "user1003",
+      "text": "No está nada mal",
+      "text_entities": [{"type": "plain", "text": "No está nada mal"}]
+    },
+    {
+      "id": 6,
+      "type": "message",
+      "date": "2023-01-12T11:00:00",
+      "date_unixtime": "1673521200",
+      "from": "Usuario Dos",
+      "from_id": "user1002",
+      "text": "Gracias por ayudarme 🙏❤️",
+      "text_entities": [{"type": "plain", "text": "Gracias por ayudarme 🙏❤️"}],
+      "reactions": [
+        {"type": "emoji", "count": 3, "emoji": "👍", "recent": []},
+        {"type": "emoji", "count": 1, "emoji": "❤", "recent": []}
+      ]
+    },
+    {
+      "id": 7,
+      "type": "message",
+      "date": "2023-01-12T12:00:00",
+      "date_unixtime": "1673524800",
+      "from": "Usuario Uno",
+      "from_id": "user1001",
+      "text": "😢",
+      "text_entities": [{"type": "plain", "text": "😢"}]
+    },
+    {
+      "id": 8,
+      "type": "message",
+      "date": "2023-01-12T13:00:00",
+      "date_unixtime": "1673528400",
+      "from": "Usuario Tres",
+      "from_id": "user1003",
+      "text": "el grupo se reunió a las tres",
+      "text_entities": [{"type": "plain", "text": "el grupo se reunió a las tres"}]
+    },
+    {
+      "id": 9,
+      "type": "message",
+      "date": "2023-01-13T09:00:00",
+      "date_unixtime": "1673600400",
+      "from": "Usuario Dos",
+      "from_id": "user1002",
+      "text": "Estoy muy feliz 😊",
+      "text_entities": [{"type": "plain", "text": "Estoy muy feliz 😊"}]
+    },
+    {
+      "id": 10,
+      "type": "message",
+      "date": "2023-01-13T09:00:00",
+      "date_unixtime": "1673600400",
+      "from": "Usuario Dos",
+      "from_id": "user1002",
+      "text": "Estoy muy feliz 😊",
+      "text_entities": [{"type": "plain", "text": "Estoy muy feliz 😊"}]
+    },
+    {
+      "id": 11,
+      "type": "message",
+      "date": "2023-01-14T15:00:00",
+      "date_unixtime": "1673712000",
+      "from": "Usuario Uno",
+      "from_id": "user1001",
+      "text": "Mira este link https://example.com y el archivo",
+      "text_entities": [
+        {"type": "plain", "text": "Mira este link "},
+        {"type": "link", "text": "https://example.com"},
+        {"type": "plain", "text": " y el archivo"}
+      ]
+    },
+    {
+      "id": 12,
+      "type": "message",
+      "date": "2023-01-15T16:00:00",
+      "date_unixtime": "1673798400",
+      "from": "Usuario Tres",
+      "from_id": "user1003",
+      "forwarded_from": "Canal Externo",
+      "forwarded_from_id": "channel555",
+      "text": "Este es un mensaje reenviado",
+      "text_entities": [{"type": "plain", "text": "Este es un mensaje reenviado"}]
+    },
+    {
+      "id": 13,
+      "type": "message",
+      "date": "2023-01-15T17:00:00",
+      "date_unixtime": "1673802000",
+      "from": "Usuario Uno",
+      "from_id": "user1001",
+      "media_type": "sticker",
+      "sticker_emoji": "😢",
+      "text": "",
+      "text_entities": []
+    },
+    {
+      "id": 14,
+      "type": "message",
+      "date": "2023-01-16T18:00:00",
+      "date_unixtime": "1673892000",
+      "from": "Usuario Dos",
+      "from_id": "user1002",
+      "text": "Esto es pésimo, terrible 😡",
+      "text_entities": [{"type": "plain", "text": "Esto es pésimo, terrible 😡"}]
+    },
+    {
+      "id": 15,
+      "type": "message",
+      "date": "2023-01-17T19:00:00",
+      "date_unixtime": "1673974800",
+      "from": "Usuario Tres",
+      "from_id": "user1003",
+      "text": "No puedo estar más contento, por fin",
+      "text_entities": [{"type": "plain", "text": "No puedo estar más contento, por fin"}]
+    }
+  ]
+}

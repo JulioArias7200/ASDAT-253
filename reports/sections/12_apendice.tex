@@ -1,0 +1,75 @@
+\section{Ap\'endice}
+\label{sec:apendice}
+
+\subsection{A. Glosario de categor\'\i{}as emocionales}
+
+El esquema multietiqueta emplea dieciocho categor\'\i{}as, agrupables en tres grandes
+familias. La Tabla~\ref{tab:glosario} las resume.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Familias de categor\'\i{}as emocionales del esquema (resumen).}
+  \label{tab:glosario}
+  \begin{tabular}{lp{9.5cm}}
+    \toprule
+    Familia & Categor\'\i{}as (ejemplos) \\
+    \midrule
+    Positivas sociales & gratitud, alegr\'\i{}a, satisfacci\'on, confianza, entusiasmo, empat\'\i{}a \\
+    Negativas & frustraci\'on, ansiedad, enojo, tristeza, decepci\'on \\
+    Cognitivas/neutras & duda, sorpresa, curiosidad, esperanza \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{B. Par\'ametros de configuraci\'on}
+
+La Tabla~\ref{tab:params} recoge los principales par\'ametros del an\'alisis y sus
+valores por defecto, todos ellos modificables sin tocar el c\'odigo.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Par\'ametros principales del \emph{pipeline}.}
+  \label{tab:params}
+  \begin{tabular}{lll}
+    \toprule
+    Par\'ametro & Valor & Descripci\'on \\
+    \midrule
+    negation.window & 3 & Tama\~no de la ventana de negaci\'on \\
+    sentiment.min\_evidence\_terms & 1 & Umbral $\tau$ de evidencia \\
+    sentiment.emoji\_weight & 1 & Peso $\alpha$ de los emojis \\
+    sentiment.reaction\_weight & 0 & Peso de las reacciones \\
+    topics.k & \nTemas{} & N\'umero de t\'opicos LDA \\
+    topics.seed & 42 & Semilla de reproducibilidad \\
+    markov.order & 1 & Orden de la cadena de Markov \\
+    cleaning.keep\_emojis & true & Conservar emojis \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{C. Figuras complementarias}
+
+Las Figuras~\ref{fig:pol_diaria} y~\ref{fig:vol_diario} ofrecen el detalle diario de la
+polaridad y del volumen, complementando las series agregadas presentadas en la
+Secci\'on~\ref{sec:resultados}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{polaridad_diaria.png}
+  \caption{Polaridad media diaria.}
+  \label{fig:pol_diaria}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{volumen_diario.png}
+  \caption{Volumen diario de mensajes.}
+  \label{fig:vol_diario}
+\end{figure}
+
+\subsection{D. Resumen de m\'etricas globales}
+
+La Tabla~\ref{tab:resumen_general} recapitula las m\'etricas globales del an\'alisis.
+
+\input{tables/resumen_general}

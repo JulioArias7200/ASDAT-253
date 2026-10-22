@@ -1,0 +1,68 @@
+# =============================================================================
+# AS_Telegram — Configuración
+# Copiar a config/config.yml y ajustar. config.yml está excluido de Git.
+# =============================================================================
+
+project:
+  name: "AS_Telegram"
+  timezone: "America/La_Paz"      # zona canónica para timestamps locales
+
+paths:
+  data_raw:        "data/raw"
+  data_interim:    "data/interim"
+  data_processed:  "data/processed"
+  data_results:    "data/results"
+  dictionary:      "data/dictionary/sentiment_dictionary.csv"
+  database:        "database/as_telegram.sqlite"
+  logs:            "logs"
+  reports:         "reports"
+
+import:
+  # Ruta relativa al export oficial de Telegram Desktop (JSON).
+  telegram_json: "data/raw/result.json"
+  reject_service: true            # los mensajes de servicio no se analizan
+  keep_media_without_text: false   # conservar multimedia sin texto (no analizable)
+  min_word_count: 0                # 0 = no descartar por longitud (ver clean)
+  anonymize_names: false           # true para exportaciones/informes
+
+cleaning:
+  lowercase: true
+  remove_urls: true                # política de URLs configurable
+  url_placeholder: ""
+  collapse_whitespace: true
+  keep_emojis: true                # NUNCA eliminar emojis
+  strip_mentions: false
+  strip_hashtags: false
+  lemmatize: false                 # lematización opcional (udpipe)
+  min_token_length: 2              # no elimina negaciones (se preservan aparte)
+
+negation:
+  window: 3                        # tokens tras un negador que se marcan
+  negators: ["no", "ni", "nunca", "jamas", "tampoco", "sin", "nada", "nadie", "jama"]
+  double_negation_flip: false      # "no está nada mal" => positivo (regla explícita)
+
+sentiment:
+  min_evidence_terms: 1            # términos mínimos para tener evidencia
+  multiple_emotions: true          # permitir varias emociones por mensaje
+  reaction_weight: 0.0             # reacciones NO se mezclan por defecto (0)
+  emoji_weight: 1.0
+  lexical_weight: 1.0
+
+topics:
+  method: "lda"
+  k: 5
+  k_range: [3, 10]
+  min_df: 3
+  max_df: 0.85
+  ngram_range: [1, 2]
+  seed: 42
+
+markov:
+  order: 1
+  states: ["positivo", "negativo", "neutro"]
+  per_user: false                  # false = flujo global del chat
+
+analysis:
+  date_from: "2022-12-16"          # corpus desde 2022
+  date_to: null                    # null = hasta la fecha más reciente
+  exclude_service: true

@@ -1,0 +1,74 @@
+# =============================================================================
+# AS_Telegram — archivos excluidos de Git
+# =============================================================================
+
+# --- Secretos y sesiones ----------------------------------------------------
+.env
+*.session
+*.session-journal
+.credentials*
+
+# --- Corpus y datos (privados / generados localmente) -----------------------
+data/raw/*
+data/interim/*
+data/processed/*
+data/results/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/results/.gitkeep
+# El diccionario SÍ se versiona (es un artefacto editable y auditable)
+!data/dictionary/
+
+# --- Base de datos local ----------------------------------------------------
+database/*.sqlite
+database/*.sqlite-*
+database/*.db
+
+# --- Resultados privados y artefactos no reproducibles ----------------------
+reports/figures/*
+reports/tables/*
+reports/generated/*
+!reports/figures/.gitkeep
+!reports/tables/.gitkeep
+!reports/generated/.gitkeep
+
+# --- Compilación LaTeX ------------------------------------------------------
+reports/*.pdf
+reports/*.aux
+reports/*.log
+reports/*.out
+reports/*.toc
+
+# --- Logs -------------------------------------------------------------------
+logs/*
+!logs/.gitkeep
+
+# --- Configuración local ----------------------------------------------------
+config/config.yml
+
+# --- renv -------------------------------------------------------------------
+renv/library/
+renv/staging/
+renv/cache/
+renv/sandbox/
+
+# --- R / herramientas -------------------------------------------------------
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# --- Temporales -------------------------------------------------------------
+_*.R
+_*.log
+*.tmp
+*.bak
+__pycache__/
+*.pyc
+
+# --- Sistema -----------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/*.log

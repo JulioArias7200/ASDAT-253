@@ -1,0 +1,130 @@
+\begin{thebibliography}{}
+
+\bibitem[Benoit et~al., 2018]{benoit2018quanteda}
+Benoit, K., Watanabe, K., Wang, H., Nulty, P., Obeng, A., M{\"u}ller, S., and
+  Matsuo, A. (2018).
+\newblock quanteda: An r package for the quantitative analysis of textual data.
+\newblock {\em Journal of Open Source Software}, 3(30):774.
+
+\bibitem[Blei, 2012]{blei2012topicmodels}
+Blei, D.~M. (2012).
+\newblock Probabilistic topic models.
+\newblock {\em Communications of the ACM}, 55(4):77--84.
+
+\bibitem[Blei et~al., 2003]{blei2003lda}
+Blei, D.~M., Ng, A.~Y., and Jordan, M.~I. (2003).
+\newblock Latent dirichlet allocation.
+\newblock {\em Journal of Machine Learning Research}, 3:993--1022.
+
+\bibitem[Bollen et~al., 2011]{bollen2011twitter}
+Bollen, J., Mao, H., and Zeng, X. (2011).
+\newblock Twitter mood predicts the stock market.
+\newblock {\em Journal of Computational Science}, 2(1):1--8.
+
+\bibitem[Brooke et~al., 2009]{brooke2009negation}
+Brooke, J., Tofiloski, M., and Taboada, M. (2009).
+\newblock Cross-linguistic sentiment analysis: From english to spanish.
+\newblock {\em Proceedings of the International Conference RANLP}, pages
+  50--56.
+
+\bibitem[Cohen, 1960]{cohen1960kappa}
+Cohen, J. (1960).
+\newblock A coefficient of agreement for nominal scales.
+\newblock {\em Educational and Psychological Measurement}, 20(1):37--46.
+
+\bibitem[Ekman, 1992]{ekman1992emotions}
+Ekman, P. (1992).
+\newblock An argument for basic emotions.
+\newblock volume~6, pages 169--200.
+
+\bibitem[Freelon, 2018]{freelon2019computational}
+Freelon, D. (2018).
+\newblock Computational research in the post-api age.
+\newblock {\em Political Communication}, 35(4):665--668.
+
+\bibitem[Golder and Macy, 2011]{golder2011diurnal}
+Golder, S.~A. and Macy, M.~W. (2011).
+\newblock Diurnal and seasonal mood vary with work, sleep, and daylength across
+  diverse cultures.
+\newblock {\em Science}, 333(6051):1878--1881.
+
+\bibitem[Grimmer and Stewart, 2013]{grimmer2013text}
+Grimmer, J. and Stewart, B.~M. (2013).
+\newblock Text as data: The promise and pitfalls of automatic content analysis
+  methods for political texts.
+\newblock {\em Political Analysis}, 21(3):267--297.
+
+\bibitem[Gr{\"u}n and Hornik, 2011]{grun2011topicmodels}
+Gr{\"u}n, B. and Hornik, K. (2011).
+\newblock topicmodels: An r package for fitting topic models.
+\newblock {\em Journal of Statistical Software}, 40(13):1--30.
+
+\bibitem[Hutto and Gilbert, 2014]{hutto2014vader}
+Hutto, C.~J. and Gilbert, E. (2014).
+\newblock {VADER}: A parsimonious rule-based model for sentiment analysis of
+  social media text.
+\newblock In {\em Proceedings of the International AAAI Conference on Web and
+  Social Media}, volume~8, pages 216--225.
+
+\bibitem[Kralj~Novak et~al., 2015]{novak2015emojis}
+Kralj~Novak, P., Smailovi{\'c}, J., Sluban, B., and Mozeti{\v{c}}, I. (2015).
+\newblock Sentiment of emojis.
+\newblock volume~10, page e0144296.
+
+\bibitem[Landis and Koch, 1977]{landis1977kappa}
+Landis, J.~R. and Koch, G.~G. (1977).
+\newblock {\em The Measurement of Observer Agreement for Categorical Data},
+  volume~33.
+
+\bibitem[Liu, 2012]{liu2012sentiment}
+Liu, B. (2012).
+\newblock {\em Sentiment Analysis and Opinion Mining}.
+\newblock Synthesis Lectures on Human Language Technologies. Morgan \& Claypool
+  Publishers.
+
+\bibitem[Mohammad and Turney, 2013]{mohammad2013emolex}
+Mohammad, S.~M. and Turney, P.~D. (2013).
+\newblock Crowdsourcing a word--emotion association lexicon.
+\newblock volume~29, pages 436--465.
+
+\bibitem[Morante and Daelemans, 2012]{morante2012negation}
+Morante, R. and Daelemans, W. (2012).
+\newblock A meta-learning approach to processing the scope of negation.
+\newblock {\em Computational Linguistics}, 38(4).
+
+\bibitem[Norris, 1997]{norris1997markov}
+Norris, J.~R. (1997).
+\newblock {\em Markov Chains}.
+\newblock Cambridge University Press.
+
+\bibitem[P{\'e}rez-Rosas et~al., 2012]{perez2012spanish}
+P{\'e}rez-Rosas, V., Banea, C., and Mihalcea, R. (2012).
+\newblock Learning sentiment lexicons in spanish.
+\newblock {\em Proceedings of the Eighth International Conference on Language
+  Resources and Evaluation (LREC)}, pages 3077--3081.
+
+\bibitem[Plutchik, 1980]{plutchik1980emotions}
+Plutchik, R. (1980).
+\newblock {\em Emotion: A Psychoevolutionary Synthesis}.
+\newblock Harper \& Row.
+
+\bibitem[{R Core Team}, 2024]{rcore2024}
+{R Core Team} (2024).
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[Russell, 1980]{russell1980circumplex}
+Russell, J.~A. (1980).
+\newblock {\em A Circumplex Model of Affect}, volume~39.
+
+\bibitem[Taboada et~al., 2011]{taboada2011socal}
+Taboada, M., Brooke, J., Tofiloski, M., Voll, K., and Stede, M. (2011).
+\newblock Lexicon-based methods for sentiment analysis.
+\newblock {\em Computational Linguistics}, 37(2):267--307.
+
+\bibitem[Townsend and Wallace, 2016]{townsend2016social}
+Townsend, L. and Wallace, C. (2016).
+\newblock Social media research: A guide to ethics.
+\newblock {\em University of Aberdeen}.
+
+\end{thebibliography}

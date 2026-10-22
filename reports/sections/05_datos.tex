@@ -1,0 +1,130 @@
+\section{Datos y preprocesamiento}
+\label{sec:datos}
+
+\subsection{Origen y naturaleza del corpus}
+
+El corpus procede de una exportación de Telegram Desktop en formato JSON del grupo
+privado ``Curso de Temporada Invierno 2026''. Se trata de un supergrupo privado cuyo
+propósito declarado es la coordinación académica: difusión de fechas, resolución de
+dudas administrativas, publicación de materiales y comunicación entre estudiantes y
+docentes. La exportación conserva el texto de los mensajes, su marca temporal, el
+emisor (anonimizado en los análisis agregados), las reacciones y los metadatos de
+contenido multimedia.
+
+La ventana temporal cubre desde \manualInicio{} hasta \manualFin{}, con \meses{} meses de
+historia y \diasActividad{} días con al menos un mensaje. La participación es amplia:
+se identifican \nRemitentes{} emisores distintos. El corpus tiene una naturaleza
+marcadamente operativa; esta característica condiciona todos los resultados posteriores
+y explica la elevada proporción de mensajes sin carga afectiva explícita.
+
+\subsection{Proceso de extracción, transformación y carga}
+
+La etapa de importación procesó el archivo crudo y aplicó tres filtros: exclusión de
+mensajes de servicio, exclusión de contenidos multimedia sin texto y deduplicación por
+identificador de mensaje. La Tabla~\ref{tab:resumen_etl} resume el resultado del proceso ETL.
+
+\input{tables/resumen_etl}
+
+Los mensajes de servicio (ingresos, salidas, cambios de título o de fotografía) se
+descartaron porque no contienen texto de usuario. Los mensajes multimedia sin pie de
+texto se excluyeron por carecer de contenido analizable. Los archivos con texto
+asociado, en cambio, se conservaron. No se detectaron duplicados por identificador; s\'\i{}
+se identificaron dos pares con contenido idéntico (mismo instante, emisor y texto), que
+se marcaron como pendientes de revisión en lugar de eliminarse silenciosamente.
+
+\subsection{Composición por tipo de contenido}
+
+La Tabla~\ref{tab:tipos_media} desglosa los mensajes según el tipo de contenido. La inmensa
+mayor\'\i{}a son mensajes de texto puro; las fotograf\'\i{}as con pie de texto constituyen
+el segundo grupo, seguidas de archivos y v\'\i{}deos. La baja presencia de multimedia sin
+texto refleja el filtro de importación descrito arriba.
+
+\input{tables/tipos_media}
+
+\subsection{Distribución temporal del volumen}
+
+La Tabla~\ref{tab:mensajes_por_anio} recoge la distribución anual de los mensajes. El grupo
+experiment\'o un crecimiento sostenido hasta el año de mayor actividad, con un repunte
+ligado a los ciclos de inscripción. La Figura~\ref{fig:vol_mensual} muestra el detalle
+mensual, donde se aprecian picos coincidentes con los per\'\i{}odos de matr\'\i{}cula y
+de inicio de semestre.
+
+\input{tables/mensajes_por_anio}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{volumen_mensual.png}
+  \caption{Volumen de mensajes por mes.}
+  \label{fig:vol_mensual}
+\end{figure}
+
+\subsection{Patrones de actividad}
+
+La actividad se distribuye de forma desigual a lo largo de la semana y del d\'\i{}a. La
+Tabla~\ref{tab:actividad_diasemana} y la Figura~\ref{fig:dia} muestran que el d\'\i{}a de mayor
+actividad es el \diaPico{}, mientras que los fines de semana concentran menos tráfico.
+La distribuci\'on horaria (Figura~\ref{fig:hora}) revela una concentraci\'on en la franja
+de \horaPico{}, coherente con el horario laboral y acad\'emico.
+
+\input{tables/actividad_diasemana}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{actividad_diasemana.png}
+  \caption{Distribuci\'on de mensajes por d\'\i{}a de la semana.}
+  \label{fig:dia}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{actividad_hora.png}
+  \caption{Distribuci\'on de mensajes por hora del d\'\i{}a (UTC).}
+  \label{fig:hora}
+\end{figure}
+
+\subsection{Limpieza y normalizaci\'on}
+
+La limpieza conserva el texto original en un campo aparte y genera un campo normalizado.
+Se aplica la forma Unicode NFC, se convierte a min\'usculas y se colapsan espacios. Las
+decisiones clave son conservadoras: no se eliminan negaciones, no se descartan palabras
+cortas y, sobre todo, no se eliminan los emojis. Los enlaces y menciones pueden
+sustituirse por marcadores o retirarse según la configuraci\'on. La Figura~\ref{fig:terminos}
+presenta los términos más frecuentes tras la limpieza y la eliminaci\'on de palabras
+vac\'ias, ofreciendo una primera intuici\'on del vocabulario dominante del corpus.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{top_terminos.png}
+  \caption{Términos más frecuentes del corpus tras la limpieza.}
+  \label{fig:terminos}
+\end{figure}
+
+\subsection{Emojis y reacciones}
+
+Los emojis se catalogan en la etapa de procesamiento y se conservan como unidades
+l\'exicas. La Figura~\ref{fig:emojis} muestra los quince emojis más frecuentes, entre los
+que destacan \emojiTop{} (con \emojiTopN{} ocurrencias), junto con otros s\'\i{}mbolos de
+se\~nalizaci\'on, confirmaci\'on y comunidad. Las reacciones (Figura~\ref{fig:reacciones})
+están dominadas por \reactTop{} (\reactTopN{} usos), lo que sugiere una cultura de
+validaci\'on positiva de las contribuciones ajenas.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.68\textwidth]{top_emojis.png}
+  \caption{Emojis más frecuentes del corpus.}
+  \label{fig:emojis}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.68\textwidth]{top_reacciones.png}
+  \caption{Reacciones más usadas del corpus.}
+  \label{fig:reacciones}
+\end{figure}
+
+\subsection{Privacidad de los datos}
+
+El análisis se realiza de forma agregada. En las salidas dirigidas a terceros se emplean
+identificadores anonimizados mediante funciones de \emph{hash} y no se reproducen
+mensajes completos sin necesidad. El corpus bruto no se versiona en el repositorio p\'ublico.
+La Secci\'on~\ref{sec:etica} detalla las consideraciones \'eticas.

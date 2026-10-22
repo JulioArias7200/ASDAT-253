@@ -1,0 +1,61 @@
+% =============================================================================
+% main.tex — Informe de análisis de sentimiento y emociones (AS_Telegram)
+% Compilar (local):  pdflatex main ; bibtex main ; pdflatex main ; pdflatex main
+% Compilar (Overleaf): subir la carpeta "reports" completa como proyecto.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\input{preamble}
+
+\title{\textbf{Análisis de sentimiento y emociones en un grupo de Telegram
+       de gestión académica}\\[0.3em]
+       \large Un estudio exploratorio con un método léxico multietiqueta en español}
+\author{Proyecto AS\_Telegram}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Este informe presenta un estudio exploratorio del discurso de un grupo privado de
+Telegram dedicado a la gestión académica, con \nMensajes{} mensajes recuperados y
+\nAnalizados{} mensajes analizados entre \manualInicio{} y \manualFin{}. Se implementa
+un \emph{pipeline} reproducible de extracción, transformación y carga (ETL) que separa
+explícitamente tres señales de evidencia ---léxico, emojis y reacciones---, modela la
+negación mediante una ventana contextual, expande contracciones y emoticonos, y clasifica
+cada mensaje en una de dieciocho categorías emocionales y en una etiqueta de polaridad
+(positivo, negativo, neutro o indeterminado). La cobertura del diccionario es del
+\pctCobertura{}\%, de modo que \pctIndeterminado{}\% de los mensajes carece de evidencia
+suficiente y se reporta como \emph{indeterminado}; este resultado se asume como hallazgo
+central y no se rellena con etiquetas inventadas. Aun así, entre los mensajes con
+evidencia suficiente, los positivos (\pctPositivos{}\%) superan ampliamente a los
+negativos (\pctNegativos{}\%), con una emoción dominante de carácter
+\emph{\emocionTop{}}. El análisis temporal revela \diasActividad{} días con actividad y
+\meses{} meses de historia, con picos de volumen en el día \diaPico{} y en torno a las
+\;\horaPico{}. El modelado de tópicos (LDA) identifica \nTemas{} temas interpretables y
+las cadenas de Markov sugieren que el estado neutro es absorbente (\permanenciaNeutro{}
+mensajes de permanencia media). El informe documenta además las decisiones de
+reproducibilidad, las consideraciones éticas y las limitaciones del enfoque.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\input{sections/01_resumen}
+\input{sections/02_introduccion}
+\input{sections/03_marco_teorico}
+\input{sections/04_metodologia}
+\input{sections/05_datos}
+\input{sections/06_resultados}
+\input{sections/07_discusion}
+\input{sections/08_limitaciones}
+\input{sections/09_conclusiones}
+\input{sections/10_etica}
+\input{sections/11_reproducibilidad}
+\input{sections/12_apendice}
+
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}

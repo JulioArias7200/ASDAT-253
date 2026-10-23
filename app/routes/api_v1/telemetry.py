@@ -134,12 +134,49 @@ def get_bitacora_live_feed():
         from database.queries import get_bitacora_reciente
         tabla = request.args.get("tabla")
         operacion = request.args.get("operacion")
+        solo_mods = request.args.get("solo_modificaciones", "false").lower() in ("true", "1", "yes")
         limit = int(request.args.get("limit", 50))
-        eventos = get_bitacora_reciente(limit=limit, tabla=tabla, operacion=operacion)
+        eventos = get_bitacora_reciente(limit=limit, tabla=tabla, operacion=operacion, solo_modificaciones=solo_mods)
         return jsonify({
             "status": "success",
             "total": len(eventos),
             "eventos": eventos
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@api_v1_bp.route("/bitacora/kpis", methods=["GET"])
+def get_bitacora_kpis_endpoint():
+    """Retorna el conteo y telemetría de auditoría."""
+    try:
+        from database.queries import get_bitacora_kpis
+        return jsonify({"status": "success", "kpis": get_bitacora_kpis()}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@api_v1_bp.route("/bitacora/batches", methods=["GET"])
+def get_bitacora_batches_endpoint():
+    """Retorna el historial de lotes de minería de datos y pipelines R."""
+    try:
+        from database.queries import get_bitacora_procesos_mineria
+        limit = int(request.args.get("limit", 20))
+        return jsonify({"status": "success", "lotes": get_bitacora_procesos_mineria(limit=limit)}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@api_v1_bp.route("/bitacora/dataset-samples", methods=["GET"])
+def get_dataset_samples_endpoint():
+    """Retorna muestras representativas de datos contrastando el ANTES vs DESPUÉS del cambio."""
+    try:
+        from database.queries import get_dataset_transformation_samples
+        script = request.args.get("script")
+        limit = int(request.args.get("limit", 12))
+        samples = get_dataset_transformation_samples(script_filter=script, limit=limit)
+        return jsonify({
+            "status": "success",
+            "total": len(samples),
+            "script_filtrado": script or "TODOS",
+            "muestras": samples
         }), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500

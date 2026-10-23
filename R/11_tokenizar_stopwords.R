@@ -170,8 +170,12 @@ for (i in seq_len(nrow(top50))) {
 }
 cat("\n")
 
-out_dir <- "data/results"
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+posibles_out <- c("data/results", "../data/results")
+out_dir <- posibles_out[dir.exists(posibles_out)][1]
+if (is.na(out_dir)) {
+  out_dir <- "data/results"
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+}
 out_path <- file.path(out_dir, "tokens_frecuencia.csv")
 readr::write_csv(tabla_freq, out_path)
 

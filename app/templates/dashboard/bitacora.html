@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Control de Bitácora & Auditoría CDC - Sentix Intelligence{% endblock %}
+{% block title %}Bitácora de Transformaciones & Auditoría CDC - Sentix Intelligence{% endblock %}
 
 {% block content %}
 <main class="flex-1 p-space-md lg:p-space-xl flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
@@ -11,18 +11,18 @@
             <div class="flex items-center gap-2">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/30 text-tertiary border border-tertiary/20">
                     <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
-                    PostgreSQL 18.6 • PL/pgSQL CDC Triggers
+                    PostgreSQL 17.5 • Data Lineage & CDC
                 </span>
                 <span class="text-outline text-xs">•</span>
-                <span class="text-outline text-xs font-mono">TGBase (sa-east-1)</span>
+                <span class="text-outline text-xs font-mono">Neon Serverless (Corpus 23,371 Mensajes)</span>
             </div>
             <h1 class="text-headline-lg font-bold tracking-tight text-on-surface flex items-center gap-2.5 mt-1">
-                <span class="material-symbols-outlined text-[32px] text-primary">verified_user</span>
-                Bitácora de Auditoría en Tiempo Real (CDC)
+                <span class="material-symbols-outlined text-[32px] text-primary">history_edu</span>
+                Bitácora de Transformaciones y Auditoría del Dataset
             </h1>
-            <p class="text-body-md text-on-surface-variant max-w-3xl">
-                Supervisión criptográfica y registro transaccional automático de cambios a nivel de fila disparados por 
-                <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-surface-container-high text-primary">fn_registrar_bitacora_cambio()</span> en Neon Serverless.
+            <p class="text-body-md text-on-surface-variant max-w-4xl">
+                Trazabilidad metodológica del ciclo de vida de los datos: visualización del <strong class="text-on-surface font-semibold">Estado ANTES vs DESPUÉS</strong> de cada transformación, 
+                scripts ejecutados, columnas afectadas, técnicas de minería y auditoría transaccional de cambios.
             </p>
         </div>
 
@@ -37,7 +37,7 @@
             <!-- Disparar Mutación de Prueba -->
             <button id="btn-test-mutation" type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-primary hover:bg-primary/90 text-on-primary shadow-sm hover:shadow transition-all active:scale-95">
                 <span class="material-symbols-outlined text-[18px]">bolt</span>
-                <span>Probar Trigger en Vivo</span>
+                <span>Probar Trigger CDC</span>
             </button>
         </div>
     </div>
@@ -45,255 +45,445 @@
     <!-- Alert / Toast Banner Container -->
     <div id="toast-container" class="hidden"></div>
 
-    <!-- Metric KPI Cards: Telemetría de Auditoría -->
+    <!-- Metric KPI Cards: Resumen de Transformaciones del Corpus -->
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
-        <!-- Card 1: Total Registros en Bitácora -->
-        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
+        <!-- Card 1: Normalización de Texto -->
+        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-primary/30 shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-primary/5 rounded-full pointer-events-none"></div>
             <div class="flex items-center justify-between text-outline text-xs font-medium">
-                <span>Total Eventos Auditados</span>
-                <span class="material-symbols-outlined text-[18px] text-primary">receipt_long</span>
+                <span class="text-primary font-semibold">Textos Normalizados</span>
+                <span class="material-symbols-outlined text-[20px] text-primary">text_fields</span>
             </div>
             <div class="mt-2 flex items-baseline gap-2">
-                <span id="kpi-total-eventos" class="text-3xl font-bold font-mono text-on-surface">{{ eventos|length }}</span>
-                <span class="text-xs text-outline font-mono">eventos recientes</span>
+                <span class="text-3xl font-bold font-mono text-primary">21,464</span>
+                <span class="text-xs text-outline font-mono">mensajes limpios</span>
             </div>
             <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
-                <span>Retención Neon</span>
-                <span class="font-mono text-on-surface-variant font-medium">Permanente</span>
+                <span>Script: 11_tokenizar_stopwords.R</span>
+                <span class="font-mono text-primary font-semibold">text_norm</span>
             </div>
         </div>
 
-        <!-- Card 2: Tablas con Trigger Activo -->
+        <!-- Card 2: Emociones Inferidas -->
         <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between text-outline text-xs font-medium">
-                <span>Tablas Monitorizadas</span>
-                <span class="material-symbols-outlined text-[18px] text-secondary">table_chart</span>
+                <span>Inferencia Afectiva</span>
+                <span class="material-symbols-outlined text-[18px] text-secondary">psychology</span>
             </div>
             <div class="mt-2 flex items-baseline gap-2">
-                <span class="text-3xl font-bold font-mono text-on-surface">16</span>
-                <span class="text-xs text-secondary font-medium">100% Cobertura</span>
+                <span class="text-3xl font-bold font-mono text-on-surface">4,089</span>
+                <span class="text-xs text-outline font-mono">clasificados</span>
             </div>
             <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
-                <span>Triggers PL/pgSQL</span>
-                <span class="font-mono text-tertiary font-medium">AFTER INSERT|UPDATE|DELETE</span>
+                <span>18 Emociones Plutchik</span>
+                <span class="font-mono text-secondary font-medium">dominant_emotion</span>
             </div>
         </div>
 
-        <!-- Card 3: Nivel de Aislamiento & Latencia -->
+        <!-- Card 3: Emojis Contextualizados -->
         <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between text-outline text-xs font-medium">
-                <span>Latencia de Disparo</span>
-                <span class="material-symbols-outlined text-[18px] text-tertiary">speed</span>
+                <span>Diccionario de Emojis</span>
+                <span class="material-symbols-outlined text-[18px] text-tertiary">sentiment_satisfied</span>
             </div>
             <div class="mt-2 flex items-baseline gap-2">
-                <span class="text-3xl font-bold font-mono text-tertiary">&lt; 0.8</span>
-                <span class="text-xs text-outline font-mono">ms / mutación</span>
+                <span class="text-3xl font-bold font-mono text-tertiary">433</span>
+                <span class="text-xs text-outline font-mono">emojis catalogados</span>
             </div>
             <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
-                <span>Overhead</span>
-                <span class="font-mono text-tertiary font-medium">Zero-impact (C-Extension)</span>
+                <span>Script: 13_diccionario_emojis.R</span>
+                <span class="font-mono text-tertiary font-medium">emoji_signal</span>
             </div>
         </div>
 
-        <!-- Card 4: Seguridad & Auditoría C-Level -->
+        <!-- Card 4: Lingüística Shadow -->
         <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between text-outline text-xs font-medium">
-                <span>Contexto de Aplicación</span>
-                <span class="material-symbols-outlined text-[18px] text-primary">fingerprint</span>
+                <span>Lingüística Shadow</span>
+                <span class="material-symbols-outlined text-[18px] text-on-surface-variant">visibility_off</span>
             </div>
             <div class="mt-2 flex items-baseline gap-2">
-                <span class="text-3xl font-bold font-mono text-on-surface">SESSION</span>
-                <span class="text-xs text-outline font-mono">variables</span>
+                <span class="text-3xl font-bold font-mono text-on-surface">1,000</span>
+                <span class="text-xs text-outline font-mono">patrones analizados</span>
             </div>
             <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
-                <span>Variables</span>
-                <span class="font-mono text-primary font-medium">app.current_{user,ip,ep}</span>
+                <span>Script: 12_shadow_linguistic.R</span>
+                <span class="font-mono text-tertiary font-medium">hesitation_score</span>
             </div>
         </div>
     </section>
 
-    <!-- Filters & Table Section -->
+    <!-- Main Navigation Tabs -->
     <section class="p-space-md lg:p-space-lg rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-space-md">
         
-        <!-- Filter Bar -->
-        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-            <!-- Left: Filter Pills for Operation -->
-            <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-xs font-semibold text-outline mr-1">Operación:</span>
-                <button type="button" class="filter-op-btn active px-3 py-1 rounded-lg text-xs font-medium bg-primary text-on-primary transition-all" data-op="ALL">Todas</button>
-                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="INSERT">INSERT</button>
-                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="UPDATE">UPDATE</button>
-                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="DELETE">DELETE</button>
-            </div>
-
-            <!-- Right: Table selector & search -->
+        <!-- Pestañas Superiores -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-surface-container-high/60 pb-3">
             <div class="flex items-center gap-2 flex-wrap">
-                <select id="filter-tabla" class="px-3 py-1.5 rounded-xl text-xs bg-surface-container border border-surface-container-high text-on-surface focus:outline-none focus:ring-1 focus:ring-primary">
-                    <option value="">Todas las tablas</option>
-                    <option value="diccionario_emojis">diccionario_emojis</option>
-                    <option value="tokens_frecuencia">tokens_frecuencia</option>
-                    <option value="shadow_linguistics">shadow_linguistics</option>
-                    <option value="mensajes">mensajes</option>
-                    <option value="tfidf_mensajes">tfidf_mensajes</option>
-                    <option value="ngrams_frecuencias">ngrams_frecuencias</option>
-                    <option value="lda_topicos">lda_topicos</option>
-                    <option value="metricas_temporales">metricas_temporales</option>
-                    <option value="diccionario_sentimientos">diccionario_sentimientos</option>
-                    <option value="docentes">docentes</option>
-                    <option value="menciones_docentes">menciones_docentes</option>
-                </select>
+                <!-- Tab 1: Muestreo Antes vs Después (ESTELAR) -->
+                <button type="button" class="tab-btn active inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-on-primary shadow-sm transition-all" data-tab="tab-transformaciones">
+                    <span class="material-symbols-outlined text-[16px]">compare</span>
+                    <span>Muestreo: Antes vs Después</span>
+                    <span id="badge-muestreo-count" class="px-2 py-0.5 rounded-full text-[10px] bg-on-primary/20 text-on-primary font-bold">{{ muestreo_dataset|length }}</span>
+                </button>
 
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
-                    <input id="filter-search" type="text" placeholder="Buscar en diff o ID..." class="pl-8 pr-3 py-1.5 rounded-xl text-xs bg-surface-container border border-surface-container-high text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary w-48 sm:w-60" />
-                </div>
+                <!-- Tab 2: Fases y Linaje Formal -->
+                <button type="button" class="tab-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-tab="tab-lineage">
+                    <span class="material-symbols-outlined text-[16px]">account_tree</span>
+                    <span>Linaje de Pipelines (5 Fases)</span>
+                </button>
 
-                <button id="btn-manual-reload" type="button" class="p-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Refrescar ahora">
-                    <span class="material-symbols-outlined text-[18px]">refresh</span>
+                <!-- Tab 3: Modificaciones CDC en Vivo -->
+                <button type="button" class="tab-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-tab="tab-cdc">
+                    <span class="material-symbols-outlined text-[16px]">published_with_changes</span>
+                    <span>Modificaciones CDC (En Vivo)</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-surface-container-highest text-on-surface-variant font-bold">{{ modificaciones|length }}</span>
+                </button>
+
+                <!-- Tab 4: Lotes Batch de Minería -->
+                <button type="button" class="tab-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-tab="tab-lotes">
+                    <span class="material-symbols-outlined text-[16px]">terminal</span>
+                    <span>Lotes y Corridas R</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-surface-container-highest text-on-surface-variant font-bold">{{ lotes|length }}</span>
                 </button>
             </div>
+
+            <!-- Botón de recarga -->
+            <button id="btn-manual-reload" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-[16px]">refresh</span>
+                <span>Actualizar Datos</span>
+            </button>
         </div>
 
-        <!-- Table Container -->
-        <div class="overflow-x-auto rounded-xl border border-surface-container-high/60">
-            <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                    <tr class="bg-surface-container-high/40 text-outline uppercase font-mono text-[10px] tracking-wider border-b border-surface-container-high">
-                        <th class="py-3 px-4 font-semibold">ID / Timestamp</th>
-                        <th class="py-3 px-4 font-semibold">Operación</th>
-                        <th class="py-3 px-4 font-semibold">Tabla Afectada</th>
-                        <th class="py-3 px-4 font-semibold">Registro ID</th>
-                        <th class="py-3 px-4 font-semibold">Actor & Origen</th>
-                        <th class="py-3 px-4 font-semibold">Diff de Modificaciones (JSONB)</th>
-                        <th class="py-3 px-4 font-semibold text-right">Detalle</th>
-                    </tr>
-                </thead>
-                <tbody id="bitacora-tbody" class="divide-y divide-surface-container-high/40 font-mono">
-                    {% for ev in eventos %}
-                    <tr class="hover:bg-surface-container/40 transition-colors evento-row" data-op="{{ ev.operacion }}" data-tabla="{{ ev.tabla }}">
-                        <!-- ID / Timestamp -->
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-on-surface">#{{ ev.bitacora_id }}</span>
-                                <span class="text-[10px] text-outline">{{ ev.fecha }}</span>
+        <!-- =================================================================== -->
+        <!-- PANEL 1: MUESTREO DE TRANSFORMACIONES (ANTES VS DESPUÉS SPLIT-VIEW) -->
+        <!-- =================================================================== -->
+        <div id="tab-transformaciones" class="tab-content flex flex-col gap-4">
+            
+            <!-- Barra de Filtros por Script Responsable -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-surface-container-low/50 p-3 rounded-xl border border-surface-container-high/40">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-xs font-semibold text-outline mr-2 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px] text-primary">filter_alt</span>
+                        Filtrar por Script:
+                    </span>
+                    <button type="button" class="filter-script-btn active px-3 py-1 rounded-lg text-xs font-medium bg-primary text-on-primary transition-all" data-script="ALL">Todos los Pipelines</button>
+                    <button type="button" class="filter-script-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-script="11_tokenizar_stopwords.R">11_tokenizar_stopwords.R</button>
+                    <button type="button" class="filter-script-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-script="13_diccionario_emojis.R">13_diccionario_emojis.R</button>
+                    <button type="button" class="filter-script-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-script="sentix_emotion_engine">sentix_emotion_engine</button>
+                    <button type="button" class="filter-script-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-script="12_shadow_linguistic.R">12_shadow_linguistic.R</button>
+                </div>
+                
+                <span class="text-[11px] text-outline font-mono">Mostrando muestras representativas del corpus</span>
+            </div>
+
+            <!-- Contenedor de Tarjetas Split-View (Antes ➔ Después) -->
+            <div id="samples-container" class="grid grid-cols-1 gap-space-md">
+                {% for sample in muestreo_dataset %}
+                <div class="sample-card rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 overflow-hidden shadow-sm flex flex-col" data-script="{{ sample.script }}">
+                    <!-- Card Header: Script, Fase, Fecha y Columnas -->
+                    <div class="px-space-md py-3 bg-surface-container-low/70 border-b border-surface-container-high/60 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-primary-container/40 text-primary border border-primary/20">
+                                <span class="material-symbols-outlined text-[15px]">terminal</span>
+                                {{ sample.script }}
+                            </span>
+                            <span class="text-xs text-on-surface font-semibold">• {{ sample.fase }}</span>
+                            <span class="text-outline text-xs">•</span>
+                            <span class="text-xs text-secondary font-mono font-bold">Registro: #{{ sample.id }}</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-[11px] text-outline flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">schedule</span>
+                                {{ sample.fecha }}
+                            </span>
+                            <div class="flex items-center gap-1">
+                                {% for col in sample.columnas_afectadas %}
+                                <span class="px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary text-[10px] font-mono font-bold">{{ col }}</span>
+                                {% endfor %}
                             </div>
-                        </td>
+                        </div>
+                    </div>
 
-                        <!-- Operación Pill -->
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            {% if ev.operacion == 'INSERT' %}
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/40 text-tertiary border border-tertiary/20">INSERT</span>
-                            {% elif ev.operacion == 'UPDATE' %}
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/40 text-primary border border-primary/20">UPDATE</span>
-                            {% elif ev.operacion == 'DELETE' %}
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container/40 text-error border border-error/20">DELETE</span>
-                            {% else %}
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-container text-on-surface">{{ ev.operacion }}</span>
-                            {% endif %}
-                        </td>
+                    <!-- Qué se realizó (Acción Técnica) -->
+                    <div class="px-space-md py-2.5 bg-surface-container-lowest border-b border-surface-container-high/40 flex items-center gap-2 text-xs text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[16px] text-tertiary shrink-0">engineering</span>
+                        <span><strong>Qué se realizó:</strong> {{ sample.que_se_realizo }}</span>
+                    </div>
 
-                        <!-- Tabla Afectada -->
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <span class="px-2 py-1 rounded bg-surface-container text-on-surface font-semibold text-[11px]">{{ ev.tabla }}</span>
-                        </td>
-
-                        <!-- Registro ID -->
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <span class="text-secondary font-bold">#{{ ev.registro_id }}</span>
-                        </td>
-
-                        <!-- Actor & Origen -->
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <div class="flex flex-col text-[11px]">
-                                <span class="text-on-surface font-medium">{{ ev.usuario or 'neon_system' }}</span>
-                                <span class="text-[9px] text-outline">{{ ev.ip or 'internal' }} • {{ ev.endpoint or 'plpgsql_trigger' }}</span>
-                            </div>
-                        </td>
-
-                        <!-- Diff de Modificaciones -->
-                        <td class="py-3 px-4 max-w-md">
-                            {% if ev.diff %}
-                                <div class="bg-surface-container-lowest/80 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1 max-h-24 overflow-y-auto">
-                                    {% for col, val in ev.diff.items() %}
-                                        <div class="flex items-center gap-1.5 flex-wrap">
-                                            <span class="font-bold text-primary">{{ col }}:</span>
-                                            {% if val is mapping and 'anterior' in val and 'nuevo' in val %}
-                                                <span class="line-through text-error bg-error-container/20 px-1 rounded">{{ val.anterior }}</span>
-                                                <span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
-                                                <span class="text-tertiary bg-tertiary-container/20 px-1 rounded font-bold">{{ val.nuevo }}</span>
-                                            {% else %}
-                                                <span class="text-on-surface-variant">{{ val }}</span>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                    <!-- Split View: Antes vs Después -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-surface-container-high/60 p-space-md gap-4 lg:gap-0">
+                        
+                        <!-- Columna Izquierda: ESTADO ANTES -->
+                        <div class="lg:pr-4 flex flex-col justify-between gap-3">
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-error-container/30 text-error uppercase tracking-wider">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        Estado ANTES (Original / En Bruto)
+                                    </span>
+                                    <span class="text-[10px] text-outline font-mono">text_original</span>
                                 </div>
-                            {% elif ev.operacion == 'INSERT' %}
-                                <span class="text-outline text-[11px] italic">Inserción completa de registro</span>
-                            {% else %}
-                                <span class="text-outline text-[11px] italic">Sin modificaciones de columnas</span>
-                            {% endif %}
-                        </td>
+                                <div class="p-3 rounded-xl bg-surface-container/60 border border-surface-container-high/40 font-mono text-xs text-on-surface leading-relaxed break-words">
+                                    "{{ sample.antes.texto }}"
+                                </div>
+                            </div>
 
-                        <!-- Detalle Button -->
-                        <td class="py-3 px-4 text-right whitespace-nowrap">
-                            <button type="button" class="btn-inspect-diff p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"
-                                data-id="{{ ev.bitacora_id }}"
-                                data-op="{{ ev.operacion }}"
-                                data-tabla="{{ ev.tabla }}"
-                                data-reg="{{ ev.registro_id }}"
-                                data-diff='{{ ev.diff|tojson|safe if ev.diff else "{}" }}'
-                                data-prev='{{ ev.datos_previos|tojson|safe if ev.datos_previos else "{}" }}'
-                                data-new='{{ ev.datos_nuevos|tojson|safe if ev.datos_nuevos else "{}" }}'
-                                title="Inspeccionar Payload Completo">
-                                <span class="material-symbols-outlined text-[16px]">visibility</span>
-                            </button>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr id="empty-state-row">
-                        <td colspan="7" class="py-12 text-center text-outline">
-                            <span class="material-symbols-outlined text-[40px] text-outline/50 mb-2">inbox</span>
-                            <p class="text-sm">No se han registrado eventos en la bitácora aún.</p>
-                            <p class="text-xs text-outline mt-1">Haz clic en <strong>"Probar Trigger en Vivo"</strong> para disparar un evento de auditoría.</p>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                            <!-- Metadata Previa -->
+                            <div class="flex items-center gap-2 flex-wrap text-[11px] font-mono text-outline pt-2 border-t border-surface-container-high/30">
+                                {% for k, v in sample.antes.detalles.items() %}
+                                <span class="px-2 py-0.5 rounded bg-surface-container-low text-outline">
+                                    <strong>{{ k }}:</strong> {{ v }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Columna Derecha: ESTADO DESPUÉS -->
+                        <div class="lg:pl-4 flex flex-col justify-between gap-3">
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-container/30 text-tertiary uppercase tracking-wider">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        Estado DESPUÉS (Normalizado & Enriquecido)
+                                    </span>
+                                    <span class="text-[10px] text-tertiary font-mono font-bold">text_norm / features</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-tertiary-container/10 border border-tertiary/20 font-mono text-xs text-on-surface font-semibold leading-relaxed break-words">
+                                    "{{ sample.despues.texto }}"
+                                </div>
+                            </div>
+
+                            <!-- Metadata Resultante -->
+                            <div class="flex items-center gap-2 flex-wrap text-[11px] font-mono pt-2 border-t border-surface-container-high/30">
+                                {% for k, v in sample.despues.detalles.items() %}
+                                <span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-medium">
+                                    <strong class="text-on-surface">{{ k }}:</strong> {{ v }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% else %}
+                <div class="p-12 text-center text-outline">No se encontraron muestras de transformación en este momento.</div>
+                {% endfor %}
+            </div>
+
         </div>
+
+        <!-- =================================================================== -->
+        <!-- PANEL 2: LINAJE FORMAL DE PIPELINES (5 FASES)                       -->
+        <!-- =================================================================== -->
+        <div id="tab-lineage" class="tab-content hidden flex flex-col gap-4">
+            <div class="flex items-center justify-between text-xs text-outline px-1">
+                <span>Diagrama de secuencia metodológica de las 5 fases de extracción, limpieza, catalogación y modelado.</span>
+                <span class="text-[11px] font-mono text-tertiary">Corpus total: 23,371 mensajes</span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3">
+                {% for etapa in lineage_etapas %}
+                <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-primary-container/30 text-primary font-bold font-mono flex items-center justify-center shrink-0">
+                            0{{ etapa.fase_id }}
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="text-body-md font-bold text-on-surface">{{ etapa.fase }}</h4>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-surface-container text-on-surface-variant">{{ etapa.script }}</span>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/30 text-tertiary">{{ etapa.estado }}</span>
+                            </div>
+                            <p class="text-xs text-on-surface-variant">{{ etapa.descripcion }}</p>
+                            <div class="flex items-center gap-1.5 flex-wrap mt-1">
+                                <span class="text-[10px] text-outline uppercase font-semibold">Columnas:</span>
+                                {% for c in etapa.columnas_afectadas %}
+                                <span class="px-1.5 py-0.2 rounded bg-surface-container-high text-on-surface font-mono text-[10px]">{{ c }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:items-end justify-center shrink-0 text-xs font-mono">
+                        <span class="text-primary font-bold text-[14px]">{{ etapa.registros_afectados }} registros</span>
+                        <span class="text-outline text-[11px]">{{ etapa.fecha_ejecucion }}</span>
+                        <span class="text-[10px] text-tertiary mt-0.5">{{ etapa.tipo_transformacion }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PANEL 3: MODIFICACIONES CDC EN VIVO                                 -->
+        <!-- =================================================================== -->
+        <div id="tab-cdc" class="tab-content hidden flex flex-col gap-3">
+            <div class="flex items-center justify-between text-xs text-outline px-1">
+                <span>Auditoría transaccional capturada en tiempo real por el trigger PL/pgSQL <code class="text-primary font-mono">fn_registrar_bitacora_cambio()</code>.</span>
+                <span class="text-[11px] font-mono text-primary">Solo mutaciones (UPDATE/DELETE)</span>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-surface-container-high/60">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-surface-container-high/40 text-outline uppercase font-mono text-[10px] tracking-wider border-b border-surface-container-high">
+                            <th class="py-3 px-4 font-semibold">ID / Timestamp</th>
+                            <th class="py-3 px-4 font-semibold">Operación</th>
+                            <th class="py-3 px-4 font-semibold">Tabla Afectada</th>
+                            <th class="py-3 px-4 font-semibold">Registro ID</th>
+                            <th class="py-3 px-4 font-semibold">Actor & Origen</th>
+                            <th class="py-3 px-4 font-semibold min-w-[280px]">Cambio de Valor (Diff Visual)</th>
+                            <th class="py-3 px-4 font-semibold text-right">Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-modificaciones" class="divide-y divide-surface-container-high/40 font-mono">
+                        {% for ev in modificaciones %}
+                        <tr class="hover:bg-surface-container/40 transition-colors">
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="font-bold text-on-surface">#{{ ev.bitacora_id }}</span>
+                                <div class="text-[10px] text-outline">{{ ev.fecha }}</div>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container/40 text-primary">{{ ev.operacion }}</span>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[11px]">{{ ev.tabla }}</span>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-secondary-container/30 text-secondary font-bold text-[12px]">#{{ ev.registro_id }}</span>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap text-[11px]">
+                                <span class="text-on-surface font-medium">{{ ev.usuario or 'admin' }}</span>
+                                <div class="text-[9px] text-outline">{{ ev.ip or '127.0.0.1' }}</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                {% if ev.diff %}
+                                    <div class="bg-surface-container-lowest/90 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1.5 max-h-24 overflow-y-auto">
+                                        {% for col, val in ev.diff.items() %}
+                                            <div class="flex items-center gap-1.5 flex-wrap">
+                                                <span class="font-bold text-primary font-mono">{{ col }}:</span>
+                                                {% if val is mapping and 'anterior' in val and 'nuevo' in val %}
+                                                    <span class="line-through text-error bg-error-container/20 px-1.5 py-0.5 rounded text-[11px]">{{ val.anterior }}</span>
+                                                    <span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+                                                    <span class="text-tertiary bg-tertiary-container/30 px-1.5 py-0.5 rounded text-[11px] font-bold">{{ val.nuevo }}</span>
+                                                {% else %}
+                                                    <span class="text-on-surface-variant">{{ val }}</span>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td class="py-3 px-4 text-right whitespace-nowrap">
+                                <button type="button" class="btn-inspect-diff p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"
+                                    data-id="{{ ev.bitacora_id }}"
+                                    data-op="{{ ev.operacion }}"
+                                    data-tabla="{{ ev.tabla }}"
+                                    data-reg="{{ ev.registro_id }}"
+                                    data-diff='{{ ev.diff|tojson|safe if ev.diff else "{}" }}'
+                                    data-prev='{{ ev.datos_previos|tojson|safe if ev.datos_previos else "{}" }}'
+                                    data-new='{{ ev.datos_nuevos|tojson|safe if ev.datos_nuevos else "{}" }}'
+                                    title="Inspeccionar Payload">
+                                    <span class="material-symbols-outlined text-[16px]">visibility</span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PANEL 4: LOTES BATCH DE MINERÍA R                                   -->
+        <!-- =================================================================== -->
+        <div id="tab-lotes" class="tab-content hidden flex flex-col gap-3">
+            <div class="flex items-center justify-between text-xs text-outline px-1">
+                <span>Registro de ejecuciones masivas de scripts R en <code class="text-tertiary font-mono">bitacora_procesos_mineria</code>.</span>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-surface-container-high/60">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-surface-container-high/40 text-outline uppercase font-mono text-[10px] tracking-wider border-b border-surface-container-high">
+                            <th class="py-3 px-4 font-semibold">Lote ID / Fecha</th>
+                            <th class="py-3 px-4 font-semibold">Pipeline de Minería</th>
+                            <th class="py-3 px-4 font-semibold">Fase Técnica</th>
+                            <th class="py-3 px-4 font-semibold">Estado</th>
+                            <th class="py-3 px-4 font-semibold">Métricas de Volumen</th>
+                            <th class="py-3 px-4 font-semibold">Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container-high/40 font-mono">
+                        {% for lote in lotes %}
+                        <tr class="hover:bg-surface-container/40 transition-colors">
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="font-bold text-on-surface">#{{ lote.proceso_id }}</span>
+                                <div class="text-[10px] text-outline">{{ lote.fecha_inicio }}</div>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap font-bold text-on-surface">
+                                {{ lote.nombre_pipeline }}
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium text-[11px]">{{ lote.fase }}</span>
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/30 text-tertiary">
+                                    {{ lote.estado }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4">
+                                {% if lote.metricas_json %}
+                                    <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
+                                        {% for k, v in lote.metricas_json.items() %}
+                                            <span class="px-2 py-0.5 rounded bg-surface-container-high/60 text-on-surface">
+                                                <strong class="text-primary">{{ k }}:</strong> {{ v }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td class="py-3 px-4 whitespace-nowrap font-bold text-secondary">
+                                {{ (lote.duracion_ms / 1000)|round(2) if lote.duracion_ms else '0.5' }} s
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </section>
 
-    <!-- Modal Inspector de Payload JSON & Variables de Sesión -->
+    <!-- Modal Inspector de Payload JSON -->
     <div id="inspector-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-surface-container-lowest border border-surface-container-high rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <!-- Modal Header -->
+        <div class="bg-surface-container-lowest border border-surface-container-high rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
             <div class="px-6 py-4 border-b border-surface-container-high flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary text-[22px]">troubleshoot</span>
                     <h3 class="text-headline-sm font-bold text-on-surface" id="modal-title">Inspección de Auditoría #000</h3>
                 </div>
-                <button type="button" id="close-modal-btn" class="p-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+                <button type="button" id="close-modal-btn" class="p-1 rounded-lg text-outline hover:text-on-surface transition-colors">
                     <span class="material-symbols-outlined text-[20px]">close</span>
                 </button>
             </div>
-            <!-- Modal Body -->
             <div class="p-6 overflow-y-auto flex flex-col gap-4 font-mono text-xs">
                 <div>
-                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Diferencial Calculado (diff_modificaciones):</span>
+                    <span class="text-outline uppercase text-[10px] font-bold">Diferencial (diff_modificaciones):</span>
                     <pre id="modal-diff" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-on-surface overflow-x-auto"></pre>
                 </div>
                 <div>
-                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Estado Previo (OLD):</span>
+                    <span class="text-outline uppercase text-[10px] font-bold">Estado Previo (OLD):</span>
                     <pre id="modal-prev" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-outline overflow-x-auto max-h-40"></pre>
                 </div>
                 <div>
-                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Estado Nuevo (NEW):</span>
+                    <span class="text-outline uppercase text-[10px] font-bold">Estado Nuevo (NEW):</span>
                     <pre id="modal-new" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-outline overflow-x-auto max-h-40"></pre>
                 </div>
             </div>
-            <!-- Modal Footer -->
             <div class="px-6 py-3 border-t border-surface-container-high bg-surface-container-low/50 flex justify-end">
-                <button type="button" id="close-modal-footer-btn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Cerrar Inspector</button>
+                <button type="button" id="close-modal-footer-btn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Cerrar</button>
             </div>
         </div>
     </div>
@@ -306,20 +496,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     let autoRefreshActive = true;
     let refreshInterval = null;
-    let currentOpFilter = "ALL";
-    let currentTablaFilter = "";
-    let currentSearchTerm = "";
+    let currentScriptFilter = "ALL";
 
-    const tbody = document.getElementById("bitacora-tbody");
-    const kpiTotal = document.getElementById("kpi-total-eventos");
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+    const scriptFilterButtons = document.querySelectorAll(".filter-script-btn");
+    const samplesContainer = document.getElementById("samples-container");
     const btnTest = document.getElementById("btn-test-mutation");
     const btnReload = document.getElementById("btn-manual-reload");
     const btnToggleAuto = document.getElementById("toggle-autorefresh");
     const labelAuto = document.getElementById("autorefresh-label");
     const spinner = document.getElementById("refresh-spinner");
-    const filterTabla = document.getElementById("filter-tabla");
-    const filterSearch = document.getElementById("filter-search");
-    const opButtons = document.querySelectorAll(".filter-op-btn");
 
     // Modal elements
     const modal = document.getElementById("inspector-modal");
@@ -367,8 +554,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (e.target === modal) closeModal();
     });
 
-    // Delegación de eventos para inspección
-    tbody.addEventListener("click", function(e) {
+    document.addEventListener("click", function(e) {
         const btn = e.target.closest(".btn-inspect-diff");
         if (!btn) return;
         try {
@@ -376,6 +562,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: btn.getAttribute("data-id"),
                 op: btn.getAttribute("data-op"),
                 tabla: btn.getAttribute("data-tabla"),
+                reg: btn.getAttribute("data-reg"),
                 diff: JSON.parse(btn.getAttribute("data-diff") || "{}"),
                 prev: JSON.parse(btn.getAttribute("data-prev") || "{}"),
                 new: JSON.parse(btn.getAttribute("data-new") || "{}")
@@ -386,53 +573,95 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Renderizar filas dinámicamente desde API
-    function renderEventos(eventos) {
-        kpiTotal.textContent = eventos.length;
-        if (!eventos || eventos.length === 0) {
-            tbody.innerHTML = `
-                <tr id="empty-state-row">
-                    <td colspan="7" class="py-12 text-center text-outline">
-                        <span class="material-symbols-outlined text-[40px] text-outline/50 mb-2">inbox</span>
-                        <p class="text-sm">No se encontraron eventos con los filtros seleccionados.</p>
-                    </td>
-                </tr>`;
-            return;
+    // Manejo de Tabs Principales
+    tabButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            tabButtons.forEach(b => {
+                b.classList.remove("active", "bg-primary", "text-on-primary", "shadow-sm");
+                b.classList.add("bg-surface-container", "text-on-surface-variant");
+            });
+            this.classList.add("active", "bg-primary", "text-on-primary", "shadow-sm");
+            this.classList.remove("bg-surface-container", "text-on-surface-variant");
+
+            const targetTab = this.getAttribute("data-tab");
+            tabContents.forEach(c => {
+                if (c.id === targetTab) {
+                    c.classList.remove("hidden");
+                } else {
+                    c.classList.add("hidden");
+                }
+            });
+        });
+    });
+
+    // Filtrado de Muestras por Script
+    scriptFilterButtons.forEach(btn => {
+        btn.addEventListener("click", async function() {
+            scriptFilterButtons.forEach(b => {
+                b.classList.remove("active", "bg-primary", "text-on-primary");
+                b.classList.add("bg-surface-container", "text-on-surface-variant");
+            });
+            this.classList.add("active", "bg-primary", "text-on-primary");
+            this.classList.remove("bg-surface-container", "text-on-surface-variant");
+
+            currentScriptFilter = this.getAttribute("data-script");
+            await filterSamplesByScript(currentScriptFilter);
+        });
+    });
+
+    async function filterSamplesByScript(script) {
+        const cards = document.querySelectorAll(".sample-card");
+        if (script === "ALL") {
+            cards.forEach(c => c.style.display = "");
+        } else {
+            cards.forEach(c => {
+                const s = c.getAttribute("data-script");
+                if (s === script) {
+                    c.style.display = "";
+                } else {
+                    c.style.display = "none";
+                }
+            });
         }
+    }
+
+    // Polling de Telemetría CDC en Vivo
+    async function fetchLiveFeed() {
+        try {
+            const resMods = await fetch("/api/v1/bitacora/live?limit=50&solo_modificaciones=true");
+            if (resMods.ok) {
+                const data = await resMods.json();
+                if (data.status === "success" && data.eventos) {
+                    renderModificacionesTable(data.eventos);
+                }
+            }
+        } catch(err) {
+            console.warn("Fallo al sincronizar bitácora CDC:", err);
+        }
+    }
+
+    function renderModificacionesTable(eventos) {
+        const tbody = document.getElementById("tbody-modificaciones");
+        if (!tbody || !eventos) return;
 
         let html = "";
         eventos.forEach(ev => {
-            let opBadge = "";
-            if (ev.operacion === "INSERT") {
-                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/40 text-tertiary border border-tertiary/20">INSERT</span>`;
-            } else if (ev.operacion === "UPDATE") {
-                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/40 text-primary border border-primary/20">UPDATE</span>`;
-            } else if (ev.operacion === "DELETE") {
-                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container/40 text-error border border-error/20">DELETE</span>`;
-            } else {
-                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-container text-on-surface">${ev.operacion}</span>`;
-            }
-
             let diffHtml = "";
             if (ev.diff && Object.keys(ev.diff).length > 0) {
-                diffHtml = `<div class="bg-surface-container-lowest/80 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1 max-h-24 overflow-y-auto">`;
+                diffHtml = `<div class="bg-surface-container-lowest/90 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1.5 max-h-24 overflow-y-auto">`;
                 for (const [col, val] of Object.entries(ev.diff)) {
                     diffHtml += `<div class="flex items-center gap-1.5 flex-wrap">`;
-                    diffHtml += `<span class="font-bold text-primary">${col}:</span>`;
+                    diffHtml += `<span class="font-bold text-primary font-mono">${col}:</span>`;
                     if (val && typeof val === "object" && "anterior" in val && "nuevo" in val) {
-                        diffHtml += `<span class="line-through text-error bg-error-container/20 px-1 rounded">${val.anterior}</span>`;
-                        diffHtml += `<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>`;
-                        diffHtml += `<span class="text-tertiary bg-tertiary-container/20 px-1 rounded font-bold">${val.nuevo}</span>`;
+                        diffHtml += `<span class="line-through text-error bg-error-container/20 px-1.5 py-0.5 rounded text-[11px]">${val.anterior}</span>`;
+                        diffHtml += `<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>`;
+                        diffHtml += `<span class="text-tertiary bg-tertiary-container/30 px-1.5 py-0.5 rounded text-[11px] font-bold">${val.nuevo}</span>`;
                     } else {
                         diffHtml += `<span class="text-on-surface-variant">${JSON.stringify(val)}</span>`;
                     }
                     diffHtml += `</div>`;
                 }
                 diffHtml += `</div>`;
-            } else if (ev.operacion === "INSERT") {
-                diffHtml = `<span class="text-outline text-[11px] italic">Inserción completa de registro</span>`;
-            } else {
-                diffHtml = `<span class="text-outline text-[11px] italic">Sin modificaciones de columnas</span>`;
             }
 
             const safeDiff = JSON.stringify(ev.diff || {}).replace(/"/g, '&quot;');
@@ -440,27 +669,25 @@ document.addEventListener("DOMContentLoaded", function() {
             const safeNew = JSON.stringify(ev.datos_nuevos || {}).replace(/"/g, '&quot;');
 
             html += `
-            <tr class="hover:bg-surface-container/40 transition-colors evento-row" data-op="${ev.operacion}" data-tabla="${ev.tabla}">
+            <tr class="hover:bg-surface-container/40 transition-colors">
                 <td class="py-3 px-4 whitespace-nowrap">
-                    <div class="flex flex-col">
-                        <span class="font-bold text-on-surface">#${ev.bitacora_id}</span>
-                        <span class="text-[10px] text-outline">${ev.fecha || ''}</span>
-                    </div>
-                </td>
-                <td class="py-3 px-4 whitespace-nowrap">${opBadge}</td>
-                <td class="py-3 px-4 whitespace-nowrap">
-                    <span class="px-2 py-1 rounded bg-surface-container text-on-surface font-semibold text-[11px]">${ev.tabla}</span>
+                    <span class="font-bold text-on-surface">#${ev.bitacora_id}</span>
+                    <div class="text-[10px] text-outline">${ev.fecha || ''}</div>
                 </td>
                 <td class="py-3 px-4 whitespace-nowrap">
-                    <span class="text-secondary font-bold">#${ev.registro_id}</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container/40 text-primary">${ev.operacion}</span>
                 </td>
                 <td class="py-3 px-4 whitespace-nowrap">
-                    <div class="flex flex-col text-[11px]">
-                        <span class="text-on-surface font-medium">${ev.usuario || 'neon_system'}</span>
-                        <span class="text-[9px] text-outline">${ev.ip || 'internal'} • ${ev.endpoint || 'trigger'}</span>
-                    </div>
+                    <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-semibold text-[11px]">${ev.tabla}</span>
                 </td>
-                <td class="py-3 px-4 max-w-md">${diffHtml}</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                    <span class="px-2 py-0.5 rounded bg-secondary-container/30 text-secondary font-bold text-[12px]">#${ev.registro_id || 'N/A'}</span>
+                </td>
+                <td class="py-3 px-4 whitespace-nowrap text-[11px]">
+                    <span class="text-on-surface font-medium">${ev.usuario || 'admin'}</span>
+                    <div class="text-[9px] text-outline">${ev.ip || '127.0.0.1'}</div>
+                </td>
+                <td class="py-3 px-4">${diffHtml}</td>
                 <td class="py-3 px-4 text-right whitespace-nowrap">
                     <button type="button" class="btn-inspect-diff p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"
                         data-id="${ev.bitacora_id}"
@@ -470,58 +697,16 @@ document.addEventListener("DOMContentLoaded", function() {
                         data-diff="${safeDiff}"
                         data-prev="${safePrev}"
                         data-new="${safeNew}"
-                        title="Inspeccionar Payload Completo">
+                        title="Inspeccionar Payload">
                         <span class="material-symbols-outlined text-[16px]">visibility</span>
                     </button>
                 </td>
             </tr>`;
         });
-
         tbody.innerHTML = html;
-        applyClientFilters();
     }
 
-    // Filtrar clientes en vivo (texto y tabs)
-    function applyClientFilters() {
-        const rows = tbody.querySelectorAll(".evento-row");
-        const term = currentSearchTerm.toLowerCase();
-
-        rows.forEach(row => {
-            const op = row.getAttribute("data-op");
-            const tabla = row.getAttribute("data-tabla");
-            const text = row.textContent.toLowerCase();
-
-            let matchesOp = (currentOpFilter === "ALL" || op === currentOpFilter);
-            let matchesTabla = (!currentTablaFilter || tabla === currentTablaFilter);
-            let matchesSearch = (!term || text.includes(term));
-
-            if (matchesOp && matchesTabla && matchesSearch) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    }
-
-    // Polling API para refrescar eventos
-    async function fetchLiveFeed() {
-        try {
-            let url = `/api/v1/bitacora/live?limit=60`;
-            if (currentTablaFilter) url += `&tabla=${encodeURIComponent(currentTablaFilter)}`;
-            if (currentOpFilter !== "ALL") url += `&operacion=${encodeURIComponent(currentOpFilter)}`;
-
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("Error en feed de bitácora");
-            const data = await res.json();
-            if (data.status === "success") {
-                renderEventos(data.eventos);
-            }
-        } catch(err) {
-            console.warn("Fallo al sincronizar bitácora:", err);
-        }
-    }
-
-    // Disparar mutación de prueba en Neon
+    // Botón Probar Trigger en Vivo
     btnTest.addEventListener("click", async function() {
         btnTest.disabled = true;
         btnTest.classList.add("opacity-70");
@@ -535,7 +720,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             const data = await res.json();
             if (res.ok && data.status === "success") {
-                showToast(`Mutación exitosa: ${data.mensaje}`, "success");
+                showToast(`Mutación capturada por Trigger: ${data.mensaje}`, "success");
                 await fetchLiveFeed();
             } else {
                 showToast(`Error al mutar: ${data.message || 'Fallo desconocido'}`, "error");
@@ -578,31 +763,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     btnReload.addEventListener("click", fetchLiveFeed);
 
-    // Eventos de botones de filtrado
-    opButtons.forEach(btn => {
-        btn.addEventListener("click", function() {
-            opButtons.forEach(b => {
-                b.classList.remove("active", "bg-primary", "text-on-primary");
-                b.classList.add("bg-surface-container", "text-on-surface-variant");
-            });
-            this.classList.add("active", "bg-primary", "text-on-primary");
-            this.classList.remove("bg-surface-container", "text-on-surface-variant");
-            currentOpFilter = this.getAttribute("data-op");
-            fetchLiveFeed();
-        });
-    });
-
-    filterTabla.addEventListener("change", function() {
-        currentTablaFilter = this.value;
-        fetchLiveFeed();
-    });
-
-    filterSearch.addEventListener("input", function() {
-        currentSearchTerm = this.value;
-        applyClientFilters();
-    });
-
-    // Iniciar polling
     startPolling();
 });
 </script>

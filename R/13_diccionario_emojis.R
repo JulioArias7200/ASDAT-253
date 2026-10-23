@@ -50,7 +50,9 @@ if (is.na(json_path)) stop("No se encontró result.json")
 
 dic_path <- buscar(c(
   "data/results/emojis_diccionario_contexto.csv",
+  "../data/results/emojis_diccionario_contexto.csv",
   "data/dictionary/emojis_diccionario_contexto.csv",
+  "../data/dictionary/emojis_diccionario_contexto.csv",
   "emojis_diccionario_contexto.csv",
   "data/emojis_diccionario_contexto.csv",
   "data/raw/emojis_diccionario_contexto.csv",
@@ -232,8 +234,12 @@ for (i in seq_len(min(50, nrow(freq_total)))) {
 }
 cat("\n")
 
-out_dir <- "data/results"
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+posibles_out <- c("data/results", "../data/results")
+out_dir <- posibles_out[dir.exists(posibles_out)][1]
+if (is.na(out_dir)) {
+  out_dir <- "data/results"
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+}
 out_freq <- file.path(out_dir, "emojis_frecuencia.csv")
 readr::write_csv(freq_total, out_freq)
 cat(sprintf("  CSV frecuencias guardado en: %s\n", out_freq))

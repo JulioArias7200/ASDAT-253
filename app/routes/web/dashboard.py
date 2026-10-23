@@ -16,7 +16,11 @@ from database.queries import (
     get_perfil_emocional_docentes,
     get_nlp_kpis_summary,
     get_tfidf_keywords,
-    get_bitacora_reciente
+    get_bitacora_reciente,
+    get_bitacora_kpis,
+    get_bitacora_procesos_mineria,
+    get_dataset_transformations_lineage,
+    get_dataset_transformation_samples
 )
 
 @web_bp.route("/")
@@ -88,16 +92,29 @@ def dashboard_view():
 def bitacora_view():
     """
     Renderiza el centro de comando de la bitácora y auditoría en tiempo real (CDC)
-    con visualizador de diffs JSON y telemetría de mutación sobre Neon PostgreSQL.
+    con segmentación por cambios de valor, altas y lotes de minería sobre Neon PostgreSQL.
     """
     kpis = get_dashboard_kpis()
     neon_status = get_neon_health_telemetry()
-    eventos = get_bitacora_reciente(limit=50)
+    kpis_bitacora = get_bitacora_kpis()
+    modificaciones = get_bitacora_reciente(limit=100, solo_modificaciones=True)
+    altas = get_bitacora_reciente(limit=100, operacion='INSERT')
+    lotes = get_bitacora_procesos_mineria(limit=20)
+    eventos = get_bitacora_reciente(limit=100)
+    lineage_etapas = get_dataset_transformations_lineage()
+    muestreo_dataset = get_dataset_transformation_samples(limit=12)
+    
     return render_template(
         "dashboard/bitacora.html",
         kpis=kpis,
         neon_status=neon_status,
-        eventos=eventos
+        kpis_bitacora=kpis_bitacora,
+        modificaciones=modificaciones,
+        altas=altas,
+        lotes=lotes,
+        eventos=eventos,
+        lineage_etapas=lineage_etapas,
+        muestreo_dataset=muestreo_dataset
     )
 
 

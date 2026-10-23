@@ -1,0 +1,19 @@
+name: Sincronizar Fork Automáticamente
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Se ejecuta cada 30 minutos (puedes cambiarlo)
+  workflow_dispatch: # Permite activarlo manualmente si quieres
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sincronizar con el repositorio original
+        uses: tgymnich/fork-sync@v2
+        with:
+          owner: ismedinab96         # Reemplaza con el usuario dueño del repo original
+          repo: ASDAT-253   # Reemplaza con el nombre del repo original
+          base: main                     # La rama que quieres traer (ej: main o master)
+          head: main                     # Tu rama de destino en el fork
+          token: ${{ secrets.GITHUB_TOKEN }}

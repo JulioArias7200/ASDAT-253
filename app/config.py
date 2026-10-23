@@ -3,12 +3,18 @@
 Configuración de la aplicación Flask para entornos Local y Render con Neon PostgreSQL.
 """
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde .env
+env_file = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_file)
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "sentix-intelligence-secret-production-key-2026")
     
-    # Normalización de URL para Neon PostgreSQL (Render provee postgres:// que SQLAlchemy prefiere como postgresql://)
-    raw_db_url = os.getenv("DATABASE_URL", "sqlite:///sentix_local.db")
+    # Normalización de URL para Neon PostgreSQL
+    raw_db_url = os.getenv("NEON_CONECTION") or os.getenv("DATABASE_URL") or "sqlite:///sentix_local.db"
     if raw_db_url.startswith("postgres://"):
         raw_db_url = raw_db_url.replace("postgres://", "postgresql+psycopg2://", 1)
     elif raw_db_url.startswith("postgresql://") and not raw_db_url.startswith("postgresql+"):

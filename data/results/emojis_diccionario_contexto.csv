@@ -1,0 +1,442 @@
+﻿emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironia
+👍,Pulgar arriba,Como reacción es un acuse de recibo: 'visto / de acuerdo / gracias por avisar'. No siempre implica entusiasmo; en el chat es la reacción por defecto para confirmar que se leyó un comunicado o una respuesta.,acuse_recibo,reaccion,aprobación,positivo,no
+👎,Pulgar abajo,"Reacción de desacuerdo o rechazo: mala noticia, respuesta que no gusta o mensaje criticado. A veces se usa como 'voto en contra' en tono de burla hacia una pregunta o queja.",rechazo,reaccion,desaprobación,negativo,posible
+🤣,Risa a carcajadas,Algo gracioso o absurdo. Como reacción también puede ser risa de resignación ante un problema administrativo ('ya ni modo').,risa,reaccion,alegría,positivo,posible
+👉,Dedo a la derecha,"En anuncios señala la acción o el enlace principal ('👉 inscríbete aquí', 'comparte este enlace'). Es un 'haz clic acá'. Junto a 👈 es pedido tímido.",llamado_accion,anuncio,dirección,neutro,no
+❤,Corazón rojo,"Como reacción: agradecimiento o aprecio ('me encantó / gracias'). En anuncios, adorno afectivo.",afecto,reaccion,amor,positivo,no
+✅,Marca de verificación,"Ítem confirmado: requisito, beneficio, 'aplica para' o 'incluye'. Equivale a 'sí'.",vineta_positiva,anuncio,confirmación,positivo,no
+🙏,Manos juntas,"En conversación casi siempre significa 'por favor' al pedir ayuda (¿hay grupo?, ¿alguien me pasa...?). En anuncios, 'gracias por participar'.",pedir_favor,conversacion,súplica,positivo,no
+🔹,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+✨,Destellos,"Énfasis decorativo de entusiasmo ('✨ No te pierdas esta oportunidad ✨'). Realza el mensaje, sin significado propio.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🚀,Cohete,Arranque o lanzamiento: 'empezamos / se viene / aprovecha'. Tono de impulso al inicio de convocatorias.,impulso,anuncio,entusiasmo,positivo,no
+🔥,Fuego,"'Imperdible / épico': hype para eventos, fiestas y promociones. Como reacción: 'qué bueno'.",hype,mixto,entusiasmo,positivo,no
+📍,Chincheta de ubicación,Lugar del evento ('📍 Lugar: Auditorio'). Indica dónde presentarse. Fuera de anuncios señala 'aquí' o 'este punto'.,marcador_lugar,anuncio,informativo,neutro,no
+❤‍🔥,Corazón en llamas,Reacción de entusiasmo y apoyo fuerte: 'excelente / me encanta'. Más intenso que ❤.,afecto,reaccion,amor,positivo,no
+🎉,Confeti,"Buena noticia o evento: 'se habilitó la materia', 'te invitamos'. También se repite como énfasis de entusiasmo.",celebracion,anuncio,celebración,positivo,no
+😢,Cara llorando,"Lamento ante un problema de trámite (sin cupo, choque de horarios, falta de información). No es llanto real: acompaña un pedido de ayuda o una queja suave.",lamento,conversacion,tristeza_leve,negativo,no
+👀,Ojos,En conversación: 'atentos / ¿alguien sabe?': llama la atención sobre una duda o indica que se está pendiente de la respuesta ('¿Hay grupo de base de datos 1 👀?'). En anuncios: 'mira / descubre / ojo con esto' y también intriga ('Jurado: 3 Lic. sorpresa 👀'). No es literal 'mirar'.,atencion_pendiente,mixto,atención,neutro,posible
+💻,Computadora portátil,"Informática: materias o eventos de programación, y modalidad virtual ('💻 Modalidad: virtual').",tema_tecnologia,anuncio,informativo,neutro,no
+📅,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+😁,Sonrisa amplia,"Simpatía o cordialidad. Como reacción: 'jaja, buena'. Al pedir algo suaviza el pedido ('porfiiis 😁').",cordialidad,reaccion,alegría,positivo,no
+📢,Megáfono,Comunicado o anuncio: 'atención a todos'. Abre un mensaje oficial o una convocatoria.,comunicado,anuncio,informativo,neutro,no
+🎓,Birrete,"Universidad, carrera, certificación o graduación; se usa para dar peso académico a un evento o curso.",tema_academico,anuncio,logro,positivo,no
+😂,Llorando de risa,"Risa ante un comentario gracioso o una situación absurda del sistema de inscripciones. Suele aparecer solo, como respuesta rápida.",risa,conversacion,alegría,positivo,posible
+📚,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+🥲,Sonrisa con lágrima,"Resignación con sonrisa forzada: 'qué le vamos a hacer'. Sonríe para no llorar ante trámites, falta de cupos o aulas desconocidas. Es una de las expresiones más irónicas del chat.",resignacion,conversacion,resignación,negativo,si
+🔗,Enlace,"Introduce un enlace (grupo de WhatsApp, formulario, página). 'Aquí está el link'.",marcador_enlace,anuncio,informativo,neutro,no
+🥳,Cara de fiesta,"En anuncios, 'buenas noticias / se habilitó / ¡se viene el evento!'. En el chat, celebración de una materia habilitada.",celebracion,anuncio,celebración,positivo,no
+👏,Aplausos,"Felicitación o reconocimiento (por una noticia buena, materia habilitada o buen aporte).",felicitacion,reaccion,admiración,positivo,no
+😅,Sonrisa con sudor,"Nerviosismo, vergüenza leve o disculpa: 'perdón por preguntar', 'se me olvidó'. Suaviza una pregunta o queja.",nerviosismo,conversacion,vergüenza,neutro,posible
+😭,Llorando fuerte,Dramatización: angustia por un problema ('no me salen las horas') o gratitud exagerada ('gracias 😭😭'). Casi nunca es tristeza profunda.,lamento_exagerado,conversacion,angustia,negativo,posible
+🤔,Cara pensando,"Duda abierta: '¿y ahora qué?', '¿se puede aún?'. Muchas veces el emoji solo es la pregunta.",duda,conversacion,duda,neutro,no
+📌,Chincheta,Dato clave o nota que hay que tener presente ('📌 esta materia habilita 3 de 8vo'). Es el 'ojo con esto / a tener en cuenta'.,destacar_nota,anuncio,énfasis,neutro,no
+😔,Cara pensativa triste,Pesar o desánimo por un trámite que no avanza ('ya pagué y nada'). Acompaña un pedido de ayuda.,lamento,conversacion,decepción,negativo,no
+💡,Foco,"Idea, innovación o dato clave.",tema_idea,anuncio,informativo,positivo,no
+👌,Ok,"Confirmación: 'está bien / entendido / listo'. Con tono burlón puede significar 'claro, qué bien' o 'buena jugada'.",confirmacion,conversacion,acuerdo,positivo,posible
+🤡,Payaso,Burla hacia el mensaje o la persona: 'qué ridiculez / qué tontería'. Casi siempre se usa como reacción para ridiculizar y no como adorno. También como autoironía ante una situación absurda.,ironia_burla,reaccion,burla,negativo,si
+⚠,Advertencia,"Condición o restricción importante: 'cupos limitados', 'solo para quienes ya cursaron...'.",alerta_condicion,anuncio,advertencia,neutro,no
+⏰,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+😊,Sonrisa suave,Cordialidad al saludar o pedir; en anuncios para animar sin presionar.,cordialidad,mixto,alegría,positivo,no
+👇,Dedo hacia abajo,"'Abajo / a continuación': anuncia que debajo está el enlace, formulario, lista o categorías.",apuntar_abajo,anuncio,dirección,neutro,no
+🥺,Ojitos suplicantes,Súplica tierna: pedir un favor o recomendación ('X2 que habiliten más cupos 🥺'). No es tristeza; es 'porfa'.,suplica,conversacion,súplica,neutro,posible
+🔴,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+😱,Cara gritando,"Sorpresa negativa ante un cambio (docente, horario). En anuncios se usa como gancho exagerado de 'no pierdas esta oportunidad'.",sorpresa,mixto,sorpresa,neutro,posible
+🐧,Pingüino Tux,"Linux y software libre (FLISoL, torneos de Linux).",tema_tecnologia,anuncio,informativo,neutro,no
+🏆,Trofeo,"Torneo, competencia o premio principal.",premio,anuncio,logro,positivo,no
+🤖,Robot,"Inteligencia artificial, robótica o innovación tecnológica.",tema_tecnologia,anuncio,informativo,neutro,no
+🎯,Diana,"Objetivo, meta o categoría ('🎯 Premios', 'Dirigido a').",marcador_objetivo,anuncio,logro,positivo,no
+⚙,Engranaje,"Ingeniería, sistemas, configuración o 'por dentro'.",tema_tecnologia,anuncio,informativo,neutro,no
+🗓,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+📲,Celular con flecha,"'Únete / inscríbete desde tu celular': WhatsApp, QR o formulario.",marcador_contacto,anuncio,informativo,neutro,no
+🙌,Manos arriba,"Celebración o ánimo grupal: '¡lo logramos!', '¡anímense!', 'gracias de antemano'. En anuncios invita a participar con buena vibra.",celebracion,anuncio,entusiasmo,positivo,no
+💰,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+🎮,Control de videojuego,Videojuegos y torneos gamer.,tema_videojuegos,anuncio,entretenimiento,positivo,no
+🌟,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🫠,Cara derritiéndose,'Me derrito / qué desastre': sensación de caos o impotencia ante el sistema de inscripción. Casi siempre irónico.,resignacion,conversacion,agobio,negativo,si
+🔵,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+🖥,Computadora de escritorio,"Sistemas / computación (por ejemplo, Análisis y Diseño de Sistemas).",tema_tecnologia,anuncio,informativo,neutro,no
+♟,Peón de ajedrez,Torneo de ajedrez.,tema_evento,anuncio,entretenimiento,positivo,no
+🥹,Ojos llorosos,Súplica o ternura al pedir recomendación de docente o información. También emoción por una noticia.,suplica,conversacion,súplica,neutro,no
+🎃,Calabaza,"Halloween: fiestas y concursos temáticos de octubre. Como reacción, tono de broma.",tema_evento,anuncio,entretenimiento,positivo,no
+📝,Nota / formulario,'Regístrate / completa el formulario' o apuntes.,marcador_formulario,anuncio,informativo,neutro,no
+🎁,Regalo,"Premio, sorteo o sorpresa.",premio,anuncio,entusiasmo,positivo,no
+🚨,Sirena,"Alerta o convocatoria urgente: 'no pierdas ni un segundo'. Marca un comunicado importante, no un peligro real.",alerta,anuncio,urgencia,neutro,no
+💬,Burbuja de chat,'Únete al grupo / escríbenos / más información'. Invita a entrar al chat de coordinación.,marcador_contacto,anuncio,informativo,neutro,no
+💪,Bíceps,"Ánimo y fuerza ('tú puedes'); en convocatorias, motivación para participar.",animo,anuncio,motivación,positivo,no
+😬,Mueca,"Incomodidad: 'uy, ¿alguien sabe por qué?'. Anticipa una mala noticia.",incomodidad,conversacion,incomodidad,negativo,no
+🚩,Bandera,Punto de interés ('🚩¿Dónde?') o juego de 'Captura la bandera'.,marcador_punto,anuncio,informativo,neutro,no
+❗,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+👋,Saludo,Saludo de apertura ('Buenas👋') o bienvenida a novatos en los comunicados.,saludo,mixto,saludo,positivo,no
+👆,Dedo hacia arriba,'Lo de arriba': hace referencia al mensaje anterior o pide que lo lean ('👆 hagan caso a esto').,referencia_arriba,conversacion,énfasis,neutro,no
+📊,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+🤝,Apretón de manos,"Alianza, acuerdo o trabajo conjunto (comunidades, convenios, networking).",acuerdo_alianza,anuncio,acuerdo,positivo,no
+😞,Cara decepcionada,Decepción por un resultado o cambio.,lamento,conversacion,decepción,negativo,no
+→,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+💀,Calavera,"Hipérbole: 'me muero / estoy perdido / no voy a aprobar' ante algo difícil (horario hasta las 10 pm, docente exigente). No expresa risa.",hiperbole,conversacion,resignación,negativo,si
+🤓,Cara de nerd,"En anuncios, tono ameno-técnico para el público de informática. En el chat, burla amistosa de sabelotodo ('todo posi mi estimado 🤓😎').",humor,mixto,humor,neutro,si
+‼,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+👩‍💻,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+😐,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+🤩,Ojos de estrella,Emoción por un evento o premio.,entusiasmo,anuncio,admiración,positivo,no
+🌐,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+👥,Grupo de personas,"Organizador, público objetivo o grupo de coordinación ('👥 Organiza: GDG').",marcador_organizador,anuncio,informativo,neutro,no
+🧠,Cerebro,"Inteligencia, estrategia o 'piensa'.",tema_tecnologia,anuncio,informativo,neutro,no
+🇧🇴,Bandera de Bolivia,Identidad nacional / alcance en Bolivia.,identidad_pais,anuncio,orgullo,positivo,no
+😉,Guiño,Complicidad o ironía suave ('última oportunidad 😉'); invita sin presionar.,complicidad,mixto,picardía,positivo,posible
+🔐,Candado,"Seguridad informática, o privacidad/anonimato (encuesta anónima).",tema_seguridad,anuncio,informativo,neutro,no
+📈,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+🌍,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+🎤,Micrófono,Ponencia o charla ('🎤 Ponencias').,tema_evento,anuncio,informativo,neutro,no
+🧐,Monóculo,"Duda con matiz de investigar o cuestionar ('¿hasta qué fecha?'); a veces sarcástico: 'a ver, ¿quién es?'.",duda_critica,conversacion,duda,neutro,posible
+😡,Cara enojada,Enojo; en anuncios de fiesta/eventos aparece como parte de un tono 'intenso'.,enojo,mixto,enojo,negativo,no
+😃,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+🔩,Tuerca,Técnico / hardware (complemento de ⚙).,tema_tecnologia,anuncio,informativo,neutro,no
+🤗,Abrazo cálido,Bienvenida o agradecimiento cordial.,calidez,mixto,calidez,positivo,no
+📱,Celular,Contacto o app móvil.,marcador_contacto,anuncio,informativo,neutro,no
+🎟,Entrada,"Boleto, pre-venta o inscripción con cupo.",marcador_costo,anuncio,informativo,neutro,no
+🔊,Altavoz,'¡Atención!' Igual que 📢: llamado a escuchar un anuncio o transmisión en vivo.,comunicado,anuncio,informativo,neutro,no
+⚡,Rayo,"Energía, rapidez o 'rápido'.",hype,anuncio,energía,positivo,no
+🤭,Risita tapándose la boca,Travesura o pena divertida.,humor,mixto,humor,positivo,no
+💸,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+🔒,Candado,"Seguridad informática, o privacidad/anonimato (encuesta anónima).",tema_seguridad,anuncio,informativo,neutro,no
+💙,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+😳,Cara sonrojada,"Desconcierto: algo inesperado ('ya pagué y no puedo inscribirme', 'fuera de rango').",desconcierto,conversacion,desconcierto,neutro,no
+🕛,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+❓,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+🟢,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+💚,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+😑,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+🙂,Sonrisa leve,Cordialidad neutra; a veces seca.,cordialidad,conversacion,alegría,neutro,posible
+🕒,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+💵,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+⬇,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+👨‍🏫,Docente,Docente o instructor ('👨‍🏫 Docente: Lic. ...').,marcador_docente,anuncio,informativo,neutro,no
+🥇,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+🥈,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+👑,Corona,Campeón/a o torneo de élite.,premio,anuncio,logro,positivo,no
+💛,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+🤮,Cara vomitando,Rechazo fuerte. En el chat se usó como reacción a publicaciones de propaganda/campaña y a pedidos que no gustaron: 'qué asco / no estoy de acuerdo'.,rechazo,reaccion,asco,negativo,no
+🤨,Ceja levantada,Desconfianza o duda: 'eso no cuadra / ¿en serio?'. Como reacción cuestiona lo que dijo otra persona.,duda_critica,reaccion,desconfianza,negativo,posible
+😎,Gafas de sol,Seguridad o actitud relajada ('todo posi').,confianza,mixto,confianza,positivo,no
+🕗,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+👨‍💻,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+🐉,Dragón,Mascota del grupo GUILD (desarrolladores de videojuegos).,identidad_grupo,anuncio,informativo,neutro,no
+⚽,Pelota,"Torneo deportivo (futsal, voleibol).",tema_evento,anuncio,entretenimiento,positivo,no
+⭐,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🤯,Mente explotando,Asombro o sorpresa por una noticia inesperada (mucho más usado como reacción).,sorpresa,reaccion,sorpresa,neutro,no
+😒,Cara de desdén,Desagrado o impaciencia ('cuánto tiempo será 😒').,fastidio,conversacion,desagrado,negativo,no
+🙄,Ojos en blanco,Hartazgo o sarcasmo hacia docentes o administración.,fastidio,conversacion,fastidio,negativo,si
+🤧,Estornudo,"'Ojalá / suplico por una respuesta': se usa en tono de 'estoy a la espera, qué pena'.",lamento,conversacion,pesar,negativo,posible
+🕙,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+📞,Teléfono,Contacto por llamada o WhatsApp (números de referencia).,marcador_contacto,anuncio,informativo,neutro,no
+📋,Portapapeles,"Requisitos, formulario o lista de inscripción.",marcador_formulario,anuncio,informativo,neutro,no
+📄,Documento / certificado,"Documento, certificado o requisito en papel ('📄 Certificación gratuita').",marcador_documento,anuncio,informativo,neutro,no
+📜,Documento / certificado,"Documento, certificado o requisito en papel ('📄 Certificación gratuita').",marcador_documento,anuncio,informativo,neutro,no
+☁,Nube,Cloud computing.,tema_tecnologia,anuncio,informativo,neutro,no
+🐍,Serpiente,Python.,tema_tecnologia,anuncio,informativo,neutro,no
+🏐,Pelota,"Torneo deportivo (futsal, voleibol).",tema_evento,anuncio,entretenimiento,positivo,no
+🥉,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+🥰,Cara con corazones,Cariño o agradecimiento sincero (solo aparece como reacción).,afecto,reaccion,amor,positivo,no
+🫂,Abrazo,"Apoyo emocional o agradecimiento cálido ('Gracias 🫂'); en la encuesta de bienestar, empatía.",apoyo,mixto,calidez,positivo,no
+☝,Dedo hacia arriba,'Lo de arriba / ahí': remite a un mensaje anterior o a algo ya publicado.,referencia_arriba,conversacion,énfasis,neutro,no
+🙈,Mono tapándose los ojos,Vergüenza o 'prefiero no ver'.,timidez,conversacion,vergüenza,neutro,no
+🕐,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+●,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+🔺,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+🔻,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+👾,Alienígena arcade,Videojuegos / desarrollo de juegos.,tema_videojuegos,anuncio,entretenimiento,positivo,no
+🤙,Mano 'llámame / shaka',Confirmación relajada y amistosa: 'dale / listo / gracias'.,confirmacion,conversacion,acuerdo,positivo,no
+😓,Sudor frío,Preocupación por un plazo o nota.,preocupacion,conversacion,preocupación,negativo,no
+📆,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+📣,Megáfono,Comunicado o anuncio: 'atención a todos'. Abre un mensaje oficial o una convocatoria.,comunicado,anuncio,informativo,neutro,no
+⬆,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+🌎,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+📡,Antena,Redes / telecomunicaciones.,tema_tecnologia,anuncio,informativo,neutro,no
+🎨,Paleta,Diseño o feria de proyectos.,tema_evento,anuncio,informativo,neutro,no
+💫,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+👈,Dedo a la izquierda,"Casi siempre va junto a 👉 (👉👈): gesto tímido de pedir un favor con vergüenza ('disculpen la molestia, ¿alguien sabe?').",pedir_favor,conversacion,timidez,neutro,posible
+😏,Sonrisa pícara,"Sugerencia o sarcasmo ('qué práctico 😏'); en fiestas, picardía.",picardia,mixto,picardía,neutro,si
+😿,Gato llorando,Lamento tierno/dramático.,lamento,conversacion,tristeza_leve,negativo,no
+😀,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+⏳,Reloj de arena,Tiempo limitado: 'se acaba el plazo / últimos días'.,urgencia_plazo,anuncio,urgencia,neutro,no
+👤,Persona,Responsable o contacto individual.,marcador_organizador,anuncio,informativo,neutro,no
+🔍,Lupa,"Buscar o investigar (forense, descubrir).",tema_investigacion,anuncio,informativo,neutro,no
+📘,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+👩‍🏫,Docente,Docente o instructor ('👨‍🏫 Docente: Lic. ...').,marcador_docente,anuncio,informativo,neutro,no
+🧑‍💻,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+🎊,Confeti,"Buena noticia o evento: 'se habilitó la materia', 'te invitamos'. También se repite como énfasis de entusiasmo.",celebracion,anuncio,celebración,positivo,no
+☕,Café,Te con Tech / pausa social.,fiesta,anuncio,calidez,positivo,no
+👻,Fantasma / alien,Tema de Halloween o juego.,tema_evento,anuncio,entretenimiento,neutro,no
+🌚,Luna con cara,"Tono pícaro o de sarcasmo ligero: 'sí, claro' / 'sé lo que digo'. También lo usan en la encuesta anónima como guiño de complicidad.",ironia_burla,reaccion,picardía,neutro,si
+🤬,Cara insultando,"Enojo fuerte por un problema (postergación, cambio de horario, inscripción bloqueada).",enojo,mixto,enojo,negativo,no
+🫡,Saludo militar,"'A la orden / enterado'. En anuncios, 'cumple con los requisitos'.",acuse_recibo,mixto,respeto,positivo,no
+🙃,Cara invertida,"Ironía directa: 'sí, claro, qué bien'. Lo contrario de lo que dice el mensaje.",ironia_burla,conversacion,ironía,negativo,si
+😮‍💨,Exhalando,Alivio o cansancio resignado ('qué fastidio'); 'a ver si sale'.,resignacion,conversacion,resignación,neutro,no
+😕,Cara confundida,Confusión ante información contradictoria.,confusion,conversacion,confusión,neutro,no
+🫣,Mirando entre dedos,Pena o curiosidad; en el chat acompaña preguntas apenadas.,timidez,conversacion,timidez,neutro,no
+🦕,Dinosaurio,"Humor absurdo o sobre algo 'viejo/antiguo' (plan antiguo, docente veterano).",humor,conversacion,humor,neutro,si
+😄,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+☺,Cara sonriente,Cordialidad.,cordialidad,anuncio,alegría,positivo,no
+⌚,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+🕕,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+🕘,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+📎,Clip,Adjunto o documento anexo.,marcador_documento,anuncio,informativo,neutro,no
+🟡,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+🛑,Alto,Prohibido o 'detente': restricción.,alerta_condicion,anuncio,advertencia,negativo,no
+🔑,Llave,Clave o acceso (seguridad/criptografía).,tema_seguridad,anuncio,informativo,neutro,no
+😪,Cara con sueño,Cansancio.,agobio,conversacion,agotamiento,negativo,no
+😌,Cara aliviada,Alivio.,alivio,conversacion,alivio,positivo,no
+🤑,Cara de dinero,"Costo o dinero; en burlas, 'no pierdo mi plata'.",dinero,conversacion,codicia,neutro,posible
+😈,Diablillo,Picardía en fiestas.,picardia,anuncio,picardía,positivo,no
+🕓,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+🕔,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+🪪,Carnet,Documento de identidad / requisito de carnet.,marcador_documento,anuncio,informativo,neutro,no
+⁉,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+✔,Marca de verificación,"Ítem confirmado: requisito, beneficio, 'aplica para' o 'incluye'. Equivale a 'sí'.",vineta_positiva,anuncio,confirmación,positivo,no
+➡,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+▶,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+🏫,Escuela / edificio,"Lugar institucional (carrera, edificio, universidad).",marcador_lugar,anuncio,informativo,neutro,no
+🔄,Flechas circulares,Reversing / ciclo.,tema_tecnologia,anuncio,informativo,neutro,no
+🖼,Imagen,Esteganografía / imagen.,tema_tecnologia,anuncio,informativo,neutro,no
+🧩,Rompecabezas,Retos / lógica.,tema_evento,anuncio,entretenimiento,positivo,no
+🎲,Dado,Juegos de mesa.,tema_evento,anuncio,entretenimiento,positivo,no
+🎙,Micrófono de estudio,Transmisión / podcast.,tema_evento,anuncio,informativo,neutro,no
+💼,Maletín,Trabajo / emprendimiento.,tema_profesional,anuncio,informativo,neutro,no
+🏅,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+🎈,Globo,"Fiesta, celebración.",fiesta,anuncio,celebración,positivo,no
+🥃,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+👽,Fantasma / alien,Tema de Halloween o juego.,tema_evento,anuncio,entretenimiento,neutro,no
+🕵‍♂,Detective,Investigación / forense (ciberseguridad).,tema_seguridad,anuncio,informativo,neutro,no
+🤷,Encogerse de hombros,'No sé / qué se le va a hacer': incertidumbre o resignación ante un trámite.,resignacion,conversacion,resignación,neutro,no
+✍,Mano escribiendo,"Registrar, firmar, rellenar un formulario.",formulario,anuncio,informativo,neutro,no
+😶,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+😫,Cara cansada,Agotamiento o fastidio con la carga académica.,agobio,conversacion,agotamiento,negativo,no
+😴,Durmiendo,Aburrimiento o sueño.,agobio,mixto,aburrimiento,neutro,no
+🥵,Cara con calor,Intensidad en fiestas.,fiesta,anuncio,intensidad,positivo,no
+😇,Ángel,Inocencia o 'yo no fui'; también ofrecer algo con cara de bondad.,inocencia,conversacion,inocencia,positivo,si
+⏱,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+🕖,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+🔸,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+✳,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+🆕,Nuevo,Novedad.,enfasis,anuncio,énfasis,positivo,no
+📕,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+🕹,Joystick,Videojuegos.,tema_videojuegos,anuncio,informativo,neutro,no
+⚔,Espadas,Competencia / duelo.,tema_evento,anuncio,entretenimiento,positivo,no
+🎶,Notas musicales,Música / fiesta.,tema_evento,anuncio,entretenimiento,positivo,no
+🍾,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+🍻,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+🌸,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+💥,Explosión,Impacto / énfasis.,hype,anuncio,energía,positivo,no
+😯,Cara sorprendida,Sorpresa leve.,sorpresa,conversacion,sorpresa,neutro,no
+👴,Hombre mayor,Docente veterano o referencia a 'antiguo' (plan antiguo).,humor,anuncio,humor,neutro,posible
+✌,Paz / victoria,Despedida o ánimo amistoso.,saludo,anuncio,positivo,positivo,no
+🤷‍♂,Encogerse de hombros,'No sé / qué se le va a hacer': incertidumbre o resignación ante un trámite.,resignacion,conversacion,resignación,neutro,no
+🗣,Cabeza hablando,Anuncio de charla o 'se comenta que'.,anuncio_charla,anuncio,informativo,neutro,no
+🕺,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
+💃,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
+☠,Calavera con huesos,Igual que 💀: 'estoy muerto / no hay solución'.,hiperbole,conversacion,resignación,negativo,si
+😥,Triste pero aliviado,Preocupación leve.,preocupacion,conversacion,preocupación,negativo,no
+😵‍💫,Cara aturdida,Desorientación: 'no entiendo nada de este trámite'.,confusion,conversacion,confusión,negativo,no
+🫥,Cara punteada,'Me desvanezco / sin respuesta': sentirse invisible o sin información.,resignacion,conversacion,apatía,negativo,posible
+🐙,Pulpo,"Uso lúdico/absurdo, sin significado fijo (saludo extraño o broma).",humor,conversacion,humor,neutro,posible
+😆,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+😨,Cara asustada,Miedo o preocupación.,miedo,reaccion,miedo,negativo,no
+🕑,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+⌛,Reloj de arena,Tiempo limitado: 'se acaba el plazo / últimos días'.,urgencia_plazo,anuncio,urgencia,neutro,no
+📩,Sobre,Contacto por correo / envío de información.,marcador_contacto,anuncio,informativo,neutro,no
+🪙,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+🔔,Campana,Recordatorio / aviso.,comunicado,anuncio,informativo,neutro,no
+➖,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+📗,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+📖,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+🏛,Escuela / edificio,"Lugar institucional (carrera, edificio, universidad).",marcador_lugar,anuncio,informativo,neutro,no
+👩‍🔬,Científico/a,"Ciencias, investigación o laboratorio.",tema_ciencia,anuncio,informativo,neutro,no
+🔧,Llave inglesa,"Herramientas, taller práctico.",tema_tecnologia,anuncio,informativo,neutro,no
+🎥,Cámara,Transmisión o registro fotográfico.,tema_evento,anuncio,informativo,neutro,no
+📸,Cámara,Transmisión o registro fotográfico.,tema_evento,anuncio,informativo,neutro,no
+🎼,Notas musicales,Música / fiesta.,tema_evento,anuncio,entretenimiento,positivo,no
+🪐,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+🔢,Números,Matemáticas.,tema_academico,anuncio,informativo,neutro,no
+❄,Copo de nieve,Invierno (curso de temporada invierno).,tema_estacion,anuncio,informativo,neutro,no
+🍺,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+🍄,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+💯,100,Total acuerdo o 'perfecto'.,enfasis,mixto,aprobación,positivo,no
+💜,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+💔,Corazón roto,Pena o desilusión por una situación.,lamento,conversacion,tristeza,negativo,no
+🐕,Perro,Mascota / broma.,humor,conversacion,humor,neutro,no
+🙋‍♂,Hombre levantando la mano,'Yo / presente / yo pregunto': levanta la mano para participar o preguntar.,participacion,conversacion,participación,neutro,no
+🤦‍♂,Facepalm,Frustración por algo evidente o absurdo ('ya qué').,fastidio,conversacion,frustración,negativo,posible
+💁‍♀,Persona informando,Marca a la persona de contacto o responsable de dar información.,contacto,anuncio,informativo,neutro,no
+💁‍♂,Persona informando,Marca a la persona de contacto o responsable de dar información.,contacto,anuncio,informativo,neutro,no
+🖋,Pluma,Cursos o publicaciones; algo para firmar o escribir.,formulario,anuncio,informativo,neutro,no
+👁,Ojo,Mirar/atención; solo en mensajes cortos ('👁👁' = 'estoy atento / veo').,atencion,conversacion,atención,neutro,no
+😣,Cara angustiada,Aflicción.,lamento,conversacion,angustia,negativo,no
+🗿,Moái,Cara de póker: 'sin comentarios / evidente'. Se usa con ironía para marcar apatía.,ironia_burla,reaccion,ironía,neutro,si
+🍀,Trébol,Suerte: 'ojalá salga'.,esperanza,conversacion,esperanza,positivo,no
+🤠,Vaquero,Tono juguetón.,humor,anuncio,humor,positivo,no
+😜,Cara loca,Broma.,humor,conversacion,humor,positivo,no
+🎫,Ticket,Entrada o cupo.,marcador_costo,anuncio,informativo,neutro,no
+🔷,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+♦,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+🟠,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+🟣,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+👨‍🔬,Científico/a,"Ciencias, investigación o laboratorio.",tema_ciencia,anuncio,informativo,neutro,no
+👩‍🎓,Estudiante,Estudiantes.,tema_academico,anuncio,informativo,neutro,no
+📉,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+🔌,Enchufe,Hardware/electrónica.,tema_tecnologia,anuncio,informativo,neutro,no
+🐲,Dragón,Mascota del grupo GUILD (desarrolladores de videojuegos).,identidad_grupo,anuncio,informativo,neutro,no
+📺,Televisión,Transmisión.,tema_evento,anuncio,informativo,neutro,no
+🌡,Termómetro,Física (carrera).,tema_ciencia,anuncio,informativo,neutro,no
+☄,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+🛸,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+🔮,Bola de cristal,Predicción/misterio.,tema_evento,anuncio,informativo,neutro,no
+✈,Avión,Viaje / movilidad.,tema_evento,anuncio,informativo,neutro,no
+🌴,Palmera,Verano.,tema_evento,anuncio,informativo,neutro,no
+🍷,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+🍸,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+🍬,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🎇,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🦋,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🤍,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+🖤,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+👸,Realeza,Concurso de elección (reina/rey).,tema_evento,anuncio,informativo,neutro,no
+🫅,Realeza,Concurso de elección (reina/rey).,tema_evento,anuncio,informativo,neutro,no
+👨‍🎓,Estudiante / docente,Estudiante o docente.,tema_academico,anuncio,informativo,neutro,no
+🧑‍🏫,Estudiante / docente,Estudiante o docente.,tema_academico,anuncio,informativo,neutro,no
+🙂‍↕,Asintiendo,"'Sí, de acuerdo'.",acuerdo,conversacion,acuerdo,positivo,no
+🫢,Mano en la boca,Sorpresa o 'uy'.,sorpresa,conversacion,sorpresa,neutro,no
+✋,Mano en alto,'Espera / un momento' o 'yo también'.,participacion,conversacion,participación,neutro,no
+❤‍🩹,Corazón sanando,Apoyo y recuperación; campaña solidaria.,apoyo,anuncio,calidez,positivo,no
+💩,Caca,Rechazo burlón: 'eso es basura'.,ironia_burla,reaccion,burla,negativo,si
+🫵,Señalando a quien lee,'Tú / ¿y tú?': interpela directamente.,llamado_accion,anuncio,interpelación,neutro,no
+🏴‍☠,Bandera pirata,Hacking / piratería (competencia de ciberseguridad).,tema_seguridad,anuncio,informativo,neutro,no
+🛡,Escudo,Seguridad / defensa.,tema_seguridad,anuncio,informativo,neutro,no
+✏,Lápiz,Escribir o apuntes.,tema_academico,anuncio,informativo,neutro,no
+💗,Corazón creciente,Afecto.,afecto,anuncio,amor,positivo,no
+⚖,Balanza,Legislación / derecho (materia de Legislación Informática y Ética).,tema_academico,anuncio,informativo,neutro,no
+🍲,Olla,Comida / actividad social.,tema_evento,anuncio,informativo,neutro,no
+💎,Diamante,Algo valioso / premium.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+🎪,Carpa de circo,Feria o evento con carpa.,tema_evento,anuncio,informativo,neutro,no
+🇺🇸,Bandera,País (referencia internacional).,identidad_pais,anuncio,informativo,neutro,no
+🇰🇷,Bandera,País (referencia internacional).,identidad_pais,anuncio,informativo,neutro,no
+🗨,Globo de diálogo,Conversación / comentarios.,marcador_contacto,anuncio,informativo,neutro,no
+⚛,Átomo,Ciencias / física.,tema_ciencia,anuncio,informativo,neutro,no
+🌑,Luna nueva,Tono nocturno o broma.,humor,reaccion,humor,neutro,no
+🎭,Máscaras,Teatro / evento cultural.,tema_evento,anuncio,informativo,neutro,no
+🥊,Guante de boxeo,Competencia / duelo.,tema_evento,anuncio,entretenimiento,neutro,no
+🦄,Unicornio,Humor ligero / 'algo raro y especial'.,humor,reaccion,humor,positivo,no
+😩,Cara agotada,Agobio.,agobio,conversacion,agotamiento,negativo,no
+🥴,Cara mareada,Confusión o caos.,confusion,reaccion,confusión,neutro,no
+😖,Cara angustiada,Aflicción.,lamento,conversacion,angustia,negativo,no
+🤪,Cara loca,Broma.,humor,conversacion,humor,positivo,no
+📧,Sobre,Contacto por correo / envío de información.,marcador_contacto,anuncio,informativo,neutro,no
+🖊,Útiles,Escribir.,tema_academico,anuncio,informativo,neutro,no
+🌠,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+🥷,Ninja,Anonimato / discreción (encuesta anónima).,tema_seguridad,anuncio,informativo,neutro,no
+🫶,Corazón con manos,Agradecimiento cariñoso.,afecto,conversacion,amor,positivo,no
+😤,Resoplando,Frustración y enojo contenido.,enojo,conversacion,frustración,negativo,no
+😠,Cara enfadada,Molestia por el trámite o la respuesta.,enojo,conversacion,enojo,negativo,no
+❌,Cruz,Ítem rechazado o 'no aplica'.,vineta_negativa,mixto,rechazo,negativo,no
+✖,Cruz,Ítem rechazado o 'no aplica'.,vineta_negativa,mixto,rechazo,negativo,no
+🖍,Útiles,Escribir.,tema_academico,anuncio,informativo,neutro,no
+🧡,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+💖,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+💕,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+☃,Muñeco de nieve,Invierno (curso de temporada de invierno).,tema_estacion,mixto,informativo,neutro,no
+☑,Casilla marcada,"Ítem confirmado en una lista (por ejemplo, cursos disponibles). Funciona igual que ✅.",vineta_positiva,anuncio,confirmación,positivo,no
+☹,Cara con ceño fruncido,Tristeza o decepción: 'si no me cambian de semestre ☹'.,lamento,conversacion,tristeza_leve,negativo,no
+♀,Símbolos de género,"Mujer / hombre en sentido literal (por ejemplo, empoderamiento ♀ y masculinidades ♂ en una encuesta de investigación). No expresan emoción.",tema_genero,anuncio,informativo,neutro,no
+♂,Símbolos de género,"Mujer / hombre en sentido literal (por ejemplo, empoderamiento ♀ y masculinidades ♂ en una encuesta de investigación). No expresan emoción.",tema_genero,anuncio,informativo,neutro,no
+♾,Infinito,"Parte del nombre o logo de una agrupación (META ♾ I); es adorno de identidad, no significa 'infinito' en el mensaje.",identidad_grupo,anuncio,informativo,neutro,no
+⚰,Ataúd,Humor negro: 'estoy muerto / sin esperanza' tras esperar una hora sin respuesta. Equivale a 💀.,hiperbole,conversacion,resignación,negativo,si
+⛽,Surtidor,Gasolina: servicio de hacer fila de combustible por otros.,tema_servicio,anuncio,informativo,neutro,no
+❇,Destello verde,Viñeta decorativa que introduce un dato adicional ('❇️ También se realizará la entrega de certificados').,vineta,anuncio,neutro,neutro,no
+❎,Cruz en recuadro verde,"Marca de negación o descarte ('no / eso no'). Aquí se usó como respuesta seca, junto a 2️⃣, en medio de una discusión sobre docentes; el sentido exacto es ambiguo.",vineta_negativa,conversacion,rechazo,negativo,posible
+❔,Interrogación blanca,Marca que el mensaje es una pregunta ('Una pregunta ❔').,duda,conversacion,duda,neutro,no
+➕,Más,"'Además / y también': añade un dato extra a la lista (por ejemplo, costo único de matrícula).",vineta,anuncio,neutro,neutro,no
+🇫🇷,Bandera,"País o idioma de un listado de clubes de idiomas (Francés, Japonés).",identidad_pais,anuncio,informativo,neutro,no
+🇯🇵,Bandera,"País o idioma de un listado de clubes de idiomas (Francés, Japonés).",identidad_pais,anuncio,informativo,neutro,no
+🇲🇾,Bandera de Malasia,País sede de un evento internacional (Technoxian).,identidad_pais,anuncio,informativo,neutro,no
+🌌,Vía Láctea,Tema espacial: hackatón de la NASA (Space Apps Challenge).,tema_evento,anuncio,informativo,neutro,no
+🌳,Árbol / hoja / gota,Medio ambiente y agua (ciclo de conferencias Culture in Science).,tema_ciencia,anuncio,informativo,neutro,no
+🌷,Tulipán,Agradecimiento floral y cortés a quienes participaron en un evento.,cortesia,anuncio,gratitud,positivo,no
+🌻,Girasol,'Te envío flores amarillas': gesto simbólico de cariño por la primavera y el Día del Estudiante.,afecto,conversacion,afecto,positivo,no
+🌿,Hierba,Bienestar y desarrollo personal (club de la lista de actividades).,tema_bienestar,anuncio,informativo,positivo,no
+🍃,Árbol / hoja / gota,Medio ambiente y agua (ciclo de conferencias Culture in Science).,tema_ciencia,anuncio,informativo,neutro,no
+🍕,Pizza,Habrá comida en el evento ('📅🍕').,tema_evento,anuncio,entretenimiento,positivo,no
+🍪,Galleta,'Comparte cookies': juego de palabras de informática (cookies web) en un evento de networking.,humor,anuncio,humor,positivo,no
+🍫,Chocolate,Referencia literal (evento de ron y chocolate).,tema_evento,anuncio,entretenimiento,positivo,no
+🍹,Bebidas,Fiesta o brindis (lista de tragos).,fiesta,anuncio,celebración,positivo,no
+🎀,Lazo rosado,Símbolo de la lucha contra el cáncer de mama (seminario de octubre).,tema_salud,anuncio,concientización,positivo,no
+🎄,Árbol de Navidad,Saludo de Navidad.,saludo,mixto,celebración,positivo,no
+🎛,Perillas de control,Sistemas de control (feria de proyectos).,tema_tecnologia,anuncio,informativo,neutro,no
+🎞,Claqueta / película,Video o premio relacionado con series y películas (suscripción a plataforma).,tema_evento,anuncio,informativo,neutro,no
+🎧,Auriculares / guitarra,DJ y banda en vivo (fiesta o concierto).,fiesta,anuncio,entretenimiento,positivo,no
+🎬,Claqueta / película,Video o premio relacionado con series y películas (suscripción a plataforma).,tema_evento,anuncio,informativo,neutro,no
+🎸,Auriculares / guitarra,DJ y banda en vivo (fiesta o concierto).,fiesta,anuncio,entretenimiento,positivo,no
+🏀,Baloncesto,Pruebas de selección deportiva (⚽🏀🏐).,tema_evento,anuncio,entretenimiento,neutro,no
+🏃‍♂,Corredor,'Apúrate': urgencia de cupos limitados.,urgencia_plazo,anuncio,urgencia,neutro,no
+🏔,Montaña,'Seguimos escalando': crecimiento y éxito profesional (taller de inserción laboral).,tema_profesional,anuncio,motivación,positivo,no
+🏢,Edificio,Dirección o lugar del evento ('🏢 Dirección: Monoblock').,marcador_lugar,anuncio,informativo,neutro,no
+🐮,Vaca,Alusión al nombre del proyecto Vaquita.,identidad_grupo,anuncio,informativo,neutro,no
+🐯,Tigre,Alusión a un refrán o chiste ('lo que le faltó al tigre con el burro'): ironía para pedir tolerancia.,humor,conversacion,ironía,neutro,si
+🐳,Ballena,"Reacción poco convencional a una pregunta; sin significado fijo, probablemente humorística.",humor,reaccion,humor,neutro,posible
+🐾,Huellas,"Mascota (Buguila, mascota del frente Cyber7).",identidad_grupo,anuncio,informativo,neutro,no
+👁‍🗨,Ojo en burbuja,Igual que 👀: 'alguien de cálculo 2 paralelo C 👁️‍🗨️' significa '¿alguien? estoy pendiente'.,atencion_pendiente,conversacion,atención,neutro,posible
+👊,Puño,Competencia o combate ('demuestra tu destreza en el ring'); a veces mensaje pegado de otra herramienta de redacción.,tema_evento,anuncio,entretenimiento,neutro,no
+👨‍👩‍👧‍👦,Familia,"Dirigido a madres, padres o tutores.",marcador_publico,anuncio,informativo,neutro,no
+👹,Ogro,Indignación caricaturesca: 'no debieron cambiar el horario 👹'.,enojo,conversacion,enojo,negativo,posible
+👺,Duende enojado,Tono travieso o de sospecha al preguntar qué docente avanza más; sin significado fijo.,humor,conversacion,picardía,neutro,posible
+💤,Zzz,Sueño o cansancio; con 💀 ('💀💤') significa 'muerto de sueño'.,agobio,conversacion,agotamiento,neutro,no
+💧,Árbol / hoja / gota,Medio ambiente y agua (ciclo de conferencias Culture in Science).,tema_ciencia,anuncio,informativo,neutro,no
+💭,Globo de pensamiento,'Pensar / reflexionar'; acompaña el tema de matemática.,tema_academico,anuncio,informativo,neutro,no
+📂,Carpeta abierta,Requisitos documentales: 'presentar los documentos ordenados'.,marcador_documento,anuncio,informativo,neutro,no
+🔁,Repetir,Instrucción de repetir o actualizar ('actualiza el navegador un par de veces').,instruccion,anuncio,informativo,neutro,no
+🔎,Lupa,Analizar o identificar algo ('cómo identificar negocios rentables'). Igual que 🔍.,tema_investigacion,anuncio,informativo,neutro,no
+🔓,Candado abierto,Acceso libre o gratuito.,marcador_costo,anuncio,informativo,neutro,no
+🔬,Ciencias,"Ciencias naturales y exactas: biología, física, química y matemática (listas de carreras de Ciencias Puras).",tema_ciencia,anuncio,informativo,neutro,no
+🔭,Ciencias,"Ciencias naturales y exactas: biología, física, química y matemática (listas de carreras de Ciencias Puras).",tema_ciencia,anuncio,informativo,neutro,no
+🕚,Reloj con hora,Hora de inicio del evento ('🕚 15:00 – 18:00').,marcador_hora,anuncio,informativo,neutro,no
+🕞,Reloj con hora,Hora de inicio del evento ('🕚 15:00 – 18:00').,marcador_hora,anuncio,informativo,neutro,no
+🕵‍♀,Detective,Aventura de búsqueda de pistas (juego o caza del tesoro).,tema_evento,anuncio,entretenimiento,neutro,no
+🕸,Telaraña,Halloween (decoración temática).,tema_evento,anuncio,entretenimiento,neutro,no
+🖕,Dedo medio,Insulto directo. Aparece como reacción a un mensaje de propaganda electoral: rechazo total.,rechazo,reaccion,enojo,negativo,no
+🖖,Saludo vulcano,"Saludo amistoso o 'presente' al unirse a una pregunta colectiva (después de X2, X3).",saludo,conversacion,saludo,positivo,no
+🖱,Mouse,Artículos tecnológicos para sorteo.,premio,anuncio,entusiasmo,positivo,no
+🗄,Archivero,Bases de datos.,tema_tecnologia,anuncio,informativo,neutro,no
+🗳,Urna,Votación o elecciones; llamado a participar en una decisión.,tema_votacion,anuncio,participación,neutro,no
+😝,Lengua afuera,Burla juguetona o provocadora en una discusión ('solo queda ignorarte 😝'): cierra con sarcasmo.,ironia_burla,conversacion,burla,negativo,si
+😟,Cara preocupada,Extrañeza preocupada al pedir la razón de una crítica ('¿Por qué 😟?').,preocupacion,conversacion,preocupación,negativo,no
+😦,Cara preocupada,"Reacción solitaria de preocupación o asombro ante una noticia o pedido difícil (exámenes, cambios de pensum).",preocupacion,conversacion,preocupación,negativo,no
+😧,Cara preocupada,"Reacción solitaria de preocupación o asombro ante una noticia o pedido difícil (exámenes, cambios de pensum).",preocupacion,conversacion,preocupación,negativo,no
+😮,Boca abierta,"'Ah, no sabía': sorpresa al enterarse de un requisito y pregunta de seguimiento.",sorpresa,conversacion,sorpresa,neutro,no
+😲,Cara asombrada,Asombro ante una situación sin respuesta o inesperada.,sorpresa,conversacion,sorpresa,neutro,no
+😵,Cara aturdida,'Me mareé': abrumado por la información o por una recomendación sobre un docente.,confusion,conversacion,confusión,negativo,no
+🙆‍♂,Gesto de 'OK',"'Ok, gracias': aceptación cortés de una respuesta.",acuerdo,conversacion,acuerdo,positivo,no
+🙊,Mono sin hablar,'No digo nada': indirecta o comentario sarcástico ('no falta los que se inscriban a materia de color rojo 🙊').,ironia_burla,conversacion,ironía,neutro,si
+🛍,Compras,"Oferta, paquete o consumo (encuesta de consumo digital, reserva de paquete).",tema_comercio,anuncio,informativo,neutro,no
+🛒,Compras,"Oferta, paquete o consumo (encuesta de consumo digital, reserva de paquete).",tema_comercio,anuncio,informativo,neutro,no
+🛠,Herramientas,Taller práctico y emprendimiento.,tema_tecnologia,anuncio,informativo,neutro,no
+🛰,Satélite,Redes sociales / comunicación (encabeza los enlaces de redes).,marcador_contacto,anuncio,informativo,neutro,no
+🟤,Círculo marrón,"Viñeta de color para listar requisitos (inscripción, cuenta bancaria).",vineta_color,anuncio,neutro,neutro,no
+🤌,Dedos juntos,Gesto de exasperación: '¿qué quieres que haga?'. Con 😂 expresa resignación humorística ante un problema de inscripción.,resignacion,conversacion,resignación,neutro,si
+🤛,Choque de puños,"'Gracias, buena onda': agradecimiento y camaradería entre estudiantes.",agradecimiento,conversacion,agradecimiento,positivo,no
+🤜,Choque de puños,"'Gracias, buena onda': agradecimiento y camaradería entre estudiantes.",agradecimiento,conversacion,agradecimiento,positivo,no
+🤟,Mano 'rock / te quiero',Aprobación entusiasta al recomendar un docente ('Tellez 🤟' = 'excelente').,aprobacion,conversacion,admiración,positivo,no
+🤤,Cara babeando,Antojo o ganas: genera expectativa por una fiesta ('Viernes 16 de junio🔥🤤').,hype,anuncio,entusiasmo,positivo,no
+🤦,Facepalm,"Incredulidad o frustración por una situación absurda (por ejemplo, no tener la boleta de inscripción).",fastidio,conversacion,frustración,negativo,posible
+🤫,Cara pidiendo silencio,'Shhh': pide discreción o es broma sobre algo que no se dice en voz alta.,humor,conversacion,humor,neutro,posible
+🤷‍♀,Encogerse de hombros,'No sé / qué se le va a hacer'; opinión tentativa.,resignacion,conversacion,resignación,neutro,no
+🥂,Bebidas,Fiesta o brindis (lista de tragos).,fiesta,anuncio,celebración,positivo,no
+🥶,Cara con frío,Nerviosismo o inseguridad ante un trámite (qué decir en el banco).,nerviosismo,conversacion,nerviosismo,negativo,no
+🦁,León,Juego con el apellido del docente (Lic. León): es un adorno cariñoso al preguntar por él.,humor,conversacion,humor,neutro,posible
+🦉,Búho,"Sabiduría e innovación (campaña, comunidad tecnológica).",tema_idea,anuncio,informativo,positivo,no
+🦜,Loro,Adorno humorístico sin significado fijo al pedir recomendaciones.,humor,conversacion,humor,neutro,posible
+🦠,Ciencias,"Ciencias naturales y exactas: biología, física, química y matemática (listas de carreras de Ciencias Puras).",tema_ciencia,anuncio,informativo,neutro,no
+🧑‍🦽‍➡,Persona en silla de ruedas,"Broma sobre docentes mayores ('toca jubilarlos'); humor de edad, tono burlón.",ironia_burla,conversacion,burla,negativo,si
+🧫,Ciencias,"Ciencias naturales y exactas: biología, física, química y matemática (listas de carreras de Ciencias Puras).",tema_ciencia,anuncio,informativo,neutro,no
+🧮,Ciencias,"Ciencias naturales y exactas: biología, física, química y matemática (listas de carreras de Ciencias Puras).",tema_ciencia,anuncio,informativo,neutro,no
+🫦,Labios mordiéndose,Sin sentido romántico aquí: se usa como viñeta llamativa o de coquetería humorística ('🫦: mandaremos encuesta').,vineta,anuncio,humor,neutro,posible
+🫩,Cara con ojeras,Cansancio o hartazgo por una situación repetida.,agobio,conversacion,agotamiento,negativo,no
+🫷,Manos empujando,"Pedido amable, parecido a 🙏 ('alguien con el link... 🫸🫷' = 'porfa').",pedir_favor,conversacion,súplica,positivo,posible
+🫸,Manos empujando,"Pedido amable, parecido a 🙏 ('alguien con el link... 🫸🫷' = 'porfa').",pedir_favor,conversacion,súplica,positivo,posible

@@ -127,3 +127,31 @@ def get_emotion_docente_detail(docente_id):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+@api_v1_bp.route("/bitacora/live", methods=["GET"])
+def get_bitacora_live_feed():
+    """Retorna los últimos eventos auditados por Neon con filtros opcionales."""
+    try:
+        from database.queries import get_bitacora_reciente
+        tabla = request.args.get("tabla")
+        operacion = request.args.get("operacion")
+        limit = int(request.args.get("limit", 50))
+        eventos = get_bitacora_reciente(limit=limit, tabla=tabla, operacion=operacion)
+        return jsonify({
+            "status": "success",
+            "total": len(eventos),
+            "eventos": eventos
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@api_v1_bp.route("/bitacora/test-mutation", methods=["POST"])
+def trigger_audit_mutation():
+    """Dispara una mutación de prueba en Neon para validar el Trigger en tiempo real."""
+    try:
+        from database.queries import trigger_test_mutation
+        res = trigger_test_mutation(usuario="dashboard_tester")
+        return jsonify(res), 200 if res.get("status") == "success" else 500
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+

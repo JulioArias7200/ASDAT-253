@@ -70,3 +70,4 @@ venv/
 .DS_Store
 Thumbs.db
 .vscode/*.log
+

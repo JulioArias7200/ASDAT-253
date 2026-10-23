@@ -1,0 +1,606 @@
+{% extends "base.html" %}
+
+{% block title %}Control de Bitácora & Auditoría CDC - Sentix Intelligence{% endblock %}
+
+{% block content %}
+<main class="flex-1 p-space-md lg:p-space-xl flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+
+    <!-- Top Telemetry & CDC Status Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md border-b border-surface-container-high/60 pb-space-lg">
+        <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/30 text-tertiary border border-tertiary/20">
+                    <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                    PostgreSQL 18.6 • PL/pgSQL CDC Triggers
+                </span>
+                <span class="text-outline text-xs">•</span>
+                <span class="text-outline text-xs font-mono">TGBase (sa-east-1)</span>
+            </div>
+            <h1 class="text-headline-lg font-bold tracking-tight text-on-surface flex items-center gap-2.5 mt-1">
+                <span class="material-symbols-outlined text-[32px] text-primary">verified_user</span>
+                Bitácora de Auditoría en Tiempo Real (CDC)
+            </h1>
+            <p class="text-body-md text-on-surface-variant max-w-3xl">
+                Supervisión criptográfica y registro transaccional automático de cambios a nivel de fila disparados por 
+                <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-surface-container-high text-primary">fn_registrar_bitacora_cambio()</span> en Neon Serverless.
+            </p>
+        </div>
+
+        <!-- Action Toolbar -->
+        <div class="flex items-center gap-space-sm flex-wrap shrink-0">
+            <!-- Auto-Refresh Toggle -->
+            <button id="toggle-autorefresh" type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium bg-surface-container border border-surface-container-high hover:bg-surface-container-high text-on-surface transition-colors" title="Alternar sondeo cada 5s">
+                <span class="material-symbols-outlined text-[16px] text-tertiary animate-spin" id="refresh-spinner" style="animation-duration: 3s;">sync</span>
+                <span>Auto-refresco: <strong id="autorefresh-label" class="text-tertiary">Activo (5s)</strong></span>
+            </button>
+
+            <!-- Disparar Mutación de Prueba -->
+            <button id="btn-test-mutation" type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-primary hover:bg-primary/90 text-on-primary shadow-sm hover:shadow transition-all active:scale-95">
+                <span class="material-symbols-outlined text-[18px]">bolt</span>
+                <span>Probar Trigger en Vivo</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Alert / Toast Banner Container -->
+    <div id="toast-container" class="hidden"></div>
+
+    <!-- Metric KPI Cards: Telemetría de Auditoría -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+        <!-- Card 1: Total Registros en Bitácora -->
+        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-outline text-xs font-medium">
+                <span>Total Eventos Auditados</span>
+                <span class="material-symbols-outlined text-[18px] text-primary">receipt_long</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+                <span id="kpi-total-eventos" class="text-3xl font-bold font-mono text-on-surface">{{ eventos|length }}</span>
+                <span class="text-xs text-outline font-mono">eventos recientes</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
+                <span>Retención Neon</span>
+                <span class="font-mono text-on-surface-variant font-medium">Permanente</span>
+            </div>
+        </div>
+
+        <!-- Card 2: Tablas con Trigger Activo -->
+        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-outline text-xs font-medium">
+                <span>Tablas Monitorizadas</span>
+                <span class="material-symbols-outlined text-[18px] text-secondary">table_chart</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-bold font-mono text-on-surface">13</span>
+                <span class="text-xs text-secondary font-medium">100% Cobertura</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
+                <span>Triggers PL/pgSQL</span>
+                <span class="font-mono text-tertiary font-medium">AFTER INSERT|UPDATE|DELETE</span>
+            </div>
+        </div>
+
+        <!-- Card 3: Nivel de Aislamiento & Latencia -->
+        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-outline text-xs font-medium">
+                <span>Latencia de Disparo</span>
+                <span class="material-symbols-outlined text-[18px] text-tertiary">speed</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-bold font-mono text-tertiary">&lt; 0.8</span>
+                <span class="text-xs text-outline font-mono">ms / mutación</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
+                <span>Overhead</span>
+                <span class="font-mono text-tertiary font-medium">Zero-impact (C-Extension)</span>
+            </div>
+        </div>
+
+        <!-- Card 4: Seguridad & Auditoría C-Level -->
+        <div class="p-space-md rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-outline text-xs font-medium">
+                <span>Contexto de Aplicación</span>
+                <span class="material-symbols-outlined text-[18px] text-primary">fingerprint</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-bold font-mono text-on-surface">SESSION</span>
+                <span class="text-xs text-outline font-mono">variables</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-surface-container-high/40 flex items-center justify-between text-[11px] text-outline">
+                <span>Variables</span>
+                <span class="font-mono text-primary font-medium">app.current_{user,ip,ep}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters & Table Section -->
+    <section class="p-space-md lg:p-space-lg rounded-2xl bg-surface-container-lowest border border-surface-container-high/60 shadow-sm flex flex-col gap-space-md">
+        
+        <!-- Filter Bar -->
+        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <!-- Left: Filter Pills for Operation -->
+            <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-xs font-semibold text-outline mr-1">Operación:</span>
+                <button type="button" class="filter-op-btn active px-3 py-1 rounded-lg text-xs font-medium bg-primary text-on-primary transition-all" data-op="ALL">Todas</button>
+                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="INSERT">INSERT</button>
+                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="UPDATE">UPDATE</button>
+                <button type="button" class="filter-op-btn px-3 py-1 rounded-lg text-xs font-medium bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-op="DELETE">DELETE</button>
+            </div>
+
+            <!-- Right: Table selector & search -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <select id="filter-tabla" class="px-3 py-1.5 rounded-xl text-xs bg-surface-container border border-surface-container-high text-on-surface focus:outline-none focus:ring-1 focus:ring-primary">
+                    <option value="">Todas las tablas</option>
+                    <option value="mensajes">mensajes</option>
+                    <option value="tfidf_mensajes">tfidf_mensajes</option>
+                    <option value="ngrams_frecuencias">ngrams_frecuencias</option>
+                    <option value="lda_topicos">lda_topicos</option>
+                    <option value="metricas_temporales">metricas_temporales</option>
+                    <option value="diccionario_sentimientos">diccionario_sentimientos</option>
+                    <option value="docentes">docentes</option>
+                    <option value="menciones_docentes">menciones_docentes</option>
+                </select>
+
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
+                    <input id="filter-search" type="text" placeholder="Buscar en diff o ID..." class="pl-8 pr-3 py-1.5 rounded-xl text-xs bg-surface-container border border-surface-container-high text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary w-48 sm:w-60" />
+                </div>
+
+                <button id="btn-manual-reload" type="button" class="p-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Refrescar ahora">
+                    <span class="material-symbols-outlined text-[18px]">refresh</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto rounded-xl border border-surface-container-high/60">
+            <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                    <tr class="bg-surface-container-high/40 text-outline uppercase font-mono text-[10px] tracking-wider border-b border-surface-container-high">
+                        <th class="py-3 px-4 font-semibold">ID / Timestamp</th>
+                        <th class="py-3 px-4 font-semibold">Operación</th>
+                        <th class="py-3 px-4 font-semibold">Tabla Afectada</th>
+                        <th class="py-3 px-4 font-semibold">Registro ID</th>
+                        <th class="py-3 px-4 font-semibold">Actor & Origen</th>
+                        <th class="py-3 px-4 font-semibold">Diff de Modificaciones (JSONB)</th>
+                        <th class="py-3 px-4 font-semibold text-right">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="bitacora-tbody" class="divide-y divide-surface-container-high/40 font-mono">
+                    {% for ev in eventos %}
+                    <tr class="hover:bg-surface-container/40 transition-colors evento-row" data-op="{{ ev.operacion }}" data-tabla="{{ ev.tabla }}">
+                        <!-- ID / Timestamp -->
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-on-surface">#{{ ev.bitacora_id }}</span>
+                                <span class="text-[10px] text-outline">{{ ev.fecha }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Operación Pill -->
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            {% if ev.operacion == 'INSERT' %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/40 text-tertiary border border-tertiary/20">INSERT</span>
+                            {% elif ev.operacion == 'UPDATE' %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/40 text-primary border border-primary/20">UPDATE</span>
+                            {% elif ev.operacion == 'DELETE' %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container/40 text-error border border-error/20">DELETE</span>
+                            {% else %}
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-container text-on-surface">{{ ev.operacion }}</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Tabla Afectada -->
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <span class="px-2 py-1 rounded bg-surface-container text-on-surface font-semibold text-[11px]">{{ ev.tabla }}</span>
+                        </td>
+
+                        <!-- Registro ID -->
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <span class="text-secondary font-bold">#{{ ev.registro_id }}</span>
+                        </td>
+
+                        <!-- Actor & Origen -->
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <div class="flex flex-col text-[11px]">
+                                <span class="text-on-surface font-medium">{{ ev.usuario or 'neon_system' }}</span>
+                                <span class="text-[9px] text-outline">{{ ev.ip or 'internal' }} • {{ ev.endpoint or 'plpgsql_trigger' }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Diff de Modificaciones -->
+                        <td class="py-3 px-4 max-w-md">
+                            {% if ev.diff %}
+                                <div class="bg-surface-container-lowest/80 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1 max-h-24 overflow-y-auto">
+                                    {% for col, val in ev.diff.items() %}
+                                        <div class="flex items-center gap-1.5 flex-wrap">
+                                            <span class="font-bold text-primary">{{ col }}:</span>
+                                            {% if val is mapping and 'anterior' in val and 'nuevo' in val %}
+                                                <span class="line-through text-error bg-error-container/20 px-1 rounded">{{ val.anterior }}</span>
+                                                <span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>
+                                                <span class="text-tertiary bg-tertiary-container/20 px-1 rounded font-bold">{{ val.nuevo }}</span>
+                                            {% else %}
+                                                <span class="text-on-surface-variant">{{ val }}</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% elif ev.operacion == 'INSERT' %}
+                                <span class="text-outline text-[11px] italic">Inserción completa de registro</span>
+                            {% else %}
+                                <span class="text-outline text-[11px] italic">Sin modificaciones de columnas</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Detalle Button -->
+                        <td class="py-3 px-4 text-right whitespace-nowrap">
+                            <button type="button" class="btn-inspect-diff p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"
+                                data-id="{{ ev.bitacora_id }}"
+                                data-op="{{ ev.operacion }}"
+                                data-tabla="{{ ev.tabla }}"
+                                data-reg="{{ ev.registro_id }}"
+                                data-diff='{{ ev.diff|tojson|safe if ev.diff else "{}" }}'
+                                data-prev='{{ ev.datos_previos|tojson|safe if ev.datos_previos else "{}" }}'
+                                data-new='{{ ev.datos_nuevos|tojson|safe if ev.datos_nuevos else "{}" }}'
+                                title="Inspeccionar Payload Completo">
+                                <span class="material-symbols-outlined text-[16px]">visibility</span>
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr id="empty-state-row">
+                        <td colspan="7" class="py-12 text-center text-outline">
+                            <span class="material-symbols-outlined text-[40px] text-outline/50 mb-2">inbox</span>
+                            <p class="text-sm">No se han registrado eventos en la bitácora aún.</p>
+                            <p class="text-xs text-outline mt-1">Haz clic en <strong>"Probar Trigger en Vivo"</strong> para disparar un evento de auditoría.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Modal Inspector de Payload JSON & Variables de Sesión -->
+    <div id="inspector-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-surface-container-lowest border border-surface-container-high rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-surface-container-high flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[22px]">troubleshoot</span>
+                    <h3 class="text-headline-sm font-bold text-on-surface" id="modal-title">Inspección de Auditoría #000</h3>
+                </div>
+                <button type="button" id="close-modal-btn" class="p-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto flex flex-col gap-4 font-mono text-xs">
+                <div>
+                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Diferencial Calculado (diff_modificaciones):</span>
+                    <pre id="modal-diff" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-on-surface overflow-x-auto"></pre>
+                </div>
+                <div>
+                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Estado Previo (OLD):</span>
+                    <pre id="modal-prev" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-outline overflow-x-auto max-h-40"></pre>
+                </div>
+                <div>
+                    <span class="text-outline uppercase text-[10px] font-bold tracking-wider">Estado Nuevo (NEW):</span>
+                    <pre id="modal-new" class="mt-1.5 p-3 rounded-xl bg-surface-container border border-surface-container-high/60 text-outline overflow-x-auto max-h-40"></pre>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="px-6 py-3 border-t border-surface-container-high bg-surface-container-low/50 flex justify-end">
+                <button type="button" id="close-modal-footer-btn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Cerrar Inspector</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let autoRefreshActive = true;
+    let refreshInterval = null;
+    let currentOpFilter = "ALL";
+    let currentTablaFilter = "";
+    let currentSearchTerm = "";
+
+    const tbody = document.getElementById("bitacora-tbody");
+    const kpiTotal = document.getElementById("kpi-total-eventos");
+    const btnTest = document.getElementById("btn-test-mutation");
+    const btnReload = document.getElementById("btn-manual-reload");
+    const btnToggleAuto = document.getElementById("toggle-autorefresh");
+    const labelAuto = document.getElementById("autorefresh-label");
+    const spinner = document.getElementById("refresh-spinner");
+    const filterTabla = document.getElementById("filter-tabla");
+    const filterSearch = document.getElementById("filter-search");
+    const opButtons = document.querySelectorAll(".filter-op-btn");
+
+    // Modal elements
+    const modal = document.getElementById("inspector-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDiff = document.getElementById("modal-diff");
+    const modalPrev = document.getElementById("modal-prev");
+    const modalNew = document.getElementById("modal-new");
+    const closeModalBtn = document.getElementById("close-modal-btn");
+    const closeModalFooterBtn = document.getElementById("close-modal-footer-btn");
+
+    function showToast(message, type = "success") {
+        const toast = document.createElement("div");
+        const bgClass = type === "success" 
+            ? "bg-tertiary-container/90 text-tertiary border-tertiary/30" 
+            : "bg-error-container/90 text-error border-error/30";
+        toast.className = `fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-xl border shadow-lg backdrop-blur text-xs font-medium ${bgClass} transition-all duration-300 transform translate-y-2 opacity-0`;
+        toast.innerHTML = `<span class="material-symbols-outlined text-[18px]">${type === 'success' ? 'check_circle' : 'error'}</span><span>${message}</span>`;
+        document.body.appendChild(toast);
+        
+        requestAnimationFrame(() => {
+            toast.classList.remove("translate-y-2", "opacity-0");
+        });
+        setTimeout(() => {
+            toast.classList.add("translate-y-2", "opacity-0");
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+
+    // Modal interactions
+    function openModal(data) {
+        modalTitle.textContent = `Inspección de Auditoría #${data.id} • ${data.op} [${data.tabla}]`;
+        modalDiff.textContent = JSON.stringify(data.diff, null, 2);
+        modalPrev.textContent = JSON.stringify(data.prev, null, 2);
+        modalNew.textContent = JSON.stringify(data.new, null, 2);
+        modal.classList.remove("hidden");
+    }
+
+    function closeModal() {
+        modal.classList.add("hidden");
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
+    closeModalFooterBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Delegación de eventos para inspección
+    tbody.addEventListener("click", function(e) {
+        const btn = e.target.closest(".btn-inspect-diff");
+        if (!btn) return;
+        try {
+            const data = {
+                id: btn.getAttribute("data-id"),
+                op: btn.getAttribute("data-op"),
+                tabla: btn.getAttribute("data-tabla"),
+                diff: JSON.parse(btn.getAttribute("data-diff") || "{}"),
+                prev: JSON.parse(btn.getAttribute("data-prev") || "{}"),
+                new: JSON.parse(btn.getAttribute("data-new") || "{}")
+            };
+            openModal(data);
+        } catch(err) {
+            console.error("Error al parsear payload:", err);
+        }
+    });
+
+    // Renderizar filas dinámicamente desde API
+    function renderEventos(eventos) {
+        kpiTotal.textContent = eventos.length;
+        if (!eventos || eventos.length === 0) {
+            tbody.innerHTML = `
+                <tr id="empty-state-row">
+                    <td colspan="7" class="py-12 text-center text-outline">
+                        <span class="material-symbols-outlined text-[40px] text-outline/50 mb-2">inbox</span>
+                        <p class="text-sm">No se encontraron eventos con los filtros seleccionados.</p>
+                    </td>
+                </tr>`;
+            return;
+        }
+
+        let html = "";
+        eventos.forEach(ev => {
+            let opBadge = "";
+            if (ev.operacion === "INSERT") {
+                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container/40 text-tertiary border border-tertiary/20">INSERT</span>`;
+            } else if (ev.operacion === "UPDATE") {
+                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/40 text-primary border border-primary/20">UPDATE</span>`;
+            } else if (ev.operacion === "DELETE") {
+                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container/40 text-error border border-error/20">DELETE</span>`;
+            } else {
+                opBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-container text-on-surface">${ev.operacion}</span>`;
+            }
+
+            let diffHtml = "";
+            if (ev.diff && Object.keys(ev.diff).length > 0) {
+                diffHtml = `<div class="bg-surface-container-lowest/80 p-2 rounded-lg border border-surface-container-high/60 text-[11px] flex flex-col gap-1 max-h-24 overflow-y-auto">`;
+                for (const [col, val] of Object.entries(ev.diff)) {
+                    diffHtml += `<div class="flex items-center gap-1.5 flex-wrap">`;
+                    diffHtml += `<span class="font-bold text-primary">${col}:</span>`;
+                    if (val && typeof val === "object" && "anterior" in val && "nuevo" in val) {
+                        diffHtml += `<span class="line-through text-error bg-error-container/20 px-1 rounded">${val.anterior}</span>`;
+                        diffHtml += `<span class="material-symbols-outlined text-[12px] text-outline">arrow_forward</span>`;
+                        diffHtml += `<span class="text-tertiary bg-tertiary-container/20 px-1 rounded font-bold">${val.nuevo}</span>`;
+                    } else {
+                        diffHtml += `<span class="text-on-surface-variant">${JSON.stringify(val)}</span>`;
+                    }
+                    diffHtml += `</div>`;
+                }
+                diffHtml += `</div>`;
+            } else if (ev.operacion === "INSERT") {
+                diffHtml = `<span class="text-outline text-[11px] italic">Inserción completa de registro</span>`;
+            } else {
+                diffHtml = `<span class="text-outline text-[11px] italic">Sin modificaciones de columnas</span>`;
+            }
+
+            const safeDiff = JSON.stringify(ev.diff || {}).replace(/"/g, '&quot;');
+            const safePrev = JSON.stringify(ev.datos_previos || {}).replace(/"/g, '&quot;');
+            const safeNew = JSON.stringify(ev.datos_nuevos || {}).replace(/"/g, '&quot;');
+
+            html += `
+            <tr class="hover:bg-surface-container/40 transition-colors evento-row" data-op="${ev.operacion}" data-tabla="${ev.tabla}">
+                <td class="py-3 px-4 whitespace-nowrap">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-on-surface">#${ev.bitacora_id}</span>
+                        <span class="text-[10px] text-outline">${ev.fecha || ''}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-4 whitespace-nowrap">${opBadge}</td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                    <span class="px-2 py-1 rounded bg-surface-container text-on-surface font-semibold text-[11px]">${ev.tabla}</span>
+                </td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                    <span class="text-secondary font-bold">#${ev.registro_id}</span>
+                </td>
+                <td class="py-3 px-4 whitespace-nowrap">
+                    <div class="flex flex-col text-[11px]">
+                        <span class="text-on-surface font-medium">${ev.usuario || 'neon_system'}</span>
+                        <span class="text-[9px] text-outline">${ev.ip || 'internal'} • ${ev.endpoint || 'trigger'}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-4 max-w-md">${diffHtml}</td>
+                <td class="py-3 px-4 text-right whitespace-nowrap">
+                    <button type="button" class="btn-inspect-diff p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"
+                        data-id="${ev.bitacora_id}"
+                        data-op="${ev.operacion}"
+                        data-tabla="${ev.tabla}"
+                        data-reg="${ev.registro_id}"
+                        data-diff="${safeDiff}"
+                        data-prev="${safePrev}"
+                        data-new="${safeNew}"
+                        title="Inspeccionar Payload Completo">
+                        <span class="material-symbols-outlined text-[16px]">visibility</span>
+                    </button>
+                </td>
+            </tr>`;
+        });
+
+        tbody.innerHTML = html;
+        applyClientFilters();
+    }
+
+    // Filtrar clientes en vivo (texto y tabs)
+    function applyClientFilters() {
+        const rows = tbody.querySelectorAll(".evento-row");
+        const term = currentSearchTerm.toLowerCase();
+
+        rows.forEach(row => {
+            const op = row.getAttribute("data-op");
+            const tabla = row.getAttribute("data-tabla");
+            const text = row.textContent.toLowerCase();
+
+            let matchesOp = (currentOpFilter === "ALL" || op === currentOpFilter);
+            let matchesTabla = (!currentTablaFilter || tabla === currentTablaFilter);
+            let matchesSearch = (!term || text.includes(term));
+
+            if (matchesOp && matchesTabla && matchesSearch) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    // Polling API para refrescar eventos
+    async function fetchLiveFeed() {
+        try {
+            let url = `/api/v1/bitacora/live?limit=60`;
+            if (currentTablaFilter) url += `&tabla=${encodeURIComponent(currentTablaFilter)}`;
+            if (currentOpFilter !== "ALL") url += `&operacion=${encodeURIComponent(currentOpFilter)}`;
+
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("Error en feed de bitácora");
+            const data = await res.json();
+            if (data.status === "success") {
+                renderEventos(data.eventos);
+            }
+        } catch(err) {
+            console.warn("Fallo al sincronizar bitácora:", err);
+        }
+    }
+
+    // Disparar mutación de prueba en Neon
+    btnTest.addEventListener("click", async function() {
+        btnTest.disabled = true;
+        btnTest.classList.add("opacity-70");
+        const originalText = btnTest.innerHTML;
+        btnTest.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Disparando en Neon...</span>`;
+
+        try {
+            const res = await fetch("/api/v1/bitacora/test-mutation", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }
+            });
+            const data = await res.json();
+            if (res.ok && data.status === "success") {
+                showToast(`Mutación exitosa: ${data.mensaje}`, "success");
+                await fetchLiveFeed();
+            } else {
+                showToast(`Error al mutar: ${data.message || 'Fallo desconocido'}`, "error");
+            }
+        } catch(err) {
+            showToast(`Fallo de red: ${err.message}`, "error");
+        } finally {
+            btnTest.disabled = false;
+            btnTest.classList.remove("opacity-70");
+            btnTest.innerHTML = originalText;
+        }
+    });
+
+    // Control de auto-refresco
+    function startPolling() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        refreshInterval = setInterval(fetchLiveFeed, 5000);
+        autoRefreshActive = true;
+        labelAuto.textContent = "Activo (5s)";
+        labelAuto.className = "text-tertiary";
+        spinner.classList.add("animate-spin");
+    }
+
+    function stopPolling() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        autoRefreshActive = false;
+        labelAuto.textContent = "Pausado";
+        labelAuto.className = "text-outline";
+        spinner.classList.remove("animate-spin");
+    }
+
+    btnToggleAuto.addEventListener("click", function() {
+        if (autoRefreshActive) {
+            stopPolling();
+        } else {
+            startPolling();
+            fetchLiveFeed();
+        }
+    });
+
+    btnReload.addEventListener("click", fetchLiveFeed);
+
+    // Eventos de botones de filtrado
+    opButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            opButtons.forEach(b => {
+                b.classList.remove("active", "bg-primary", "text-on-primary");
+                b.classList.add("bg-surface-container", "text-on-surface-variant");
+            });
+            this.classList.add("active", "bg-primary", "text-on-primary");
+            this.classList.remove("bg-surface-container", "text-on-surface-variant");
+            currentOpFilter = this.getAttribute("data-op");
+            fetchLiveFeed();
+        });
+    });
+
+    filterTabla.addEventListener("change", function() {
+        currentTablaFilter = this.value;
+        fetchLiveFeed();
+    });
+
+    filterSearch.addEventListener("input", function() {
+        currentSearchTerm = this.value;
+        applyClientFilters();
+    });
+
+    // Iniciar polling
+    startPolling();
+});
+</script>
+{% endblock %}

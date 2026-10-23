@@ -15,7 +15,8 @@ from database.queries import (
     get_lda_topics_summary,
     get_perfil_emocional_docentes,
     get_nlp_kpis_summary,
-    get_tfidf_keywords
+    get_tfidf_keywords,
+    get_bitacora_reciente
 )
 
 @web_bp.route("/")
@@ -82,4 +83,21 @@ def dashboard_view():
         top_tfidf_docentes=top_tfidf_docentes,
         top_tfidf_ciclos=top_tfidf_ciclos
     )
+
+@web_bp.route("/bitacora")
+def bitacora_view():
+    """
+    Renderiza el centro de comando de la bitácora y auditoría en tiempo real (CDC)
+    con visualizador de diffs JSON y telemetría de mutación sobre Neon PostgreSQL.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    eventos = get_bitacora_reciente(limit=50)
+    return render_template(
+        "dashboard/bitacora.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        eventos=eventos
+    )
+
 

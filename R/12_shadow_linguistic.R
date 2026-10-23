@@ -231,8 +231,12 @@ shadow_csv <- dplyr::bind_rows(
   head(tfidf_df, 200)
 )
 
-out_dir <- "data/results"
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+posibles_out <- c("data/results", "../data/results")
+out_dir <- posibles_out[dir.exists(posibles_out)][1]
+if (is.na(out_dir)) {
+  out_dir <- "data/results"
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+}
 out_path <- file.path(out_dir, "shadow_linguistic.csv")
 readr::write_csv(shadow_csv, out_path)
 

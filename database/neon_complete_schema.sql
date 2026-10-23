@@ -387,3 +387,48 @@ BEGIN
     RETURN NULL;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- -----------------------------------------------------------------------------
+-- 14. Integridad Referencial y Relaciones Foreign Key
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS catalogo_topicos (
+    topico_id       INTEGER PRIMARY KEY,
+    nombre_etiqueta VARCHAR(255) NOT NULL,
+    descripcion     TEXT,
+    creado_en       TIMESTAMPTZ DEFAULT clock_timestamp()
+);
+
+ALTER TABLE tfidf_mensajes 
+    ADD CONSTRAINT fk_tfidf_mensajes_mensaje 
+    FOREIGN KEY (message_id) REFERENCES mensajes(message_id) 
+    ON DELETE CASCADE;
+
+ALTER TABLE gifs_animaciones 
+    ADD CONSTRAINT fk_gifs_mensajes_mensaje 
+    FOREIGN KEY (mensaje_id) REFERENCES mensajes(message_id) 
+    ON DELETE CASCADE;
+
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_mensajes_mensaje 
+    FOREIGN KEY (mensaje_id) REFERENCES mensajes(message_id) 
+    ON DELETE CASCADE;
+
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_docentes_docente 
+    FOREIGN KEY (docente_id) REFERENCES docentes(docente_id) 
+    ON UPDATE CASCADE ON DELETE SET NULL;
+
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_materias_materia 
+    FOREIGN KEY (codigo_materia) REFERENCES materias(codigo_materia) 
+    ON UPDATE CASCADE ON DELETE SET NULL;
+
+ALTER TABLE lda_topicos
+    ADD CONSTRAINT fk_lda_topicos_catalogo
+    FOREIGN KEY (topico_id) REFERENCES catalogo_topicos(topico_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE mensajes
+    ADD CONSTRAINT fk_mensajes_topicos
+    FOREIGN KEY (topico_lda_id) REFERENCES catalogo_topicos(topico_id)
+    ON DELETE SET NULL;

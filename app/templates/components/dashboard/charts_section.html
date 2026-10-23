@@ -137,7 +137,7 @@
 
                     <div
                         class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-code-sm text-code-sm">
-                        <span>* Métricas agregadas en vivo desde 23,462 mensajes analizados</span>
+                        <span>* Métricas agregadas en vivo desde {{ "{:,}".format(kpis.total_mensajes) }} mensajes analizados</span>
                         <span class="text-secondary hover:underline cursor-pointer">Ver todos los {{ kpis.total_docentes }} docentes</span>
                     </div>
                 </div>

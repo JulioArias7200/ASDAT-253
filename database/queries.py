@@ -108,39 +108,61 @@ def get_top_reacciones_telegram(limit=8):
 
 def get_modalidad_chat_distribution():
     """Distribución de modalidades del chat (texto, fotos, preguntas, stickers)."""
+    c = 628.32  # 2 * pi * r (donde r=100)
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("""
                     SELECT 
                         COUNT(*) AS total,
-                        COUNT(*) FILTER (WHERE NOT tiene_imagen AND NOT es_sticker AND NOT es_gif AND n_questions = 0) AS texto_puro,
+                        COUNT(*) FILTER (WHERE es_sticker) AS stickers,
                         COUNT(*) FILTER (WHERE tiene_imagen) AS ocr,
-                        COUNT(*) FILTER (WHERE n_questions > 0) AS preguntas,
-                        COUNT(*) FILTER (WHERE es_sticker) AS stickers
+                        COUNT(*) FILTER (WHERE NOT tiene_imagen AND NOT es_sticker AND (n_questions > 0 OR text_original LIKE '%?%' OR text_original LIKE '%¿%')) AS preguntas,
+                        COUNT(*) FILTER (WHERE NOT tiene_imagen AND NOT es_sticker AND NOT es_gif AND NOT (n_questions > 0 OR text_original LIKE '%?%' OR text_original LIKE '%¿%')) AS texto_puro
                     FROM mensajes;
                 """)
                 r = cur.fetchone()
                 total = r["total"] or 1
+                t_puro = r["texto_puro"] or 0
+                t_ocr = r["ocr"] or 0
+                t_preg = r["preguntas"] or 0
+                t_stick = r["stickers"] or 0
+
+                len_t = round((t_puro / total) * c, 2)
+                len_p = round((t_preg / total) * c, 2)
+                len_o = round((t_ocr / total) * c, 2)
+                len_s = round((t_stick / total) * c, 2)
+
+                off_p = round(-len_t, 2)
+                off_o = round(-(len_t + len_p), 2)
+                off_s = round(-(len_t + len_p + len_o), 2)
+
                 return {
                     "total": total,
-                    "texto_puro": r["texto_puro"],
-                    "ocr": r["ocr"],
-                    "preguntas": r["preguntas"],
-                    "stickers": r["stickers"],
-                    "pct_texto": round(100.0 * r["texto_puro"] / total, 1),
-                    "pct_ocr": round(100.0 * r["ocr"] / total, 1),
-                    "pct_preguntas": round(100.0 * r["preguntas"] / total, 1),
-                    "pct_stickers": round(100.0 * r["stickers"] / total, 1),
-                    "len_texto": 439.2, "len_preguntas": 82.9, "len_ocr": 47.8, "len_stickers": 58.4,
-                    "off_preguntas": -439.2, "off_ocr": -522.1, "off_stickers": -569.9
+                    "texto_puro": t_puro,
+                    "ocr": t_ocr,
+                    "preguntas": t_preg,
+                    "stickers": t_stick,
+                    "pct_texto": round(100.0 * t_puro / total, 1),
+                    "pct_ocr": round(100.0 * t_ocr / total, 1),
+                    "pct_preguntas": round(100.0 * t_preg / total, 1),
+                    "pct_stickers": round(100.0 * t_stick / total, 1),
+                    "circumference": c,
+                    "len_texto": len_t,
+                    "len_preguntas": len_p,
+                    "len_ocr": len_o,
+                    "len_stickers": len_s,
+                    "off_preguntas": off_p,
+                    "off_ocr": off_o,
+                    "off_stickers": off_s
                 }
     except Exception:
         return {
-            "total": 23371, "texto_puro": 16400, "ocr": 2742, "preguntas": 3100, "stickers": 98,
-            "pct_texto": 70.1, "pct_ocr": 11.7, "pct_preguntas": 13.2, "pct_stickers": 0.4,
-            "len_texto": 439.2, "len_preguntas": 82.9, "len_ocr": 47.8, "len_stickers": 58.4,
-            "off_preguntas": -439.2, "off_ocr": -522.1, "off_stickers": -569.9
+            "total": 23371, "texto_puro": 14319, "ocr": 2742, "preguntas": 6188, "stickers": 98,
+            "pct_texto": 61.3, "pct_ocr": 11.7, "pct_preguntas": 26.5, "pct_stickers": 0.4,
+            "circumference": 628.32,
+            "len_texto": 385.0, "len_preguntas": 166.4, "len_ocr": 73.7, "len_stickers": 2.6,
+            "off_preguntas": -385.0, "off_ocr": -551.4, "off_stickers": -625.1
         }
 
 def get_tendencia_temporal_resumen():

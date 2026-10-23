@@ -262,24 +262,46 @@
                         </div>
                     </div>
 
-                    <!-- Métricas KPIs del Rango Seleccionado -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 py-2 px-1 text-center border-b border-surface-container-high/40 font-mono text-label-sm">
+                    <!-- Métricas KPIs del Rango Seleccionado (5 Columnas con Picos y Caídas) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 py-2 px-1 text-center border-b border-surface-container-high/40 font-mono text-label-sm">
                         <div class="flex flex-col">
                             <span class="text-outline text-[10px] uppercase tracking-wider">Total Período</span>
                             <span id="timeline-kpi-total" class="text-on-surface font-bold text-[14px]">--</span>
                         </div>
                         <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider flex items-center justify-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px] text-tertiary">trending_up</span>
+                                Pico Máximo
+                            </span>
+                            <span id="timeline-kpi-pico" class="text-tertiary font-bold text-[13px]">--</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider flex items-center justify-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px] text-pink-400">trending_down</span>
+                                Caída Mínima (Valle)
+                            </span>
+                            <span id="timeline-kpi-caida" class="text-pink-400 font-bold text-[13px]">--</span>
+                        </div>
+                        <div class="flex flex-col">
                             <span class="text-outline text-[10px] uppercase tracking-wider">Preguntas</span>
-                            <span id="timeline-kpi-preguntas" class="text-secondary font-bold text-[14px]">--</span>
+                            <span id="timeline-kpi-preguntas" class="text-secondary font-bold text-[13px]">--</span>
                         </div>
-                        <div class="flex flex-col">
-                            <span class="text-outline text-[10px] uppercase tracking-wider">Pico Máximo</span>
-                            <span id="timeline-kpi-pico" class="text-tertiary font-bold text-[14px]">--</span>
+                        <div class="flex flex-col col-span-2 sm:col-span-1">
+                            <span class="text-outline text-[10px] uppercase tracking-wider">Promedio Actividad</span>
+                            <span id="timeline-kpi-promedio" class="text-on-surface font-bold text-[13px]">--</span>
                         </div>
-                        <div class="flex flex-col">
-                            <span class="text-outline text-[10px] uppercase tracking-wider">Promedio</span>
-                            <span id="timeline-kpi-promedio" class="text-on-surface font-bold text-[14px]">--</span>
-                        </div>
+                    </div>
+
+                    <!-- Badge de Estado Contextual Dinámico (Informativo y Drill-down) -->
+                    <div id="timeline-context-badge" class="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono py-1.5 px-2 bg-surface-container-low/60 rounded-md border border-outline/10 mt-1">
+                        <span id="timeline-context-text" class="text-on-surface-variant flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            <span>Evolución cronológica interactiva con caídas y picos estacionales</span>
+                        </span>
+                        <span id="timeline-drilldown-hint" class="text-primary text-[10.5px] font-medium hidden flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">zoom_in</span>
+                            <span>Haz clic en un año para ver sus caídas y picos mensuales</span>
+                        </span>
                     </div>
 
                     <!-- Visualizador SVG Interactivo con Crosshair y Tooltip -->

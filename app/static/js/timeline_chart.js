@@ -94,12 +94,10 @@ class TimelineChartEngine {
                     this.endDate = `${val}-12-31`;
                     if (dateInputs) dateInputs.classList.add('hidden');
 
-                    // Al seleccionar un año específico, si la granularidad era anual,
-                    // pasarla a 'monthly' para mostrar el desglose de los 12 meses de ese año
-                    if (this.granularity === 'yearly') {
-                        this.granularity = 'monthly';
-                        this.updateGranularityButtons('monthly');
-                    }
+                    // Al seleccionar un año específico, forzar granularidad 'monthly'
+                    // para mostrar el desglose de los 12 meses de ese año y visualizar caídas y picos
+                    this.granularity = 'monthly';
+                    this.updateGranularityButtons('monthly');
                 }
                 this.fetchData();
             });
@@ -119,7 +117,7 @@ class TimelineChartEngine {
             });
         }
 
-        // 4. Eventos de ratón para Tooltip y Crosshair
+        // 4. Eventos de ratón para Tooltip, Crosshair y Clic Drill-down
         if (this.svg) {
             this.svg.addEventListener('mousemove', (e) => this.handleMouseMove(e));
             this.svg.addEventListener('mouseleave', () => this.handleMouseLeave());
@@ -129,11 +127,47 @@ class TimelineChartEngine {
                 }
             });
             this.svg.addEventListener('touchend', () => this.handleMouseLeave());
+            this.svg.addEventListener('click', (e) => this.handleClick(e));
         }
 
         window.addEventListener('resize', () => {
             if (this.data) this.render();
         });
+    }
+
+    handleClick(e) {
+        if (!this.currentPoints || this.currentPoints.length === 0) return;
+
+        const rect = this.svg.getBoundingClientRect();
+        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+        const relX = ((clientX - rect.left) / rect.width) * 740;
+
+        let closest = this.currentPoints[0];
+        let minDist = Math.abs(relX - closest.x);
+
+        for (let i = 1; i < this.currentPoints.length; i++) {
+            const dist = Math.abs(relX - this.currentPoints[i].x);
+            if (dist < minDist) {
+                minDist = dist;
+                closest = this.currentPoints[i];
+            }
+        }
+
+        // Si estamos en granularidad anual, hacer drill-down directo al año clickeado
+        if (this.granularity === 'yearly' && closest.periodo) {
+            this.drillDownYear(closest.periodo);
+        }
+    }
+
+    drillDownYear(year) {
+        this.startDate = `${year}-01-01`;
+        this.endDate = `${year}-12-31`;
+        this.granularity = 'monthly';
+        this.updateGranularityButtons('monthly');
+        this.updatePresetButtons(year);
+        const dateInputs = document.getElementById('timeline-custom-dates');
+        if (dateInputs) dateInputs.classList.add('hidden');
+        this.fetchData();
     }
 
     async fetchData() {
@@ -165,15 +199,48 @@ class TimelineChartEngine {
         if (totalEl) totalEl.textContent = Number(kpis.total_periodo || 0).toLocaleString();
 
         const preguntasEl = document.getElementById('timeline-kpi-preguntas');
-        if (preguntasEl) preguntasEl.textContent = Number(kpis.total_preguntas || 0).toLocaleString();
+        if (preguntasEl) {
+            const pct = kpis.pct_preguntas || (kpis.total_periodo > 0 ? Math.round((kpis.total_preguntas / kpis.total_periodo) * 100) : 0);
+            preguntasEl.textContent = `${Number(kpis.total_preguntas || 0).toLocaleString()} (${pct}%)`;
+        }
 
         const picoEl = document.getElementById('timeline-kpi-pico');
-        if (picoEl && kpis.pico_maximo) {
-            picoEl.textContent = `${kpis.pico_maximo.periodo} (${Number(kpis.pico_maximo.total).toLocaleString()} msgs)`;
+        if (picoEl) {
+            if (kpis.pico_maximo && kpis.pico_maximo.label) {
+                picoEl.textContent = `${kpis.pico_maximo.label} (${Number(kpis.pico_maximo.total).toLocaleString()} msgs)`;
+            } else {
+                picoEl.textContent = '--';
+            }
+        }
+
+        const caidaEl = document.getElementById('timeline-kpi-caida');
+        if (caidaEl) {
+            if (kpis.caida_minima && kpis.caida_minima.label) {
+                caidaEl.textContent = `${kpis.caida_minima.label} (${Number(kpis.caida_minima.total).toLocaleString()} msgs)`;
+            } else {
+                caidaEl.textContent = '--';
+            }
         }
 
         const promEl = document.getElementById('timeline-kpi-promedio');
-        if (promEl) promEl.textContent = `${Number(kpis.promedio || 0).toLocaleString()} msgs/punto`;
+        if (promEl) promEl.textContent = `${Number(kpis.promedio || 0).toLocaleString()} / período`;
+
+        // Context Badge y Drill-down Hint
+        const contextText = document.getElementById('timeline-context-text');
+        const drilldownHint = document.getElementById('timeline-drilldown-hint');
+        if (contextText) {
+            if (this.granularity === 'yearly') {
+                contextText.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span> <span><strong>Vista Macro Interanual (2022-2026):</strong> Suma acumulada de mensajes por año.</span>`;
+                if (drilldownHint) drilldownHint.classList.remove('hidden');
+            } else if (this.startDate && this.endDate && this.startDate.slice(0, 4) === this.endDate.slice(0, 4)) {
+                const yr = this.startDate.slice(0, 4);
+                contextText.innerHTML = `<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> <span><strong>Desglose Mensual Año ${yr}:</strong> Caídas y picos estacionales visibles a lo largo de las 12 cohortes.</span>`;
+                if (drilldownHint) drilldownHint.classList.add('hidden');
+            } else {
+                contextText.innerHTML = `<span class="w-2 h-2 rounded-full bg-tertiary"></span> <span><strong>Evolución Cronológica Completa:</strong> Fluctuaciones de actividad académica, parciales y recesos.</span>`;
+                if (drilldownHint) drilldownHint.classList.add('hidden');
+            }
+        }
     }
 
     render() {
@@ -304,38 +371,84 @@ class TimelineChartEngine {
             }
         });
 
-        // 6. Renderizar Puntos Interactivos (Circles) para TODOS los puntos
+        // 6. Renderizar Puntos Interactivos (Circles) y Badges de Picos y Caídas
         this.currentPoints.forEach(p => {
             // Círculo exterior (Halo)
             const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             halo.setAttribute('cx', p.x);
             halo.setAttribute('cy', p.yTotal);
-            halo.setAttribute('r', this.granularity === 'yearly' ? '7' : (p.en_franja ? '6' : '4.5'));
-            halo.setAttribute('fill', p.en_franja === 'verano' ? 'rgba(244, 114, 182, 0.25)' : 'rgba(76, 215, 246, 0.25)');
+            halo.setAttribute('r', this.granularity === 'yearly' ? '8' : (p.en_franja ? '6' : '4.5'));
+            halo.setAttribute('fill', p.en_franja === 'verano' ? 'rgba(244, 114, 182, 0.25)' : (p.es_valle ? 'rgba(244, 114, 182, 0.35)' : 'rgba(76, 215, 246, 0.25)'));
             this.svg.appendChild(halo);
 
             // Círculo principal
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             circle.setAttribute('cx', p.x);
             circle.setAttribute('cy', p.yTotal);
-            circle.setAttribute('r', this.granularity === 'yearly' ? '4.5' : (p.en_franja ? '3.5' : '2.5'));
-            circle.setAttribute('fill', p.en_franja === 'verano' ? '#f472b6' : '#4cd7f6');
+            circle.setAttribute('r', this.granularity === 'yearly' ? '5.5' : (p.es_pico || p.es_valle ? '4.5' : (p.en_franja ? '3.5' : '2.5')));
+            circle.setAttribute('fill', p.es_valle ? '#f472b6' : (p.es_pico ? '#4edea3' : (p.en_franja === 'verano' ? '#f472b6' : '#4cd7f6')));
             circle.setAttribute('stroke', '#13141f');
             circle.setAttribute('stroke-width', '1.5');
+            if (this.granularity === 'yearly') {
+                circle.style.cursor = 'pointer';
+            }
             this.svg.appendChild(circle);
 
-            // Si es vista anual o hay pocos puntos, mostrar el valor numérico arriba del punto
-            if (this.granularity === 'yearly' || this.currentPoints.length <= 6) {
+            // Renderizado de Badges Explicativos para Picos y Caídas
+            if (p.es_pico) {
+                this.drawPointBadge(p, 'pico');
+            } else if (p.es_valle && this.currentPoints.length > 2) {
+                this.drawPointBadge(p, 'valle');
+            } else if (this.granularity === 'yearly') {
                 const valText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 valText.setAttribute('x', p.x);
-                valText.setAttribute('y', p.yTotal - 11);
+                valText.setAttribute('y', p.yTotal - 13);
                 valText.setAttribute('text-anchor', 'middle');
-                valText.setAttribute('class', 'font-mono text-[11px] font-bold');
+                valText.setAttribute('class', 'font-mono text-[11px] font-bold cursor-pointer');
                 valText.setAttribute('fill', '#4cd7f6');
                 valText.textContent = Number(p.total).toLocaleString();
                 this.svg.appendChild(valText);
             }
         });
+    }
+
+    drawPointBadge(p, type) {
+        const isPico = type === 'pico';
+        const badgeW = isPico ? 92 : 96;
+        const badgeH = 17;
+        const badgeX = Math.max(10, Math.min(740 - badgeW - 10, p.x - badgeW / 2));
+        
+        let badgeY = isPico ? (p.yTotal - 23) : (p.yTotal + 13);
+        if (badgeY < 18) badgeY = p.yTotal + 13;
+        if (badgeY > 205) badgeY = p.yTotal - 23;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', 'point-badge select-none pointer-events-none');
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', badgeX);
+        rect.setAttribute('y', badgeY);
+        rect.setAttribute('width', badgeW);
+        rect.setAttribute('height', badgeH);
+        rect.setAttribute('rx', '4');
+        rect.setAttribute('fill', isPico ? '#05232a' : '#2d091a');
+        rect.setAttribute('stroke', isPico ? '#4edea3' : '#f472b6');
+        rect.setAttribute('stroke-width', '1');
+        rect.setAttribute('opacity', '0.96');
+        g.appendChild(rect);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', badgeX + badgeW / 2);
+        text.setAttribute('y', badgeY + 11.5);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', isPico ? '#4edea3' : '#f472b6');
+        text.setAttribute('class', 'font-mono text-[9px] font-bold');
+        text.textContent = isPico 
+            ? `▲ Pico: ${Number(p.total).toLocaleString()}` 
+            : `▼ Caída: ${Number(p.total).toLocaleString()}`;
+        g.appendChild(text);
+
+        this.svg.appendChild(g);
     }
 
     renderSpecialBands(padTop, graphH, franjas) {
@@ -510,6 +623,25 @@ class TimelineChartEngine {
                 </div>`;
             }
 
+            let picoValleBadge = '';
+            if (closest.es_pico) {
+                picoValleBadge = `<div class="mt-1 px-1.5 py-0.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-[#4edea3] text-[9.5px] font-bold flex items-center gap-1">
+                    <span>▲</span> Pico Máximo de Actividad
+                </div>`;
+            } else if (closest.es_valle && this.currentPoints.length > 2) {
+                picoValleBadge = `<div class="mt-1 px-1.5 py-0.5 rounded bg-pink-950/90 border border-pink-500/40 text-[#f472b6] text-[9.5px] font-bold flex items-center gap-1">
+                    <span>▼</span> Caída Mínima (Receso Académico)
+                </div>`;
+            }
+
+            let drillHint = '';
+            if (this.granularity === 'yearly') {
+                drillHint = `<div class="mt-1.5 text-primary text-[10px] font-medium border-t border-outline/10 pt-1 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">zoom_in</span>
+                    <span>Clic para ver las caídas y picos de ${closest.label}</span>
+                </div>`;
+            }
+
             this.tooltip.innerHTML = `
                 <div class="font-mono text-[11px] text-outline font-semibold border-b border-outline/10 pb-1 flex items-center justify-between">
                     <span>${closest.periodo}</span>
@@ -529,7 +661,9 @@ class TimelineChartEngine {
                         <span class="font-bold font-mono text-on-surface">${Number(closest.preguntas).toLocaleString()} <span class="text-outline text-[10px]">(${pctPreguntas}%)</span></span>
                     </div>
                 </div>
+                ${picoValleBadge}
                 ${franjaBadge}
+                ${drillHint}
             `;
 
             const containerRect = this.container.getBoundingClientRect();

@@ -939,7 +939,18 @@ def get_timeline_series_data(start_date=None, end_date=None, granularity="monthl
                 data_points = []
                 total_sum = 0
                 preguntas_sum = 0
-                pico_max = {"periodo": "", "total": 0}
+                
+                min_tot = None
+                max_tot = -1
+                for r in rows:
+                    tot = int(r["total_mensajes"])
+                    if tot > max_tot:
+                        max_tot = tot
+                    if min_tot is None or tot < min_tot:
+                        min_tot = tot
+
+                pico_max = {"periodo": "", "label": "", "total": 0}
+                caida_min = {"periodo": "", "label": "", "total": 0}
 
                 for r in rows:
                     per = str(r["periodo"])
@@ -948,8 +959,6 @@ def get_timeline_series_data(start_date=None, end_date=None, granularity="monthl
 
                     total_sum += tot
                     preguntas_sum += preg
-                    if tot > pico_max["total"]:
-                        pico_max = {"periodo": per, "total": tot}
 
                     # Determinar etiqueta amigable
                     label = per
@@ -970,11 +979,21 @@ def get_timeline_series_data(start_date=None, end_date=None, granularity="monthl
                     elif granularity == "yearly":
                         label = f"{per}"
 
+                    es_pico = (tot == max_tot and max_tot > 0 and len(rows) > 1)
+                    es_valle = (tot == min_tot and len(rows) > 1)
+
+                    if tot == max_tot and not pico_max["label"]:
+                        pico_max = {"periodo": per, "label": label, "total": tot}
+                    if tot == min_tot and not caida_min["label"]:
+                        caida_min = {"periodo": per, "label": label, "total": tot}
+
                     data_points.append({
                         "periodo": per,
                         "label": label,
                         "total": tot,
                         "preguntas": preg,
+                        "es_pico": es_pico,
+                        "es_valle": es_valle,
                         "en_franja": en_franja,
                         "franja_nombre": franja_info["nombre"] if franja_info else None,
                         "franja_badge": franja_info["badge"] if franja_info else None,
@@ -988,7 +1007,9 @@ def get_timeline_series_data(start_date=None, end_date=None, granularity="monthl
                     "kpis": {
                         "total_periodo": total_sum,
                         "total_preguntas": preguntas_sum,
+                        "pct_preguntas": round(100.0 * preguntas_sum / max(total_sum, 1), 1),
                         "pico_maximo": pico_max,
+                        "caida_minima": caida_min,
                         "promedio": round(total_sum / max(len(data_points), 1), 1)
                     },
                     "data_points": data_points,

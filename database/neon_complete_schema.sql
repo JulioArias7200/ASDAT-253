@@ -334,7 +334,7 @@ BEGIN
 
     IF (TG_OP = 'DELETE') THEN
         v_old_json := to_jsonb(OLD);
-        v_pk_val := COALESCE(v_old_json->>'message_id', v_old_json->>'id', v_old_json->>'docente_id', v_old_json->>'codigo_materia', v_old_json->>'topico_id');
+        v_pk_val := COALESCE(v_old_json->>'message_id', v_old_json->>'id', v_old_json->>'emoji', v_old_json->>'token', v_old_json->>'docente_id', v_old_json->>'codigo_materia', v_old_json->>'topico_id');
         
         INSERT INTO bitacora_cambios (
             tabla_afectada, operacion, registro_id, datos_previos, datos_nuevos, diff_modificaciones,
@@ -348,7 +348,7 @@ BEGIN
     ELSIF (TG_OP = 'UPDATE') THEN
         v_old_json := to_jsonb(OLD);
         v_new_json := to_jsonb(NEW);
-        v_pk_val := COALESCE(v_new_json->>'message_id', v_new_json->>'id', v_new_json->>'docente_id', v_new_json->>'codigo_materia', v_new_json->>'topico_id');
+        v_pk_val := COALESCE(v_new_json->>'message_id', v_new_json->>'id', v_new_json->>'emoji', v_new_json->>'token', v_new_json->>'docente_id', v_new_json->>'codigo_materia', v_new_json->>'topico_id');
 
         FOR v_key IN SELECT jsonb_object_keys(v_new_json)
         LOOP
@@ -372,7 +372,7 @@ BEGIN
 
     ELSIF (TG_OP = 'INSERT') THEN
         v_new_json := to_jsonb(NEW);
-        v_pk_val := COALESCE(v_new_json->>'message_id', v_new_json->>'id', v_new_json->>'docente_id', v_new_json->>'codigo_materia', v_new_json->>'topico_id');
+        v_pk_val := COALESCE(v_new_json->>'message_id', v_new_json->>'id', v_new_json->>'emoji', v_new_json->>'token', v_new_json->>'docente_id', v_new_json->>'codigo_materia', v_new_json->>'topico_id');
 
         INSERT INTO bitacora_cambios (
             tabla_afectada, operacion, registro_id, datos_previos, datos_nuevos, diff_modificaciones,

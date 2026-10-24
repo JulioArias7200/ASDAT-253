@@ -1,820 +1,434 @@
-emoji,rango,count_total,count_texto,count_reacciones,significado_es,categoria_emocional,polaridad
-👍,1,4415,58,4357,Pulgar arriba (aprobación),aprobación,positivo
-👎,2,831,0,831,Pulgar abajo (desaprobación),desaprobación,negativo
-👉,3,211,211,0,Dedo apuntando a la derecha,dirección,neutro
-🤣,4,209,15,194,Cara revolcándose de risa,alegría,positivo
-❤,5,197,0,197,sin definición registrada,sin clasificar,neutro
-✅,6,189,189,0,Aprobado/correcto,positivo,positivo
-🔹,7,162,162,0,sin definición registrada,sin clasificar,neutro
-❤‍🔥,8,144,0,144,sin definición registrada,sin clasificar,neutro
-📍,9,143,143,0,Chincheta azul,neutral,neutro
-🚀,10,123,123,0,Cohete (éxito/rapidez),entusiasmo,positivo
-📅,11,115,115,0,sin definición registrada,sin clasificar,neutro
-🔥,12,113,98,15,Fuego (tendencia/ardiente),intensidad,intenso
-👀,13,106,92,14,sin definición registrada,sin clasificar,neutro
-📢,14,102,102,0,sin definición registrada,sin clasificar,neutro
-😢,15,97,70,27,Cara triste llorando,tristeza,negativo
-😁,16,90,32,58,Cara con amplia sonrisa,alegría,positivo
-🔗,17,89,89,0,sin definición registrada,sin clasificar,neutro
-🙏,18,85,82,3,Manos juntas (gracias / por favor),gratitud,positivo
-🎓,19,82,82,0,Birrete (graduación),logro,positivo
-📚,20,79,79,0,Libros (estudio),neutral,neutro
-✨,21,68,68,0,Destellos,positivo,positivo
-👏,22,65,3,62,Aplausos,aprobación,positivo
-📌,23,62,62,0,Chincheta roja,neutral,neutro
-😅,24,60,60,0,Cara con sudor frío (alivio nervioso),alivio,positivo
-🤡,25,56,5,51,Cara de payaso (ridículo),humor,neutro
-💡,26,55,55,0,sin definición registrada,sin clasificar,neutro
-⏰,27,52,52,0,sin definición registrada,sin clasificar,neutro
-😔,28,52,52,0,Cara reflexiva/pensativa,reflexión,neutro
-💻,29,51,51,0,Computadora portátil,neutral,neutro
-🥲,30,50,50,0,Cara llorando de emoción,emoción_mixta,positivo
-🤔,31,47,34,13,Cara pensativa,reflexión,neutro
-😊,32,46,46,0,Cara sonriente con ojos cerrados,alegría,positivo
-🎉,33,45,41,4,Celebración con confeti,celebración,positivo
-👌,34,45,37,8,sin definición registrada,sin clasificar,neutro
-🎯,35,40,40,0,Diana (meta lograda),logro,positivo
-😭,36,37,36,1,Cara llorando con fuerza,tristeza,negativo
-💰,37,35,35,0,sin definición registrada,sin clasificar,neutro
-️,38,34,34,0,sin definición registrada,sin clasificar,neutro
-📲,39,34,34,0,sin definición registrada,sin clasificar,neutro
-😱,40,34,15,19,sin definición registrada,sin clasificar,neutro
-🌟,41,32,32,0,Estrella brillante,positivo,positivo
-😂,42,32,32,0,Cara llorando de risa,alegría,positivo
-🏆,43,31,31,0,Trofeo,logro,positivo
-🥺,44,31,31,0,Cara con ojos de súplica,súplica,negativo
-🙌,45,26,26,0,sin definición registrada,sin clasificar,neutro
-🤖,46,26,26,0,sin definición registrada,sin clasificar,neutro
-🥹,47,26,26,0,Cara conteniendo lágrimas,emoción,positivo
-⚠️,48,25,25,0,Advertencia,advertencia,negativo
-🎁,49,25,25,0,Regalo,gratitud,positivo
-👇,50,25,25,0,Dedo apuntando abajo,dirección,neutro
-📝,51,25,25,0,Libreta,neutral,neutro
-🚩,52,25,25,0,sin definición registrada,sin clasificar,neutro
-💬,53,24,24,0,sin definición registrada,sin clasificar,neutro
-🖥️,54,24,24,0,Monitor de computadora,neutral,neutro
-🚨,55,23,23,0,sin definición registrada,sin clasificar,neutro
-😐,56,20,10,10,Cara neutral,neutral,neutro
-🥳,57,20,20,0,Cara de fiesta/celebración,celebración,positivo
-🎃,58,19,14,5,sin definición registrada,sin clasificar,neutro
-👥,59,19,19,0,sin definición registrada,sin clasificar,neutro
-🔴,60,19,19,0,sin definición registrada,sin clasificar,neutro
-🗓️,61,19,19,0,sin definición registrada,sin clasificar,neutro
-📱,62,16,16,0,Teléfono móvil,neutral,neutro
-😞,63,16,16,0,Cara decepcionada,decepción,negativo
-🤝,64,16,16,0,Apretón de manos (acuerdo),acuerdo,positivo
-🥳🥳🎉🎉🎉🎉,65,16,16,0,sin definición registrada,sin clasificar,neutro
-🎤,66,15,15,0,sin definición registrada,sin clasificar,neutro
-🐧,67,15,15,0,sin definición registrada,sin clasificar,neutro
-🐧⚙️,68,15,15,0,sin definición registrada,sin clasificar,neutro
-🗓,69,15,15,0,sin definición registrada,sin clasificar,neutro
-😃,70,15,15,0,Cara alegre con boca abierta,alegría,positivo
-😉,71,15,15,0,sin definición registrada,sin clasificar,neutro
-🙏🙏,72,15,15,0,sin definición registrada,sin clasificar,neutro
-🎉👍,73,14,14,0,sin definición registrada,sin clasificar,neutro
-👋,74,14,14,0,Saludo con la mano,saludo,positivo
-💪,75,14,14,0,Bíceps / fuerza,fuerza,positivo
-🌍,76,13,13,0,sin definición registrada,sin clasificar,neutro
-📈,77,13,13,0,Gráfico ascendente,neutral,neutro
-🕛,78,13,13,0,sin definición registrada,sin clasificar,neutro
-🌐,79,12,12,0,sin definición registrada,sin clasificar,neutro
-🎮,80,12,12,0,sin definición registrada,sin clasificar,neutro
-🕒,81,12,12,0,sin definición registrada,sin clasificar,neutro
-🙏🏻,82,12,12,0,sin definición registrada,sin clasificar,neutro
-🥇,83,12,12,0,Medalla de oro,logro,positivo
-🥈,84,12,12,0,Medalla de plata,logro,positivo
-🥲🥲,85,12,12,0,sin definición registrada,sin clasificar,neutro
-👀👀,86,11,11,0,sin definición registrada,sin clasificar,neutro
-👆,87,11,11,0,Dedo apuntando arriba,dirección,neutro
-💚,88,11,11,0,Corazón verde,amor,positivo
-💸,89,11,11,0,sin definición registrada,sin clasificar,neutro
-🕗,90,11,11,0,sin definición registrada,sin clasificar,neutro
-🫠,91,11,11,0,Cara derritiéndose (vergüenza),vergüenza,neutro
-🤮,92,11,0,11,sin definición registrada,sin clasificar,neutro
-♟️🔥,93,10,10,0,sin definición registrada,sin clasificar,neutro
-🇧🇴,94,10,10,0,sin definición registrada,sin clasificar,neutro
-💵,95,10,10,0,sin definición registrada,sin clasificar,neutro
-📄,96,10,10,0,sin definición registrada,sin clasificar,neutro
-📋,97,10,10,0,Portapapeles,neutral,neutro
-📞,98,10,10,0,sin definición registrada,sin clasificar,neutro
-🕙,99,10,10,0,sin definición registrada,sin clasificar,neutro
-🖥,100,10,10,0,sin definición registrada,sin clasificar,neutro
-😬,101,10,10,0,Cara de mueca incómoda,incomodidad,negativo
-😳,102,10,10,0,sin definición registrada,sin clasificar,neutro
-🤭,103,10,10,0,Cara tapando la boca (risita),humor,neutro
-🤯,104,10,1,9,sin definición registrada,sin clasificar,neutro
-🥉,105,10,10,0,Medalla de bronce,logro,positivo
-🧐,106,10,10,0,Cara con monóculo (crítico),curioso,positivo
-⚙️📊,107,9,9,0,sin definición registrada,sin clasificar,neutro
-🎟️,108,9,9,0,sin definición registrada,sin clasificar,neutro
-👨‍🏫,109,9,9,0,Profesor,neutral,neutro
-💻✨,110,9,9,0,sin definición registrada,sin clasificar,neutro
-📊,111,9,9,0,Gráfico de barras,neutral,neutro
-🔐,112,9,9,0,sin definición registrada,sin clasificar,neutro
-🔵,113,9,9,0,sin definición registrada,sin clasificar,neutro
-🔺,114,9,9,0,sin definición registrada,sin clasificar,neutro
-🔻,115,9,9,0,sin definición registrada,sin clasificar,neutro
-🕐,116,9,9,0,sin definición registrada,sin clasificar,neutro
-😂😂,117,9,9,0,sin definición registrada,sin clasificar,neutro
-🙄,118,9,9,0,sin definición registrada,sin clasificar,neutro
-🤨,119,9,1,8,sin definición registrada,sin clasificar,neutro
-🥰,120,9,0,9,Cara con tres corazones (afecto),amor,positivo
-⚠,121,8,8,0,sin definición registrada,sin clasificar,neutro
-🎓✨,122,8,8,0,sin definición registrada,sin clasificar,neutro
-💀,123,8,8,0,Calavera (muerto de risa/peligro),humor_negro,positivo
-📆,124,8,8,0,sin definición registrada,sin clasificar,neutro
-📜,125,8,8,0,sin definición registrada,sin clasificar,neutro
-📣,126,8,8,0,sin definición registrada,sin clasificar,neutro
-🙂,127,8,8,0,Cara ligeramente sonriente,alegría,positivo
-🤩,128,8,8,0,Cara con estrellas en los ojos (fascinado),admiración,positivo
-🧠,129,8,8,0,sin definición registrada,sin clasificar,neutro
-🫂,130,8,8,0,sin definición registrada,sin clasificar,neutro
-☁️,131,7,7,0,sin definición registrada,sin clasificar,neutro
-♟️,132,7,7,0,sin definición registrada,sin clasificar,neutro
-❗✨,133,7,7,0,sin definición registrada,sin clasificar,neutro
-☕,134,7,7,0,Café,neutro,neutro
-⭐,135,7,7,0,Estrella,positivo,positivo
-🐉,136,7,7,0,sin definición registrada,sin clasificar,neutro
-🐧🔩,137,7,7,0,sin definición registrada,sin clasificar,neutro
-👤,138,7,7,0,sin definición registrada,sin clasificar,neutro
-👩‍💻,139,7,7,0,sin definición registrada,sin clasificar,neutro
-📘,140,7,7,0,sin definición registrada,sin clasificar,neutro
-🔐📡,141,7,7,0,sin definición registrada,sin clasificar,neutro
-🔩✨,142,7,7,0,sin definición registrada,sin clasificar,neutro
-😎,143,7,6,1,Cara con lentes (cool/confiado),confianza,positivo
-😑,144,7,7,0,Cara inexpresiva,neutral,neutro
-😢😢,145,7,7,0,sin definición registrada,sin clasificar,neutro
-🤙,146,7,7,0,Llamada telefónica,comunicación,neutro
-☝️,147,6,6,0,Dedo índice arriba (ojo),énfasis,neutro
-♟️🧠,148,6,6,0,sin definición registrada,sin clasificar,neutro
-❓,149,6,6,0,sin definición registrada,sin clasificar,neutro
-⚙️🐧,150,6,6,0,sin definición registrada,sin clasificar,neutro
-🏆💻,151,6,6,0,sin definición registrada,sin clasificar,neutro
-🐍,152,6,6,0,sin definición registrada,sin clasificar,neutro
-👩‍🏫,153,6,6,0,Profesora,neutral,neutro
-👻,154,6,6,0,sin definición registrada,sin clasificar,neutro
-💫,155,6,6,0,Destellos girando,positivo,positivo
-💻📚,156,6,6,0,sin definición registrada,sin clasificar,neutro
-📎,157,6,6,0,sin definición registrada,sin clasificar,neutro
-🕕,158,6,6,0,sin definición registrada,sin clasificar,neutro
-🕘,159,6,6,0,sin definición registrada,sin clasificar,neutro
-😂😂😂,160,6,6,0,sin definición registrada,sin clasificar,neutro
-😿,161,6,6,0,sin definición registrada,sin clasificar,neutro
-🛑,162,6,6,0,sin definición registrada,sin clasificar,neutro
-🤓,163,6,6,0,Cara de nerd/estudioso,intelectual,positivo
-⏳,164,5,5,0,sin definición registrada,sin clasificar,neutro
-➡️,165,5,5,0,sin definición registrada,sin clasificar,neutro
-✔️,166,5,5,0,sin definición registrada,sin clasificar,neutro
-🌎,167,5,5,0,sin definición registrada,sin clasificar,neutro
-🌐💻,168,5,5,0,sin definición registrada,sin clasificar,neutro
-🎈,169,5,5,0,Globo,celebración,positivo
-🎊,170,5,5,0,Fiesta,celebración,positivo
-🏅,171,5,5,0,sin definición registrada,sin clasificar,neutro
-🏫,172,5,5,0,Escuela/Universidad,neutral,neutro
-💛,173,5,5,0,Corazón amarillo,amor,positivo
-🔄⚙️,174,5,5,0,sin definición registrada,sin clasificar,neutro
-🔒🔑,175,5,5,0,sin definición registrada,sin clasificar,neutro
-🕓,176,5,5,0,sin definición registrada,sin clasificar,neutro
-🕔,177,5,5,0,sin definición registrada,sin clasificar,neutro
-🕵️‍♂️🔍,178,5,5,0,sin definición registrada,sin clasificar,neutro
-🖼🔒,179,5,5,0,sin definición registrada,sin clasificar,neutro
-😀,180,5,5,0,Cara ampliamente sonriente,alegría,positivo
-😄,181,5,5,0,Cara sonriente con ojos abiertos,alegría,positivo
-😈,182,5,5,0,Cara de diablillo sonriente,malicia,negativo
-😕,183,5,5,0,Cara confundida,confusión,neutro
-😪,184,5,5,0,Cara con sueño,sueño,neutro
-🙈,185,5,4,1,sin definición registrada,sin clasificar,neutro
-🟡,186,5,5,0,sin definición registrada,sin clasificar,neutro
-🤗,187,5,4,1,Cara de abrazo cálido,calidez,positivo
-🤣🤣,188,5,5,0,sin definición registrada,sin clasificar,neutro
-🥳✨,189,5,5,0,sin definición registrada,sin clasificar,neutro
-🥳🥳🥳,190,5,5,0,sin definición registrada,sin clasificar,neutro
-🫡,191,5,5,0,Cara saludando militarmente,respeto,positivo
-🌚,192,5,0,5,sin definición registrada,sin clasificar,neutro
-🤬,193,5,0,5,Cara furiosa con insultos,enojo,negativo
-☺️,194,4,4,0,sin definición registrada,sin clasificar,neutro
-✳️,195,4,4,0,sin definición registrada,sin clasificar,neutro
-❗❗,196,4,4,0,sin definición registrada,sin clasificar,neutro
-⚡,197,4,4,0,Rayo (energía),energía,positivo
-🆕,198,4,4,0,sin definición registrada,sin clasificar,neutro
-🌸,199,4,4,0,sin definición registrada,sin clasificar,neutro
-🎮🎮🎮,200,4,4,0,sin definición registrada,sin clasificar,neutro
-🎶,201,4,4,0,sin definición registrada,sin clasificar,neutro
-👩‍💻👨‍💻,202,4,4,0,sin definición registrada,sin clasificar,neutro
-👴,203,4,4,0,sin definición registrada,sin clasificar,neutro
-💙❤️,204,4,4,0,sin definición registrada,sin clasificar,neutro
-💻🎓,205,4,4,0,sin definición registrada,sin clasificar,neutro
-📕,206,4,4,0,sin definición registrada,sin clasificar,neutro
-🔊,207,4,4,0,sin definición registrada,sin clasificar,neutro
-🔴🔵🔴🔵🔴🔵🔴🔵🔴🔵,208,4,4,0,sin definición registrada,sin clasificar,neutro
-🔵🔴,209,4,4,0,sin definición registrada,sin clasificar,neutro
-🔸,210,4,4,0,sin definición registrada,sin clasificar,neutro
-🕖,211,4,4,0,sin definición registrada,sin clasificar,neutro
-😂😂😂😂,212,4,4,0,sin definición registrada,sin clasificar,neutro
-😏,213,4,4,0,sin definición registrada,sin clasificar,neutro
-😓,214,4,4,0,sin definición registrada,sin clasificar,neutro
-😢😢😢😢,215,4,4,0,sin definición registrada,sin clasificar,neutro
-😮‍💨,216,4,4,0,sin definición registrada,sin clasificar,neutro
-🙌🏻,217,4,4,0,sin definición registrada,sin clasificar,neutro
-🟢,218,4,4,0,sin definición registrada,sin clasificar,neutro
-🟢⚽,219,4,4,0,sin definición registrada,sin clasificar,neutro
-⚽🟢,220,4,4,0,sin definición registrada,sin clasificar,neutro
-🤓💻,221,4,4,0,sin definición registrada,sin clasificar,neutro
-🤧,222,4,4,0,sin definición registrada,sin clasificar,neutro
-🥲🥲🥲,223,4,4,0,sin definición registrada,sin clasificar,neutro
-🫠🫠,224,4,4,0,sin definición registrada,sin clasificar,neutro
-⏱️,225,3,3,0,sin definición registrada,sin clasificar,neutro
-⌛,226,3,3,0,sin definición registrada,sin clasificar,neutro
-⬇️,227,3,3,0,sin definición registrada,sin clasificar,neutro
-❄️,228,3,3,0,Nieve,neutral,neutro
-✨️,229,3,3,0,sin definición registrada,sin clasificar,neutro
-⚡️,230,3,3,0,sin definición registrada,sin clasificar,neutro
-⚔️,231,3,3,0,sin definición registrada,sin clasificar,neutro
-🍄,232,3,3,0,sin definición registrada,sin clasificar,neutro
-🎉✨,233,3,3,0,sin definición registrada,sin clasificar,neutro
-🎙️,234,3,3,0,sin definición registrada,sin clasificar,neutro
-🎟,235,3,3,0,sin definición registrada,sin clasificar,neutro
-🎮✨,236,3,3,0,sin definición registrada,sin clasificar,neutro
-🎮🔥,237,3,3,0,sin definición registrada,sin clasificar,neutro
-🎲🧩,238,3,3,0,sin definición registrada,sin clasificar,neutro
-🏐,239,3,3,0,sin definición registrada,sin clasificar,neutro
-🏐💻,240,3,3,0,sin definición registrada,sin clasificar,neutro
-🏛️,241,3,3,0,sin definición registrada,sin clasificar,neutro
-👈,242,3,3,0,Dedo apuntando a la izquierda,dirección,neutro
-👉🏻,243,3,3,0,sin definición registrada,sin clasificar,neutro
-👍🏻,244,3,3,0,sin definición registrada,sin clasificar,neutro
-👍👍👍,245,3,3,0,sin definición registrada,sin clasificar,neutro
-👑,246,3,3,0,Corona,logro,positivo
-👑♟️,247,3,3,0,sin definición registrada,sin clasificar,neutro
-👨‍💻,248,3,3,0,sin definición registrada,sin clasificar,neutro
-👾,249,3,3,0,sin definición registrada,sin clasificar,neutro
-💃🕺,250,3,3,0,sin definición registrada,sin clasificar,neutro
-💪🏻,251,3,3,0,sin definición registrada,sin clasificar,neutro
-💪💻,252,3,3,0,sin definición registrada,sin clasificar,neutro
-💯,253,3,3,0,100 puntos (perfecto),perfección,positivo
-💻🏐,254,3,3,0,sin definición registrada,sin clasificar,neutro
-💼,255,3,3,0,sin definición registrada,sin clasificar,neutro
-📗,256,3,3,0,sin definición registrada,sin clasificar,neutro
-📚✨,257,3,3,0,sin definición registrada,sin clasificar,neutro
-📚🤝,258,3,3,0,sin definición registrada,sin clasificar,neutro
-📩,259,3,3,0,sin definición registrada,sin clasificar,neutro
-🔔,260,3,3,0,sin definición registrada,sin clasificar,neutro
-🔢,261,3,3,0,sin definición registrada,sin clasificar,neutro
-🔥♟️,262,3,3,0,sin definición registrada,sin clasificar,neutro
-🔩,263,3,3,0,sin definición registrada,sin clasificar,neutro
-🕑,264,3,3,0,sin definición registrada,sin clasificar,neutro
-😁👍,265,3,3,0,sin definición registrada,sin clasificar,neutro
-😅😅,266,3,3,0,sin definición registrada,sin clasificar,neutro
-😌,267,3,3,0,sin definición registrada,sin clasificar,neutro
-😒,268,3,3,0,Cara de disgusto/desinterés,desagrado,negativo
-😔😔,269,3,3,0,sin definición registrada,sin clasificar,neutro
-😥,270,3,3,0,sin definición registrada,sin clasificar,neutro
-😫,271,3,3,0,Cara exhausta,agotamiento,negativo
-😬😬😬,272,3,3,0,sin definición registrada,sin clasificar,neutro
-😭😭😭,273,3,3,0,sin definición registrada,sin clasificar,neutro
-🙃,274,3,3,0,sin definición registrada,sin clasificar,neutro
-🙌🏼👇🏻,275,3,3,0,sin definición registrada,sin clasificar,neutro
-🙏🏻🙏🏻🙏🏻,276,3,3,0,sin definición registrada,sin clasificar,neutro
-🤑👌,277,3,3,0,sin definición registrada,sin clasificar,neutro
-🤓😎,278,3,3,0,sin definición registrada,sin clasificar,neutro
-🤔🤔🤔,279,3,3,0,sin definición registrada,sin clasificar,neutro
-🤩🤩🥳🥳,280,3,3,0,sin definición registrada,sin clasificar,neutro
-🥃,281,3,3,0,sin definición registrada,sin clasificar,neutro
-🥺🥺🥺,282,3,3,0,sin definición registrada,sin clasificar,neutro
-🧠📊,283,3,3,0,sin definición registrada,sin clasificar,neutro
-🪙,284,3,3,0,sin definición registrada,sin clasificar,neutro
-🪪,285,3,3,0,sin definición registrada,sin clasificar,neutro
-🫥,286,3,3,0,sin definición registrada,sin clasificar,neutro
-😨,287,3,0,3,sin definición registrada,sin clasificar,neutro
-☄,288,2,2,0,sin definición registrada,sin clasificar,neutro
-☠️,289,2,2,0,sin definición registrada,sin clasificar,neutro
-♟️💻,290,2,2,0,sin definición registrada,sin clasificar,neutro
-♦,291,2,2,0,sin definición registrada,sin clasificar,neutro
-✍,292,2,2,0,sin definición registrada,sin clasificar,neutro
-✍️,293,2,2,0,sin definición registrada,sin clasificar,neutro
-✏️,294,2,2,0,Lápiz,neutral,neutro
-❤️,295,2,2,0,Corazón rojo,amor,positivo
-❤️💛,296,2,2,0,sin definición registrada,sin clasificar,neutro
-✅🚀,297,2,2,0,sin definición registrada,sin clasificar,neutro
-✨🎉,298,2,2,0,sin definición registrada,sin clasificar,neutro
-✨🚀,299,2,2,0,sin definición registrada,sin clasificar,neutro
-⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️,300,2,2,0,sin definición registrada,sin clasificar,neutro
-⚡🏆,301,2,2,0,sin definición registrada,sin clasificar,neutro
-⚖️,302,2,2,0,sin definición registrada,sin clasificar,neutro
-⚙️,303,2,2,0,sin definición registrada,sin clasificar,neutro
-⚛️,304,2,2,0,sin definición registrada,sin clasificar,neutro
-⭐️,305,2,2,0,sin definición registrada,sin clasificar,neutro
-🇰🇷,306,2,2,0,sin definición registrada,sin clasificar,neutro
-🇺🇸,307,2,2,0,sin definición registrada,sin clasificar,neutro
-🌑,308,2,2,0,sin definición registrada,sin clasificar,neutro
-🌴,309,2,2,0,sin definición registrada,sin clasificar,neutro
-🍬,310,2,2,0,sin definición registrada,sin clasificar,neutro
-🍸,311,2,2,0,sin definición registrada,sin clasificar,neutro
-🍺🍻🥃,312,2,2,0,sin definición registrada,sin clasificar,neutro
-🍾,313,2,2,0,sin definición registrada,sin clasificar,neutro
-🎃🔥,314,2,2,0,sin definición registrada,sin clasificar,neutro
-🎇,315,2,2,0,sin definición registrada,sin clasificar,neutro
-🎓💻,316,2,2,0,sin definición registrada,sin clasificar,neutro
-🎥,317,2,2,0,sin definición registrada,sin clasificar,neutro
-🎨,318,2,2,0,sin definición registrada,sin clasificar,neutro
-🎨💡,319,2,2,0,sin definición registrada,sin clasificar,neutro
-🎪,320,2,2,0,sin definición registrada,sin clasificar,neutro
-🎫,321,2,2,0,sin definición registrada,sin clasificar,neutro
-🎭,322,2,2,0,sin definición registrada,sin clasificar,neutro
-🎲,323,2,2,0,sin definición registrada,sin clasificar,neutro
-🏆⚡,324,2,2,0,sin definición registrada,sin clasificar,neutro
-🏴‍☠️,325,2,2,0,sin definición registrada,sin clasificar,neutro
-🐲,326,2,2,0,sin definición registrada,sin clasificar,neutro
-👆👆👆👆,327,2,2,0,sin definición registrada,sin clasificar,neutro
-👉👈,328,2,2,0,sin definición registrada,sin clasificar,neutro
-👋🏻,329,2,2,0,sin definición registrada,sin clasificar,neutro
-👌🏻,330,2,2,0,sin definición registrada,sin clasificar,neutro
-👍👍,331,2,2,0,sin definición registrada,sin clasificar,neutro
-👍😁,332,2,2,0,sin definición registrada,sin clasificar,neutro
-👏👏,333,2,2,0,sin definición registrada,sin clasificar,neutro
-👨‍🏫👏,334,2,2,0,sin definición registrada,sin clasificar,neutro
-💁🏻‍♀️,335,2,2,0,sin definición registrada,sin clasificar,neutro
-💁🏻‍♂️,336,2,2,0,sin definición registrada,sin clasificar,neutro
-💎,337,2,2,0,sin definición registrada,sin clasificar,neutro
-💙🐍💛,338,2,2,0,sin definición registrada,sin clasificar,neutro
-💚💙🤍,339,2,2,0,sin definición registrada,sin clasificar,neutro
-💛❤️,340,2,2,0,sin definición registrada,sin clasificar,neutro
-💥,341,2,2,0,Explosión,sorpresa,neutro
-💩,342,2,1,1,sin definición registrada,sin clasificar,neutro
-💻♟️,343,2,2,0,sin definición registrada,sin clasificar,neutro
-💻📈,344,2,2,0,sin definición registrada,sin clasificar,neutro
-💻🔥,345,2,2,0,sin definición registrada,sin clasificar,neutro
-📌📌,346,2,2,0,sin definición registrada,sin clasificar,neutro
-📖,347,2,2,0,Libro abierto,neutral,neutro
-📝📌,348,2,2,0,sin definición registrada,sin clasificar,neutro
-📸,349,2,2,0,sin definición registrada,sin clasificar,neutro
-🔊🔊🔊,350,2,2,0,sin definición registrada,sin clasificar,neutro
-🔍,351,2,2,0,sin definición registrada,sin clasificar,neutro
-🔒🛡,352,2,2,0,sin definición registrada,sin clasificar,neutro
-🔥💻,353,2,2,0,sin definición registrada,sin clasificar,neutro
-🔧,354,2,2,0,sin definición registrada,sin clasificar,neutro
-🔮,355,2,2,0,sin definición registrada,sin clasificar,neutro
-🔷,356,2,2,0,sin definición registrada,sin clasificar,neutro
-🕹️,357,2,2,0,sin definición registrada,sin clasificar,neutro
-🗣️,358,2,2,0,sin definición registrada,sin clasificar,neutro
-🗨️,359,2,2,0,sin definición registrada,sin clasificar,neutro
-🗿,360,2,1,1,sin definición registrada,sin clasificar,neutro
-😆,361,2,2,0,Cara sonriente radiante,alegría,positivo
-😉👌,362,2,2,0,sin definición registrada,sin clasificar,neutro
-😏🤭,363,2,2,0,sin definición registrada,sin clasificar,neutro
-😓😓,364,2,2,0,sin definición registrada,sin clasificar,neutro
-😜,365,2,2,0,sin definición registrada,sin clasificar,neutro
-😡,366,2,2,0,Cara muy enojada,enojo,negativo
-😣,367,2,2,0,sin definición registrada,sin clasificar,neutro
-😭😭😭😭,368,2,2,0,sin definición registrada,sin clasificar,neutro
-😶,369,2,2,0,sin definición registrada,sin clasificar,neutro
-🙂‍,370,2,2,0,sin definición registrada,sin clasificar,neutro
-🙏🙏🙏,371,2,2,0,sin definición registrada,sin clasificar,neutro
-🙏🙏🙏🙏,372,2,2,0,sin definición registrada,sin clasificar,neutro
-🚀✨,373,2,2,0,sin definición registrada,sin clasificar,neutro
-🚀🔥,374,2,2,0,sin definición registrada,sin clasificar,neutro
-🟠,375,2,2,0,sin definición registrada,sin clasificar,neutro
-🟣,376,2,2,0,sin definición registrada,sin clasificar,neutro
-🤑,377,2,2,0,Cara de dinero,codicia,neutro
-🤔🤔,378,2,2,0,sin definición registrada,sin clasificar,neutro
-🤔🤔🤔🤔,379,2,2,0,sin definición registrada,sin clasificar,neutro
-🤖✨,380,2,2,0,sin definición registrada,sin clasificar,neutro
-🤖💻,381,2,2,0,sin definición registrada,sin clasificar,neutro
-🤖🚀,382,2,2,0,sin definición registrada,sin clasificar,neutro
-🤠,383,2,2,0,sin definición registrada,sin clasificar,neutro
-🤣🤣🤣,384,2,2,0,sin definición registrada,sin clasificar,neutro
-🤧🙃,385,2,2,0,sin definición registrada,sin clasificar,neutro
-🤧🤧,386,2,2,0,sin definición registrada,sin clasificar,neutro
-🤷,387,2,2,0,sin definición registrada,sin clasificar,neutro
-🤷‍♂,388,2,2,0,sin definición registrada,sin clasificar,neutro
-🥵,389,2,2,0,sin definición registrada,sin clasificar,neutro
-️🥵,390,2,2,0,sin definición registrada,sin clasificar,neutro
-🥺🥺,391,2,2,0,sin definición registrada,sin clasificar,neutro
-🧐🧐🧐,392,2,2,0,sin definición registrada,sin clasificar,neutro
-🧑‍🏫,393,2,2,0,sin definición registrada,sin clasificar,neutro
-🧑‍💻,394,2,2,0,sin definición registrada,sin clasificar,neutro
-🧩,395,2,2,0,sin definición registrada,sin clasificar,neutro
-🪪📢,396,2,2,0,sin definición registrada,sin clasificar,neutro
-🫣,397,2,2,0,Cara asomándose tímidamente,timidez,neutro
-🦄,398,2,0,2,sin definición registrada,sin clasificar,neutro
-⚽,399,1,1,0,sin definición registrada,sin clasificar,neutro
-➕,400,1,1,0,sin definición registrada,sin clasificar,neutro
-⏱️✅,401,1,1,0,sin definición registrada,sin clasificar,neutro
-⏳⚡,402,1,1,0,sin definición registrada,sin clasificar,neutro
-⌚,403,1,1,0,sin definición registrada,sin clasificar,neutro
-⌚⌚⌚⌚⌚,404,1,1,0,sin definición registrada,sin clasificar,neutro
-⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️,405,1,1,0,sin definición registrada,sin clasificar,neutro
-⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️,406,1,1,0,sin definición registrada,sin clasificar,neutro
-☝,407,1,1,0,sin definición registrada,sin clasificar,neutro
-☁️️,408,1,1,0,sin definición registrada,sin clasificar,neutro
-☃️,409,1,1,0,sin definición registrada,sin clasificar,neutro
-☑️,410,1,1,0,sin definición registrada,sin clasificar,neutro
-☠🤡,411,1,1,0,sin definición registrada,sin clasificar,neutro
-☹,412,1,1,0,sin definición registrada,sin clasificar,neutro
-♀,413,1,1,0,sin definición registrada,sin clasificar,neutro
-♂,414,1,1,0,sin definición registrada,sin clasificar,neutro
-✈️,415,1,1,0,sin definición registrada,sin clasificar,neutro
-✌🏻,416,1,1,0,sin definición registrada,sin clasificar,neutro
-✌🏼,417,1,1,0,sin definición registrada,sin clasificar,neutro
-✌🏼😅,418,1,1,0,sin definición registrada,sin clasificar,neutro
-❇️,419,1,1,0,sin definición registrada,sin clasificar,neutro
-❎,420,1,1,0,sin definición registrada,sin clasificar,neutro
-❔,421,1,1,0,sin definición registrada,sin clasificar,neutro
-❓❓❓,422,1,1,0,sin definición registrada,sin clasificar,neutro
-❓❓❓❓,423,1,1,0,sin definición registrada,sin clasificar,neutro
-❗,424,1,1,0,Signo de exclamación,énfasis,neutro
-❗❗❗,425,1,1,0,sin definición registrada,sin clasificar,neutro
-❗❗❗❗❗,426,1,1,0,sin definición registrada,sin clasificar,neutro
-❤️‍🔥,427,1,1,0,Corazón en llamas (pasión),amor,positivo
-❤️🖤💙,428,1,1,0,sin definición registrada,sin clasificar,neutro
-❤️‍🩹,429,1,1,0,Corazón vendado,amor,positivo
-❤️‍🩹🎓,430,1,1,0,sin definición registrada,sin clasificar,neutro
-✅️,431,1,1,0,sin definición registrada,sin clasificar,neutro
-✅✅✅✅✅✅✅✅✅✅✅,432,1,1,0,sin definición registrada,sin clasificar,neutro
-✋,433,1,1,0,Mano levantada (alto/hola),saludo,positivo
-✋🏼,434,1,1,0,sin definición registrada,sin clasificar,neutro
-✨✅,435,1,1,0,sin definición registrada,sin clasificar,neutro
-✨⭐,436,1,1,0,sin definición registrada,sin clasificar,neutro
-✨🎟,437,1,1,0,sin definición registrada,sin clasificar,neutro
-✨👑,438,1,1,0,sin definición registrada,sin clasificar,neutro
-✨👽🚀,439,1,1,0,sin definición registrada,sin clasificar,neutro
-✨📚,440,1,1,0,sin definición registrada,sin clasificar,neutro
-✨📢,441,1,1,0,sin definición registrada,sin clasificar,neutro
-✨️😁,442,1,1,0,sin definición registrada,sin clasificar,neutro
-✨😃🤗,443,1,1,0,sin definición registrada,sin clasificar,neutro
-✨🚨,444,1,1,0,sin definición registrada,sin clasificar,neutro
-⚠️✨,445,1,1,0,sin definición registrada,sin clasificar,neutro
-⚡⏳,446,1,1,0,sin definición registrada,sin clasificar,neutro
-♾️,447,1,1,0,sin definición registrada,sin clasificar,neutro
-⚔,448,1,1,0,sin definición registrada,sin clasificar,neutro
-⚙️⚡🔬,449,1,1,0,sin definición registrada,sin clasificar,neutro
-⚰,450,1,1,0,sin definición registrada,sin clasificar,neutro
-⛽💸,451,1,1,0,sin definición registrada,sin clasificar,neutro
-🇧🇴✨,452,1,1,0,sin definición registrada,sin clasificar,neutro
-🇧🇴⭐️,453,1,1,0,sin definición registrada,sin clasificar,neutro
-🇧🇴🌎,454,1,1,0,sin definición registrada,sin clasificar,neutro
-🇧🇴📚,455,1,1,0,sin definición registrada,sin clasificar,neutro
-🇫🇷,456,1,1,0,sin definición registrada,sin clasificar,neutro
-🇯🇵,457,1,1,0,sin definición registrada,sin clasificar,neutro
-🇲🇾,458,1,1,0,sin definición registrada,sin clasificar,neutro
-🌌,459,1,1,0,sin definición registrada,sin clasificar,neutro
-️🌍,460,1,1,0,sin definición registrada,sin clasificar,neutro
-🌍✈,461,1,1,0,sin definición registrada,sin clasificar,neutro
-🌍✨,462,1,1,0,sin definición registrada,sin clasificar,neutro
-🌍💻,463,1,1,0,sin definición registrada,sin clasificar,neutro
-🌎🇧🇴,464,1,1,0,sin definición registrada,sin clasificar,neutro
-🌐💡,465,1,1,0,sin definición registrada,sin clasificar,neutro
-🌟🚀,466,1,1,0,sin definición registrada,sin clasificar,neutro
-🌡,467,1,1,0,sin definición registrada,sin clasificar,neutro
-🌡🌠,468,1,1,0,sin definición registrada,sin clasificar,neutro
-🌳,469,1,1,0,sin definición registrada,sin clasificar,neutro
-🌷,470,1,1,0,sin definición registrada,sin clasificar,neutro
-🌻,471,1,1,0,sin definición registrada,sin clasificar,neutro
-🌿,472,1,1,0,sin definición registrada,sin clasificar,neutro
-🍀,473,1,1,0,sin definición registrada,sin clasificar,neutro
-🍃,474,1,1,0,sin definición registrada,sin clasificar,neutro
-🍪,475,1,1,0,sin definición registrada,sin clasificar,neutro
-🍫,476,1,1,0,Chocolate,satisfacción,positivo
-🍲🚨,477,1,1,0,sin definición registrada,sin clasificar,neutro
-🍷,478,1,1,0,sin definición registrada,sin clasificar,neutro
-🍹,479,1,1,0,sin definición registrada,sin clasificar,neutro
-🍺,480,1,1,0,Cerveza,neutro,neutro
-🍾🍻,481,1,1,0,sin definición registrada,sin clasificar,neutro
-🎀,482,1,1,0,sin definición registrada,sin clasificar,neutro
-🎁💰,483,1,1,0,sin definición registrada,sin clasificar,neutro
-🎃🎃🎃🎃🎃🎃🎃🎃🎃,484,1,1,0,sin definición registrada,sin clasificar,neutro
-🎃👨‍💻👩‍💻,485,1,1,0,sin definición registrada,sin clasificar,neutro
-🎄🎉,486,1,1,0,sin definición registrada,sin clasificar,neutro
-🎉🎉,487,1,1,0,sin definición registrada,sin clasificar,neutro
-🎉🎊,488,1,1,0,sin definición registrada,sin clasificar,neutro
-🎉👋,489,1,1,0,sin definición registrada,sin clasificar,neutro
-🎉💻,490,1,1,0,sin definición registrada,sin clasificar,neutro
-🎉📚,491,1,1,0,sin definición registrada,sin clasificar,neutro
-🎊🎉,492,1,1,0,sin definición registrada,sin clasificar,neutro
-🎓🇧🇴🏆,493,1,1,0,sin definición registrada,sin clasificar,neutro
-🎓🔊,494,1,1,0,sin definición registrada,sin clasificar,neutro
-🎙,495,1,1,0,sin definición registrada,sin clasificar,neutro
-🎛️💡,496,1,1,0,sin definición registrada,sin clasificar,neutro
-🎟✨,497,1,1,0,sin definición registrada,sin clasificar,neutro
-🎤💻,498,1,1,0,sin definición registrada,sin clasificar,neutro
-🎤🔥,499,1,1,0,sin definición registrada,sin clasificar,neutro
-🎤🚀,500,1,1,0,sin definición registrada,sin clasificar,neutro
-🎥🎞️,501,1,1,0,sin definición registrada,sin clasificar,neutro
-🎨💀,502,1,1,0,sin definición registrada,sin clasificar,neutro
-🎨🤖,503,1,1,0,sin definición registrada,sin clasificar,neutro
-🎮🇧🇴,504,1,1,0,sin definición registrada,sin clasificar,neutro
-🎮👊,505,1,1,0,sin definición registrada,sin clasificar,neutro
-🎮🔴,506,1,1,0,sin definición registrada,sin clasificar,neutro
-⚽🏀🏐,507,1,1,0,sin definición registrada,sin clasificar,neutro
-🏃🏻‍♂️,508,1,1,0,sin definición registrada,sin clasificar,neutro
-🏆💵,509,1,1,0,sin definición registrada,sin clasificar,neutro
-🏔✨,510,1,1,0,sin definición registrada,sin clasificar,neutro
-🏢,511,1,1,0,sin definición registrada,sin clasificar,neutro
-🐉🎮,512,1,1,0,sin definición registrada,sin clasificar,neutro
-🐉🐉,513,1,1,0,sin definición registrada,sin clasificar,neutro
-🐉🔥,514,1,1,0,sin definición registrada,sin clasificar,neutro
-🐍✨,515,1,1,0,sin definición registrada,sin clasificar,neutro
-🐍👩‍💻🧑‍💻,516,1,1,0,sin definición registrada,sin clasificar,neutro
-🐕🐕🐕,517,1,1,0,sin definición registrada,sin clasificar,neutro
-🐙🐙🐙,518,1,1,0,sin definición registrada,sin clasificar,neutro
-🐮🇧🇴,519,1,1,0,sin definición registrada,sin clasificar,neutro
-🐯,520,1,1,0,sin definición registrada,sin clasificar,neutro
-🐾,521,1,1,0,sin definición registrada,sin clasificar,neutro
-👀👀👀,522,1,1,0,sin definición registrada,sin clasificar,neutro
-👀👀🥹🥹,523,1,1,0,sin definición registrada,sin clasificar,neutro
-👀💻,524,1,1,0,sin definición registrada,sin clasificar,neutro
-👀😂,525,1,1,0,sin definición registrada,sin clasificar,neutro
-👁👁,526,1,1,0,sin definición registrada,sin clasificar,neutro
-👁️‍🗨️,527,1,1,0,sin definición registrada,sin clasificar,neutro
-👆🏽,528,1,1,0,sin definición registrada,sin clasificar,neutro
-👆👆,529,1,1,0,sin definición registrada,sin clasificar,neutro
-👆🤓,530,1,1,0,sin definición registrada,sin clasificar,neutro
-👇🏻,531,1,1,0,sin definición registrada,sin clasificar,neutro
-👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻,532,1,1,0,sin definición registrada,sin clasificar,neutro
-👇👇,533,1,1,0,sin definición registrada,sin clasificar,neutro
-👇👇👇👇👇👇👇👇👇👇,534,1,1,0,sin definición registrada,sin clasificar,neutro
-👉🏻👈🏻😬,535,1,1,0,sin definición registrada,sin clasificar,neutro
-👉🏼,536,1,1,0,sin definición registrada,sin clasificar,neutro
-👉🏼👈🏼,537,1,1,0,sin definición registrada,sin clasificar,neutro
-👋🏻👋🏻,538,1,1,0,sin definición registrada,sin clasificar,neutro
-👋🏼,539,1,1,0,sin definición registrada,sin clasificar,neutro
-👋👋,540,1,1,0,sin definición registrada,sin clasificar,neutro
-👌✨😀,541,1,1,0,sin definición registrada,sin clasificar,neutro
-👌🏻👌🏻👌🏻👌🏻,542,1,1,0,sin definición registrada,sin clasificar,neutro
-👌👌,543,1,1,0,sin definición registrada,sin clasificar,neutro
-👌😀,544,1,1,0,sin definición registrada,sin clasificar,neutro
-👌😁,545,1,1,0,sin definición registrada,sin clasificar,neutro
-👍👌,546,1,1,0,sin definición registrada,sin clasificar,neutro
-👏🏻,547,1,1,0,sin definición registrada,sin clasificar,neutro
-👏🏽,548,1,1,0,sin definición registrada,sin clasificar,neutro
-👏🏽👏🏽👏🏽,549,1,1,0,sin definición registrada,sin clasificar,neutro
-👏🏽👏🏽👏🏽👏🏽👏🏽👏🏽,550,1,1,0,sin definición registrada,sin clasificar,neutro
-👑✨,551,1,1,0,sin definición registrada,sin clasificar,neutro
-👑🤣,552,1,1,0,sin definición registrada,sin clasificar,neutro
-👨🏻‍💻👩‍💻,553,1,1,0,sin definición registrada,sin clasificar,neutro
-👨‍👩‍👧‍👦,554,1,1,0,sin definición registrada,sin clasificar,neutro
-👨‍💻👩‍💻,555,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍🎓👨‍🎓,556,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍🏫👨‍🏫,557,1,1,0,sin definición registrada,sin clasificar,neutro
-👩🏻‍🎓👨🏽‍🎓,558,1,1,0,sin definición registrada,sin clasificar,neutro
-👩🏻‍💻,559,1,1,0,sin definición registrada,sin clasificar,neutro
-👩🏻‍💻👨🏻‍💻,560,1,1,0,sin definición registrada,sin clasificar,neutro
-👩🏻‍🔬👨🏻‍🔬,561,1,1,0,sin definición registrada,sin clasificar,neutro
-👩🏼‍💻🧑🏻‍💻,562,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍💻🌟,563,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍💻🧑‍💻,564,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍🔬,565,1,1,0,sin definición registrada,sin clasificar,neutro
-👩‍🔬👨‍🔬,566,1,1,0,sin definición registrada,sin clasificar,neutro
-👸,567,1,1,0,sin definición registrada,sin clasificar,neutro
-👸🫅,568,1,1,0,sin definición registrada,sin clasificar,neutro
-👹,569,1,1,0,sin definición registrada,sin clasificar,neutro
-👺,570,1,1,0,sin definición registrada,sin clasificar,neutro
-👽👽👽👾👾👾,571,1,1,0,sin definición registrada,sin clasificar,neutro
-➖👾➖👾➖👾,572,1,1,0,sin definición registrada,sin clasificar,neutro
-💀💀💀,573,1,1,0,sin definición registrada,sin clasificar,neutro
-💀💀💀💀💀💀,574,1,1,0,sin definición registrada,sin clasificar,neutro
-💀💤,575,1,1,0,sin definición registrada,sin clasificar,neutro
-💔,576,1,1,0,Corazón roto (tristeza),tristeza,negativo
-💔🥲,577,1,1,0,sin definición registrada,sin clasificar,neutro
-💗,578,1,1,0,Corazón con destellos,amor,positivo
-💙,579,1,1,0,Corazón azul,amor,positivo
-💙💛,580,1,1,0,sin definición registrada,sin clasificar,neutro
-💙🖤❤️,581,1,1,0,sin definición registrada,sin clasificar,neutro
-💜,582,1,1,0,Corazón morado,amor,positivo
-💜🎉,583,1,1,0,sin definición registrada,sin clasificar,neutro
-💡✨,584,1,1,0,sin definición registrada,sin clasificar,neutro
-💡🌍,585,1,1,0,sin definición registrada,sin clasificar,neutro
-💡🎨,586,1,1,0,sin definición registrada,sin clasificar,neutro
-💡💻,587,1,1,0,sin definición registrada,sin clasificar,neutro
-💡🤓,588,1,1,0,sin definición registrada,sin clasificar,neutro
-💧,589,1,1,0,sin definición registrada,sin clasificar,neutro
-💪✨,590,1,1,0,sin definición registrada,sin clasificar,neutro
-💪🇧🇴,591,1,1,0,sin definición registrada,sin clasificar,neutro
-💪🔥,592,1,1,0,sin definición registrada,sin clasificar,neutro
-💪😃,593,1,1,0,sin definición registrada,sin clasificar,neutro
-💪🫂,594,1,1,0,sin definición registrada,sin clasificar,neutro
-💫🚀,595,1,1,0,sin definición registrada,sin clasificar,neutro
-💬✅,596,1,1,0,sin definición registrada,sin clasificar,neutro
-💵🚀,597,1,1,0,sin definición registrada,sin clasificar,neutro
-💸📈,598,1,1,0,sin definición registrada,sin clasificar,neutro
-💻🎉,599,1,1,0,sin definición registrada,sin clasificar,neutro
-💻💗,600,1,1,0,sin definición registrada,sin clasificar,neutro
-💻🤝,601,1,1,0,sin definición registrada,sin clasificar,neutro
-💼✨,602,1,1,0,sin definición registrada,sin clasificar,neutro
-💼🌟,603,1,1,0,sin definición registrada,sin clasificar,neutro
-📂,604,1,1,0,sin definición registrada,sin clasificar,neutro
-📅🍕,605,1,1,0,sin definición registrada,sin clasificar,neutro
-📈💸,606,1,1,0,sin definición registrada,sin clasificar,neutro
-📉,607,1,1,0,Gráfico descendente,neutral,neutro
-📊💡,608,1,1,0,sin definición registrada,sin clasificar,neutro
-📊📈,609,1,1,0,sin definición registrada,sin clasificar,neutro
-📚🎁📖✨,610,1,1,0,sin definición registrada,sin clasificar,neutro
-📚🚀,611,1,1,0,sin definición registrada,sin clasificar,neutro
-📚🤖,612,1,1,0,sin definición registrada,sin clasificar,neutro
-📝🤓,613,1,1,0,sin definición registrada,sin clasificar,neutro
-📡🔒,614,1,1,0,sin definición registrada,sin clasificar,neutro
-📧,615,1,1,0,sin definición registrada,sin clasificar,neutro
-📸🎬,616,1,1,0,sin definición registrada,sin clasificar,neutro
-📺,617,1,1,0,sin definición registrada,sin clasificar,neutro
-📺🎉,618,1,1,0,sin definición registrada,sin clasificar,neutro
-🔁,619,1,1,0,sin definición registrada,sin clasificar,neutro
-🔊🔊🔊🔊,620,1,1,0,sin definición registrada,sin clasificar,neutro
-🔌,621,1,1,0,sin definición registrada,sin clasificar,neutro
-🔌🎙️🖱️,622,1,1,0,sin definición registrada,sin clasificar,neutro
-🔎,623,1,1,0,Lupa,neutral,neutro
-🔑,624,1,1,0,sin definición registrada,sin clasificar,neutro
-🔒✅,625,1,1,0,sin definición registrada,sin clasificar,neutro
-🔓,626,1,1,0,sin definición registrada,sin clasificar,neutro
-️🔥,627,1,1,0,sin definición registrada,sin clasificar,neutro
-🔥🎮,628,1,1,0,sin definición registrada,sin clasificar,neutro
-🔥💙,629,1,1,0,sin definición registrada,sin clasificar,neutro
-🔥😏,630,1,1,0,sin definición registrada,sin clasificar,neutro
-🔥🤤,631,1,1,0,sin definición registrada,sin clasificar,neutro
-🔭,632,1,1,0,Telescopio,neutral,neutro
-🕚,633,1,1,0,sin definición registrada,sin clasificar,neutro
-🕞,634,1,1,0,sin definición registrada,sin clasificar,neutro
-🕵️‍♀️,635,1,1,0,sin definición registrada,sin clasificar,neutro
-🕸️,636,1,1,0,sin definición registrada,sin clasificar,neutro
-🕹️✨,637,1,1,0,sin definición registrada,sin clasificar,neutro
-🕹️🚀,638,1,1,0,sin definición registrada,sin clasificar,neutro
-🖊,639,1,1,0,sin definición registrada,sin clasificar,neutro
-🖋️,640,1,1,0,sin definición registrada,sin clasificar,neutro
-🖖🏻,641,1,1,0,sin definición registrada,sin clasificar,neutro
-🗄,642,1,1,0,sin definición registrada,sin clasificar,neutro
-🗓⏰,643,1,1,0,sin definición registrada,sin clasificar,neutro
-🗣️🔥,644,1,1,0,sin definición registrada,sin clasificar,neutro
-🗳️,645,1,1,0,sin definición registrada,sin clasificar,neutro
-😁😁,646,1,1,0,sin definición registrada,sin clasificar,neutro
-😁😁😁😁,647,1,1,0,sin definición registrada,sin clasificar,neutro
-😁😁😁😳,648,1,1,0,sin definición registrada,sin clasificar,neutro
-😁😄😅,649,1,1,0,sin definición registrada,sin clasificar,neutro
-😂✨,650,1,1,0,sin definición registrada,sin clasificar,neutro
-😂👍,651,1,1,0,sin definición registrada,sin clasificar,neutro
-😂😂😂😂😂😂,652,1,1,0,sin definición registrada,sin clasificar,neutro
-😂🤣,653,1,1,0,sin definición registrada,sin clasificar,neutro
-😂🤣😂🤣,654,1,1,0,sin definición registrada,sin clasificar,neutro
-😅😅😅,655,1,1,0,sin definición registrada,sin clasificar,neutro
-😅🙈,656,1,1,0,sin definición registrada,sin clasificar,neutro
-😅🤣,657,1,1,0,sin definición registrada,sin clasificar,neutro
-😇,658,1,1,0,Cara de inocente,bondad,positivo
-😇😇😇,659,1,1,0,sin definición registrada,sin clasificar,neutro
-😊👋,660,1,1,0,sin definición registrada,sin clasificar,neutro
-😊😉,661,1,1,0,sin definición registrada,sin clasificar,neutro
-😊😒😒😒,662,1,1,0,sin definición registrada,sin clasificar,neutro
-😊🫡,663,1,1,0,sin definición registrada,sin clasificar,neutro
-😌😌,664,1,1,0,sin definición registrada,sin clasificar,neutro
-😎✨,665,1,1,0,sin definición registrada,sin clasificar,neutro
-😑😑😑😑😑,666,1,1,0,sin definición registrada,sin clasificar,neutro
-😒😒😒😒,667,1,1,0,sin definición registrada,sin clasificar,neutro
-😔🔥,668,1,1,0,sin definición registrada,sin clasificar,neutro
-😔😔😔😔😔😔😔,669,1,1,0,sin definición registrada,sin clasificar,neutro
-😔😢,670,1,1,0,sin definición registrada,sin clasificar,neutro
-😕😞,671,1,1,0,sin definición registrada,sin clasificar,neutro
-😖,672,1,1,0,sin definición registrada,sin clasificar,neutro
-😝,673,1,1,0,sin definición registrada,sin clasificar,neutro
-😞😞,674,1,1,0,sin definición registrada,sin clasificar,neutro
-😞😞😞,675,1,1,0,sin definición registrada,sin clasificar,neutro
-😟,676,1,1,0,Cara preocupada,preocupación,negativo
-😡😡😡😡😡😡😡😡😡😡😡😡😡😡😡,677,1,1,0,sin definición registrada,sin clasificar,neutro
-😢💔,678,1,1,0,sin definición registrada,sin clasificar,neutro
-😢😢😢,679,1,1,0,sin definición registrada,sin clasificar,neutro
-😢😢😢😢😭😭😭,680,1,1,0,sin definición registrada,sin clasificar,neutro
-😢🥲,681,1,1,0,sin definición registrada,sin clasificar,neutro
-😦,682,1,1,0,sin definición registrada,sin clasificar,neutro
-😧,683,1,1,0,sin definición registrada,sin clasificar,neutro
-😩,684,1,1,0,Cara angustiada,angustia,negativo
-😫🥲,685,1,1,0,sin definición registrada,sin clasificar,neutro
-😬💀,686,1,1,0,sin definición registrada,sin clasificar,neutro
-😬😬😬😬,687,1,1,0,sin definición registrada,sin clasificar,neutro
-😭😅😅🥲🥲🥲,688,1,1,0,sin definición registrada,sin clasificar,neutro
-😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭,689,1,1,0,sin definición registrada,sin clasificar,neutro
-😮,690,1,1,0,Cara sorprendida,sorpresa,neutro
-😮‍💨🍀,691,1,1,0,sin definición registrada,sin clasificar,neutro
-😯,692,1,1,0,Cara boquiabierta,sorpresa,neutro
-😯😯😯,693,1,1,0,sin definición registrada,sin clasificar,neutro
-😱💀,694,1,1,0,sin definición registrada,sin clasificar,neutro
-😱😊,695,1,1,0,sin definición registrada,sin clasificar,neutro
-😱😱,696,1,1,0,sin definición registrada,sin clasificar,neutro
-😱😱😱,697,1,1,0,sin definición registrada,sin clasificar,neutro
-😲,698,1,1,0,Cara muy asombrada,sorpresa,neutro
-😳😔,699,1,1,0,sin definición registrada,sin clasificar,neutro
-😳😱😱,700,1,1,0,sin definición registrada,sin clasificar,neutro
-😴⚠️⚠️,701,1,1,0,sin definición registrada,sin clasificar,neutro
-😴😴😴,702,1,1,0,sin definición registrada,sin clasificar,neutro
-😵,703,1,1,0,Cara mareada,confusión,neutro
-😵‍💫😵‍💫😂,704,1,1,0,sin definición registrada,sin clasificar,neutro
-😶😶,705,1,1,0,sin definición registrada,sin clasificar,neutro
-😿☝️,706,1,1,0,sin definición registrada,sin clasificar,neutro
-🙂🙂🙂🙂,707,1,1,0,sin definición registrada,sin clasificar,neutro
-🙃🫠,708,1,1,0,sin definición registrada,sin clasificar,neutro
-🙄🤬,709,1,1,0,sin definición registrada,sin clasificar,neutro
-🙆‍♂,710,1,1,0,sin definición registrada,sin clasificar,neutro
-🙈☺️,711,1,1,0,sin definición registrada,sin clasificar,neutro
-🙈🙈,712,1,1,0,sin definición registrada,sin clasificar,neutro
-🙊,713,1,1,0,sin definición registrada,sin clasificar,neutro
-🙋‍♂,714,1,1,0,sin definición registrada,sin clasificar,neutro
-🙋🏻‍♂️,715,1,1,0,sin definición registrada,sin clasificar,neutro
-🙌🙌,716,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🏻😢,717,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🏻🥺,718,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🏼,719,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🏼🙏🏼🙏🏼,720,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🔴🔵,721,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏😢,722,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🙏🙏🙏🙏,723,1,1,0,sin definición registrada,sin clasificar,neutro
-🙏🥺,724,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🌎,725,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🌐,726,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🌟,727,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🎮,728,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀👽✨,729,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀💜,730,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀💫,731,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🔧,732,1,1,0,sin definición registrada,sin clasificar,neutro
-🚀🪐,733,1,1,0,sin definición registrada,sin clasificar,neutro
-🚨✨,734,1,1,0,sin definición registrada,sin clasificar,neutro
-🚨🍲,735,1,1,0,sin definición registrada,sin clasificar,neutro
-🛍️,736,1,1,0,sin definición registrada,sin clasificar,neutro
-🛒,737,1,1,0,sin definición registrada,sin clasificar,neutro
-🛠,738,1,1,0,sin definición registrada,sin clasificar,neutro
-🛰🤩,739,1,1,0,sin definición registrada,sin clasificar,neutro
-🛸🛸,740,1,1,0,sin definición registrada,sin clasificar,neutro
-🟡🟢,741,1,1,0,sin definición registrada,sin clasificar,neutro
-🟤,742,1,1,0,sin definición registrada,sin clasificar,neutro
-🤌,743,1,1,0,sin definición registrada,sin clasificar,neutro
-🤓☝️,744,1,1,0,sin definición registrada,sin clasificar,neutro
-🤓📉,745,1,1,0,sin definición registrada,sin clasificar,neutro
-🤓🖋️,746,1,1,0,sin definición registrada,sin clasificar,neutro
-🤓🤓,747,1,1,0,sin definición registrada,sin clasificar,neutro
-🤔💭🧮📝,748,1,1,0,sin definición registrada,sin clasificar,neutro
-🤔🫣🤔🫣🎼🎼🎼,749,1,1,0,sin definición registrada,sin clasificar,neutro
-🤖⚽,750,1,1,0,sin definición registrada,sin clasificar,neutro
-🤖🎨,751,1,1,0,sin definición registrada,sin clasificar,neutro
-🤗🤗,752,1,1,0,sin definición registrada,sin clasificar,neutro
-🤗🤗🤗,753,1,1,0,sin definición registrada,sin clasificar,neutro
-🤗🤗🤗🤗🤗,754,1,1,0,sin definición registrada,sin clasificar,neutro
-🤙🏻🫶,755,1,1,0,sin definición registrada,sin clasificar,neutro
-🤜🤛,756,1,1,0,sin definición registrada,sin clasificar,neutro
-🤝🏼,757,1,1,0,sin definición registrada,sin clasificar,neutro
-🤝💻,758,1,1,0,sin definición registrada,sin clasificar,neutro
-🤟,759,1,1,0,Amor y paz,energía,positivo
-🤡🤡,760,1,1,0,sin definición registrada,sin clasificar,neutro
-🤣👑,761,1,1,0,sin definición registrada,sin clasificar,neutro
-🤣🫵,762,1,1,0,sin definición registrada,sin clasificar,neutro
-🤦,763,1,1,0,sin definición registrada,sin clasificar,neutro
-🤦‍♂,764,1,1,0,sin definición registrada,sin clasificar,neutro
-🤦🏻‍♂️,765,1,1,0,sin definición registrada,sin clasificar,neutro
-🤨🤨,766,1,1,0,sin definición registrada,sin clasificar,neutro
-🤩🤩,767,1,1,0,sin definición registrada,sin clasificar,neutro
-🤩🤩🤩,768,1,1,0,sin definición registrada,sin clasificar,neutro
-🤫,769,1,1,0,sin definición registrada,sin clasificar,neutro
-🤭🤭,770,1,1,0,sin definición registrada,sin clasificar,neutro
-🤷‍♀,771,1,1,0,sin definición registrada,sin clasificar,neutro
-🤷🏻,772,1,1,0,sin definición registrada,sin clasificar,neutro
-🤷🏻‍♂️,773,1,1,0,sin definición registrada,sin clasificar,neutro
-🤷🏻😮‍💨,774,1,1,0,sin definición registrada,sin clasificar,neutro
-🥂,775,1,1,0,sin definición registrada,sin clasificar,neutro
-🥊,776,1,1,0,sin definición registrada,sin clasificar,neutro
-🥊⚡,777,1,1,0,sin definición registrada,sin clasificar,neutro
-🥳♟️👑,778,1,1,0,sin definición registrada,sin clasificar,neutro
-🥳❤️💙,779,1,1,0,sin definición registrada,sin clasificar,neutro
-🥳🎉,780,1,1,0,sin definición registrada,sin clasificar,neutro
-🥳🙌🏻,781,1,1,0,sin definición registrada,sin clasificar,neutro
-🥶,782,1,1,0,sin definición registrada,sin clasificar,neutro
-🥷🌚,783,1,1,0,sin definición registrada,sin clasificar,neutro
-🥹😆,784,1,1,0,sin definición registrada,sin clasificar,neutro
-🥹🙏,785,1,1,0,sin definición registrada,sin clasificar,neutro
-🥹🥹,786,1,1,0,sin definición registrada,sin clasificar,neutro
-🥹🫠,787,1,1,0,sin definición registrada,sin clasificar,neutro
-🥺📌👌,788,1,1,0,sin definición registrada,sin clasificar,neutro
-🥺🙏,789,1,1,0,sin definición registrada,sin clasificar,neutro
-🥺🦁,790,1,1,0,sin definición registrada,sin clasificar,neutro
-🦉💻,791,1,1,0,sin definición registrada,sin clasificar,neutro
-🦋,792,1,1,0,sin definición registrada,sin clasificar,neutro
-🦋☺️,793,1,1,0,sin definición registrada,sin clasificar,neutro
-🦕🦕🦕🦕🦕🦕,794,1,1,0,sin definición registrada,sin clasificar,neutro
-🦜,795,1,1,0,sin definición registrada,sin clasificar,neutro
-🦠🧫,796,1,1,0,sin definición registrada,sin clasificar,neutro
-🧐🍷,797,1,1,0,sin definición registrada,sin clasificar,neutro
-🧑🏻‍💻,798,1,1,0,sin definición registrada,sin clasificar,neutro
-🧑‍💻👩‍💻,799,1,1,0,sin definición registrada,sin clasificar,neutro
-🧑‍🦽‍➡️,800,1,1,0,sin definición registrada,sin clasificar,neutro
-🧠✨,801,1,1,0,sin definición registrada,sin clasificar,neutro
-🧠💥,802,1,1,0,sin definición registrada,sin clasificar,neutro
-🪐,803,1,1,0,sin definición registrada,sin clasificar,neutro
-🪐🚀,804,1,1,0,sin definición registrada,sin clasificar,neutro
-🫅,805,1,1,0,sin definición registrada,sin clasificar,neutro
-🫠😵‍💫,806,1,1,0,sin definición registrada,sin clasificar,neutro
-🫠🫠🫠,807,1,1,0,sin definición registrada,sin clasificar,neutro
-🫠🫠🫠🫠,808,1,1,0,sin definición registrada,sin clasificar,neutro
-🫠🫠🫠🫠🫠,809,1,1,0,sin definición registrada,sin clasificar,neutro
-🫢🫢,810,1,1,0,sin definición registrada,sin clasificar,neutro
-🫣🫣,811,1,1,0,sin definición registrada,sin clasificar,neutro
-🫦,812,1,1,0,sin definición registrada,sin clasificar,neutro
-🫩,813,1,1,0,sin definición registrada,sin clasificar,neutro
-🫵🏻,814,1,1,0,sin definición registrada,sin clasificar,neutro
-🫸🫷,815,1,1,0,sin definición registrada,sin clasificar,neutro
-🤪,816,1,0,1,sin definición registrada,sin clasificar,neutro
-🐳,817,1,0,1,sin definición registrada,sin clasificar,neutro
-🖕,818,1,0,1,sin definición registrada,sin clasificar,neutro
-🥴,819,1,0,1,sin definición registrada,sin clasificar,neutro
+rango,emoji,count_texto,count_reacciones,count_total,pct_anuncio,pct_inicio_linea,pct_solo_emoji,pct_en_pregunta,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironia
+1,👍,95,4357,4452,17.9,31.6,30.5,1.1,Pulgar arriba,Como reacción es un acuse de recibo: 'visto / de acuerdo / gracias por avisar'. No siempre implica entusiasmo; en el chat es la reacción por defecto para confirmar que se leyó un comunicado o una respuesta.,acuse_recibo,reaccion,aprobación,positivo,no
+2,👎,0,831,831,NA,NA,NA,NA,Pulgar abajo,"Reacción de desacuerdo o rechazo: mala noticia, respuesta que no gusta o mensaje criticado. A veces se usa como 'voto en contra' en tono de burla hacia una pregunta o queja.",rechazo,reaccion,desaprobación,negativo,posible
+3,🤣,38,194,232,5.3,28.9,18.4,10.5,Risa a carcajadas,Algo gracioso o absurdo. Como reacción también puede ser risa de resignación ante un problema administrativo ('ya ni modo').,risa,reaccion,alegría,positivo,posible
+4,👉,219,0,219,90.4,88.1,0.5,0.5,Dedo a la derecha,"En anuncios señala la acción o el enlace principal ('👉 inscríbete aquí', 'comparte este enlace'). Es un 'haz clic acá'. Junto a 👈 es pedido tímido.",llamado_accion,anuncio,dirección,neutro,no
+5,❤,13,197,210,100,38.5,0,0,Corazón rojo,"Como reacción: agradecimiento o aprecio ('me encantó / gracias'). En anuncios, adorno afectivo.",afecto,reaccion,amor,positivo,no
+6,✅,207,0,207,88.9,91.3,0,0.5,Marca de verificación,"Ítem confirmado: requisito, beneficio, 'aplica para' o 'incluye'. Equivale a 'sí'.",vineta_positiva,anuncio,confirmación,positivo,no
+7,🙏,163,3,166,9.2,9.2,6.1,23.3,Manos juntas,"En conversación casi siempre significa 'por favor' al pedir ayuda (¿hay grupo?, ¿alguien me pasa...?). En anuncios, 'gracias por participar'.",pedir_favor,conversacion,súplica,positivo,no
+8,🔹,162,0,162,100,92,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+9,✨,154,0,154,90.3,39,0,0.6,Destellos,"Énfasis decorativo de entusiasmo ('✨ No te pierdas esta oportunidad ✨'). Realza el mensaje, sin significado propio.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+10,🚀,150,0,150,100,40.7,0,0,Cohete,Arranque o lanzamiento: 'empezamos / se viene / aprovecha'. Tono de impulso al inicio de convocatorias.,impulso,anuncio,entusiasmo,positivo,no
+11,🔥,134,15,149,97,47,0,0,Fuego,"'Imperdible / épico': hype para eventos, fiestas y promociones. Como reacción: 'qué bueno'.",hype,mixto,entusiasmo,positivo,no
+12,❤‍🔥,1,145,146,100,100,0,0,Corazón en llamas,Reacción de entusiasmo y apoyo fuerte: 'excelente / me encanta'. Más intenso que ❤.,afecto,reaccion,amor,positivo,no
+13,📍,146,0,146,100,97.3,0,0,Chincheta de ubicación,Lugar del evento ('📍 Lugar: Auditorio'). Indica dónde presentarse. Fuera de anuncios señala 'aquí' o 'este punto'.,marcador_lugar,anuncio,informativo,neutro,no
+14,🎉,136,4,140,96.3,17.6,0,0.7,Confeti,"Buena noticia o evento: 'se habilitó la materia', 'te invitamos'. También se repite como énfasis de entusiasmo.",celebracion,anuncio,celebración,positivo,no
+15,😢,112,27,139,0.9,26.8,25.9,20.5,Cara llorando,"Lamento ante un problema de trámite (sin cupo, choque de horarios, falta de información). No es llanto real: acompaña un pedido de ayuda o una queja suave.",lamento,conversacion,tristeza_leve,negativo,no
+16,👀,121,14,135,10.7,21.5,19,40.5,Ojos,En conversación: 'atentos / ¿alguien sabe?': llama la atención sobre una duda o indica que se está pendiente de la respuesta ('¿Hay grupo de base de datos 1 👀?'). En anuncios: 'mira / descubre / ojo con esto' y también intriga ('Jurado: 3 Lic. sorpresa 👀'). No es literal 'mirar'.,atencion_pendiente,mixto,atención,neutro,posible
+17,💻,121,0,121,97.5,43,0,0,Computadora portátil,"Informática: materias o eventos de programación, y modalidad virtual ('💻 Modalidad: virtual').",tema_tecnologia,anuncio,informativo,neutro,no
+18,📅,117,0,117,100,98.3,0,0,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+19,😁,49,58,107,10.2,18.4,16.3,2,Sonrisa amplia,"Simpatía o cordialidad. Como reacción: 'jaja, buena'. Al pedir algo suaviza el pedido ('porfiiis 😁').",cordialidad,reaccion,alegría,positivo,no
+20,📢,105,0,105,97.1,90.5,0,0,Megáfono,Comunicado o anuncio: 'atención a todos'. Abre un mensaje oficial o una convocatoria.,comunicado,anuncio,informativo,neutro,no
+21,🎓,101,0,101,98,62.4,0,0,Birrete,"Universidad, carrera, certificación o graduación; se usa para dar peso académico a un evento o curso.",tema_academico,anuncio,logro,positivo,no
+22,📚,97,0,97,99,59.8,0,0,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+23,😂,97,0,97,1,54.6,36.1,10.3,Llorando de risa,"Risa ante un comentario gracioso o una situación absurda del sistema de inscripciones. Suele aparecer solo, como respuesta rápida.",risa,conversacion,alegría,positivo,posible
+24,🥲,92,0,92,6.5,20.7,20.7,26.1,Sonrisa con lágrima,"Resignación con sonrisa forzada: 'qué le vamos a hacer'. Sonríe para no llorar ante trámites, falta de cupos o aulas desconocidas. Es una de las expresiones más irónicas del chat.",resignacion,conversacion,resignación,negativo,si
+25,🔗,89,0,89,100,100,0,0,Enlace,"Introduce un enlace (grupo de WhatsApp, formulario, página). 'Aquí está el link'.",marcador_enlace,anuncio,informativo,neutro,no
+26,🥳,84,0,84,92.9,6,1.2,0,Cara de fiesta,"En anuncios, 'buenas noticias / se habilitó / ¡se viene el evento!'. En el chat, celebración de una materia habilitada.",celebracion,anuncio,celebración,positivo,no
+27,👏,20,62,82,10,45,45,20,Aplausos,"Felicitación o reconocimiento (por una noticia buena, materia habilitada o buen aporte).",felicitacion,reaccion,admiración,positivo,no
+28,😅,75,0,75,2.7,20,14.7,25.3,Sonrisa con sudor,"Nerviosismo, vergüenza leve o disculpa: 'perdón por preguntar', 'se me olvidó'. Suaviza una pregunta o queja.",nerviosismo,conversacion,vergüenza,neutro,posible
+29,😭,73,1,74,4.1,21.9,20.5,13.7,Llorando fuerte,Dramatización: angustia por un problema ('no me salen las horas') o gratitud exagerada ('gracias 😭😭'). Casi nunca es tristeza profunda.,lamento_exagerado,conversacion,angustia,negativo,posible
+30,🤔,58,13,71,15.5,24.1,22.4,41.4,Cara pensando,"Duda abierta: '¿y ahora qué?', '¿se puede aún?'. Muchas veces el emoji solo es la pregunta.",duda,conversacion,duda,neutro,no
+31,📌,69,0,69,95.7,94.2,0,0,Chincheta,Dato clave o nota que hay que tener presente ('📌 esta materia habilita 3 de 8vo'). Es el 'ojo con esto / a tener en cuenta'.,destacar_nota,anuncio,énfasis,neutro,no
+32,😔,68,0,68,1.5,10.3,8.8,27.9,Cara pensativa triste,Pesar o desánimo por un trámite que no avanza ('ya pagué y nada'). Acompaña un pedido de ayuda.,lamento,conversacion,decepción,negativo,no
+33,💡,67,0,67,100,73.1,0,0,Foco,"Idea, innovación o dato clave.",tema_idea,anuncio,informativo,positivo,no
+34,👌,55,8,63,3.6,21.8,18.2,0,Ok,"Confirmación: 'está bien / entendido / listo'. Con tono burlón puede significar 'claro, qué bien' o 'buena jugada'.",confirmacion,conversacion,acuerdo,positivo,posible
+35,🤡,8,51,59,0,50,50,0,Payaso,Burla hacia el mensaje o la persona: 'qué ridiculez / qué tontería'. Casi siempre se usa como reacción para ridiculizar y no como adorno. También como autoironía ante una situación absurda.,ironia_burla,reaccion,burla,negativo,si
+36,⚠,55,0,55,100,76.4,0,0,Advertencia,"Condición o restricción importante: 'cupos limitados', 'solo para quienes ya cursaron...'.",alerta_condicion,anuncio,advertencia,neutro,no
+37,⏰,54,0,54,100,83.3,0,0,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+38,😊,51,0,51,56.9,5.9,2,2,Sonrisa suave,Cordialidad al saludar o pedir; en anuncios para animar sin presionar.,cordialidad,mixto,alegría,positivo,no
+39,👇,49,0,49,100,61.2,0,0,Dedo hacia abajo,"'Abajo / a continuación': anuncia que debajo está el enlace, formulario, lista o categorías.",apuntar_abajo,anuncio,dirección,neutro,no
+40,🥺,49,0,49,4.1,12.2,6.1,36.7,Ojitos suplicantes,Súplica tierna: pedir un favor o recomendación ('X2 que habiliten más cupos 🥺'). No es tristeza; es 'porfa'.,suplica,conversacion,súplica,neutro,posible
+41,🔴,45,0,45,100,91.1,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+42,🏆,43,0,43,100,60.5,0,0,Trofeo,"Torneo, competencia o premio principal.",premio,anuncio,logro,positivo,no
+43,🐧,43,0,43,100,11.6,0,0,Pingüino Tux,"Linux y software libre (FLISoL, torneos de Linux).",tema_tecnologia,anuncio,informativo,neutro,no
+44,😱,24,19,43,0,75,45.8,0,Cara gritando,"Sorpresa negativa ante un cambio (docente, horario). En anuncios se usa como gancho exagerado de 'no pierdas esta oportunidad'.",sorpresa,mixto,sorpresa,neutro,posible
+45,🎯,40,0,40,100,82.5,0,0,Diana,"Objetivo, meta o categoría ('🎯 Premios', 'Dirigido a').",marcador_objetivo,anuncio,logro,positivo,no
+46,🤖,40,0,40,100,72.5,0,0,Robot,"Inteligencia artificial, robótica o innovación tecnológica.",tema_tecnologia,anuncio,informativo,neutro,no
+47,⚙,38,0,38,100,28.9,0,0,Engranaje,"Ingeniería, sistemas, configuración o 'por dentro'.",tema_tecnologia,anuncio,informativo,neutro,no
+48,📲,37,0,37,100,94.6,0,0,Celular con flecha,"'Únete / inscríbete desde tu celular': WhatsApp, QR o formulario.",marcador_contacto,anuncio,informativo,neutro,no
+49,🗓,37,0,37,100,94.6,0,0,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+50,🌟,36,0,36,97.2,52.8,0,0,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+51,🎮,36,0,36,100,38.9,0,0,Control de videojuego,Videojuegos y torneos gamer.,tema_videojuegos,anuncio,entretenimiento,positivo,no
+52,💰,36,0,36,100,88.9,0,0,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+53,🙌,36,0,36,88.9,11.1,0,0,Manos arriba,"Celebración o ánimo grupal: '¡lo logramos!', '¡anímense!', 'gracias de antemano'. En anuncios invita a participar con buena vibra.",celebracion,anuncio,entusiasmo,positivo,no
+54,♟,34,0,34,100,41.2,0,0,Peón de ajedrez,Torneo de ajedrez.,tema_evento,anuncio,entretenimiento,positivo,no
+55,🔵,34,0,34,100,88.2,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+56,🖥,34,0,34,100,20.6,0,0,Computadora de escritorio,"Sistemas / computación (por ejemplo, Análisis y Diseño de Sistemas).",tema_tecnologia,anuncio,informativo,neutro,no
+57,🫠,34,0,34,0,35.3,35.3,26.5,Cara derritiéndose,'Me derrito / qué desastre': sensación de caos o impotencia ante el sistema de inscripción. Casi siempre irónico.,resignacion,conversacion,agobio,negativo,si
+58,🎃,28,5,33,100,57.1,0,0,Calabaza,"Halloween: fiestas y concursos temáticos de octubre. Como reacción, tono de broma.",tema_evento,anuncio,entretenimiento,positivo,no
+59,🥹,33,0,33,3,9.1,9.1,51.5,Ojos llorosos,Súplica o ternura al pedir recomendación de docente o información. También emoción por una noticia.,suplica,conversacion,súplica,neutro,no
+60,🎁,29,0,29,100,65.5,0,0,Regalo,"Premio, sorteo o sorpresa.",premio,anuncio,entusiasmo,positivo,no
+61,📝,29,0,29,100,86.2,0,0,Nota / formulario,'Regístrate / completa el formulario' o apuntes.,marcador_formulario,anuncio,informativo,neutro,no
+62,🚨,27,0,27,81.5,51.9,0,14.8,Sirena,"Alerta o convocatoria urgente: 'no pierdas ni un segundo'. Marca un comunicado importante, no un peligro real.",alerta,anuncio,urgencia,neutro,no
+63,💬,26,0,26,100,92.3,0,0,Burbuja de chat,'Únete al grupo / escríbenos / más información'. Invita a entrar al chat de coordinación.,marcador_contacto,anuncio,informativo,neutro,no
+64,💪,25,0,25,80,24,8,0,Bíceps,"Ánimo y fuerza ('tú puedes'); en convocatorias, motivación para participar.",animo,anuncio,motivación,positivo,no
+65,😬,25,0,25,0,16,16,44,Mueca,"Incomodidad: 'uy, ¿alguien sabe por qué?'. Anticipa una mala noticia.",incomodidad,conversacion,incomodidad,negativo,no
+66,🚩,25,0,25,100,80,0,0,Bandera,Punto de interés ('🚩¿Dónde?') o juego de 'Captura la bandera'.,marcador_punto,anuncio,informativo,neutro,no
+67,❗,24,0,24,79.2,0,0,20.8,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+68,👆,23,0,23,0,91.3,60.9,4.3,Dedo hacia arriba,'Lo de arriba': hace referencia al mensaje anterior o pide que lo lean ('👆 hagan caso a esto').,referencia_arriba,conversacion,énfasis,neutro,no
+69,👋,23,0,23,47.8,0,0,26.1,Saludo,Saludo de apertura ('Buenas👋') o bienvenida a novatos en los comunicados.,saludo,mixto,saludo,positivo,no
+70,📊,23,0,23,100,21.7,0,0,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+71,→,22,0,22,100,0,0,0,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+72,😞,22,0,22,0,4.5,4.5,27.3,Cara decepcionada,Decepción por un resultado o cambio.,lamento,conversacion,decepción,negativo,no
+73,🤝,22,0,22,100,50,0,0,Apretón de manos,"Alianza, acuerdo o trabajo conjunto (comunidades, convenios, networking).",acuerdo_alianza,anuncio,acuerdo,positivo,no
+74,‼,21,0,21,100,14.3,0,0,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+75,👩‍💻,21,0,21,95.2,42.9,0,0,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+76,💀,21,0,21,14.3,57.1,52.4,4.8,Calavera,"Hipérbole: 'me muero / estoy perdido / no voy a aprobar' ante algo difícil (horario hasta las 10 pm, docente exigente). No expresa risa.",hiperbole,conversacion,resignación,negativo,si
+77,🤓,21,0,21,61.9,0,0,0,Cara de nerd,"En anuncios, tono ameno-técnico para el público de informática. En el chat, burla amistosa de sabelotodo ('todo posi mi estimado 🤓😎').",humor,mixto,humor,neutro,si
+78,🌐,20,0,20,100,70,0,0,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+79,😐,10,10,20,0,20,20,10,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+80,🤩,20,0,20,100,20,0,0,Ojos de estrella,Emoción por un evento o premio.,entusiasmo,anuncio,admiración,positivo,no
+81,🇧🇴,19,0,19,100,31.6,0,0,Bandera de Bolivia,Identidad nacional / alcance en Bolivia.,identidad_pais,anuncio,orgullo,positivo,no
+82,👥,19,0,19,100,94.7,0,0,Grupo de personas,"Organizador, público objetivo o grupo de coordinación ('👥 Organiza: GDG').",marcador_organizador,anuncio,informativo,neutro,no
+83,🧠,19,0,19,100,47.4,0,0,Cerebro,"Inteligencia, estrategia o 'piensa'.",tema_tecnologia,anuncio,informativo,neutro,no
+84,🌍,18,0,18,100,33.3,0,0,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+85,🎤,18,0,18,100,77.8,0,0,Micrófono,Ponencia o charla ('🎤 Ponencias').,tema_evento,anuncio,informativo,neutro,no
+86,📈,18,0,18,100,16.7,0,0,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+87,🔐,18,0,18,100,50,0,0,Candado,"Seguridad informática, o privacidad/anonimato (encuesta anónima).",tema_seguridad,anuncio,informativo,neutro,no
+88,😉,18,0,18,66.7,0,0,0,Guiño,Complicidad o ironía suave ('última oportunidad 😉'); invita sin presionar.,complicidad,mixto,picardía,positivo,posible
+89,🔩,17,0,17,100,5.9,0,0,Tuerca,Técnico / hardware (complemento de ⚙).,tema_tecnologia,anuncio,informativo,neutro,no
+90,😃,17,0,17,23.5,17.6,0,5.9,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+91,😡,17,0,17,94.1,0,0,0,Cara enojada,Enojo; en anuncios de fiesta/eventos aparece como parte de un tono 'intenso'.,enojo,mixto,enojo,negativo,no
+92,🧐,17,0,17,11.8,5.9,0,11.8,Monóculo,"Duda con matiz de investigar o cuestionar ('¿hasta qué fecha?'); a veces sarcástico: 'a ver, ¿quién es?'.",duda_critica,conversacion,duda,neutro,posible
+93,📱,16,0,16,100,62.5,0,0,Celular,Contacto o app móvil.,marcador_contacto,anuncio,informativo,neutro,no
+94,🤗,15,1,16,26.7,6.7,0,0,Abrazo cálido,Bienvenida o agradecimiento cordial.,calidez,mixto,calidez,positivo,no
+95,⚡,15,0,15,100,26.7,0,0,Rayo,"Energía, rapidez o 'rápido'.",hype,anuncio,energía,positivo,no
+96,🎟,15,0,15,100,93.3,0,0,Entrada,"Boleto, pre-venta o inscripción con cupo.",marcador_costo,anuncio,informativo,neutro,no
+97,🔊,15,0,15,93.3,20,0,0,Altavoz,'¡Atención!' Igual que 📢: llamado a escuchar un anuncio o transmisión en vivo.,comunicado,anuncio,informativo,neutro,no
+98,💙,14,0,14,100,35.7,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+99,💸,14,0,14,100,71.4,0,0,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+100,🔒,14,0,14,100,100,0,0,Candado,"Seguridad informática, o privacidad/anonimato (encuesta anónima).",tema_seguridad,anuncio,informativo,neutro,no
+101,🤭,14,0,14,42.9,7.1,0,0,Risita tapándose la boca,Travesura o pena divertida.,humor,mixto,humor,positivo,no
+102,❓,13,0,13,30.8,15.4,0,0,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+103,💚,13,0,13,100,53.8,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+104,🕛,13,0,13,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+105,😳,13,0,13,0,46.2,46.2,15.4,Cara sonrojada,"Desconcierto: algo inesperado ('ya pagué y no puedo inscribirme', 'fuera de rango').",desconcierto,conversacion,desconcierto,neutro,no
+106,🟢,13,0,13,92.3,69.2,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+107,⬇,12,0,12,100,75,0,0,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+108,👑,12,0,12,100,41.7,0,0,Corona,Campeón/a o torneo de élite.,premio,anuncio,logro,positivo,no
+109,👨‍🏫,12,0,12,100,75,0,0,Docente,Docente o instructor ('👨‍🏫 Docente: Lic. ...').,marcador_docente,anuncio,informativo,neutro,no
+110,💛,12,0,12,100,58.3,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+111,💵,12,0,12,100,33.3,0,0,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+112,🕒,12,0,12,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+113,😑,12,0,12,0,0,0,0,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+114,🙂,12,0,12,8.3,33.3,33.3,33.3,Sonrisa leve,Cordialidad neutra; a veces seca.,cordialidad,conversacion,alegría,neutro,posible
+115,🥇,12,0,12,100,75,0,0,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+116,🥈,12,0,12,100,75,0,0,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+117,⚽,11,0,11,100,45.5,0,0,Pelota,"Torneo deportivo (futsal, voleibol).",tema_evento,anuncio,entretenimiento,positivo,no
+118,⭐,11,0,11,100,63.6,0,0,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+119,🐉,11,0,11,100,9.1,0,0,Dragón,Mascota del grupo GUILD (desarrolladores de videojuegos).,identidad_grupo,anuncio,informativo,neutro,no
+120,👨‍💻,11,0,11,100,27.3,0,0,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+121,🕗,11,0,11,100,36.4,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+122,😎,10,1,11,50,20,10,0,Gafas de sol,Seguridad o actitud relajada ('todo posi').,confianza,mixto,confianza,positivo,no
+123,🤨,3,8,11,0,66.7,66.7,33.3,Ceja levantada,Desconfianza o duda: 'eso no cuadra / ¿en serio?'. Como reacción cuestiona lo que dijo otra persona.,duda_critica,reaccion,desconfianza,negativo,posible
+124,🤮,0,11,11,NA,NA,NA,NA,Cara vomitando,Rechazo fuerte. En el chat se usó como reacción a publicaciones de propaganda/campaña y a pedidos que no gustaron: 'qué asco / no estoy de acuerdo'.,rechazo,reaccion,asco,negativo,no
+125,☁,10,0,10,100,100,0,0,Nube,Cloud computing.,tema_tecnologia,anuncio,informativo,neutro,no
+126,🏐,10,0,10,100,40,0,0,Pelota,"Torneo deportivo (futsal, voleibol).",tema_evento,anuncio,entretenimiento,positivo,no
+127,🐍,10,0,10,100,60,0,0,Serpiente,Python.,tema_tecnologia,anuncio,informativo,neutro,no
+128,📄,10,0,10,100,90,0,0,Documento / certificado,"Documento, certificado o requisito en papel ('📄 Certificación gratuita').",marcador_documento,anuncio,informativo,neutro,no
+129,📋,10,0,10,100,90,0,0,Portapapeles,"Requisitos, formulario o lista de inscripción.",marcador_formulario,anuncio,informativo,neutro,no
+130,📜,10,0,10,100,80,0,0,Documento / certificado,"Documento, certificado o requisito en papel ('📄 Certificación gratuita').",marcador_documento,anuncio,informativo,neutro,no
+131,📞,10,0,10,100,100,0,0,Teléfono,Contacto por llamada o WhatsApp (números de referencia).,marcador_contacto,anuncio,informativo,neutro,no
+132,🕙,10,0,10,100,90,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+133,😒,10,0,10,0,30,0,0,Cara de desdén,Desagrado o impaciencia ('cuánto tiempo será 😒').,fastidio,conversacion,desagrado,negativo,no
+134,🙄,10,0,10,0,0,0,10,Ojos en blanco,Hartazgo o sarcasmo hacia docentes o administración.,fastidio,conversacion,fastidio,negativo,si
+135,🤧,10,0,10,0,10,10,30,Estornudo,"'Ojalá / suplico por una respuesta': se usa en tono de 'estoy a la espera, qué pena'.",lamento,conversacion,pesar,negativo,posible
+136,🤯,1,9,10,100,100,0,0,Mente explotando,Asombro o sorpresa por una noticia inesperada (mucho más usado como reacción).,sorpresa,reaccion,sorpresa,neutro,no
+137,🥉,10,0,10,100,70,0,0,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+138,●,9,0,9,100,100,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+139,☝,9,0,9,22.2,44.4,44.4,0,Dedo hacia arriba,'Lo de arriba / ahí': remite a un mensaje anterior o a algo ya publicado.,referencia_arriba,conversacion,énfasis,neutro,no
+140,👾,9,0,9,100,77.8,0,0,Alienígena arcade,Videojuegos / desarrollo de juegos.,tema_videojuegos,anuncio,entretenimiento,positivo,no
+141,🔺,9,0,9,100,100,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+142,🔻,9,0,9,100,11.1,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+143,🕐,9,0,9,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+144,🙈,8,1,9,0,0,0,12.5,Mono tapándose los ojos,Vergüenza o 'prefiero no ver'.,timidez,conversacion,vergüenza,neutro,no
+145,🥰,0,9,9,NA,NA,NA,NA,Cara con corazones,Cariño o agradecimiento sincero (solo aparece como reacción).,afecto,reaccion,amor,positivo,no
+146,🫂,9,0,9,11.1,22.2,22.2,0,Abrazo,"Apoyo emocional o agradecimiento cálido ('Gracias 🫂'); en la encuesta de bienestar, empatía.",apoyo,mixto,calidez,positivo,no
+147,⬆,8,0,8,0,100,0,0,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+148,🌎,8,0,8,100,75,0,0,Globo terráqueo / web,"Internet, web, alcance internacional.",tema_tecnologia,anuncio,informativo,neutro,no
+149,🎨,8,0,8,100,37.5,0,0,Paleta,Diseño o feria de proyectos.,tema_evento,anuncio,informativo,neutro,no
+150,💫,8,0,8,100,37.5,0,0,Estrella,"Destacado, importante o 'lo mejor'.",decoracion_enfasis,anuncio,entusiasmo,positivo,no
+151,📆,8,0,8,100,100,0,0,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+152,📡,8,0,8,100,12.5,0,0,Antena,Redes / telecomunicaciones.,tema_tecnologia,anuncio,informativo,neutro,no
+153,📣,8,0,8,100,75,0,0,Megáfono,Comunicado o anuncio: 'atención a todos'. Abre un mensaje oficial o una convocatoria.,comunicado,anuncio,informativo,neutro,no
+154,😓,8,0,8,0,0,0,25,Sudor frío,Preocupación por un plazo o nota.,preocupacion,conversacion,preocupación,negativo,no
+155,🤙,8,0,8,0,0,0,0,Mano 'llámame / shaka',Confirmación relajada y amistosa: 'dale / listo / gracias'.,confirmacion,conversacion,acuerdo,positivo,no
+156,⏳,7,0,7,100,57.1,0,0,Reloj de arena,Tiempo limitado: 'se acaba el plazo / últimos días'.,urgencia_plazo,anuncio,urgencia,neutro,no
+157,☕,7,0,7,100,71.4,0,0,Café,Te con Tech / pausa social.,fiesta,anuncio,calidez,positivo,no
+158,🎊,7,0,7,100,28.6,0,0,Confeti,"Buena noticia o evento: 'se habilitó la materia', 'te invitamos'. También se repite como énfasis de entusiasmo.",celebracion,anuncio,celebración,positivo,no
+159,👈,7,0,7,42.9,28.6,14.3,14.3,Dedo a la izquierda,"Casi siempre va junto a 👉 (👉👈): gesto tímido de pedir un favor con vergüenza ('disculpen la molestia, ¿alguien sabe?').",pedir_favor,conversacion,timidez,neutro,posible
+160,👤,7,0,7,100,100,0,0,Persona,Responsable o contacto individual.,marcador_organizador,anuncio,informativo,neutro,no
+161,👩‍🏫,7,0,7,100,100,0,0,Docente,Docente o instructor ('👨‍🏫 Docente: Lic. ...').,marcador_docente,anuncio,informativo,neutro,no
+162,👻,7,0,7,85.7,57.1,0,0,Fantasma / alien,Tema de Halloween o juego.,tema_evento,anuncio,entretenimiento,neutro,no
+163,📘,7,0,7,100,100,0,0,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+164,🔍,7,0,7,100,71.4,0,0,Lupa,"Buscar o investigar (forense, descubrir).",tema_investigacion,anuncio,informativo,neutro,no
+165,😀,7,0,7,0,14.3,14.3,14.3,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+166,😏,7,0,7,57.1,14.3,0,0,Sonrisa pícara,"Sugerencia o sarcasmo ('qué práctico 😏'); en fiestas, picardía.",picardia,mixto,picardía,neutro,si
+167,😿,7,0,7,14.3,14.3,14.3,28.6,Gato llorando,Lamento tierno/dramático.,lamento,conversacion,tristeza_leve,negativo,no
+168,🧑‍💻,7,0,7,100,57.1,0,0,Desarrollador/a,"Programación, desarrollo de software o público informático.",tema_tecnologia,anuncio,informativo,neutro,no
+169,⌚,6,0,6,100,16.7,0,0,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+170,☺,6,0,6,50,0,0,0,Cara sonriente,Cordialidad.,cordialidad,anuncio,alegría,positivo,no
+171,🌚,1,5,6,100,0,0,0,Luna con cara,"Tono pícaro o de sarcasmo ligero: 'sí, claro' / 'sé lo que digo'. También lo usan en la encuesta anónima como guiño de complicidad.",ironia_burla,reaccion,picardía,neutro,si
+172,📎,6,0,6,100,100,0,0,Clip,Adjunto o documento anexo.,marcador_documento,anuncio,informativo,neutro,no
+173,🔑,6,0,6,83.3,83.3,0,0,Llave,Clave o acceso (seguridad/criptografía).,tema_seguridad,anuncio,informativo,neutro,no
+174,🕕,6,0,6,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+175,🕘,6,0,6,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+176,😄,6,0,6,33.3,33.3,16.7,16.7,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+177,😕,6,0,6,0,0,0,33.3,Cara confundida,Confusión ante información contradictoria.,confusion,conversacion,confusión,neutro,no
+178,😮‍💨,6,0,6,0,33.3,33.3,16.7,Exhalando,Alivio o cansancio resignado ('qué fastidio'); 'a ver si sale'.,resignacion,conversacion,resignación,neutro,no
+179,🙃,6,0,6,16.7,16.7,16.7,16.7,Cara invertida,"Ironía directa: 'sí, claro, qué bien'. Lo contrario de lo que dice el mensaje.",ironia_burla,conversacion,ironía,negativo,si
+180,🛑,6,0,6,66.7,50,0,0,Alto,Prohibido o 'detente': restricción.,alerta_condicion,anuncio,advertencia,negativo,no
+181,🟡,6,0,6,66.7,100,0,16.7,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+182,🤬,1,5,6,0,0,0,0,Cara insultando,"Enojo fuerte por un problema (postergación, cambio de horario, inscripción bloqueada).",enojo,mixto,enojo,negativo,no
+183,🦕,6,0,6,0,100,100,0,Dinosaurio,"Humor absurdo o sobre algo 'viejo/antiguo' (plan antiguo, docente veterano).",humor,conversacion,humor,neutro,si
+184,🫡,6,0,6,83.3,16.7,0,0,Saludo militar,"'A la orden / enterado'. En anuncios, 'cumple con los requisitos'.",acuse_recibo,mixto,respeto,positivo,no
+185,🫣,6,0,6,16.7,50,0,0,Mirando entre dedos,Pena o curiosidad; en el chat acompaña preguntas apenadas.,timidez,conversacion,timidez,neutro,no
+186,⁉,5,0,5,100,0,0,0,Signos de exclamación/interrogación,"Énfasis de urgencia ('HOY‼️'). En preguntas de ficha (¿Cuándo?, ¿Dónde?) reemplaza el signo.",enfasis,anuncio,énfasis,neutro,no
+187,▶,5,0,5,0,60,0,60,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+188,✔,5,0,5,100,20,0,0,Marca de verificación,"Ítem confirmado: requisito, beneficio, 'aplica para' o 'incluye'. Equivale a 'sí'.",vineta_positiva,anuncio,confirmación,positivo,no
+189,➡,5,0,5,100,20,0,0,Flecha,Dirección o paso siguiente ('a continuación').,direccion,anuncio,dirección,neutro,no
+190,🎈,5,0,5,100,20,0,0,Globo,"Fiesta, celebración.",fiesta,anuncio,celebración,positivo,no
+191,🎙,5,0,5,100,40,0,0,Micrófono de estudio,Transmisión / podcast.,tema_evento,anuncio,informativo,neutro,no
+192,🎲,5,0,5,100,80,0,0,Dado,Juegos de mesa.,tema_evento,anuncio,entretenimiento,positivo,no
+193,🏅,5,0,5,100,80,0,0,Medallas,"Puestos del podio (1.°, 2.°, 3.°) en premios de concursos.",premio,anuncio,logro,positivo,no
+194,🏫,5,0,5,100,100,0,0,Escuela / edificio,"Lugar institucional (carrera, edificio, universidad).",marcador_lugar,anuncio,informativo,neutro,no
+195,👽,5,0,5,100,80,0,0,Fantasma / alien,Tema de Halloween o juego.,tema_evento,anuncio,entretenimiento,neutro,no
+196,💼,5,0,5,100,20,0,0,Maletín,Trabajo / emprendimiento.,tema_profesional,anuncio,informativo,neutro,no
+197,🔄,5,0,5,100,100,0,0,Flechas circulares,Reversing / ciclo.,tema_tecnologia,anuncio,informativo,neutro,no
+198,🕓,5,0,5,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+199,🕔,5,0,5,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+200,🕵‍♂,5,0,5,100,100,0,0,Detective,Investigación / forense (ciberseguridad).,tema_seguridad,anuncio,informativo,neutro,no
+201,🖼,5,0,5,100,100,0,0,Imagen,Esteganografía / imagen.,tema_tecnologia,anuncio,informativo,neutro,no
+202,😈,5,0,5,100,40,0,0,Diablillo,Picardía en fiestas.,picardia,anuncio,picardía,positivo,no
+203,😌,5,0,5,20,0,0,20,Cara aliviada,Alivio.,alivio,conversacion,alivio,positivo,no
+204,😪,5,0,5,0,20,20,20,Cara con sueño,Cansancio.,agobio,conversacion,agotamiento,negativo,no
+205,🤑,5,0,5,0,0,0,40,Cara de dinero,"Costo o dinero; en burlas, 'no pierdo mi plata'.",dinero,conversacion,codicia,neutro,posible
+206,🥃,5,0,5,100,40,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+207,🧩,5,0,5,100,100,0,0,Rompecabezas,Retos / lógica.,tema_evento,anuncio,entretenimiento,positivo,no
+208,🪪,5,0,5,100,20,0,0,Carnet,Documento de identidad / requisito de carnet.,marcador_documento,anuncio,informativo,neutro,no
+209,⏱,4,0,4,100,50,0,0,Reloj / despertador,Hora o duración del evento; también urgencia de plazo ('última hora para inscribirse').,marcador_hora,anuncio,informativo,neutro,no
+210,⚔,4,0,4,100,75,0,0,Espadas,Competencia / duelo.,tema_evento,anuncio,entretenimiento,positivo,no
+211,✍,4,0,4,75,75,0,25,Mano escribiendo,"Registrar, firmar, rellenar un formulario.",formulario,anuncio,informativo,neutro,no
+212,✳,4,0,4,100,50,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+213,🆕,4,0,4,100,0,0,0,Nuevo,Novedad.,enfasis,anuncio,énfasis,positivo,no
+214,🌸,4,0,4,100,50,0,0,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+215,🍻,4,0,4,100,50,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+216,🍾,4,0,4,100,25,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+217,🎶,4,0,4,100,100,0,0,Notas musicales,Música / fiesta.,tema_evento,anuncio,entretenimiento,positivo,no
+218,👴,4,0,4,100,0,0,0,Hombre mayor,Docente veterano o referencia a 'antiguo' (plan antiguo).,humor,anuncio,humor,neutro,posible
+219,💥,4,0,4,100,75,0,0,Explosión,Impacto / énfasis.,hype,anuncio,energía,positivo,no
+220,📕,4,0,4,100,50,0,0,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+221,🔸,4,0,4,100,100,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+222,🕖,4,0,4,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+223,🕹,4,0,4,100,0,0,0,Joystick,Videojuegos.,tema_videojuegos,anuncio,informativo,neutro,no
+224,😇,4,0,4,0,75,75,0,Ángel,Inocencia o 'yo no fui'; también ofrecer algo con cara de bondad.,inocencia,conversacion,inocencia,positivo,si
+225,😫,4,0,4,0,0,0,0,Cara cansada,Agotamiento o fastidio con la carga académica.,agobio,conversacion,agotamiento,negativo,no
+226,😯,4,0,4,0,75,0,25,Cara sorprendida,Sorpresa leve.,sorpresa,conversacion,sorpresa,neutro,no
+227,😴,4,0,4,25,0,0,0,Durmiendo,Aburrimiento o sueño.,agobio,mixto,aburrimiento,neutro,no
+228,😶,4,0,4,0,0,0,0,Cara neutral,Fastidio seco o incredulidad: 'y nada'. Resume una situación sin avance.,fastidio,conversacion,fastidio,negativo,posible
+229,🤷,4,0,4,0,0,0,0,Encogerse de hombros,'No sé / qué se le va a hacer': incertidumbre o resignación ante un trámite.,resignacion,conversacion,resignación,neutro,no
+230,🥵,4,0,4,100,0,0,0,Cara con calor,Intensidad en fiestas.,fiesta,anuncio,intensidad,positivo,no
+231,⌛,3,0,3,100,33.3,0,0,Reloj de arena,Tiempo limitado: 'se acaba el plazo / últimos días'.,urgencia_plazo,anuncio,urgencia,neutro,no
+232,☠,3,0,3,0,66.7,66.7,0,Calavera con huesos,Igual que 💀: 'estoy muerto / no hay solución'.,hiperbole,conversacion,resignación,negativo,si
+233,✌,3,0,3,100,0,0,0,Paz / victoria,Despedida o ánimo amistoso.,saludo,anuncio,positivo,positivo,no
+234,❄,3,0,3,100,0,0,0,Copo de nieve,Invierno (curso de temporada invierno).,tema_estacion,anuncio,informativo,neutro,no
+235,➖,3,0,3,100,100,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+236,🍄,3,0,3,100,33.3,0,0,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+237,🍺,3,0,3,100,66.7,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+238,🎥,3,0,3,100,66.7,0,0,Cámara,Transmisión o registro fotográfico.,tema_evento,anuncio,informativo,neutro,no
+239,🎼,3,0,3,0,0,0,0,Notas musicales,Música / fiesta.,tema_evento,anuncio,entretenimiento,positivo,no
+240,🏛,3,0,3,100,100,0,0,Escuela / edificio,"Lugar institucional (carrera, edificio, universidad).",marcador_lugar,anuncio,informativo,neutro,no
+241,🐕,3,0,3,0,0,0,0,Perro,Mascota / broma.,humor,conversacion,humor,neutro,no
+242,🐙,3,0,3,0,0,0,100,Pulpo,"Uso lúdico/absurdo, sin significado fijo (saludo extraño o broma).",humor,conversacion,humor,neutro,posible
+243,👩‍🔬,3,0,3,100,33.3,0,0,Científico/a,"Ciencias, investigación o laboratorio.",tema_ciencia,anuncio,informativo,neutro,no
+244,💃,3,0,3,100,0,0,0,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
+245,💔,3,0,3,0,0,0,66.7,Corazón roto,Pena o desilusión por una situación.,lamento,conversacion,tristeza,negativo,no
+246,💜,3,0,3,66.7,33.3,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+247,💯,3,0,3,66.7,0,0,0,100,Total acuerdo o 'perfecto'.,enfasis,mixto,aprobación,positivo,no
+248,📖,3,0,3,100,33.3,0,0,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+249,📗,3,0,3,100,33.3,0,0,Libros,"Materia, curso o estudio ('📚 Materias: Programación I y II').",tema_academico,anuncio,informativo,neutro,no
+250,📩,3,0,3,100,66.7,0,0,Sobre,Contacto por correo / envío de información.,marcador_contacto,anuncio,informativo,neutro,no
+251,📸,3,0,3,66.7,66.7,0,0,Cámara,Transmisión o registro fotográfico.,tema_evento,anuncio,informativo,neutro,no
+252,🔔,3,0,3,100,100,0,0,Campana,Recordatorio / aviso.,comunicado,anuncio,informativo,neutro,no
+253,🔢,3,0,3,100,0,0,0,Números,Matemáticas.,tema_academico,anuncio,informativo,neutro,no
+254,🔧,3,0,3,100,66.7,0,0,Llave inglesa,"Herramientas, taller práctico.",tema_tecnologia,anuncio,informativo,neutro,no
+255,🕑,3,0,3,100,100,0,0,Reloj con hora,Hora de inicio o de cierre en la ficha del evento ('🕛 Hora: 12:00'). La posición de las agujas no implica la hora real.,marcador_hora,anuncio,informativo,neutro,no
+256,🕺,3,0,3,100,0,0,0,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
+257,🗣,3,0,3,66.7,33.3,0,0,Cabeza hablando,Anuncio de charla o 'se comenta que'.,anuncio_charla,anuncio,informativo,neutro,no
+258,😆,3,0,3,0,33.3,33.3,0,Sonrisa,Alegría o amabilidad.,cordialidad,mixto,alegría,positivo,no
+259,😥,3,0,3,0,33.3,33.3,66.7,Triste pero aliviado,Preocupación leve.,preocupacion,conversacion,preocupación,negativo,no
+260,😨,0,3,3,NA,NA,NA,NA,Cara asustada,Miedo o preocupación.,miedo,reaccion,miedo,negativo,no
+261,😵‍💫,3,0,3,0,66.7,66.7,33.3,Cara aturdida,Desorientación: 'no entiendo nada de este trámite'.,confusion,conversacion,confusión,negativo,no
+262,🤷‍♂,3,0,3,0,0,0,0,Encogerse de hombros,'No sé / qué se le va a hacer': incertidumbre o resignación ante un trámite.,resignacion,conversacion,resignación,neutro,no
+263,🪐,3,0,3,100,66.7,0,0,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+264,🪙,3,0,3,100,0,0,0,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
+265,🫥,3,0,3,0,33.3,33.3,33.3,Cara punteada,'Me desvanezco / sin respuesta': sentirse invisible o sin información.,resignacion,conversacion,apatía,negativo,posible
+266,☄,2,0,2,100,50,0,0,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+267,♦,2,0,2,100,100,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+268,⚖,2,0,2,100,100,0,0,Balanza,Legislación / derecho (materia de Legislación Informática y Ética).,tema_academico,anuncio,informativo,neutro,no
+269,⚛,2,0,2,100,50,0,0,Átomo,Ciencias / física.,tema_ciencia,anuncio,informativo,neutro,no
+270,✈,2,0,2,100,50,0,0,Avión,Viaje / movilidad.,tema_evento,anuncio,informativo,neutro,no
+271,✋,2,0,2,50,50,0,0,Mano en alto,'Espera / un momento' o 'yo también'.,participacion,conversacion,participación,neutro,no
+272,✏,2,0,2,100,100,0,0,Lápiz,Escribir o apuntes.,tema_academico,anuncio,informativo,neutro,no
+273,❤‍🩹,2,0,2,50,0,0,0,Corazón sanando,Apoyo y recuperación; campaña solidaria.,apoyo,anuncio,calidez,positivo,no
+274,🇰🇷,2,0,2,100,0,0,0,Bandera,País (referencia internacional).,identidad_pais,anuncio,informativo,neutro,no
+275,🇺🇸,2,0,2,100,0,0,0,Bandera,País (referencia internacional).,identidad_pais,anuncio,informativo,neutro,no
+276,🌑,2,0,2,100,50,0,0,Luna nueva,Tono nocturno o broma.,humor,reaccion,humor,neutro,no
+277,🌡,2,0,2,100,50,0,0,Termómetro,Física (carrera).,tema_ciencia,anuncio,informativo,neutro,no
+278,🌴,2,0,2,100,50,0,0,Palmera,Verano.,tema_evento,anuncio,informativo,neutro,no
+279,🍀,2,0,2,0,50,50,0,Trébol,Suerte: 'ojalá salga'.,esperanza,conversacion,esperanza,positivo,no
+280,🍬,2,0,2,100,100,0,0,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+281,🍲,2,0,2,100,0,0,0,Olla,Comida / actividad social.,tema_evento,anuncio,informativo,neutro,no
+282,🍷,2,0,2,50,0,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+283,🍸,2,0,2,100,0,0,0,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
+284,🎇,2,0,2,100,100,0,0,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+285,🎪,2,0,2,100,100,0,0,Carpa de circo,Feria o evento con carpa.,tema_evento,anuncio,informativo,neutro,no
+286,🎫,2,0,2,100,50,0,0,Ticket,Entrada o cupo.,marcador_costo,anuncio,informativo,neutro,no
+287,🎭,2,0,2,100,100,0,0,Máscaras,Teatro / evento cultural.,tema_evento,anuncio,informativo,neutro,no
+288,🏴‍☠,2,0,2,100,0,0,0,Bandera pirata,Hacking / piratería (competencia de ciberseguridad).,tema_seguridad,anuncio,informativo,neutro,no
+289,🐲,2,0,2,100,100,0,0,Dragón,Mascota del grupo GUILD (desarrolladores de videojuegos).,identidad_grupo,anuncio,informativo,neutro,no
+290,👁,2,0,2,0,100,100,0,Ojo,Mirar/atención; solo en mensajes cortos ('👁👁' = 'estoy atento / veo').,atencion,conversacion,atención,neutro,no
+291,👨‍🎓,2,0,2,100,50,0,0,Estudiante / docente,Estudiante o docente.,tema_academico,anuncio,informativo,neutro,no
+292,👨‍🔬,2,0,2,100,0,0,0,Científico/a,"Ciencias, investigación o laboratorio.",tema_ciencia,anuncio,informativo,neutro,no
+293,👩‍🎓,2,0,2,100,50,0,0,Estudiante,Estudiantes.,tema_academico,anuncio,informativo,neutro,no
+294,👸,2,0,2,100,0,0,0,Realeza,Concurso de elección (reina/rey).,tema_evento,anuncio,informativo,neutro,no
+295,💁‍♀,2,0,2,100,100,0,0,Persona informando,Marca a la persona de contacto o responsable de dar información.,contacto,anuncio,informativo,neutro,no
+296,💁‍♂,2,0,2,100,100,0,0,Persona informando,Marca a la persona de contacto o responsable de dar información.,contacto,anuncio,informativo,neutro,no
+297,💎,2,0,2,100,100,0,0,Diamante,Algo valioso / premium.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+298,💗,2,0,2,100,50,0,0,Corazón creciente,Afecto.,afecto,anuncio,amor,positivo,no
+299,💩,1,1,2,0,100,100,0,Caca,Rechazo burlón: 'eso es basura'.,ironia_burla,reaccion,burla,negativo,si
+300,📉,2,0,2,100,0,0,0,Gráficos,"Estadística, datos o resultados (ciencia de datos).",tema_datos,anuncio,informativo,neutro,no
+301,📺,2,0,2,100,0,0,0,Televisión,Transmisión.,tema_evento,anuncio,informativo,neutro,no
+302,🔌,2,0,2,100,0,0,0,Enchufe,Hardware/electrónica.,tema_tecnologia,anuncio,informativo,neutro,no
+303,🔮,2,0,2,100,50,0,0,Bola de cristal,Predicción/misterio.,tema_evento,anuncio,informativo,neutro,no
+304,🔷,2,0,2,100,100,0,0,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no
+305,🖋,2,0,2,100,50,0,0,Pluma,Cursos o publicaciones; algo para firmar o escribir.,formulario,anuncio,informativo,neutro,no
+306,🖤,2,0,2,100,50,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+307,🗨,2,0,2,100,0,0,0,Globo de diálogo,Conversación / comentarios.,marcador_contacto,anuncio,informativo,neutro,no
+308,🗿,1,1,2,0,0,0,100,Moái,Cara de póker: 'sin comentarios / evidente'. Se usa con ironía para marcar apatía.,ironia_burla,reaccion,ironía,neutro,si
+309,😜,2,0,2,0,50,50,0,Cara loca,Broma.,humor,conversacion,humor,positivo,no
+310,😣,2,0,2,50,50,0,50,Cara angustiada,Aflicción.,lamento,conversacion,angustia,negativo,no
+311,🙂‍↕,2,0,2,0,0,0,0,Asintiendo,"'Sí, de acuerdo'.",acuerdo,conversacion,acuerdo,positivo,no
+312,🙋‍♂,2,0,2,0,50,50,50,Hombre levantando la mano,'Yo / presente / yo pregunto': levanta la mano para participar o preguntar.,participacion,conversacion,participación,neutro,no
+313,🛡,2,0,2,100,100,0,0,Escudo,Seguridad / defensa.,tema_seguridad,anuncio,informativo,neutro,no
+314,🛸,2,0,2,100,0,0,0,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+315,🟠,2,0,2,50,100,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+316,🟣,2,0,2,100,100,0,0,Viñeta de color,"Viñeta de color o categoría (divisiones de competencia, listas de requisitos o carreras). 🔴🔵 juntos suelen aludir a colores de la carrera o campaña.",vineta_color,anuncio,neutro,neutro,no
+317,🤍,2,0,2,100,100,0,0,Corazones de colores,"Adorno afectivo; los colores suelen representar equipos, carreras o campañas (por ejemplo 💚💙🤍).",afecto,anuncio,amor,positivo,no
+318,🤠,2,0,2,50,50,0,0,Vaquero,Tono juguetón.,humor,anuncio,humor,positivo,no
+319,🤦‍♂,2,0,2,0,0,0,0,Facepalm,Frustración por algo evidente o absurdo ('ya qué').,fastidio,conversacion,frustración,negativo,posible
+320,🥊,2,0,2,100,50,0,0,Guante de boxeo,Competencia / duelo.,tema_evento,anuncio,entretenimiento,neutro,no
+321,🦄,0,2,2,NA,NA,NA,NA,Unicornio,Humor ligero / 'algo raro y especial'.,humor,reaccion,humor,positivo,no
+322,🦋,2,0,2,100,0,0,0,Decoración,Adorno festivo.,decoracion_enfasis,anuncio,entusiasmo,positivo,no
+323,🧑‍🏫,2,0,2,100,100,0,0,Estudiante / docente,Estudiante o docente.,tema_academico,anuncio,informativo,neutro,no
+324,🫅,2,0,2,100,0,0,0,Realeza,Concurso de elección (reina/rey).,tema_evento,anuncio,informativo,neutro,no
+325,🫢,2,0,2,0,0,0,0,Mano en la boca,Sorpresa o 'uy'.,sorpresa,conversacion,sorpresa,neutro,no
+326,🫵,2,0,2,50,50,0,0,Señalando a quien lee,'Tú / ¿y tú?': interpela directamente.,llamado_accion,anuncio,interpelación,neutro,no
+327,☃,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+328,☑,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+329,☹,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+330,♀,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+331,♂,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+332,♾,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+333,⚰,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+334,⛽,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+335,❇,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+336,❎,1,0,1,0,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+337,❔,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+338,➕,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+339,🇫🇷,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+340,🇯🇵,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+341,🇲🇾,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+342,🌌,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+343,🌠,1,0,1,100,0,0,0,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
+344,🌳,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+345,🌷,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+346,🌻,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+347,🌿,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+348,🍃,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+349,🍕,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+350,🍪,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+351,🍫,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+352,🍹,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+353,🎀,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+354,🎄,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+355,🎛,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+356,🎞,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+357,🎧,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+358,🎬,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+359,🎸,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+360,🏀,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+361,🏃‍♂,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+362,🏔,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+363,🏢,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+364,🐮,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+365,🐯,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+366,🐳,0,1,1,NA,NA,NA,NA,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+367,🐾,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+368,👁‍🗨,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+369,👊,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+370,👨‍👩‍👧‍👦,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+371,👹,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+372,👺,1,0,1,0,0,0,100,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+373,💤,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+374,💧,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+375,💭,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+376,📂,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+377,📧,1,0,1,100,100,0,0,Sobre,Contacto por correo / envío de información.,marcador_contacto,anuncio,informativo,neutro,no
+378,🔁,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+379,🔎,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+380,🔓,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+381,🔬,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+382,🔭,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+383,🕚,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+384,🕞,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+385,🕵‍♀,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+386,🕸,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+387,🖊,1,0,1,100,100,0,0,Útiles,Escribir.,tema_academico,anuncio,informativo,neutro,no
+388,🖕,0,1,1,NA,NA,NA,NA,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+389,🖖,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+390,🖱,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+391,🗄,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+392,🗳,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+393,😖,1,0,1,0,0,0,0,Cara angustiada,Aflicción.,lamento,conversacion,angustia,negativo,no
+394,😝,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+395,😟,1,0,1,0,0,0,100,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+396,😦,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+397,😧,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+398,😩,1,0,1,0,0,0,0,Cara agotada,Agobio.,agobio,conversacion,agotamiento,negativo,no
+399,😮,1,0,1,0,100,0,100,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+400,😲,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+401,😵,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+402,🙆‍♂,1,0,1,0,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+403,🙊,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+404,🛍,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+405,🛒,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+406,🛠,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+407,🛰,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+408,🟤,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+409,🤌,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+410,🤛,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+411,🤜,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+412,🤟,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+413,🤤,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+414,🤦,1,0,1,0,100,100,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+415,🤪,0,1,1,NA,NA,NA,NA,Cara loca,Broma.,humor,conversacion,humor,positivo,no
+416,🤫,1,0,1,0,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+417,🤷‍♀,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+418,🥂,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+419,🥴,0,1,1,NA,NA,NA,NA,Cara mareada,Confusión o caos.,confusion,reaccion,confusión,neutro,no
+420,🥶,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+421,🥷,1,0,1,100,0,0,0,Ninja,Anonimato / discreción (encuesta anónima).,tema_seguridad,anuncio,informativo,neutro,no
+422,🦁,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+423,🦉,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+424,🦜,1,0,1,0,0,0,100,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+425,🦠,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+426,🧑‍🦽‍➡,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+427,🧫,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+428,🧮,1,0,1,100,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+429,🫦,1,0,1,100,100,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+430,🫩,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+431,🫶,1,0,1,0,0,0,0,Corazón con manos,Agradecimiento cariñoso.,afecto,conversacion,amor,positivo,no
+432,🫷,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado
+433,🫸,1,0,1,0,0,0,0,NA,sin definición registrada,sin clasificar,sin clasificar,sin clasificar,neutro,no evaluado

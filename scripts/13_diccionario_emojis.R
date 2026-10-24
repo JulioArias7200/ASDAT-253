@@ -1,10 +1,23 @@
 # =============================================================================
-# 13_diccionario_emojis.R — Conteo y diccionario semántico de emojis
+# 13_diccionario_emojis.R — Conteo y diccionario CONTEXTUAL de emojis
 #
 # Uso: Rscript scripts/13_diccionario_emojis.R
 #
-# Lee DIRECTAMENTE de data/raw/result.json (o result.json) sin depender
-# de pasos previos ni bases de datos.
+# Lee DIRECTAMENTE de data/raw/result.json (o result.json).
+# El significado de cada emoji vive en un archivo aparte:
+#   emojis_diccionario_contexto.csv   (editable en Excel / bloc de notas)
+#
+# Qué cambió respecto a la versión anterior
+#   1. Cada emoji se cuenta por separado (antes "🥳🥳🎉🎉" era UN solo emoji).
+#   2. Se normaliza ❤ / ❤️ y los tonos de piel (👍🏽 = 👍), para que el
+#      diccionario realmente encuentre los emojis.
+#   3. El significado es contextual (cómo se usa en ESTE chat), no el nombre
+#      oficial de Unicode.
+#   4. Se calcula el perfil de uso de cada emoji (anuncio vs. conversación,
+#      inicio de línea, mensaje solo-emoji, pregunta) para respaldar el
+#      significado con datos.
+#   5. Los emojis sin definición se exportan a emojis_pendientes.csv con
+#      ejemplos reales para completarlos fácilmente.
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -14,39 +27,68 @@ suppressPackageStartupMessages({
   library(readr)
 })
 
+`%||%` <- function(a, b) if (is.null(a)) b else a
+
 cat("\n")
 cat("=============================================================================\n")
-cat("  PASO 13 — Diccionario de Emojis del Chat (desde result.json)\n")
+cat("  PASO 13 — Diccionario Contextual de Emojis del Chat (desde result.json)\n")
 cat("=============================================================================\n\n")
 
 # ---------------------------------------------------------------------------
-# 1. Localizar y cargar result.json
+# 1. Localizar archivos
 # ---------------------------------------------------------------------------
-posibles_rutas <- c("data/raw/result.json", "result.json", "../data/raw/result.json", "../result.json")
-json_path <- posibles_rutas[file.exists(posibles_rutas)][1]
+buscar <- function(rutas) {
+  r <- rutas[file.exists(rutas)][1]
+  if (is.na(r)) NA_character_ else r
+}
+
+json_path <- buscar(c("data/raw/result.json", "result.json",
+                      "../data/raw/result.json", "../result.json"))
 if (is.na(json_path)) stop("No se encontró result.json")
 
-cat("  [1/4] Cargando:", json_path, "...\n")
+dic_path <- buscar(c("data/results/emojis_diccionario_contexto.csv",
+                     "data/dictionary/emojis_diccionario_contexto.csv",
+                     "emojis_diccionario_contexto.csv",
+                     "data/emojis_diccionario_contexto.csv",
+                     "data/raw/emojis_diccionario_contexto.csv",
+                     "scripts/emojis_diccionario_contexto.csv",
+                     "../emojis_diccionario_contexto.csv"))
+if (is.na(dic_path)) stop("No se encontró emojis_diccionario_contexto.csv (debe estar en data/results/, data/ o junto al script)")
+
+cat("  [1/5] Cargando:", json_path, "...\n")
 raw_data <- jsonlite::fromJSON(json_path, simplifyVector = FALSE)
 msgs_raw <- raw_data$messages
 cat(sprintf("     Total de registros en JSON: %s\n\n", format(length(msgs_raw), big.mark = ",")))
 
 # ---------------------------------------------------------------------------
-# 2. Extraer emojis de los textos y de las reacciones
+# 2. Expresión regular de UN emoji completo (con modificadores y secuencias ZWJ)
 # ---------------------------------------------------------------------------
-cat("  [2/4] Extrayendo emojis de los mensajes y reacciones...\n")
+# base: pictogramas, símbolos, dingbats, flechas, formas (sin los tonos de piel sueltos)
+base_emoji <- paste0(
+  "[\\x{1F000}-\\x{1F3FA}\\x{1F400}-\\x{1FAFF}",   # pictogramas, caras, gestos, objetos
+  "\\x{2190}-\\x{21FF}",                            # flechas
+  "\\x{2300}-\\x{23FF}",                            # técnicos (⏰ ⌚ ⏳)
+  "\\x{25A0}-\\x{25FF}",                            # formas geométricas (● ▶)
+  "\\x{2600}-\\x{27BF}",                            # misceláneos y dingbats (✅ ⚠ ❤)
+  "\\x{2900}-\\x{297F}",                            # flechas suplementarias
+  "\\x{2B00}-\\x{2BFF}",                            # flechas y símbolos (⬇ ⭐)
+  "\\x{203C}\\x{2049}]"                             # ‼ ⁉
+)
+modif <- "[\\x{FE0F}\\x{20E3}\\x{1F3FB}-\\x{1F3FF}]*"     # variación, keycap, tono de piel
 
 emoji_regex <- paste0(
-  "[",
-  "\U0001F000-\U0001FAFF",  # pictogramas y símbolos
-  "\U00002300-\U000023FF",  # símbolos técnicos
-  "\U00002600-\U000027BF",  # dingbats y misceláneos
-  "\U00002B00-\U00002BFF",  # flechas y símbolos
-  "\U0001F1E6-\U0001F1FF",  # banderas
-  "\U0000FE0F",             # variación
-  "\U0000200D",             # ZWJ
-  "]+"
+  "(?:[\\x{1F1E6}-\\x{1F1FF}]{2}",                 # banderas (🇧🇴)
+  "|", base_emoji, modif,                          # emoji base + modificadores
+  "(?:\\x{200D}", base_emoji, modif, ")*)"         # secuencias unidas con ZWJ (👩‍💻 ❤️‍🔥)
 )
+
+# Normaliza: quita selector de variación y tono de piel (❤️ == ❤ ; 👍🏽 == 👍)
+norm_emoji <- function(x) stringi::stri_replace_all_regex(x, "[\\x{FE0F}\\x{1F3FB}-\\x{1F3FF}]", "")
+
+# ---------------------------------------------------------------------------
+# 3. Extraer emojis (texto y reacciones) con su contexto de uso
+# ---------------------------------------------------------------------------
+cat("  [2/5] Extrayendo emojis de los mensajes y reacciones...\n")
 
 extraer_texto <- function(txt) {
   if (is.null(txt)) return("")
@@ -62,54 +104,98 @@ extraer_texto <- function(txt) {
   as.character(txt)
 }
 
-# Filtrar mensajes de usuario
 msgs_user <- msgs_raw[vapply(msgs_raw, function(m) !identical(m$type, "service"), logical(1))]
+textos_vec <- vapply(msgs_user, function(m) extraer_texto(m$text), character(1), USE.NAMES = FALSE)
 
-# A. Emojis en el texto (vectorizado ultra rápido con C++ stringi)
-textos_list <- lapply(msgs_user, function(m) extraer_texto(m$text))
-textos_vec <- unlist(textos_list, use.names = FALSE)
-hits_list <- stringi::stri_extract_all_regex(textos_vec, emoji_regex, omit_no_match = TRUE)
-emojis_texto_todos <- unlist(hits_list, use.names = FALSE)
-n_mensajes_con_emoji <- sum(vapply(hits_list, function(h) length(h) > 0, logical(1)))
+# A. Emojis en el texto, UNO POR UNO, con rasgos de contexto
+locs <- stringi::stri_locate_all_regex(textos_vec, emoji_regex)
+idx_con_emoji <- which(!is.na(vapply(locs, function(x) x[1, 1], numeric(1))))
+
+filas <- vector("list", length(idx_con_emoji))
+for (j in seq_along(idx_con_emoji)) {
+  i   <- idx_con_emoji[j]
+  t   <- textos_vec[i]
+  loc <- locs[[i]]
+  em  <- stringi::stri_sub(t, loc[, 1], loc[, 2])
+
+  # "Anuncio": mensaje largo o con varias líneas (fichas de eventos, convocatorias)
+  es_anuncio <- stringi::stri_count_fixed(t, "\n") >= 3 || nchar(t) > 300
+
+  # "Solo emoji": el mensaje no tiene más que emojis y signos (reacción escrita)
+  resto <- stringi::stri_replace_all_regex(t, emoji_regex, "")
+  solo  <- !nzchar(stringi::stri_replace_all_regex(resto, "[\\s\\x{FE0F}\\x{200D}.!\u00A1?\u00BF]", ""))
+
+  # "Inicio de línea": el emoji abre la línea (funciona como viñeta o etiqueta de campo)
+  prefijos   <- stringi::stri_sub(t, 1, loc[, 1] - 1)
+  ult_linea  <- stringi::stri_replace_all_regex(prefijos, "(?s)^.*\n", "")
+  ult_linea  <- stringi::stri_replace_all_regex(ult_linea, paste0(emoji_regex, "|[\\s*_]"), "")
+
+  filas[[j]] <- data.frame(
+    emoji        = norm_emoji(em),
+    msg_i        = i,
+    pos          = loc[, 1],
+    anuncio      = es_anuncio,
+    inicio_linea = !nzchar(ult_linea),
+    solo_emoji   = solo,
+    en_pregunta  = (!es_anuncio) && stringi::stri_detect_fixed(t, "?"),
+    stringsAsFactors = FALSE
+  )
+}
+ocurrencias <- dplyr::bind_rows(filas)
 
 # B. Emojis en las reacciones
 reac_conteos <- list()
 for (m in msgs_user) {
   if (!is.null(m$reactions) && length(m$reactions) > 0) {
     for (r in m$reactions) {
-      e <- r$emoji %||% r$reaction
+      e   <- r$emoji %||% r$reaction
       cnt <- as.integer(r$count %||% 0)
       if (!is.null(e) && !is.na(e) && cnt > 0) {
+        e <- norm_emoji(e)
         reac_conteos[[e]] <- (reac_conteos[[e]] %||% 0L) + cnt
       }
     }
   }
 }
 
-freq_texto <- if (length(emojis_texto_todos) > 0) table(emojis_texto_todos) else table(character(0))
-cat(sprintf("     Emojis en texto: %s (en %d mensajes)\n",
-            format(length(emojis_texto_todos), big.mark = ","), n_mensajes_con_emoji))
+cat(sprintf("     Emojis en texto: %s (en %s mensajes)\n",
+            format(nrow(ocurrencias), big.mark = ","),
+            format(length(idx_con_emoji), big.mark = ",")))
 cat(sprintf("     Reacciones acumuladas: %s (en %d tipos de emoji)\n\n",
             format(sum(unlist(reac_conteos)), big.mark = ","), length(reac_conteos)))
 
 # ---------------------------------------------------------------------------
-# 3. Consolidar frecuencias totales (texto + reacciones)
+# 4. Consolidar frecuencias + perfil de uso
 # ---------------------------------------------------------------------------
-cat("  [3/4] Consolidando frecuencias...\n")
+cat("  [3/5] Consolidando frecuencias y perfil de uso...\n")
 
-todos_emojis <- unique(c(names(freq_texto), names(reac_conteos)))
+perfil_texto <- ocurrencias %>%
+  group_by(emoji) %>%
+  summarise(
+    count_texto      = n(),
+    pct_anuncio      = round(100 * mean(anuncio), 1),
+    pct_inicio_linea = round(100 * mean(inicio_linea), 1),
+    pct_solo_emoji   = round(100 * mean(solo_emoji), 1),
+    pct_en_pregunta  = round(100 * mean(en_pregunta), 1),
+    .groups = "drop"
+  )
 
-freq_total <- data.frame(
-  emoji            = todos_emojis,
-  count_texto      = as.integer(freq_texto[todos_emojis]),
-  count_reacciones = vapply(todos_emojis, function(e) as.integer(reac_conteos[[e]] %||% 0L), integer(1)),
+reac_df <- data.frame(
+  emoji            = names(reac_conteos),
+  count_reacciones = as.integer(unlist(reac_conteos)),
   stringsAsFactors = FALSE
 )
-freq_total$count_texto[is.na(freq_total$count_texto)] <- 0L
-freq_total$count_total <- freq_total$count_texto + freq_total$count_reacciones
-freq_total <- freq_total[order(-freq_total$count_total), ]
-freq_total$rango <- seq_len(nrow(freq_total))
-freq_total <- freq_total[, c("rango", "emoji", "count_texto", "count_reacciones", "count_total")]
+
+freq_total <- full_join(perfil_texto, reac_df, by = "emoji") %>%
+  mutate(
+    count_texto      = coalesce(count_texto, 0L),
+    count_reacciones = coalesce(count_reacciones, 0L),
+    count_total      = count_texto + count_reacciones
+  ) %>%
+  arrange(desc(count_total), emoji) %>%
+  mutate(rango = row_number()) %>%
+  select(rango, emoji, count_texto, count_reacciones, count_total,
+         pct_anuncio, pct_inicio_linea, pct_solo_emoji, pct_en_pregunta)
 
 cat("\n=============================================================================\n")
 cat("  RANKING DE EMOJIS — Top 50 más usados (texto + reacciones)\n")
@@ -133,193 +219,79 @@ readr::write_csv(freq_total, out_freq)
 cat(sprintf("  CSV frecuencias guardado en: %s\n", out_freq))
 
 # ---------------------------------------------------------------------------
-# 4. Diccionario semántico de emojis
+# 5. Diccionario contextual
 # ---------------------------------------------------------------------------
-cat("  [4/4] Asignando significado semántico...\n")
+cat(sprintf("  [4/5] Cargando diccionario contextual: %s\n", dic_path))
 
-diccionario_emojis <- data.frame(
-  emoji = c(
-    # Caras y emociones
-    "😂","🤣","😭","😢","😅","😊","🙂","😁","😄","😀","😃","😆","😋","😍","🥰",
-    "😘","🤩","😎","🤔","😐","😑","😒","😤","😠","😡","🤬","😫","😩","😞","😔",
-    "😟","😕","🫤","😮","😯","😲","🥲","😪","🥱","😴","🤗","🤭","😬","🫠","😵",
-    "🥳","🤓","🧐","😇","🤑","😈","👿","💀","🥺","🫡","🫣","🥹","😻","🤡",
-    # Gestos y manos
-    "👍","👎","👏","🙏","🤝","✌️","☝️","👆","👇","👈","👉","🤙","💪","🫶","❤️",
-    "🤞","🫰","🤟","🤘","🖐️","✋","🤚","👋","🫲","🫳","🫴","🤜","🤛","👊","✊",
-    # Corazones
-    "❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💔","❣️","💕","💞","💓","💗",
-    "💖","💘","💝","💟","♥️","❤️‍🔥","❤️‍🩹",
-    # Académico y oficina
-    "📚","📖","✏️","📝","📋","🗂️","💻","🖥️","📱","⌨️","🖨️","💾","📊","📈","📉",
-    "🏫","🎓","👨‍🏫","👩‍🏫","📐","📏","🔬","🔭","🧪","🧫","🧬","🔎","📌","📍","🗒️",
-    # Clima / naturaleza
-    "☀️","🌤️","⛅","🌧️","❄️","🌙","⭐","🌟","💫","✨","🌈","🌊","🔥","💥","🌺",
-    # Comida
-    "🍕","🍔","🌮","🍜","🍣","☕","🍺","🎂","🍰","🍫","🧃","🥤",
-    # Misceláneos
-    "🎉","🎊","🎈","🎁","🏆","🥇","🥈","🥉","👑","🚀","💯","⚡","🌀","🎯",
-    "❗","‼️","⁉️","🚫","✅","❌","⚠️"
-  ),
-  significado_es = c(
-    # Caras
-    "Cara llorando de risa","Cara revolcándose de risa","Cara llorando con fuerza","Cara triste llorando",
-    "Cara con sudor frío (alivio nervioso)","Cara sonriente con ojos cerrados","Cara ligeramente sonriente","Cara con amplia sonrisa",
-    "Cara sonriente con ojos abiertos","Cara ampliamente sonriente","Cara alegre con boca abierta","Cara sonriente radiante",
-    "Cara saboreando","Cara con ojos de corazón (enamorado)","Cara con tres corazones (afecto)",
-    "Cara dando un beso","Cara con estrellas en los ojos (fascinado)","Cara con lentes (cool/confiado)","Cara pensativa",
-    "Cara neutral","Cara inexpresiva","Cara de disgusto/desinterés","Cara resoplando (frustración)","Cara enojada",
-    "Cara muy enojada","Cara furiosa con insultos","Cara exhausta","Cara angustiada","Cara decepcionada",
-    "Cara reflexiva/pensativa","Cara preocupada","Cara confundida","Cara indecisa","Cara sorprendida",
-    "Cara boquiabierta","Cara muy asombrada","Cara llorando de emoción","Cara con sueño",
-    "Cara bostezando (aburrido)","Cara durmiendo","Cara de abrazo cálido","Cara tapando la boca (risita)",
-    "Cara de mueca incómoda","Cara derritiéndose (vergüenza)","Cara mareada",
-    "Cara de fiesta/celebración","Cara de nerd/estudioso","Cara con monóculo (crítico)","Cara de inocente",
-    "Cara de dinero","Cara de diablillo sonriente","Cara de diablo enojado","Calavera (muerto de risa/peligro)",
-    "Cara con ojos de súplica","Cara saludando militarmente","Cara asomándose tímidamente","Cara conteniendo lágrimas",
-    "Cara de gato enamorado","Cara de payaso (ridículo)",
-    # Gestos
-    "Pulgar arriba (aprobación)","Pulgar abajo (desaprobación)","Aplausos","Manos juntas (gracias / por favor)",
-    "Apretón de manos (acuerdo)","Victoria / paz","Dedo índice arriba (ojo)","Dedo apuntando arriba",
-    "Dedo apuntando abajo","Dedo apuntando a la izquierda","Dedo apuntando a la derecha","Llamada telefónica",
-    "Bíceps / fuerza","Corazón con manos","Corazón rojo",
-    "Dedos cruzados (suerte)","Dedo pellizcando","Amor y paz","Mano cornuta (rock)","Mano abierta",
-    "Mano levantada (alto/hola)","Dorso levantado","Saludo con la mano","Mano derecha","Mano izquierda",
-    "Palma arriba","Puño derecho","Puño izquierdo","Golpe de puño","Puño cerrado (fuerza)",
-    # Corazones
-    "Corazón rojo (afecto)","Corazón naranja","Corazón amarillo","Corazón verde","Corazón azul","Corazón morado",
-    "Corazón negro","Corazón blanco","Corazón marrón","Corazón roto (tristeza)","Exclamación de corazón",
-    "Dos corazones","Corazones girando","Corazón latiendo","Corazón con destellos",
-    "Corazón brillante","Corazón con flecha","Corazón con cinta","Decoración corazón",
-    "Símbolo de corazón","Corazón en llamas (pasión)","Corazón vendado",
-    # Académico
-    "Libros (estudio)","Libro abierto","Lápiz","Libreta","Portapapeles","Carpeta de archivos",
-    "Computadora portátil","Monitor de computadora","Teléfono móvil","Teclado","Impresora","Disquete (guardar)",
-    "Gráfico de barras","Gráfico ascendente","Gráfico descendente",
-    "Escuela/Universidad","Birrete (graduación)","Profesor","Profesora","Escuadra","Regla","Microscopio",
-    "Telescopio","Tubo de ensayo","Placa de Petri","ADN","Lupa","Chincheta roja","Chincheta azul","Bloc de notas",
-    # Clima
-    "Sol","Sol con nubes","Nublado","Lluvia","Nieve","Luna","Estrella","Estrella brillante",
-    "Destellos girando","Destellos","Arcoíris","Ola de mar","Fuego (tendencia/ardiente)","Explosión","Flor",
-    # Comida
-    "Pizza","Hamburguesa","Taco","Ramen","Sushi","Café","Cerveza","Pastel de cumpleaños","Rebanada de pastel",
-    "Chocolate","Jugo","Bebida",
-    # Misceláneos
-    "Celebración con confeti","Fiesta","Globo","Regalo","Trofeo","Medalla de oro","Medalla de plata","Medalla de bronce",
-    "Corona","Cohete (éxito/rapidez)","100 puntos (perfecto)","Rayo (energía)","Remolino","Diana (meta lograda)",
-    "Signo de exclamación","Doble exclamación","Interrogación con exclamación","Prohibido","Aprobado/correcto",
-    "Cruz roja (rechazado)","Advertencia"
-  ),
-  categoria_emocional = c(
-    # Caras
-    "alegría","alegría","tristeza","tristeza","alivio","alegría","alegría","alegría","alegría","alegría",
-    "alegría","alegría","satisfacción","amor","amor",
-    "amor","admiración","confianza","reflexión","neutral","neutral","desagrado","frustración","enojo","enojo",
-    "enojo","agotamiento","angustia","decepción","reflexión",
-    "preocupación","confusión","indecisión","sorpresa","sorpresa","sorpresa","emoción_mixta","sueño",
-    "aburrimiento","sueño","calidez","humor","incomodidad","vergüenza","confusión",
-    "celebración","intelectual","curioso","bondad","codicia","malicia","enojo","humor_negro","súplica",
-    "respeto","timidez","emoción","amor","humor",
-    # Gestos
-    "aprobación","desaprobación","aprobación","gratitud","acuerdo","positivo","énfasis","dirección",
-    "dirección","dirección","dirección","comunicación","fuerza","amor","amor",
-    "esperanza","perfección","energía","rebeldía","saludo","saludo","saludo","saludo",
-    "dirección","dirección","ofrecimiento","fuerza","fuerza","fuerza","fuerza",
-    # Corazones
-    "amor","amor","amor","amor","amor","amor","amor","amor","amor","tristeza","amor",
-    "amor","amor","amor","amor",
-    "amor","amor","amor","amor","amor","amor","amor",
-    # Académico
-    "neutral","neutral","neutral","neutral","neutral","neutral","neutral","neutral","neutral","neutral",
-    "neutral","neutral","neutral","neutral","neutral",
-    "neutral","logro","neutral","neutral","neutral","neutral","neutral","neutral","neutral","neutral",
-    "neutral","neutral","neutral","neutral","neutral",
-    # Clima
-    "neutral","neutral","neutral","neutral","neutral","neutral","positivo","positivo",
-    "positivo","positivo","positivo","neutral","intensidad","sorpresa","positivo",
-    # Comida
-    "neutro","neutro","neutro","neutro","neutro","neutro","neutro","celebración","celebración",
-    "satisfacción","neutro","neutro",
-    # Misceláneos
-    "celebración","celebración","celebración","gratitud","logro","logro","logro","logro",
-    "logro","entusiasmo","perfección","energía","neutral","logro",
-    "énfasis","énfasis","confusión","negativo","positivo","negativo","advertencia"
-  ),
-  polaridad = c(
-    # Caras
-    "positivo","positivo","negativo","negativo","positivo","positivo","positivo","positivo","positivo","positivo",
-    "positivo","positivo","positivo","positivo","positivo",
-    "positivo","positivo","positivo","neutro","neutro","neutro","negativo","negativo","negativo","negativo",
-    "negativo","negativo","negativo","negativo","neutro",
-    "negativo","neutro","neutro","neutro","neutro","neutro","positivo","neutro",
-    "neutro","neutro","positivo","neutro","negativo","neutro","neutro",
-    "positivo","positivo","positivo","positivo","neutro","negativo","negativo","positivo","negativo",
-    "positivo","neutro","positivo","positivo","neutro",
-    # Gestos
-    "positivo","negativo","positivo","positivo","positivo","positivo","neutro","neutro",
-    "neutro","neutro","neutro","neutro","positivo","positivo","positivo",
-    "positivo","positivo","positivo","neutro","positivo","positivo","positivo","positivo",
-    "neutro","neutro","neutro","positivo","positivo","neutro","positivo",
-    # Corazones
-    "positivo","positivo","positivo","positivo","positivo","positivo","neutro","positivo","positivo","negativo","positivo",
-    "positivo","positivo","positivo","positivo",
-    "positivo","positivo","positivo","positivo","positivo","positivo","positivo",
-    # Académico
-    "neutro","neutro","neutro","neutro","neutro","neutro","neutro","neutro","neutro","neutro",
-    "neutro","neutro","neutro","neutro","neutro",
-    "neutro","positivo","neutro","neutro","neutro","neutro","neutro","neutro","neutro","neutro",
-    "neutro","neutro","neutro","neutro","neutro",
-    # Clima
-    "positivo","positivo","neutro","negativo","neutro","neutro","positivo","positivo",
-    "positivo","positivo","positivo","neutro","intenso","neutro","positivo",
-    # Comida
-    "neutro","neutro","neutro","neutro","neutro","neutro","neutro","positivo","positivo",
-    "positivo","neutro","neutro",
-    # Misceláneos
-    "positivo","positivo","positivo","positivo","positivo","positivo","positivo","positivo",
-    "positivo","positivo","positivo","positivo","neutro","positivo",
-    "neutro","neutro","confuso","negativo","positivo","negativo","negativo"
-  ),
-  stringsAsFactors = FALSE
-)
+diccionario <- readr::read_csv(dic_path, col_types = cols(.default = col_character()),
+                               locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+diccionario$emoji <- norm_emoji(diccionario$emoji)
+diccionario <- diccionario[!duplicated(diccionario$emoji), ]
 
-diccionario_emojis <- diccionario_emojis[!duplicated(diccionario_emojis$emoji), ]
+diccionario_resultado <- freq_total %>%
+  left_join(diccionario, by = "emoji") %>%
+  mutate(
+    sin_definicion      = is.na(significado_es),
+    significado_es      = coalesce(significado_es, "sin definición registrada"),
+    categoria_emocional = coalesce(categoria_emocional, "sin clasificar"),
+    polaridad           = coalesce(polaridad, "neutro"),
+    funcion             = coalesce(funcion, "sin clasificar"),
+    registro            = coalesce(registro, "sin clasificar"),
+    ironia              = coalesce(ironia, "no evaluado")
+  ) %>%
+  arrange(rango)
 
-diccionario_resultado <- merge(
-  freq_total[, c("rango", "emoji", "count_total", "count_texto", "count_reacciones")],
-  diccionario_emojis[, c("emoji", "significado_es", "categoria_emocional", "polaridad")],
-  by = "emoji",
-  all.x = TRUE
-)
+n_def  <- sum(!diccionario_resultado$sin_definicion)
+uso_def <- sum(diccionario_resultado$count_total[!diccionario_resultado$sin_definicion]) /
+           sum(diccionario_resultado$count_total)
+cat(sprintf("     Emojis distintos: %d | con significado: %d | cobertura de uso: %.1f%%\n\n",
+            nrow(diccionario_resultado), n_def, 100 * uso_def))
 
-diccionario_resultado$significado_es[is.na(diccionario_resultado$significado_es)] <- "sin definición registrada"
-diccionario_resultado$categoria_emocional[is.na(diccionario_resultado$categoria_emocional)] <- "sin clasificar"
-diccionario_resultado$polaridad[is.na(diccionario_resultado$polaridad)] <- "neutro"
-
-diccionario_resultado <- diccionario_resultado[order(diccionario_resultado$rango), ]
-
-cat("\n=============================================================================\n")
-cat("  DICCIONARIO SEMÁNTICO — Top 30 emojis con significado\n")
 cat("=============================================================================\n")
-cat(sprintf("  %-5s  %-8s  %8s  %-25s  %-15s  %-10s\n", "Rang.", "Emoji", "Total", "Significado", "Categoría", "Polaridad"))
-cat(sprintf("  %s\n", strrep("-", 80)))
+cat("  DICCIONARIO CONTEXTUAL — Top 30 emojis con significado\n")
+cat("=============================================================================\n")
+cat(sprintf("  %-5s  %-6s  %7s  %-20s  %-10s  %-9s\n", "Rang.", "Emoji", "Total", "Función", "Registro", "Polaridad"))
+cat(sprintf("  %s\n", strrep("-", 70)))
 for (i in seq_len(min(30, nrow(diccionario_resultado)))) {
   r <- diccionario_resultado[i, ]
-  sig <- substr(r$significado_es, 1, 25)
-  if (nchar(r$significado_es) > 25) sig <- paste0(substr(sig, 1, 22), "...")
-  cat(sprintf("  %-5d  %-8s  %8s  %-25s  %-15s  %-10s\n",
-              r$rango, r$emoji,
-              format(r$count_total, big.mark = ","),
-              sig,
-              substr(r$categoria_emocional, 1, 15),
-              r$polaridad))
+  cat(sprintf("  %-5d  %-6s  %7s  %-20s  %-10s  %-9s\n",
+              r$rango, r$emoji, format(r$count_total, big.mark = ","),
+              substr(r$funcion, 1, 20), substr(r$registro, 1, 10), r$polaridad))
 }
 cat("\n")
 
 out_dict <- file.path(out_dir, "emojis_diccionario.csv")
-readr::write_csv(diccionario_resultado, out_dict)
-cat(sprintf("  CSV diccionario guardado en: %s\n\n", out_dict))
+readr::write_csv(diccionario_resultado %>% select(-sin_definicion), out_dict)
+cat(sprintf("  CSV diccionario guardado en: %s\n", out_dict))
 
-cat("=============================================================================\n")
+# ---------------------------------------------------------------------------
+# 6. Emojis pendientes de definir (con ejemplos reales del chat)
+# ---------------------------------------------------------------------------
+cat("  [5/5] Revisando emojis sin definición...\n")
+
+pend <- diccionario_resultado %>% filter(sin_definicion)
+if (nrow(pend) > 0) {
+  ejemplo <- vapply(pend$emoji, function(e) {
+    h <- ocurrencias[ocurrencias$emoji == e, ]
+    if (nrow(h) == 0) return("(solo aparece como reacción)")
+    t <- textos_vec[h$msg_i[1]]
+    ini <- max(1, h$pos[1] - 45)
+    gsub("\\s+", " ", stringi::stri_sub(t, ini, h$pos[1] + 45))
+  }, character(1), USE.NAMES = FALSE)
+
+  pendientes <- pend %>%
+    mutate(ejemplo_en_chat = ejemplo) %>%
+    select(rango, emoji, count_total, count_texto, count_reacciones,
+           pct_anuncio, pct_inicio_linea, pct_solo_emoji, pct_en_pregunta, ejemplo_en_chat)
+
+  out_pend <- file.path(out_dir, "emojis_pendientes.csv")
+  readr::write_csv(pendientes, out_pend)
+  cat(sprintf("     %d emojis sin definir (%d usos). Revisa y agrega a %s:\n       %s\n",
+              nrow(pend), sum(pend$count_total), basename(dic_path), out_pend))
+} else {
+  cat("     Todos los emojis tienen definición.\n")
+}
+
+cat("\n=============================================================================\n")
 cat("  OK 13_diccionario_emojis (completado desde result.json)\n")
 cat("=============================================================================\n\n")

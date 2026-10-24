@@ -2,7 +2,7 @@
 """
 Controlador de vistas web para el dashboard de analítica y telemetría.
 """
-from flask import render_template
+from flask import render_template, request
 from app.routes.web import web_bp
 from database.queries import (
     get_dashboard_kpis,
@@ -29,17 +29,21 @@ def dashboard_view():
     """
     Renderiza el monitor ejecutivo de analítica y telemetría conectado en vivo
     a Neon Serverless PostgreSQL (TGBase) con procesamiento de PLN avanzado.
+    Permite el filtrado dinámico por semestre académico.
     """
+    semestre_param = request.args.get("semestre", "").strip()
+    gestion_filtro = semestre_param if semestre_param and semestre_param.lower() != "todos" else None
+
     try:
         kpis = get_dashboard_kpis()
-        ranking_docentes = get_top_docentes_ranking(limit=7)
-        directorio_docentes = get_docentes_directory(limit=50)
+        ranking_docentes = get_top_docentes_ranking(limit=7, gestion_semestre=gestion_filtro)
+        directorio_docentes = get_docentes_directory(limit=50, gestion_semestre=gestion_filtro)
         reacciones = get_top_reacciones_telegram(limit=8)
         modalidad = get_modalidad_chat_distribution()
         tendencia = get_tendencia_temporal_resumen()
         neon_status = get_neon_health_telemetry()
         lda_topics = get_lda_topics_summary()
-        perfil_emocional = get_perfil_emocional_docentes(limit=8)
+        perfil_emocional = get_perfil_emocional_docentes(limit=8, gestion_semestre=gestion_filtro)
         nlp_kpis = get_nlp_kpis_summary()
         top_tfidf_docentes = get_tfidf_keywords(entidad_tipo="DOCENTE", limit=12)
         top_tfidf_ciclos = get_tfidf_keywords(entidad_tipo="CICLO", limit=12)
@@ -85,7 +89,13 @@ def dashboard_view():
         perfil_emocional=perfil_emocional,
         nlp_kpis=nlp_kpis,
         top_tfidf_docentes=top_tfidf_docentes,
-        top_tfidf_ciclos=top_tfidf_ciclos
+        top_tfidf_ciclos=top_tfidf_ciclos,
+        semestre_activo=gestion_filtro or "todos",
+        gestiones_disponibles=[
+            "todos", "2022-II", "2023-I", "2023-II", 
+            "2024-I", "2024-II", "2025-I", "2025-II", 
+            "2026-I", "2026-II"
+        ]
     )
 
 @web_bp.route("/bitacora")

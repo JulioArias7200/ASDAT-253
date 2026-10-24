@@ -1,132 +1,134 @@
-            <!-- SECTION 1: 5 Executive KPI Metric Blocks -->
-            <div id="kpis-resumen" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-gutter scroll-mt-24">
-                <!-- KPI 1: Mensajes Importados -->
-                <div
-                    class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
-                    <div class="absolute top-0 left-0 right-0 h-[2px] bg-secondary"></div>
-                    <div class="flex items-start justify-between">
-                        <div class="flex flex-col">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Corpus Telegram</span>
-                            <div class="flex items-baseline gap-2 mt-space-xs">
-                                <span
-                                    class="font-metric-display text-metric-display text-on-surface tracking-tight">{{ "{:,}".format(kpis.total_mensajes) }}</span>
-                                <span class="font-label-sm text-label-sm text-outline">msgs</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
-                            <span class="material-symbols-outlined text-[20px]">mark_chat_read</span>
-                        </div>
-                    </div>
-                    <div class="mt-space-md pt-space-xs flex items-center justify-between">
-                        <div
-                            class="flex items-center gap-1 bg-tertiary-container/20 text-tertiary px-space-xs py-0.5 rounded-full">
-                            <span class="material-symbols-outlined text-[14px]">cloud_done</span>
-                            <span class="font-code-sm text-code-sm font-semibold">Neon Live</span>
-                        </div>
-                        <span
-                            class="bg-secondary/10 text-secondary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">100% procesado</span>
-                    </div>
-                </div>
-
-                <!-- KPI 2: Emisores Únicos -->
-                <div
-                    class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
-                    <div class="absolute top-0 left-0 right-0 h-[2px] bg-primary"></div>
-                    <div class="flex items-start justify-between">
-                        <div class="flex flex-col">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Comunidad Estudiantil</span>
-                            <div class="flex items-baseline gap-2 mt-space-xs">
-                                <span
-                                    class="font-metric-display text-metric-display text-on-surface tracking-tight">{{ "{:,}".format(kpis.usuarios_unicos) }}</span>
-                                <span class="font-label-sm text-label-sm text-outline">emisores</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-[20px]">groups</span>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-space-md pt-space-xs flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
-                        <span>Ø {{ kpis.promedio_msgs_usuario }} msgs / emisor</span>
-                        <span class="text-tertiary font-medium">Actividad continua</span>
-                    </div>
-                </div>
-
-                <!-- KPI 3: Docentes Evaluados -->
-                <div
-                    class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
-                    <div class="absolute top-0 left-0 right-0 h-[2px] bg-tertiary"></div>
-                    <div class="flex items-start justify-between">
-                        <div class="flex flex-col">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Docentes Evaluados</span>
-                            <div class="flex items-baseline gap-2 mt-space-xs">
-                                <span
-                                    class="font-metric-display text-metric-display text-on-surface tracking-tight">{{ kpis.total_docentes }}</span>
-                                <span class="font-label-sm text-label-sm text-tertiary">profesores</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary">
-                            <span class="material-symbols-outlined text-[20px]">school</span>
-                        </div>
-                    </div>
-                    <div class="mt-space-md pt-space-xs flex items-center justify-between">
-                        <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">{{ "{:,}".format(kpis.total_menciones) }} menciones</span>
-                        <span class="font-code-sm text-code-sm text-tertiary font-semibold">100% catalogados</span>
-                    </div>
-                </div>
-
-                <!-- KPI 4: Materias y Paralelos -->
-                <div
-                    class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
-                    <div class="absolute top-0 left-0 right-0 h-[2px] bg-secondary-container"></div>
-                    <div class="flex items-start justify-between">
-                        <div class="flex flex-col">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Oferta Académica</span>
-                            <div class="flex items-baseline gap-2 mt-space-xs">
-                                <span
-                                    class="font-metric-display text-metric-display text-secondary tracking-tight">{{ kpis.total_materias }}</span>
-                                <span class="font-label-sm text-label-sm text-outline">materias</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
-                            <span class="material-symbols-outlined text-[20px]">menu_book</span>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-body-sm text-body-sm">
-                        <span class="truncate">{{ kpis.total_paralelos }} paralelos oficiales</span>
-                        <span class="font-code-sm text-code-sm text-tertiary font-semibold">I-2024</span>
-                    </div>
-                </div>
-
-                <!-- KPI 5: Multimodal & Modismos -->
-                <div
-                    class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
-                    <div class="absolute top-0 left-0 right-0 h-[2px] bg-primary-container"></div>
-                    <div class="flex items-start justify-between">
-                        <div class="flex flex-col">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Enriquecimiento Multimodal</span>
-                            <div class="flex items-baseline gap-2 mt-space-xs">
-                                <span
-                                    class="font-metric-display text-metric-display text-on-surface tracking-tight">{{ "{:,}".format(kpis.total_multimodal) }}</span>
-                                <span class="font-label-sm text-label-sm text-primary">artefactos</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-fixed">
-                            <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
-                        </div>
-                    </div>
-                    <div class="mt-space-md pt-space-xs flex items-center justify-between font-code-sm text-code-sm">
-                        <span class="text-tertiary font-medium" title="Imágenes con texto OCR">{{ "{:,}".format(kpis.total_ocr) }} OCR</span>
-                        <span class="text-outline">|</span>
-                        <span class="text-secondary font-medium" title="Reacciones Granulares">{{ "{:,}".format(kpis.total_reacciones) }} Reacc</span>
-                        <span class="text-outline">|</span>
-                        <span class="text-primary font-medium" title="Ocurrencias de modismos">{{ kpis.total_modismos }} Jergas</span>
-                    </div>
+<!-- SECTION 1: 5 Executive KPI Metric Blocks -->
+<div id="kpis-resumen" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-gutter scroll-mt-24">
+    <!-- KPI 1: Mensajes Importados -->
+    <div
+        class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-secondary"></div>
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Corpus Telegram</span>
+                <div class="flex items-baseline gap-2 mt-space-xs">
+                    <span class="font-metric-display text-metric-display text-on-surface tracking-tight">{{
+                        "{:,}".format(kpis.total_mensajes) }}</span>
+                    <span class="font-label-sm text-label-sm text-outline">msgs</span>
                 </div>
             </div>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[20px]">mark_chat_read</span>
+            </div>
+        </div>
+        <div class="mt-space-md pt-space-xs flex items-center justify-between">
+            <div class="flex items-center gap-1 bg-tertiary-container/20 text-tertiary px-space-xs py-0.5 rounded-full">
+                <span class="material-symbols-outlined text-[14px]">cloud_done</span>
+                <span class="font-code-sm text-code-sm font-semibold">Neon Live</span>
+            </div>
+            <span
+                class="bg-secondary/10 text-secondary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">100%
+                procesado</span>
+        </div>
+    </div>
+
+    <!-- KPI 2: Emisores Únicos -->
+    <div
+        class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-primary"></div>
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Comunidad
+                    Estudiantil</span>
+                <div class="flex items-baseline gap-2 mt-space-xs">
+                    <span class="font-metric-display text-metric-display text-on-surface tracking-tight">{{
+                        "{:,}".format(kpis.usuarios_unicos) }}</span>
+                    <span class="font-label-sm text-label-sm text-outline">emisores</span>
+                </div>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[20px]">groups</span>
+            </div>
+        </div>
+        <div
+            class="mt-space-md pt-space-xs flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
+            <span>Ø {{ kpis.promedio_msgs_usuario }} msgs / emisor</span>
+            <span class="text-tertiary font-medium">Actividad continua</span>
+        </div>
+    </div>
+
+    <!-- KPI 3: Docentes Evaluados -->
+    <div
+        class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-tertiary"></div>
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Docentes
+                    Evaluados</span>
+                <div class="flex items-baseline gap-2 mt-space-xs">
+                    <span class="font-metric-display text-metric-display text-on-surface tracking-tight">{{
+                        kpis.total_docentes }}</span>
+                    <span class="font-label-sm text-label-sm text-tertiary">profesores</span>
+                </div>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary">
+                <span class="material-symbols-outlined text-[20px]">school</span>
+            </div>
+        </div>
+        <div class="mt-space-md pt-space-xs flex items-center justify-between">
+            <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">{{
+                "{:,}".format(kpis.total_menciones) }} menciones</span>
+            <span class="font-code-sm text-code-sm text-tertiary font-semibold">100% catalogados</span>
+        </div>
+    </div>
+
+    <!-- KPI 4: Materias y Paralelos -->
+    <div
+        class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-secondary-container"></div>
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Oferta Académica</span>
+                <div class="flex items-baseline gap-2 mt-space-xs">
+                    <span class="font-metric-display text-metric-display text-secondary tracking-tight">{{
+                        kpis.total_materias }}</span>
+                    <span class="font-label-sm text-label-sm text-outline">materias</span>
+                </div>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[20px]">menu_book</span>
+            </div>
+        </div>
+        <div class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-body-sm text-body-sm">
+            <span class="truncate">{{ kpis.total_paralelos }} paralelos oficiales</span>
+            <span class="font-code-sm text-code-sm text-tertiary font-semibold">I-2024</span>
+        </div>
+    </div>
+
+    <!-- KPI 5: Multimodal & Modismos -->
+    <div
+        class="relative bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between overflow-hidden group hover:bg-surface-container-high transition-colors">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-primary-container"></div>
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Enriquecimiento
+                    Multimodal</span>
+                <div class="flex items-baseline gap-2 mt-space-xs">
+                    <span class="font-metric-display text-metric-display text-on-surface tracking-tight">{{
+                        "{:,}".format(kpis.total_multimodal) }}</span>
+                    <span class="font-label-sm text-label-sm text-primary">artefactos</span>
+                </div>
+            </div>
+            <div
+                class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-fixed">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+            </div>
+        </div>
+        <div class="mt-space-md pt-space-xs flex items-center justify-between font-code-sm text-code-sm">
+            <span class="text-tertiary font-medium" title="Imágenes con texto OCR">{{ "{:,}".format(kpis.total_ocr) }}
+                OCR</span>
+            <span class="text-outline">|</span>
+            <span class="text-secondary font-medium" title="Reacciones Granulares">{{
+                "{:,}".format(kpis.total_reacciones) }} Reacc</span>
+            <span class="text-outline">|</span>
+            <span class="text-primary font-medium" title="Ocurrencias de modismos">{{ kpis.total_modismos }}
+                Jergas</span>
+        </div>
+    </div>
+</div>

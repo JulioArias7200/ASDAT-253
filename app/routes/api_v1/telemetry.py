@@ -181,14 +181,27 @@ def get_dataset_samples_endpoint():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-@api_v1_bp.route("/bitacora/test-mutation", methods=["POST"])
-def trigger_audit_mutation():
-    """Dispara una mutación de prueba en Neon para validar el Trigger en tiempo real."""
+@api_v1_bp.route("/analytics/timeline", methods=["GET"])
+def get_analytics_timeline_endpoint():
+    """
+    Retorna la serie cronológica dinámica de mensajes y consultas académicas
+    con soporte para granularidad (monthly, semester, yearly, hourly), filtro de fechas
+    y franjas especiales (Mayo-Agosto y Dic-Feb).
+    """
     try:
-        from database.queries import trigger_test_mutation
-        res = trigger_test_mutation(usuario="dashboard_tester")
-        return jsonify(res), 200 if res.get("status") == "success" else 500
+        from database.queries import get_timeline_series_data
+        start_date = request.args.get("start")
+        end_date = request.args.get("end")
+        granularity = request.args.get("granularity", "monthly").lower()
+
+        data = get_timeline_series_data(
+            start_date=start_date,
+            end_date=end_date,
+            granularity=granularity
+        )
+        return jsonify(data), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
 
 

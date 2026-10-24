@@ -15,5 +15,6 @@ from database.queries import (
     get_perfil_emocional_docentes,
     get_nlp_kpis_summary,
     get_tfidf_keywords,
-    get_bitacora_reciente
+    get_bitacora_reciente,
+    get_timeline_series_data
 )

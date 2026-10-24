@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Importar Datos & Análisis - SentiDataUMSA{% endblock %}
+
+{% block content %}
+<main class="w-full bg-background flex-1 transition-colors duration-200">
+    <div class="flex flex-col w-full">
+        <!-- Header Strip Institucional -->
+        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-margin py-space-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                            <span class="material-symbols-outlined text-[13px]">cloud_upload</span>
+                            Data Ingestion Lab
+                        </span>
+                        <span class="text-outline text-xs">•</span>
+                        <span class="font-code-sm text-xs text-secondary font-medium">Telegram JSON &bull; CSV Exporter</span>
+                    </div>
+                    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+                        Importación de Datos &amp; Análisis On-Demand
+                    </h1>
+                    <p class="font-body-sm text-body-sm text-outline max-w-4xl">
+                        Laboratorio para incorporar nuevos chats o lotes de Telegram a SentiDataUMSA. 
+                        Permite validar el esquema, ejecutar el preprocesamiento y evaluar polaridad en modo sandbox antes de persistir en Neon PostgreSQL.
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-2 self-start md:self-auto">
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Motor de Ingestión Listo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full px-margin py-space-lg flex flex-col gap-space-lg">
+            <!-- Stepper de 4 Pasos -->
+            <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-center">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="w-8 h-8 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center font-mono">1</span>
+                        <span class="font-semibold text-xs text-on-surface">Seleccionar Archivo</span>
+                        <span class="text-[11px] text-outline font-mono">.json o .csv</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="w-8 h-8 rounded-full bg-surface-container-high text-outline font-bold text-xs flex items-center justify-center font-mono">2</span>
+                        <span class="font-semibold text-xs text-outline">Validación de Esquema</span>
+                        <span class="text-[11px] text-outline font-mono">UTF-8 &bull; Campos</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="w-8 h-8 rounded-full bg-surface-container-high text-outline font-bold text-xs flex items-center justify-center font-mono">3</span>
+                        <span class="font-semibold text-xs text-outline">Ejecución en Sandbox</span>
+                        <span class="text-[11px] text-outline font-mono">Preprocesamiento</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="w-8 h-8 rounded-full bg-surface-container-high text-outline font-bold text-xs flex items-center justify-center font-mono">4</span>
+                        <span class="font-semibold text-xs text-outline">Persistencia en Neon</span>
+                        <span class="text-[11px] text-outline font-mono">Commit con CDC</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zona Drag and Drop -->
+            <div class="bg-surface-container rounded-xl p-space-xl shadow-md border-2 border-dashed border-primary/40 hover:border-primary transition-all flex flex-col items-center justify-center gap-3 text-center cursor-pointer min-h-[220px]">
+                <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-sm">
+                    <span class="material-symbols-outlined text-[32px]">upload_file</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <h3 class="font-headline-sm text-base font-bold text-on-surface">Arrastra y suelta tu export de Telegram aquí</h3>
+                    <p class="font-body-sm text-xs text-outline">o haz clic para explorar archivos locales (.json exportado desde Telegram Desktop o .csv)</p>
+                </div>
+                <input type="file" id="import-file-input" class="hidden" accept=".json,.csv">
+                <button type="button" onclick="document.getElementById('import-file-input').click()"
+                    class="bg-primary hover:bg-primary/90 text-on-primary font-semibold text-xs px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 mt-2">
+                    <span class="material-symbols-outlined text-[16px]">folder_open</span>
+                    Seleccionar Archivo de mi Equipo
+                </button>
+            </div>
+
+            <!-- Instrucciones de Exportación -->
+            <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-3">
+                <div class="flex items-center gap-2 pb-2 border-b border-surface-container-high/60">
+                    <span class="material-symbols-outlined text-secondary text-[20px]">info</span>
+                    <h3 class="font-headline-sm text-sm font-semibold text-on-surface">¿Cómo exportar el historial desde Telegram Desktop?</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-body-sm text-on-surface-variant">
+                    <div class="p-3 rounded-lg bg-surface-container-low border border-outline/10 flex flex-col gap-1">
+                        <strong class="text-on-surface">Paso 1: Abrir el Chat</strong>
+                        <p class="text-outline">Ingresa al grupo de Telegram de la materia o carrera desde Telegram Desktop en tu computadora.</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-surface-container-low border border-outline/10 flex flex-col gap-1">
+                        <strong class="text-on-surface">Paso 2: Menú de Exportación</strong>
+                        <p class="text-outline">Haz clic en los tres puntos superiores (⋮) y selecciona <em>"Exportar historial del chat"</em>.</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-surface-container-low border border-outline/10 flex flex-col gap-1">
+                        <strong class="text-on-surface">Paso 3: Formato JSON Máquina</strong>
+                        <p class="text-outline">Elige formato <strong>JSON legible por máquina</strong> y sube el archivo generado aquí.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

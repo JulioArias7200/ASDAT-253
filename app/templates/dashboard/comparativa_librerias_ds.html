@@ -6,7 +6,7 @@
 <main class="w-full bg-background flex-1 transition-colors duration-200">
     <div class="flex flex-col w-full">
         <!-- Header Strip Institucional -->
-        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-margin py-space-md">
+        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-4 sm:px-margin py-4 sm:py-space-md">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center gap-2">
@@ -17,17 +17,17 @@
                         <span class="text-outline text-xs">•</span>
                         <span class="font-code-sm text-xs text-tertiary font-medium">Cohen's Kappa &amp; F1 Engine</span>
                     </div>
-                    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+                    <h1 class="font-headline-lg text-xl sm:text-headline-lg font-bold text-on-surface tracking-tight">
                         Comparativa: Librerías vs DS propio
                     </h1>
-                    <p class="font-body-sm text-body-sm text-outline max-w-4xl">
+                    <p class="font-body-sm text-xs sm:text-body-sm text-outline max-w-4xl">
                         Evaluación rigurosa de concordancia entre clasificadores estándar (Librería Docente / Léxico General) 
                         y el <strong class="text-on-surface font-semibold">Dataset propio SentiDataUMSA</strong>, calibrado para capturar modismos paceños, 
                         sarcasmo estudiantil e inversión por reglas de negación.
                     </p>
                 </div>
                 
-                <div class="flex items-center gap-2 self-start md:self-auto">
+                <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
                     <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
                         <span class="font-code-sm text-xs text-on-surface">Neon DB Live</span>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="w-full px-margin py-space-lg flex flex-col gap-space-lg">
+        <div class="w-full px-3 sm:px-margin py-4 sm:py-space-lg flex flex-col gap-4 sm:gap-space-lg">
             <!-- 4 Métricas Clave de Benchmark (Executive Cards) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
                 <!-- Card 1: Cohen's Kappa -->
@@ -230,7 +230,42 @@
                     </span>
                 </div>
 
-                <div class="overflow-x-auto">
+                <!-- Vista Móvil: Tarjetas Apiladas (Smartphones < 768px) -->
+                <div class="flex flex-col gap-3 md:hidden">
+                    {% for d in benchmark.discrepancias %}
+                    <div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high/80 flex flex-col gap-2 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-outline font-semibold">#{{ d.message_id }}</span>
+                            <span class="px-2 py-0.5 rounded-full text-[11px] font-mono capitalize bg-surface-container-high text-on-surface-variant">
+                                {{ d.emocion }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-on-surface font-mono leading-relaxed bg-surface-container px-2.5 py-1.5 rounded-lg border border-outline/10">
+                            "{{ d.texto }}"
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+                            <div class="flex flex-col gap-0.5">
+                                <span class="text-[10px] uppercase font-semibold text-outline">DS Propio:</span>
+                                <span class="px-2 py-0.5 rounded text-center text-[11px] font-mono font-semibold {% if d.ds_propio == 'positivo' %}bg-emerald-500/20 text-emerald-400{% elif d.ds_propio == 'negativo' %}bg-pink-500/20 text-pink-400{% else %}bg-cyan-500/20 text-cyan-400{% endif %}">
+                                    {{ d.ds_propio }}
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-0.5">
+                                <span class="text-[10px] uppercase font-semibold text-outline">Librería Externa:</span>
+                                <span class="px-2 py-0.5 rounded text-center text-[11px] font-mono font-semibold {% if d.libreria_externa == 'positivo' %}bg-emerald-500/20 text-emerald-400{% elif d.libreria_externa == 'negativo' %}bg-pink-500/20 text-pink-400{% else %}bg-surface-container-high text-outline{% endif %}">
+                                    {{ d.libreria_externa }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-outline-variant bg-surface-container/60 p-2 rounded-lg border border-outline/5 leading-tight">
+                            <strong class="text-on-surface-variant font-medium">Motivo:</strong> {{ d.motivo }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Vista Escritorio y Tableta: Tabla Completa (>= 768px) -->
+                <div class="hidden md:block overflow-x-auto">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="border-b border-surface-container-high text-outline uppercase font-mono tracking-wider">

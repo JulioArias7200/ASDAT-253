@@ -1,5 +1,5 @@
     <aside id="main-sidebar"
-        class="w-72 bg-surface-container-lowest border-r border-surface-container-high/60 flex flex-col shrink-0 fixed inset-y-0 left-0 z-50 h-screen">
+        class="w-72 bg-surface-container-lowest border-r border-surface-container-high/60 flex flex-col shrink-0 fixed inset-y-0 left-0 z-50 h-screen -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none">
         <!-- Logo & Brand Header -->
         <div
             class="h-20 px-space-md border-b border-surface-container-high/40 flex items-center justify-between shrink-0">
@@ -13,9 +13,9 @@
                 </div>
             </div>
             <button
-                class="text-outline hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors lg:hidden"
-                id="close-sidebar-btn" type="button">
-                <span class="material-symbols-outlined text-[20px]">close</span>
+                class="min-w-[44px] min-h-[44px] flex items-center justify-center text-outline hover:text-on-surface rounded-xl hover:bg-surface-container-high transition-colors lg:hidden cursor-pointer"
+                id="close-sidebar-btn" type="button" aria-label="Cerrar barra lateral">
+                <span class="material-symbols-outlined text-[22px]">close</span>
             </button>
         </div>
 

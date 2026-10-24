@@ -190,54 +190,54 @@
                         </div>
 
                         <!-- Barra de Controles C-Level: Granularidad + Presets de Rango -->
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pt-2">
+                        <div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-2.5 pt-2">
                             <!-- Selector de Granularidad Temporal -->
-                            <div class="flex items-center gap-1 bg-surface-container-highest/60 p-1 rounded-lg border border-outline/15">
+                            <div class="flex items-center gap-1 bg-surface-container-highest/60 p-1 rounded-lg border border-outline/15 overflow-x-auto max-w-full">
                                 <button type="button" data-granularity="monthly"
-                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium bg-primary text-on-primary font-semibold transition-all">
+                                    class="timeline-gran-btn px-2.5 sm:px-3 py-1 rounded text-xs font-semibold bg-primary text-on-primary shadow-sm transition-all whitespace-nowrap">
                                     Mensual
                                 </button>
                                 <button type="button" data-granularity="semester"
-                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all">
+                                    class="timeline-gran-btn px-2.5 sm:px-3 py-1 rounded text-xs font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     Semestral
                                 </button>
                                 <button type="button" data-granularity="yearly"
-                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all">
+                                    class="timeline-gran-btn px-2.5 sm:px-3 py-1 rounded text-xs font-medium text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     Anual
                                 </button>
                                 <button type="button" data-granularity="hourly"
-                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[14px]">schedule</span>
-                                    Horario (0-23h)
+                                    class="timeline-gran-btn px-2 sm:px-3 py-1 rounded text-xs font-medium text-outline hover:text-on-surface transition-all flex items-center gap-1 whitespace-nowrap">
+                                    <span class="material-symbols-outlined text-[13px]">schedule</span>
+                                    Horario
                                 </button>
                             </div>
 
                             <!-- Selector de Rangos Preestablecidos -->
-                            <div class="flex flex-wrap items-center gap-1">
+                            <div class="flex items-center gap-1 overflow-x-auto max-w-full pb-0.5">
                                 <button type="button" data-preset="all"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-primary text-primary bg-primary/10 transition-all">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-primary text-primary bg-primary/10 transition-all whitespace-nowrap">
                                     Histórico
                                 </button>
                                 <button type="button" data-preset="2023"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-outline/20 text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     2023
                                 </button>
                                 <button type="button" data-preset="2024"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-outline/20 text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     2024
                                 </button>
                                 <button type="button" data-preset="2025"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-outline/20 text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     2025
                                 </button>
                                 <button type="button" data-preset="2026"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-outline/20 text-outline hover:text-on-surface transition-all whitespace-nowrap">
                                     2026
                                 </button>
                                 <button type="button" data-preset="custom"
-                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all flex items-center gap-1">
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-xs font-medium border border-outline/20 text-outline hover:text-on-surface transition-all flex items-center gap-1 whitespace-nowrap">
                                     <span class="material-symbols-outlined text-[13px]">date_range</span>
-                                    Personalizado
+                                    Filtro
                                 </button>
                             </div>
                         </div>

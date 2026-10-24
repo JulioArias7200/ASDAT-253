@@ -3,10 +3,10 @@
 {% block title %}Bitácora de Transformaciones & Auditoría CDC - SentiDataUMSA{% endblock %}
 
 {% block content %}
-<main class="flex-1 p-space-md lg:p-space-xl flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<main class="flex-1 p-3 sm:p-space-md lg:p-space-xl flex flex-col gap-4 sm:gap-space-lg max-w-[1720px] mx-auto w-full">
 
     <!-- Top Telemetry & CDC Status Header -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md border-b border-surface-container-high/60 pb-space-lg">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md border-b border-surface-container-high/60 pb-4 sm:pb-space-lg">
         <div class="flex flex-col gap-1">
             <div class="flex items-center gap-2">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/30 text-tertiary border border-tertiary/20">
@@ -16,11 +16,11 @@
                 <span class="text-outline text-xs">•</span>
                 <span class="text-outline text-xs font-mono">Neon Serverless (Corpus 23,371 Mensajes)</span>
             </div>
-            <h1 class="text-headline-lg font-bold tracking-tight text-on-surface flex items-center gap-2.5 mt-1">
-                <span class="material-symbols-outlined text-[32px] text-primary">history_edu</span>
-                Bitácora de Transformaciones y Auditoría del Dataset
+            <h1 class="text-xl sm:text-headline-lg font-bold tracking-tight text-on-surface flex items-center gap-2 mt-1">
+                <span class="material-symbols-outlined text-[26px] sm:text-[32px] text-primary">history_edu</span>
+                <span>Bitácora de Transformaciones y Auditoría</span>
             </h1>
-            <p class="text-body-md text-on-surface-variant max-w-4xl">
+            <p class="text-xs sm:text-body-md text-on-surface-variant max-w-4xl">
                 Trazabilidad metodológica del ciclo de vida de los datos: visualización del <strong class="text-on-surface font-semibold">Estado ANTES vs DESPUÉS</strong> de cada transformación, 
                 scripts ejecutados, columnas afectadas, técnicas de minería y auditoría transaccional de cambios.
             </p>

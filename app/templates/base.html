@@ -192,12 +192,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
-<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex">
-    <!-- Componente: Sidebar de Navegación Lateral -->
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex relative overflow-x-hidden">
+    <!-- Backdrop oscuro para móvil cuando el sidebar está abierto -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity cursor-pointer"></div>
+
+    <!-- Componente: Sidebar de Navegación Lateral (Off-canvas en móvil) -->
     {% include "components/sidebar.html" %}
 
     <!-- Contenedor Principal (con margen dinámico para escritorio lg:pl-72) -->
-    <div class="flex-1 flex flex-col min-w-0 lg:pl-72">
+    <div class="flex-1 flex flex-col min-w-0 lg:pl-72 w-full">
         <!-- Componente: Header Superior con selector de corpus y botón día/noche -->
         {% include "components/header.html" %}
 
@@ -208,6 +211,11 @@
         {% include "components/footer.html" %}
     </div>
 
+    <!-- Componente: Modal QR para Dispositivos Móviles -->
+    {% include "components/qr_modal.html" %}
+
+    <!-- Script de Motor QR Offline -->
+    <script src="{{ url_for('static', filename='js/qr_engine.js') }}"></script>
     <!-- Script Principal de Interacciones y Modo Día/Noche -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block extra_scripts %}{% endblock %}

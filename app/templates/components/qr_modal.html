@@ -1,0 +1,106 @@
+<!-- Modal Interactivo: Generador de Código QR para Dispositivos Móviles (SentiDataUMSA) -->
+<div id="qr-modal-backdrop"
+    class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 transition-all duration-200">
+    
+    <div class="relative w-full max-w-md bg-surface-container-lowest border border-surface-container-high/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
+        
+        <!-- Header del Modal -->
+        <div class="px-5 py-4 border-b border-surface-container-high/60 flex items-center justify-between bg-surface-container-low/50 shrink-0">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                    <h3 class="font-headline-sm text-sm font-bold text-on-surface truncate">Abrir en Celular o Tablet</h3>
+                    <p id="qr-active-route-label" class="text-[11px] text-outline truncate font-mono">SentiDataUMSA</p>
+                </div>
+            </div>
+            <button id="btn-close-qr-modal" type="button"
+                class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer"
+                aria-label="Cerrar modal de QR">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+        </div>
+
+        <!-- Cuerpo del Modal -->
+        <div class="p-5 flex flex-col items-center gap-4 overflow-y-auto">
+            
+            <!-- Contenedor del Código QR -->
+            <div class="relative p-3.5 bg-white rounded-2xl shadow-lg border border-slate-200 flex items-center justify-center">
+                <div id="qr-code-svg-target" class="w-56 h-56 flex items-center justify-center">
+                    <!-- SVG inyectado por qr_engine.js -->
+                    <span class="material-symbols-outlined text-4xl text-slate-300 animate-spin">progress_activity</span>
+                </div>
+                <!-- Badge de marca central o sutil -->
+                <div class="absolute -bottom-2 bg-primary text-on-primary text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow tracking-wider uppercase">
+                    SentiData UMSA
+                </div>
+            </div>
+
+            <!-- Selector de Entorno de Red -->
+            <div class="w-full flex flex-col gap-1.5 text-left">
+                <label for="qr-host-mode" class="text-[11px] font-medium text-outline flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">cell_tower</span>
+                    <span>Modo de Conexión para el Móvil:</span>
+                </label>
+                <select id="qr-host-mode"
+                    class="w-full bg-surface-container px-3 py-2 text-xs rounded-xl border border-surface-container-high text-on-surface focus:outline-none focus:border-primary transition-colors cursor-pointer">
+                    <option value="current">Dirección actual del navegador (Recomendado)</option>
+                    <option value="lan">IP de Red LAN / Wi-Fi</option>
+                    <option value="localhost">Localhost (Mismo dispositivo)</option>
+                    <option value="custom">Ingresar IP o Dominio Manual</option>
+                </select>
+            </div>
+
+            <!-- Entrada de IP Manual (Oculto por defecto) -->
+            <div id="qr-custom-ip-container" class="w-full hidden flex flex-col gap-1 text-left">
+                <label for="qr-custom-ip-input" class="text-[11px] text-outline font-medium">IP y Puerto de tu PC en la red local:</label>
+                <div class="flex items-center gap-2">
+                    <input id="qr-custom-ip-input" type="text" placeholder="ej. 192.168.1.15:5000"
+                        class="flex-1 bg-surface-container px-3 py-1.5 text-xs rounded-lg border border-surface-container-high text-on-surface font-mono focus:outline-none focus:border-primary" />
+                </div>
+                <span class="text-[10px] text-outline">Introduce la IP local de tu máquina para que tu teléfono la alcance vía Wi-Fi.</span>
+            </div>
+
+            <!-- Enlace Generado y Botón Copiar -->
+            <div class="w-full flex flex-col gap-1 text-left">
+                <label class="text-[11px] font-medium text-outline flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">link</span>
+                    <span>Enlace QR Activo:</span>
+                </label>
+                <div class="flex items-center gap-1.5">
+                    <input id="qr-url-display" type="text" readonly
+                        class="flex-1 bg-surface-container px-3 py-2 text-[11px] rounded-xl border border-surface-container-high text-on-surface-variant font-mono truncate select-all focus:outline-none" />
+                    <button id="btn-copy-qr-url" type="button"
+                        class="px-3 py-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-medium rounded-xl flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
+                        title="Copiar URL al portapapeles">
+                        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                        <span>Copiar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Nota instructiva -->
+            <div class="w-full p-2.5 rounded-xl bg-secondary-container/15 border border-secondary/20 flex items-start gap-2 text-left">
+                <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">info</span>
+                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                    Apunta con la cámara de tu smartphone o lector QR para abrir esta vista al instante con la interfaz responsive optimizada.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer del Modal con Acciones -->
+        <div class="px-5 py-3 border-t border-surface-container-high/60 bg-surface-container-low/50 flex items-center justify-between gap-2 shrink-0">
+            <button id="btn-download-qr-png" type="button"
+                class="px-3 py-1.5 bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-medium rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer border border-surface-container-high">
+                <span class="material-symbols-outlined text-[16px] text-primary">download</span>
+                <span>Guardar PNG</span>
+            </button>
+            <button type="button" onclick="document.getElementById('btn-close-qr-modal').click()"
+                class="px-4 py-1.5 bg-primary text-on-primary hover:bg-primary/90 text-xs font-semibold rounded-xl shadow-sm transition-all cursor-pointer">
+                Listo
+            </button>
+        </div>
+
+    </div>
+</div>

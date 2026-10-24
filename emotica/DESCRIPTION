@@ -1,0 +1,8 @@
+Package: emotica
+Title: Preprocesamiento y analisis de emociones en chats (nombre provisional)
+Version: 0.0.1
+Description: Ingesta dinamica de chats (Telegram, WhatsApp, CSV), limpieza, anonimizacion, periodos configurables y bitacora automatica.
+License: MIT
+Encoding: UTF-8
+Imports: jsonlite, stringi, digest, yaml, lubridate, tibble, readr
+Suggests: testthat, shiny, topicmodels, slam

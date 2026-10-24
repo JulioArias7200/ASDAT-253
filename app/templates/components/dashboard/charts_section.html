@@ -97,18 +97,34 @@
                 <!-- Visualization 2: Ranking de Docentes con Mayor Interacción Estudiantil (7 cols on lg) -->
                 <div id="ranking-docentes"
                     class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between scroll-mt-24">
-                    <div class="flex items-center justify-between pb-space-xs">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs gap-2">
                         <div class="flex items-center gap-space-xs">
                             <span class="material-symbols-outlined text-primary text-[20px]">person_celebrate</span>
                             <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Docentes Más Comentados</h2>
                         </div>
-                        <div
-                            class="flex items-center gap-1 bg-surface-container-high px-space-xs py-0.5 rounded text-outline font-label-sm text-label-sm">
-                            <span class="material-symbols-outlined text-[13px] text-tertiary">bolt</span>
-                            <span>Fuente: vista_ranking_docentes (Neon)</span>
+                        <div class="flex items-center gap-2">
+                            <!-- Selector Dinámico de Gestión Semestral -->
+                            <div class="flex items-center gap-1.5 bg-surface-container-highest/60 px-2.5 py-1 rounded-lg border border-outline/20">
+                                <span class="material-symbols-outlined text-[15px] text-primary">calendar_month</span>
+                                <select id="filtro-semestre-docentes" onchange="window.location.href='/?semestre=' + this.value + '#ranking-docentes'"
+                                    class="bg-transparent text-on-surface text-label-sm font-medium focus:outline-none cursor-pointer">
+                                    {% for g in gestiones_disponibles %}
+                                    <option value="{{ g }}" class="bg-surface-container-high text-on-surface" {% if semestre_activo == g %}selected{% endif %}>
+                                        {% if g == 'todos' %}Todos los Semestres (Histórico){% else %}Gestión {{ g }}{% endif %}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="hidden sm:flex items-center gap-1 bg-surface-container-high px-space-xs py-1 rounded text-outline font-label-sm text-label-sm">
+                                <span class="material-symbols-outlined text-[13px] text-tertiary">bolt</span>
+                                <span>Neon SQL</span>
+                            </div>
                         </div>
                     </div>
-                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de 3,734 menciones estudiantiles y consultas catalogadas por docente.</p>
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">
+                        Distribución de {{ "{:,}".format(kpis.total_menciones) }} menciones estudiantiles y consultas catalogadas por docente 
+                        {% if semestre_activo != 'todos' %}<span class="text-primary font-semibold">(Filtrado por Gestión {{ semestre_activo }})</span>{% endif %}.
+                    </p>
                     
                     <!-- Horizontal Bar List Dinámico -->
                     <div class="flex flex-col gap-space-sm">
@@ -142,120 +158,199 @@
                     </div>
                 </div>
 
-                <!-- Visualization 3: Línea de Área - Evolución Cronológica (8 cols on lg) -->
+                <!-- Visualization 3: Línea de Área - Evolución Cronológica Dinámica (8 cols on lg) -->
                 <div id="evolucion-temporal"
                     class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between scroll-mt-24">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm">
-                        <div class="flex items-center gap-space-xs">
-                            <span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
-                            <div class="flex flex-col">
-                                <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Histórica de Conversaciones</h2>
-                                <span class="font-label-sm text-label-sm text-outline">Serie cronológica de 47 cohortes mensuales (2020 - 2024)</span>
+                    
+                    <!-- Header y Leyendas de la Serie -->
+                    <div class="flex flex-col gap-space-xs pb-space-sm border-b border-surface-container-high/60">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-secondary text-[22px]">show_chart</span>
+                                <div class="flex flex-col">
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Histórica de Conversaciones</h2>
+                                    <span class="font-label-sm text-label-sm text-outline">Serie cronológica analítica con franjas contextuales académicas</span>
+                                </div>
+                            </div>
+                            <!-- Leyendas Visuales -->
+                            <div class="flex flex-wrap items-center gap-2 bg-surface-container-low p-1.5 rounded-lg border border-outline/10">
+                                <span class="flex items-center gap-1.5 font-label-sm text-[12px] text-tertiary px-2 py-0.5 font-medium">
+                                    <span class="w-2.5 h-1 rounded-full bg-tertiary"></span> Total Mensajes
+                                </span>
+                                <span class="flex items-center gap-1.5 font-label-sm text-[12px] text-secondary px-2 py-0.5 font-medium">
+                                    <span class="w-2.5 h-1 rounded-full bg-secondary"></span> Preguntas
+                                </span>
+                                <span class="hidden md:flex items-center gap-1 font-label-sm text-[11px] text-[#4cd7f6] px-1.5 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/30">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#4cd7f6]"></span> May-Ago
+                                </span>
+                                <span class="hidden md:flex items-center gap-1 font-label-sm text-[11px] text-[#f472b6] px-1.5 py-0.5 rounded bg-pink-950/40 border border-pink-500/30">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#f472b6]"></span> Dic-Feb
+                                </span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg">
-                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary px-2 py-0.5">
-                                <span class="w-2 h-0.5 bg-tertiary"></span> Total Mensajes
-                            </span>
-                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-secondary px-2 py-0.5">
-                                <span class="w-2 h-0.5 bg-secondary"></span> Preguntas Académicas
-                            </span>
+
+                        <!-- Barra de Controles C-Level: Granularidad + Presets de Rango -->
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pt-2">
+                            <!-- Selector de Granularidad Temporal -->
+                            <div class="flex items-center gap-1 bg-surface-container-highest/60 p-1 rounded-lg border border-outline/15">
+                                <button type="button" data-granularity="monthly"
+                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium bg-primary text-on-primary font-semibold transition-all">
+                                    Mensual
+                                </button>
+                                <button type="button" data-granularity="semester"
+                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all">
+                                    Semestral
+                                </button>
+                                <button type="button" data-granularity="yearly"
+                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all">
+                                    Anual
+                                </button>
+                                <button type="button" data-granularity="hourly"
+                                    class="timeline-gran-btn px-2.5 py-1 rounded text-label-sm font-medium text-outline hover:text-on-surface transition-all flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">schedule</span>
+                                    Horario (0-23h)
+                                </button>
+                            </div>
+
+                            <!-- Selector de Rangos Preestablecidos -->
+                            <div class="flex flex-wrap items-center gap-1">
+                                <button type="button" data-preset="all"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-primary text-primary bg-primary/10 transition-all">
+                                    Histórico
+                                </button>
+                                <button type="button" data-preset="2023"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    2023
+                                </button>
+                                <button type="button" data-preset="2024"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    2024
+                                </button>
+                                <button type="button" data-preset="2025"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    2025
+                                </button>
+                                <button type="button" data-preset="2026"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all">
+                                    2026
+                                </button>
+                                <button type="button" data-preset="custom"
+                                    class="timeline-preset-btn px-2.5 py-1 rounded-md text-label-sm font-medium border border-outline/20 text-outline hover:text-on-surface transition-all flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">date_range</span>
+                                    Personalizado
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Date Range Picker Personalizado (Colapsable) -->
+                        <div id="timeline-custom-dates" class="hidden flex flex-wrap items-center gap-2 pt-2 pb-1 border-t border-outline/10 text-label-sm">
+                            <span class="text-outline font-medium">Filtrar Rango:</span>
+                            <div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded border border-outline/20">
+                                <label for="input-start-date" class="text-outline text-[11px]">Desde:</label>
+                                <input type="date" id="input-start-date" value="2024-01-01" min="2022-12-01" max="2026-10-31"
+                                    class="bg-transparent text-on-surface font-mono text-[12px] focus:outline-none">
+                            </div>
+                            <div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded border border-outline/20">
+                                <label for="input-end-date" class="text-outline text-[11px]">Hasta:</label>
+                                <input type="date" id="input-end-date" value="2024-12-31" min="2022-12-01" max="2026-10-31"
+                                    class="bg-transparent text-on-surface font-mono text-[12px] focus:outline-none">
+                            </div>
+                            <button type="button" id="btn-apply-custom-dates"
+                                class="bg-primary hover:bg-primary/90 text-on-primary font-semibold text-[12px] px-3 py-1 rounded transition-colors shadow-sm">
+                                Aplicar Rango
+                            </button>
                         </div>
                     </div>
-                    <!-- Analytical Area + Spline Chart SVG with Real Event Annotations -->
-                    <div class="w-full relative py-space-sm">
-                        <svg class="w-full h-56 overflow-visible" viewbox="0 0 740 240">
+
+                    <!-- Métricas KPIs del Rango Seleccionado (5 Columnas con Picos y Caídas) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 py-2 px-1 text-center border-b border-surface-container-high/40 font-mono text-label-sm">
+                        <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider">Total Período</span>
+                            <span id="timeline-kpi-total" class="text-on-surface font-bold text-[14px]">--</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider flex items-center justify-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px] text-tertiary">trending_up</span>
+                                Pico Máximo
+                            </span>
+                            <span id="timeline-kpi-pico" class="text-tertiary font-bold text-[13px]">--</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider flex items-center justify-center gap-0.5">
+                                <span class="material-symbols-outlined text-[13px] text-pink-400">trending_down</span>
+                                Caída Mínima (Valle)
+                            </span>
+                            <span id="timeline-kpi-caida" class="text-pink-400 font-bold text-[13px]">--</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-outline text-[10px] uppercase tracking-wider">Preguntas</span>
+                            <span id="timeline-kpi-preguntas" class="text-secondary font-bold text-[13px]">--</span>
+                        </div>
+                        <div class="flex flex-col col-span-2 sm:col-span-1">
+                            <span class="text-outline text-[10px] uppercase tracking-wider">Promedio Actividad</span>
+                            <span id="timeline-kpi-promedio" class="text-on-surface font-bold text-[13px]">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Badge de Estado Contextual Dinámico (Informativo y Drill-down) -->
+                    <div id="timeline-context-badge" class="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono py-1.5 px-2 bg-surface-container-low/60 rounded-md border border-outline/10 mt-1">
+                        <span id="timeline-context-text" class="text-on-surface-variant flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            <span>Evolución cronológica interactiva con caídas y picos estacionales</span>
+                        </span>
+                        <span id="timeline-drilldown-hint" class="text-primary text-[10.5px] font-medium hidden flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">zoom_in</span>
+                            <span>Haz clic en un año para ver sus caídas y picos mensuales</span>
+                        </span>
+                    </div>
+
+                    <!-- Visualizador SVG Interactivo con Crosshair y Tooltip -->
+                    <div class="w-full relative py-space-sm min-h-[240px]">
+                        <!-- Loading State -->
+                        <div id="timeline-loading" class="hidden absolute inset-0 bg-surface-container/60 backdrop-blur-[2px] flex items-center justify-center z-20 rounded-lg">
+                            <div class="flex items-center gap-2 font-label-sm text-primary">
+                                <span class="material-symbols-outlined animate-spin text-[20px]">sync</span>
+                                <span>Consultando serie cronológica en Neon...</span>
+                            </div>
+                        </div>
+
+                        <!-- Línea Guía Vertical (Crosshair) -->
+                        <div id="timeline-crosshair"
+                            class="hidden absolute top-2 bottom-8 w-[1.5px] bg-primary/70 pointer-events-none z-10 transition-all duration-75">
+                        </div>
+
+                        <!-- Tooltip Flotante Glassmorphic -->
+                        <div id="timeline-tooltip"
+                            class="hidden absolute z-30 pointer-events-none bg-surface-container-highest/95 backdrop-blur-md border border-outline/30 rounded-xl p-2.5 shadow-2xl transition-all duration-75 text-on-surface max-w-[240px]">
+                        </div>
+
+                        <!-- Lienzo SVG Dinámico -->
+                        <svg class="timeline-svg w-full h-60 overflow-visible cursor-crosshair select-none" viewBox="0 0 740 240">
                             <defs>
-                                <lineargradient id="volumeArea" x1="0" x2="0" y1="0" y2="1">
-                                    <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.25"></stop>
+                                <linearGradient id="volumeArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.30"></stop>
                                     <stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.0"></stop>
-                                </lineargradient>
-                                <lineargradient id="posArea" x1="0" x2="0" y1="0" y2="1">
-                                    <stop offset="0%" stop-color="#4edea3" stop-opacity="0.2"></stop>
+                                </linearGradient>
+                                <linearGradient id="posArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4edea3" stop-opacity="0.25"></stop>
                                     <stop offset="100%" stop-color="#4edea3" stop-opacity="0.0"></stop>
-                                </lineargradient>
+                                </linearGradient>
                             </defs>
-                            <!-- Grid horizontal reference lines -->
-                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
-                                x1="40" x2="720" y1="30" y2="30"></line>
-                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
-                                x1="40" x2="720" y1="80" y2="80"></line>
-                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
-                                x1="40" x2="720" y1="130" y2="130"></line>
-                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
-                                x1="40" x2="720" y1="180" y2="180"></line>
-                            <line class="text-outline-variant" stroke="currentColor" x1="40" x2="720" y1="210" y2="210">
-                            </line>
-                            <!-- Y Axis Labels -->
-                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="34">2k</text>
-                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="84">1.5k</text>
-                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="134">1k</text>
-                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="184">500</text>
-                            
-                            <!-- Volume Area Path -->
-                            <path
-                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55 L 700,210 L 60,210 Z"
-                                fill="url(#volumeArea)"></path>
-                            <!-- Activity Path (Cyan Line) -->
-                            <path
-                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55"
-                                fill="none" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
-                            <!-- Questions / Consultas Path (Green Line) -->
-                            <path
-                                d="M 60,195 C 120,185 180,165 240,150 C 300,140 360,160 420,145 C 480,115 540,130 600,120 C 650,110 680,115 700,118"
-                                fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2"></path>
-
-                            <!-- Academic Event Annotation 1: Inscripciones I-2022 -->
-                            <line opacity="0.6" stroke="#4cd7f6" stroke-dasharray="2 2" stroke-width="1" x1="240"
-                                x2="240" y1="40" y2="210"></line>
-                            <circle cx="240" cy="90" fill="#4cd7f6" r="4"></circle>
-                            <g transform="translate(200, 15)">
-                                <rect class="shadow-sm" fill="#1c1f2a" height="18" rx="4" width="80"></rect>
-                                <text class="font-code-sm text-[9px] font-semibold" fill="#4cd7f6" text-anchor="middle"
-                                    x="40" y="12">Inscripciones</text>
-                            </g>
-
-                            <!-- Academic Event Annotation 2: Exámenes Parciales -->
-                            <line opacity="0.6" stroke="#f472b6" stroke-dasharray="2 2" stroke-width="1" x1="480"
-                                x2="480" y1="35" y2="210"></line>
-                            <circle cx="480" cy="50" fill="#f472b6" r="4"></circle>
-                            <g transform="translate(440, 12)">
-                                <rect fill="#831843" height="18" opacity="0.9" rx="4" width="80"></rect>
-                                <text class="font-code-sm text-[9px] font-semibold" fill="#fbcfe8" text-anchor="middle"
-                                    x="40" y="12">Parciales</text>
-                            </g>
-
-                            <!-- Academic Event Annotation 3: Pico de Consultas 2024 -->
-                            <circle class="animate-ping" cx="600" cy="60" fill="#4edea3" opacity="0.7" r="4.5">
-                            </circle>
-                            <circle cx="600" cy="60" fill="#4edea3" r="4.5"></circle>
-                            <g transform="translate(560, 8)">
-                                <rect fill="#065f46" height="18" opacity="0.9" rx="4" width="80"></rect>
-                                <text class="font-code-sm text-[9px] font-semibold" fill="#6ffbbe" text-anchor="middle"
-                                    x="40" y="12">Pico Consultas</text>
-                            </g>
-
-                            <!-- X Axis Timestamps -->
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="60" y="228">2021</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="180" y="228">2022-I</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#4cd7f6" text-anchor="middle" x="240" y="228">2022-II</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="360" y="228">2023-I</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#f472b6" text-anchor="middle" x="480" y="228">2023-II</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#4edea3" text-anchor="middle" x="600" y="228">2024-I</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="700" y="228">2024-II</text>
                         </svg>
                     </div>
-                    <div
-                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs bg-surface-container-low p-space-sm rounded-lg">
+
+                    <!-- Footer Informativo sobre Franjas y Picos Académicos -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs bg-surface-container-low p-space-sm rounded-lg border border-outline/10">
                         <div class="flex items-center gap-space-sm">
-                            <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-                            <span class="font-body-sm text-body-sm text-on-surface">Picos Estacionales: Las consultas se cuadruplican durante periodos de inscripción y semanas de exámenes parciales.</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+                            <span class="font-body-sm text-body-sm text-on-surface">
+                                <strong class="text-tertiary font-semibold">Picos Estacionales:</strong> 
+                                Las consultas se incrementan significativamente en las franjas de 
+                                <span class="text-[#4cd7f6] font-medium">Mayo-Agosto</span> (2dos Parciales y Mesas) y 
+                                <span class="text-[#f472b6] font-medium">Diciembre-Febrero</span> (Cursos de Verano e Inscripciones).
+                            </span>
                         </div>
-                        <span class="font-code-sm text-code-sm text-outline">47 Meses Históricos</span>
+                        <span class="font-code-sm text-code-sm text-outline whitespace-nowrap">Neon Serverless SQL</span>
                     </div>
                 </div>
 

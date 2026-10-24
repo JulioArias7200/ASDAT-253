@@ -2,7 +2,7 @@
 """
 Controlador de vistas web para el dashboard de analítica y telemetría.
 """
-from flask import render_template
+from flask import render_template, request
 from app.routes.web import web_bp
 from database.queries import (
     get_dashboard_kpis,
@@ -20,7 +20,12 @@ from database.queries import (
     get_bitacora_kpis,
     get_bitacora_procesos_mineria,
     get_dataset_transformations_lineage,
-    get_dataset_transformation_samples
+    get_dataset_transformation_samples,
+    get_sentiment_comparison_data,
+    get_preprocessing_pipeline_data,
+    get_emojis_messages_data,
+    get_sentimientos_overview_data,
+    get_timeline_series_data
 )
 
 @web_bp.route("/")
@@ -29,17 +34,21 @@ def dashboard_view():
     """
     Renderiza el monitor ejecutivo de analítica y telemetría conectado en vivo
     a Neon Serverless PostgreSQL (TGBase) con procesamiento de PLN avanzado.
+    Permite el filtrado dinámico por semestre académico.
     """
+    semestre_param = request.args.get("semestre", "").strip()
+    gestion_filtro = semestre_param if semestre_param and semestre_param.lower() != "todos" else None
+
     try:
         kpis = get_dashboard_kpis()
-        ranking_docentes = get_top_docentes_ranking(limit=7)
-        directorio_docentes = get_docentes_directory(limit=50)
+        ranking_docentes = get_top_docentes_ranking(limit=7, gestion_semestre=gestion_filtro)
+        directorio_docentes = get_docentes_directory(limit=50, gestion_semestre=gestion_filtro)
         reacciones = get_top_reacciones_telegram(limit=8)
         modalidad = get_modalidad_chat_distribution()
         tendencia = get_tendencia_temporal_resumen()
         neon_status = get_neon_health_telemetry()
         lda_topics = get_lda_topics_summary()
-        perfil_emocional = get_perfil_emocional_docentes(limit=8)
+        perfil_emocional = get_perfil_emocional_docentes(limit=8, gestion_semestre=gestion_filtro)
         nlp_kpis = get_nlp_kpis_summary()
         top_tfidf_docentes = get_tfidf_keywords(entidad_tipo="DOCENTE", limit=12)
         top_tfidf_ciclos = get_tfidf_keywords(entidad_tipo="CICLO", limit=12)
@@ -85,7 +94,13 @@ def dashboard_view():
         perfil_emocional=perfil_emocional,
         nlp_kpis=nlp_kpis,
         top_tfidf_docentes=top_tfidf_docentes,
-        top_tfidf_ciclos=top_tfidf_ciclos
+        top_tfidf_ciclos=top_tfidf_ciclos,
+        semestre_activo=gestion_filtro or "todos",
+        gestiones_disponibles=[
+            "todos", "2022-II", "2023-I", "2023-II", 
+            "2024-I", "2024-II", "2025-I", "2025-II", 
+            "2026-I", "2026-II"
+        ]
     )
 
 @web_bp.route("/bitacora")
@@ -116,5 +131,106 @@ def bitacora_view():
         lineage_etapas=lineage_etapas,
         muestreo_dataset=muestreo_dataset
     )
+
+
+@web_bp.route("/periodos")
+def periodos_view():
+    """
+    Renderiza la vista dedicada de Análisis por Periodos e Hitos Académicos
+    con gráfico interactivo spline, selector anual/mensual/horario y detección de valles y picos.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    return render_template(
+        "dashboard/periodos.html",
+        kpis=kpis,
+        neon_status=neon_status
+    )
+
+
+@web_bp.route("/preprocesamiento")
+def preprocesamiento_view():
+    """
+    Renderiza el pipeline de preprocesamiento, tokenización, stopwords y shadow linguistic
+    con visor interactivo antes/después del dataset.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    prep_data = get_preprocessing_pipeline_data(limit=15)
+    return render_template(
+        "dashboard/preprocesamiento.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        prep=prep_data
+    )
+
+
+@web_bp.route("/emojis-mensajes")
+def emojis_mensajes_view():
+    """
+    Renderiza el catálogo analítico de emojis, concordancia semántica con el texto
+    y diccionario de jergas/modismos estudiantiles de la UMSA.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    emojis_data = get_emojis_messages_data()
+    return render_template(
+        "dashboard/emojis_mensajes.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        emojis_info=emojis_data
+    )
+
+
+@web_bp.route("/sentimientos")
+def sentimientos_view():
+    """
+    Renderiza el monitor de análisis de sentimientos nativo SentiDataUMSA:
+    distribución de polaridad, radar de emociones, señales de intensidad y negaciones.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    sent_data = get_sentimientos_overview_data()
+    perfil_emocional = get_perfil_emocional_docentes(limit=8)
+    return render_template(
+        "dashboard/sentimientos.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        sent=sent_data,
+        perfil_emocional=perfil_emocional
+    )
+
+
+@web_bp.route("/comparativa-librerias-ds")
+def comparativa_librerias_ds_view():
+    """
+    Renderiza el benchmark científico: Comparativa Librerías vs DS propio.
+    Matriz de confusión 3x3, índice Cohen's Kappa, métricas F1 y explorador de discrepancias.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    benchmark = get_sentiment_comparison_data()
+    return render_template(
+        "dashboard/comparativa_librerias_ds.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        benchmark=benchmark
+    )
+
+
+@web_bp.route("/importar-datos")
+def importar_datos_view():
+    """
+    Renderiza el laboratorio de ingestión e importación de nuevos exports de Telegram (JSON/CSV)
+    con validación sintáctica y ejecución en modo sandbox.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    return render_template(
+        "dashboard/importar_datos.html",
+        kpis=kpis,
+        neon_status=neon_status
+    )
+
 
 

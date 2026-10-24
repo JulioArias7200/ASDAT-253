@@ -10,7 +10,7 @@ def health_check():
     """Endpoint de salud para monitor de Render."""
     return jsonify({
         "status": "healthy",
-        "service": "sentix-intelligence-api",
+        "service": "sentidataumsa-api",
         "engine": "Neon Serverless PostgreSQL Ready"
     }), 200
 

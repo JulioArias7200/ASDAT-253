@@ -1,0 +1,11 @@
+paso,parametros,filas_entrada,filas_salida,huella_archivo,fecha_hora,usuario,detalle,duracion_s
+lectura_archivo,"{""adaptador"":""telegram"",""archivo"":""result.json"",""bytes"":12563522}",NA,28000,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:39,imanol,,1.307
+filtrar_eventos_de_servicio,{},28000,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:39,imanol,eliminados 4538 eventos que no son mensajes,0.023
+normalizar_fechas,"{""zona"":""UTC""}",23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:39,imanol,formato=YmdHMS; tasa=1.000; sin fecha valida=0,0.051
+eliminar_duplicados,{},23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:39,imanol,duplicados=0 (clave=msg_id),0.005
+anonimizar_autores,"{""algoritmo"":""sha256+sal""}",23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:39,imanol,autores unicos=2054; nombres e ids originales eliminados de la tabla,0.048
+enmascarar_pii,"{""patrones"":[""URL"",""EMAIL"",""USUARIO"",""NUM_ID""]}",23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:40,imanol,URL=1932; EMAIL=6; USUARIO=29; NUM_ID=83,0.349
+limpiar_texto,{},23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:40,imanol,sin texto util=2313; con emojis=1881; preguntas=6305,0.509
+detectar_idioma,"{""umbral"":0.1}",23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:40,imanol,"idioma=es; fracciones de stopwords: en=0.027, es=0.396, pt=0.162",NA
+asignar_periodos,"{""temporadas"":[""invierno"",""verano""]}",23462,23462,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:40,imanol,fuera=2046; invierno_2023=2355; invierno_2024=2655; invierno_2025=3584; invierno_2026=1854; verano_2023=1681; verano_2024=3013; verano_2025=3885; verano_2026=2389,0.026
+tokenizar,"{""columna"":""texto_limpio""}",21149,244672,6ac90f6ff1dac6b47e3aa2885cb556a2123e1d103e937744e217d5cbecf2e21e,2026-10-22 22:34:40,imanol,filas_salida = tokens; stopwords marcadas=96110; emojis=6299,0.188

@@ -1,0 +1,8 @@
+data/raw/*
+data/processed/*
+salida/
+.emotica_sal
+.Renviron
+.Rhistory
+*.rar
+etiquetado/*.csv

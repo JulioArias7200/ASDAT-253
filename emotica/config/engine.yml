@@ -1,0 +1,13 @@
+# Parametros del motor. Todo se puede calibrar aqui sin tocar codigo.
+ventana_modificadores: 3        # tokens hacia atras donde se buscan intensificadores/negadores
+factor_negacion_opuesta: 0.5    # fraccion del peso que pasa a la emocion opuesta cuando el termino esta negado
+escala_intensidad: 2.0          # intensidad = 1 - exp(-puntaje / escala)  (0 a 1, satura)
+niveles: {leve: 0.30, moderada: 0.60, alta: 0.85}   # cortes de intensidad; arriba de 'alta' = muy_alta
+senales:                        # multiplicador por la forma de escribir (se suma, con tope)
+  exclamacion: 0.15             # por cada '!' (hasta exclamacion_max)
+  exclamacion_max: 3
+  mayusculas: 0.20              # 2 o mas palabras en MAYUSCULAS
+  alargamiento: 0.15            # letras alargadas: "holaaaa"
+  tope: 0.60
+
+excluir_anuncios: true          # los anuncios y el spam no expresan la emocion del estudiante

@@ -75,52 +75,99 @@
                 </div>
             </div>
 
+            <!-- Fila Principal: Top Emojis con Selector Desplegable & Modismos UMSA -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-                <!-- Catálogo de Emojis con Valencia Emocional (6 cols) -->
-                <div class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
-                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60">
+                <!-- Columna Izquierda: Catálogo y Ranking de Emojis (Opción 1 integrada) -->
+                <div class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-sm border-b border-surface-container-high/60 gap-2">
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-[20px]">emoji_emotions</span>
                             <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
-                                Catálogo de Emojis &amp; Polaridad
+                                Catálogo &amp; Ranking de Emojis
                             </h2>
                         </div>
-                        <span class="font-code-sm text-xs text-outline font-mono">13_diccionario_emojis.R</span>
+
+                        <!-- Selector Desplegable de Top -->
+                        <div class="flex items-center gap-2 self-start sm:self-auto">
+                            <div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-lg border border-outline/20">
+                                <span class="material-symbols-outlined text-[16px] text-primary">filter_list</span>
+                                <label for="top-emojis-select" class="text-xs text-outline font-medium">Top:</label>
+                                <select id="top-emojis-select"
+                                        class="bg-transparent text-xs font-semibold text-primary focus:outline-none cursor-pointer pr-1"
+                                        onchange="window.location.href='/emojis-mensajes?top=' + this.value">
+                                    <option value="10" {% if top_seleccionado == '10' %}selected{% endif %} class="bg-surface-container text-on-surface">Top 10</option>
+                                    <option value="25" {% if top_seleccionado == '25' %}selected{% endif %} class="bg-surface-container text-on-surface">Top 25</option>
+                                    <option value="50" {% if top_seleccionado == '50' %}selected{% endif %} class="bg-surface-container text-on-surface">Top 50</option>
+                                    <option value="100" {% if top_seleccionado == '100' %}selected{% endif %} class="bg-surface-container text-on-surface">Top 100</option>
+                                    <option value="all" {% if top_seleccionado == 'all' %}selected{% endif %} class="bg-surface-container text-on-surface">Todos ({{ emojis_info.total_disponibles }})</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="py-space-md overflow-x-auto">
+                    <!-- Tabla del Top de Emojis con Contexto Integrado (Opción 1) -->
+                    <div class="py-space-md overflow-x-auto max-h-[520px] overflow-y-auto">
                         <table class="w-full text-left border-collapse text-xs">
-                            <thead>
+                            <thead class="sticky top-0 bg-surface-container z-10">
                                 <tr class="border-b border-surface-container-high text-outline uppercase font-mono">
                                     <th class="p-2 text-center w-12">Emoji</th>
-                                    <th class="p-2">Denominación</th>
+                                    <th class="p-2">Denominación &amp; Emoción</th>
                                     <th class="p-2">Valencia</th>
                                     <th class="p-2 text-right">Ocurrencias</th>
-                                    <th class="p-2">Concordancia</th>
+                                    <th class="p-2">Función &amp; Contexto UMSA</th>
+                                    <th class="p-2 text-center">Ironía</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-surface-container-high/40">
                                 {% for em in emojis_info.emojis %}
-                                <tr class="hover:bg-surface-container-high/30 transition-colors">
-                                    <td class="p-2.5 text-center text-xl">{{ em.emoji }}</td>
-                                    <td class="p-2.5 font-medium text-on-surface">{{ em.nombre }}</td>
+                                <tr class="hover:bg-surface-container-high/40 transition-colors group">
+                                    <td class="p-2.5 text-center text-xl select-all">{{ em.emoji }}</td>
+                                    <td class="p-2.5">
+                                        <div class="font-medium text-on-surface">{{ em.nombre }}</div>
+                                        <span class="text-[10px] text-outline font-mono">{{ em.categoria }}</span>
+                                    </td>
                                     <td class="p-2.5 font-semibold font-mono {{ em.color }}">{{ em.valencia }}</td>
-                                    <td class="p-2.5 text-right font-mono font-bold text-on-surface-variant">{{ em.frecuencia }}</td>
-                                    <td class="p-2.5 text-outline text-[11px]">{{ em.concordancia }}</td>
+                                    <td class="p-2.5 text-right font-mono font-bold text-on-surface-variant">
+                                        {{ "{:,}".format(em.frecuencia) }}
+                                        {% if em.count_reacciones > 0 %}
+                                        <span class="block text-[10px] text-outline font-normal">({{ em.count_reacciones }} reac)</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="p-2.5 text-outline max-w-xs">
+                                        <span class="font-semibold text-on-surface/90 text-[11px] block">{{ em.funcion }}</span>
+                                        <p class="text-[11px] text-outline line-clamp-2 leading-relaxed" title="{{ em.significado_es }}">
+                                            {{ em.significado_es }}
+                                        </p>
+                                    </td>
+                                    <td class="p-2.5 text-center whitespace-nowrap">
+                                        {% if em.tiene_ironia %}
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold font-mono" title="Identificado con inversión de sentido o sarcasmo">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+                                            Sarcasmo
+                                        </span>
+                                        {% else %}
+                                        <span class="text-outline text-[11px]">Directo</span>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="pt-2 border-t border-surface-container-high/60 flex items-center justify-between text-xs text-outline">
+                        <span>Mostrando <strong>{{ emojis_info.emojis|length }}</strong> de <strong>{{ emojis_info.total_disponibles }}</strong> emojis catalogados.</span>
+                        <span class="font-mono text-[11px] text-primary">SentiDataUMSA Context Engine</span>
+                    </div>
                 </div>
 
-                <!-- Diccionario de Jergas y Modismos UMSA (6 cols) -->
-                <div class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
+                <!-- Columna Derecha: Diccionario de Jergas y Modismos UMSA -->
+                <div class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
                     <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60">
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-amber-400 text-[20px]">record_voice_over</span>
                             <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
-                                Diccionario de Modismos UMSA (DS Propio)
+                                Modismos UMSA (DS Propio)
                             </h2>
                         </div>
                         <span class="font-code-sm text-xs bg-amber-400/10 text-amber-400 border border-amber-400/20 px-2 py-0.5 rounded font-mono">
@@ -128,12 +175,12 @@
                         </span>
                     </div>
 
-                    <div class="py-space-md overflow-x-auto">
+                    <div class="py-space-md overflow-x-auto max-h-[520px] overflow-y-auto">
                         <table class="w-full text-left border-collapse text-xs">
-                            <thead>
+                            <thead class="sticky top-0 bg-surface-container z-10">
                                 <tr class="border-b border-surface-container-high text-outline uppercase font-mono">
                                     <th class="p-2">Término</th>
-                                    <th class="p-2">Significado Académico / Cotidiano</th>
+                                    <th class="p-2">Significado Estudiantil</th>
                                     <th class="p-2 text-right">Frecuencia</th>
                                     <th class="p-2">Carga Afectiva</th>
                                 </tr>
@@ -152,12 +199,186 @@
                     </div>
 
                     <div class="bg-surface-container-low p-space-sm rounded-lg border border-outline/10 text-xs text-outline flex items-center justify-between">
-                        <span>Calibrado para el corpus estudiantil de la Carrera de Informática.</span>
-                        <span class="text-tertiary font-medium">SentiDataUMSA Native Lexicon</span>
+                        <span>Calibrado para el corpus de Informática UMSA.</span>
+                        <span class="text-tertiary font-medium">Native Lexicon</span>
                     </div>
                 </div>
             </div>
+
+            <!-- Opción 2: Explorador Completo del Diccionario Contextual UMSA (Fichas Interactivas con Buscador en Vivo) -->
+            <div id="explorador-diccionario-emojis" class="w-full bg-surface-container rounded-xl p-4 sm:p-space-md shadow-md border border-outline/10 flex flex-col gap-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-space-sm border-b border-surface-container-high/60">
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-[22px]">menu_book</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Explorador Contextual del Diccionario de Emojis UMSA
+                            </h2>
+                            <span class="font-code-sm text-xs bg-secondary/15 text-secondary border border-secondary/30 px-2 py-0.5 rounded-full font-mono">
+                                {{ emojis_info.diccionario_completo|length }} Fichas Pragmáticas
+                            </span>
+                        </div>
+                        <p class="text-xs text-outline">
+                            Consulta la ficha completa de interpretación semántica obtenida en la minería: qué significa cada emoji en inscripciones, reclamos de notas, anuncios oficiales y cuándo denota ironía.
+                        </p>
+                    </div>
+
+                    <!-- Buscador en tiempo real -->
+                    <div class="flex items-center gap-2 w-full md:w-auto">
+                        <div class="relative w-full md:w-72">
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">search</span>
+                            <input type="text" id="emoji-search-input"
+                                   placeholder="Buscar emoji, emoción, trámite..."
+                                   class="w-full bg-surface-container-high border border-outline/30 rounded-xl pl-9 pr-3 py-1.5 text-xs text-on-surface placeholder-outline focus:ring-1 focus:ring-secondary focus:outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chips de Filtrado Rápido -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button type="button" onclick="filtrarCards('todos')" class="emoji-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-secondary text-on-secondary shadow-sm transition-all" data-filter="todos">
+                        Todos ({{ emojis_info.diccionario_completo|length }})
+                    </button>
+                    <button type="button" onclick="filtrarCards('ironia')" class="emoji-filter-btn px-3 py-1 rounded-lg text-xs font-medium text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-container-highest transition-all flex items-center gap-1.5" data-filter="ironia">
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                        Solo con Ironía / Sarcasmo
+                    </button>
+                    <button type="button" onclick="filtrarCards('positivo')" class="emoji-filter-btn px-3 py-1 rounded-lg text-xs font-medium text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-container-highest transition-all" data-filter="positivo">
+                        Positivos
+                    </button>
+                    <button type="button" onclick="filtrarCards('negativo')" class="emoji-filter-btn px-3 py-1 rounded-lg text-xs font-medium text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-container-highest transition-all" data-filter="negativo">
+                        Negativos
+                    </button>
+                    <button type="button" onclick="filtrarCards('neutro')" class="emoji-filter-btn px-3 py-1 rounded-lg text-xs font-medium text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-container-highest transition-all" data-filter="neutro">
+                        Neutros / Informativos
+                    </button>
+                </div>
+
+                <!-- Grid de Tarjetas Contextuales -->
+                <div id="emoji-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-h-[640px] overflow-y-auto pr-1">
+                    {% for item in emojis_info.diccionario_completo %}
+                    <div class="emoji-card bg-surface-container-low rounded-xl p-3 border border-outline/15 hover:border-secondary/40 transition-all flex flex-col justify-between gap-2 shadow-sm"
+                         data-emoji="{{ item.emoji }}"
+                         data-nombre="{{ item.nombre|lower }}"
+                         data-polaridad="{{ item.polaridad|lower }}"
+                         data-categoria="{{ item.categoria_emocional|lower }}"
+                         data-ironia="{{ 'si' if item.tiene_ironia else 'no' }}"
+                         data-texto="{{ (item.nombre ~ ' ' ~ item.categoria_emocional ~ ' ' ~ item.funcion ~ ' ' ~ item.significado_es)|lower }}">
+                        
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-3xl select-all p-1 bg-surface-container-high/60 rounded-lg">{{ item.emoji }}</span>
+                                <div class="flex flex-col min-w-0">
+                                    <h3 class="font-headline-sm text-xs font-bold text-on-surface truncate">{{ item.nombre }}</h3>
+                                    <span class="text-[10px] text-outline font-mono capitalize">{{ item.categoria_emocional }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col items-end gap-1 shrink-0">
+                                {% if 'positivo' in item.polaridad|lower %}
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Positivo</span>
+                                {% elif 'negativo' in item.polaridad|lower %}
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-400 border border-rose-500/30">Negativo</span>
+                                {% else %}
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">Neutro</span>
+                                {% endif %}
+
+                                {% if item.tiene_ironia %}
+                                <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-rose-500/30 text-rose-300 border border-rose-500/40 animate-pulse">
+                                    ⚠️ Ironía
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Función comunicativa y Explicación Contextual UMSA -->
+                        <div class="flex flex-col gap-1 bg-surface-container-high/40 p-2 rounded-lg border border-outline/10 text-xs">
+                            <div class="flex items-center justify-between text-[10px] text-secondary font-mono font-medium">
+                                <span class="truncate">Rol: {{ item.funcion }}</span>
+                                <span class="text-outline uppercase">{{ item.registro }}</span>
+                            </div>
+                            <p class="text-[11px] text-on-surface-variant font-sans leading-relaxed line-clamp-3 hover:line-clamp-none transition-all cursor-help" title="Contexto extraído de Telegram UMSA">
+                                {{ item.significado_es }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div id="no-emoji-results" class="hidden text-center py-8 text-outline text-xs">
+                    <span class="material-symbols-outlined text-3xl mb-1 text-outline">search_off</span>
+                    <p>No se encontraron emojis con los filtros o término de búsqueda ingresado.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Filtro interactivo en vivo para el Explorador del Diccionario Contextual
+    let currentFilter = 'todos';
+    const searchInput = document.getElementById('emoji-search-input');
+    const cards = document.querySelectorAll('.emoji-card');
+    const noResults = document.getElementById('no-emoji-results');
+    const filterButtons = document.querySelectorAll('.emoji-filter-btn');
+
+    function applyFilters() {
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const textMatch = !query || 
+                              card.dataset.emoji.includes(query) || 
+                              card.dataset.nombre.includes(query) || 
+                              card.dataset.texto.includes(query);
+
+            let filterMatch = true;
+            if (currentFilter === 'ironia') {
+                filterMatch = (card.dataset.ironia === 'si');
+            } else if (currentFilter === 'positivo') {
+                filterMatch = card.dataset.polaridad.includes('positivo');
+            } else if (currentFilter === 'negativo') {
+                filterMatch = card.dataset.polaridad.includes('negativo');
+            } else if (currentFilter === 'neutro') {
+                filterMatch = card.dataset.polaridad.includes('neutro');
+            }
+
+            if (textMatch && filterMatch) {
+                card.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        if (noResults) {
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    }
+
+    function filtrarCards(filtro) {
+        currentFilter = filtro;
+        filterButtons.forEach(btn => {
+            if (btn.dataset.filter === filtro) {
+                btn.classList.add('bg-secondary', 'text-on-secondary', 'font-semibold');
+                btn.classList.remove('text-outline', 'bg-surface-container-high');
+            } else {
+                btn.classList.remove('bg-secondary', 'text-on-secondary', 'font-semibold');
+                btn.classList.add('text-outline', 'bg-surface-container-high');
+            }
+        });
+        applyFilters();
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+    }
+</script>
 {% endblock %}

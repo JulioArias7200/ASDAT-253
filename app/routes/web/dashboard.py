@@ -169,16 +169,29 @@ def preprocesamiento_view():
 def emojis_mensajes_view():
     """
     Renderiza el catálogo analítico de emojis, concordancia semántica con el texto
-    y diccionario de jergas/modismos estudiantiles de la UMSA.
+    y diccionario de jergas/modismos estudiantiles de la UMSA con selector dinámico de Top.
     """
+    top_param = request.args.get("top", "10").strip().lower()
+    if top_param in ["all", "todos", "0"]:
+        limit = None
+        top_display = "all"
+    else:
+        try:
+            limit = int(top_param)
+            top_display = str(limit)
+        except ValueError:
+            limit = 10
+            top_display = "10"
+
     kpis = get_dashboard_kpis()
     neon_status = get_neon_health_telemetry()
-    emojis_data = get_emojis_messages_data()
+    emojis_data = get_emojis_messages_data(limit=limit)
     return render_template(
         "dashboard/emojis_mensajes.html",
         kpis=kpis,
         neon_status=neon_status,
-        emojis_info=emojis_data
+        emojis_info=emojis_data,
+        top_seleccionado=top_display
     )
 
 

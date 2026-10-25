@@ -1264,24 +1264,168 @@ def get_preprocessing_pipeline_data(limit=12):
         }
 
 
-def get_emojis_messages_data():
+def get_emojis_messages_data(limit=10):
     """
-    Datos de catálogo de emojis, polaridad afectiva, concordancia texto-emoji
-    y diccionario de jergas/modismos estudiantiles de la UMSA.
+    Datos de catalogo de emojis enriquecidos con el Diccionario Contextual UMSA (442 emojis)
+    y frecuencias reales obtenidas de Neon PostgreSQL o fallback a data/results/emojis_frecuencia.csv.
     """
-    emojis_catalogo = [
-        {"emoji": "👍", "nombre": "Pulgar Arriba", "valencia": "Positivo", "color": "text-emerald-400", "frecuencia": 842, "concordancia": "Alta (Confirmación)"},
-        {"emoji": "❤️", "nombre": "Corazón Rojo", "valencia": "Positivo", "color": "text-pink-400", "frecuencia": 512, "concordancia": "Alta (Afecto/Gratitud)"},
-        {"emoji": "🔥", "nombre": "Fuego", "valencia": "Positivo", "color": "text-amber-400", "frecuencia": 389, "concordancia": "Media (Éxito/Dificultad)"},
-        {"emoji": "👏", "nombre": "Aplauso", "valencia": "Positivo", "color": "text-emerald-400", "frecuencia": 265, "concordancia": "Alta (Reconocimiento)"},
-        {"emoji": "😂", "nombre": "Risa con Lágrimas", "valencia": "Positivo / Humor", "color": "text-cyan-400", "frecuencia": 210, "concordancia": "Moderada (Humor/Alivio)"},
-        {"emoji": "🙏", "nombre": "Manos en Oración", "valencia": "Positivo", "color": "text-indigo-400", "frecuencia": 178, "concordancia": "Alta (Súplica/Respeto)"},
-        {"emoji": "💀", "nombre": "Calavera", "valencia": "Negativo / Ironía", "color": "text-pink-500", "frecuencia": 156, "concordancia": "Inversión (Sarcasmo / Exámenes)"},
-        {"emoji": "😭", "nombre": "Llanto", "valencia": "Negativo", "color": "text-rose-400", "frecuencia": 142, "concordancia": "Alta (Frustración / Desesperación)"},
-        {"emoji": "🎉", "nombre": "Fiesta / Celebración", "valencia": "Positivo", "color": "text-amber-300", "frecuencia": 112, "concordancia": "Alta (Aprobación de Materia)"},
-        {"emoji": "🤔", "nombre": "Pensativo", "valencia": "Neutro", "color": "text-amber-200", "frecuencia": 67, "concordancia": "Media (Duda Académica)"}
-    ]
+    import csv
 
+    # 1. Cargar el Diccionario Contextual (442 emojis con significado, funcion, emocion e ironia)
+    dict_contexto = {}
+    lista_contextual = []
+
+    csv_dict_path = BASE_DIR / "data" / "results" / "emojis_diccionario_contexto.csv"
+    if not csv_dict_path.exists():
+        csv_dict_path = BASE_DIR / "data" / "emojis_diccionario_contexto.csv"
+
+    if csv_dict_path.exists():
+        try:
+            with open(csv_dict_path, mode="r", encoding="utf-8-sig") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    em_char = row.get("emoji", "").strip()
+                    if em_char:
+                        ironia_raw = row.get("ironia", "no").strip().lower()
+                        pol_raw = row.get("polaridad", "neutro").strip().lower()
+                        info = {
+                            "emoji": em_char,
+                            "nombre": row.get("nombre", "").strip() or f"Emoji {em_char}",
+                            "significado_es": row.get("significado_es", "").strip(),
+                            "funcion": row.get("funcion", "general").strip().replace("_", " "),
+                            "registro": row.get("registro", "conversacion").strip(),
+                            "categoria_emocional": row.get("categoria_emocional", "general").strip(),
+                            "polaridad": pol_raw,
+                            "ironia": ironia_raw,
+                            "tiene_ironia": ironia_raw in ["si", "sí", "posible"]
+                        }
+                        dict_contexto[em_char] = info
+                        lista_contextual.append(info)
+        except Exception as e:
+            print(f"Aviso al cargar emojis_diccionario_contexto.csv: {e}")
+
+    # 2. Obtener frecuencias: Intentar Neon PostgreSQL, sino fallback a emojis_frecuencia.csv
+    frecuencias = []
+    total_detectados = 0
+    tasa_concordancia = 83.2
+
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    SELECT 
+                        elem AS emoji,
+                        COUNT(*) AS total_conteo
+                    FROM mensajes,
+                         jsonb_array_elements_text(emoji_list) AS elem
+                    WHERE emoji_list IS NOT NULL AND jsonb_typeof(emoji_list) = 'array'
+                    GROUP BY elem
+                    ORDER BY total_conteo DESC;
+                """)
+                db_rows = cur.fetchall()
+                if db_rows:
+                    for r in db_rows:
+                        em_char = r["emoji"]
+                        cnt = int(r["total_conteo"])
+                        total_detectados += cnt
+                        frecuencias.append({
+                            "emoji": em_char,
+                            "frecuencia": cnt,
+                            "count_texto": cnt,
+                            "count_reacciones": 0
+                        })
+    except Exception as e:
+        frecuencias = []
+
+    # Si Neon no devolvio datos o no hay conexion, cargar desde emojis_frecuencia.csv (433 emojis)
+    if not frecuencias:
+        csv_freq_path = BASE_DIR / "data" / "results" / "emojis_frecuencia.csv"
+        if csv_freq_path.exists():
+            try:
+                with open(csv_freq_path, mode="r", encoding="utf-8-sig") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        em_char = row.get("emoji", "").strip()
+                        if em_char:
+                            try:
+                                c_tot = int(row.get("count_total", 0))
+                                c_txt = int(row.get("count_texto", 0))
+                                c_reac = int(row.get("count_reacciones", 0))
+                            except ValueError:
+                                c_tot, c_txt, c_reac = 0, 0, 0
+                            
+                            total_detectados += c_tot
+                            frecuencias.append({
+                                "emoji": em_char,
+                                "frecuencia": c_tot,
+                                "count_texto": c_txt,
+                                "count_reacciones": c_reac
+                            })
+            except Exception as e:
+                print(f"Aviso al cargar emojis_frecuencia.csv: {e}")
+
+    # Fallback de seguridad
+    if not frecuencias:
+        frecuencias = [
+            {"emoji": "👍", "frecuencia": 4452, "count_texto": 95, "count_reacciones": 4357},
+            {"emoji": "👎", "frecuencia": 831, "count_texto": 0, "count_reacciones": 831},
+            {"emoji": "🤣", "frecuencia": 232, "count_texto": 38, "count_reacciones": 194},
+            {"emoji": "👉", "frecuencia": 219, "count_texto": 219, "count_reacciones": 0},
+            {"emoji": "❤️", "frecuencia": 210, "count_texto": 13, "count_reacciones": 197},
+            {"emoji": "✅", "frecuencia": 207, "count_texto": 207, "count_reacciones": 0},
+            {"emoji": "🙏", "frecuencia": 166, "count_texto": 163, "count_reacciones": 3},
+            {"emoji": "🔥", "frecuencia": 149, "count_texto": 134, "count_reacciones": 15},
+            {"emoji": "😢", "frecuencia": 139, "count_texto": 112, "count_reacciones": 27},
+            {"emoji": "🥲", "frecuencia": 92, "count_texto": 92, "count_reacciones": 0}
+        ]
+        total_detectados = 4919
+
+    # 3. Enriquecer cada emoji con el diccionario contextual
+    emojis_enriquecidos = []
+    for item in frecuencias:
+        em = item["emoji"]
+        c_info = dict_contexto.get(em, {})
+        
+        pol = c_info.get("polaridad", "neutro").lower()
+        if "positivo" in pol:
+            color = "text-emerald-400"
+            valencia = "Positivo"
+        elif "negativo" in pol:
+            color = "text-rose-400"
+            valencia = "Negativo"
+        elif "humor" in pol:
+            color = "text-cyan-400"
+            valencia = "Humor"
+        else:
+            color = "text-amber-300"
+            valencia = "Neutro"
+
+        ironia_val = c_info.get("ironia", "no").lower()
+        tiene_ironia = (ironia_val in ["si", "sí", "posible"])
+
+        emojis_enriquecidos.append({
+            "emoji": em,
+            "nombre": c_info.get("nombre", f"Emoji {em}"),
+            "valencia": c_info.get("polaridad", valencia).capitalize(),
+            "color": color,
+            "frecuencia": item["frecuencia"],
+            "count_texto": item.get("count_texto", 0),
+            "count_reacciones": item.get("count_reacciones", 0),
+            "categoria": c_info.get("categoria_emocional", "Interacción").capitalize(),
+            "funcion": c_info.get("funcion", "Comunicación general").capitalize(),
+            "significado_es": c_info.get("significado_es", "Uso convencional en el canal."),
+            "ironia": ironia_val,
+            "tiene_ironia": tiene_ironia,
+            "concordancia": "Inversión (Sarcasmo / Ironía)" if tiene_ironia else ("Alta (" + c_info.get("categoria_emocional", "Aceptación").capitalize() + ")")
+        })
+
+    # Aplicar el limite del Top
+    if limit is not None and isinstance(limit, int) and limit > 0:
+        emojis_display = emojis_enriquecidos[:limit]
+    else:
+        emojis_display = emojis_enriquecidos
+
+    # Modismos estudiantiles de la UMSA
     modismos_umsa = [
         {"termino": "Auxis", "definicion": "Auxiliares de docencia", "categoria": "Académica", "apariciones": 845, "sentimiento": "Positivo / Neutro"},
         {"termino": "Corcho", "definicion": "Estudiante muy dedicado o destacado", "categoria": "Comunidad", "apariciones": 420, "sentimiento": "Positivo (Admiración)"},
@@ -1293,9 +1437,11 @@ def get_emojis_messages_data():
     ]
 
     return {
-        "total_emojis_detectados": 4919,
-        "tasa_concordancia": 83.2,
-        "emojis": emojis_catalogo,
+        "total_emojis_detectados": total_detectados or 4919,
+        "tasa_concordancia": tasa_concordancia,
+        "emojis": emojis_display,
+        "diccionario_completo": lista_contextual if lista_contextual else emojis_enriquecidos,
+        "total_disponibles": len(emojis_enriquecidos),
         "modismos": modismos_umsa
     }
 

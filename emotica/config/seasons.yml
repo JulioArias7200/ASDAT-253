@@ -1,0 +1,9 @@
+# Temporadas recurrentes. inicio/fin en formato MM-DD. Si inicio > fin la temporada cruza el anio
+# (ej. verano 12-01 -> 02-29). El ciclo es el anio en que TERMINA la temporada.
+# Editar este archivo basta para otra universidad, otro hemisferio o futuros anios: no se toca codigo.
+- id: invierno
+  inicio: "05-01"
+  fin: "08-31"
+- id: verano
+  inicio: "12-01"
+  fin: "02-29"

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <title>{% block title %}SentiDataUMSA - Minería de Textos & Analítica Académica{% endblock %}</title>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <style>
+        /* Variables CSS para modo Claro */
+        :root {
+            --color-background-rgb: 248 249 254;
+            --color-on-background-rgb: 26 28 35;
+            --color-surface-rgb: 255 255 255;
+            --color-surface-dim-rgb: 236 238 246;
+            --color-surface-bright-rgb: 255 255 255;
+            --color-surface-container-rgb: 240 243 250;
+            --color-surface-container-low-rgb: 245 247 253;
+            --color-surface-container-lowest-rgb: 255 255 255;
+            --color-surface-container-high-rgb: 228 232 243;
+            --color-surface-container-highest-rgb: 216 222 236;
+            --color-surface-variant-rgb: 216 222 236;
+            --color-on-surface-rgb: 26 28 35;
+            --color-on-surface-variant-rgb: 71 77 102;
+            --color-inverse-surface-rgb: 28 31 42;
+            --color-inverse-on-surface-rgb: 223 226 241;
+            --color-outline-rgb: 118 125 147;
+            --color-outline-variant-rgb: 194 200 216;
+            --color-primary-rgb: 73 75 214;
+            --color-primary-container-rgb: 224 225 255;
+            --color-on-primary-rgb: 255 255 255;
+            --color-on-primary-container-rgb: 7 0 108;
+            --color-primary-fixed-rgb: 225 224 255;
+            --color-primary-fixed-dim-rgb: 192 193 255;
+            --color-on-primary-fixed-rgb: 7 0 108;
+            --color-on-primary-fixed-variant-rgb: 47 46 190;
+            --color-inverse-primary-rgb: 192 193 255;
+            --color-secondary-rgb: 0 130 155;
+            --color-secondary-container-rgb: 197 243 255;
+            --color-on-secondary-rgb: 255 255 255;
+            --color-on-secondary-container-rgb: 0 54 64;
+            --color-secondary-fixed-rgb: 172 237 255;
+            --color-secondary-fixed-dim-rgb: 76 215 246;
+            --color-on-secondary-fixed-rgb: 0 31 38;
+            --color-on-secondary-fixed-variant-rgb: 0 78 92;
+            --color-tertiary-rgb: 0 136 93;
+            --color-tertiary-container-rgb: 150 247 201;
+            --color-on-tertiary-rgb: 255 255 255;
+            --color-on-tertiary-container-rgb: 0 33 19;
+            --color-tertiary-fixed-rgb: 111 251 190;
+            --color-tertiary-fixed-dim-rgb: 78 222 163;
+            --color-on-tertiary-fixed-rgb: 0 33 19;
+            --color-on-tertiary-fixed-variant-rgb: 0 82 54;
+            --color-error-rgb: 186 26 26;
+            --color-error-container-rgb: 255 218 214;
+            --color-on-error-rgb: 255 255 255;
+            --color-on-error-container-rgb: 65 0 2;
+        }
+
+        /* Variables CSS para modo Oscuro */
+        .dark {
+            --color-background-rgb: 15 19 29;
+            --color-on-background-rgb: 223 226 241;
+            --color-surface-rgb: 15 19 29;
+            --color-surface-dim-rgb: 15 19 29;
+            --color-surface-bright-rgb: 53 57 68;
+            --color-surface-container-rgb: 28 31 42;
+            --color-surface-container-low-rgb: 23 27 38;
+            --color-surface-container-lowest-rgb: 10 14 24;
+            --color-surface-container-high-rgb: 38 42 53;
+            --color-surface-container-highest-rgb: 49 53 64;
+            --color-surface-variant-rgb: 49 53 64;
+            --color-on-surface-rgb: 223 226 241;
+            --color-on-surface-variant-rgb: 199 196 215;
+            --color-inverse-surface-rgb: 223 226 241;
+            --color-inverse-on-surface-rgb: 44 48 59;
+            --color-outline-rgb: 144 143 160;
+            --color-outline-variant-rgb: 70 69 84;
+            --color-primary-rgb: 192 193 255;
+            --color-primary-container-rgb: 128 131 255;
+            --color-on-primary-rgb: 16 0 169;
+            --color-on-primary-container-rgb: 13 0 150;
+            --color-primary-fixed-rgb: 225 224 255;
+            --color-primary-fixed-dim-rgb: 192 193 255;
+            --color-on-primary-fixed-rgb: 7 0 108;
+            --color-on-primary-fixed-variant-rgb: 47 46 190;
+            --color-inverse-primary-rgb: 73 75 214;
+            --color-secondary-rgb: 76 215 246;
+            --color-secondary-container-rgb: 3 181 211;
+            --color-on-secondary-rgb: 0 54 64;
+            --color-on-secondary-container-rgb: 0 66 78;
+            --color-secondary-fixed-rgb: 172 237 255;
+            --color-secondary-fixed-dim-rgb: 76 215 246;
+            --color-on-secondary-fixed-rgb: 0 31 38;
+            --color-on-secondary-fixed-variant-rgb: 0 78 92;
+            --color-tertiary-rgb: 78 222 163;
+            --color-tertiary-container-rgb: 0 136 93;
+            --color-on-tertiary-rgb: 0 56 36;
+            --color-on-tertiary-container-rgb: 0 7 3;
+            --color-tertiary-fixed-rgb: 111 251 190;
+            --color-tertiary-fixed-dim-rgb: 78 222 163;
+            --color-on-tertiary-fixed-rgb: 0 33 19;
+            --color-on-tertiary-fixed-variant-rgb: 0 82 54;
+            --color-error-rgb: 255 180 171;
+            --color-error-container-rgb: 147 0 10;
+            --color-on-error-rgb: 105 0 5;
+            --color-on-error-container-rgb: 255 218 214;
+        }
+    </style>
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "rgb(var(--color-background-rgb) / <alpha-value>)",
+                        "on-background": "rgb(var(--color-on-background-rgb) / <alpha-value>)",
+                        "surface": "rgb(var(--color-surface-rgb) / <alpha-value>)",
+                        "surface-dim": "rgb(var(--color-surface-dim-rgb) / <alpha-value>)",
+                        "surface-bright": "rgb(var(--color-surface-bright-rgb) / <alpha-value>)",
+                        "surface-container": "rgb(var(--color-surface-container-rgb) / <alpha-value>)",
+                        "surface-container-low": "rgb(var(--color-surface-container-low-rgb) / <alpha-value>)",
+                        "surface-container-lowest": "rgb(var(--color-surface-container-lowest-rgb) / <alpha-value>)",
+                        "surface-container-high": "rgb(var(--color-surface-container-high-rgb) / <alpha-value>)",
+                        "surface-container-highest": "rgb(var(--color-surface-container-highest-rgb) / <alpha-value>)",
+                        "surface-variant": "rgb(var(--color-surface-variant-rgb) / <alpha-value>)",
+                        "on-surface": "rgb(var(--color-on-surface-rgb) / <alpha-value>)",
+                        "on-surface-variant": "rgb(var(--color-on-surface-variant-rgb) / <alpha-value>)",
+                        "inverse-surface": "rgb(var(--color-inverse-surface-rgb) / <alpha-value>)",
+                        "inverse-on-surface": "rgb(var(--color-inverse-on-surface-rgb) / <alpha-value>)",
+                        "outline": "rgb(var(--color-outline-rgb) / <alpha-value>)",
+                        "outline-variant": "rgb(var(--color-outline-variant-rgb) / <alpha-value>)",
+                        "primary": "rgb(var(--color-primary-rgb) / <alpha-value>)",
+                        "primary-container": "rgb(var(--color-primary-container-rgb) / <alpha-value>)",
+                        "on-primary": "rgb(var(--color-on-primary-rgb) / <alpha-value>)",
+                        "on-primary-container": "rgb(var(--color-on-primary-container-rgb) / <alpha-value>)",
+                        "primary-fixed": "rgb(var(--color-primary-fixed-rgb) / <alpha-value>)",
+                        "primary-fixed-dim": "rgb(var(--color-primary-fixed-dim-rgb) / <alpha-value>)",
+                        "on-primary-fixed": "rgb(var(--color-on-primary-fixed-rgb) / <alpha-value>)",
+                        "on-primary-fixed-variant": "rgb(var(--color-on-primary-fixed-variant-rgb) / <alpha-value>)",
+                        "inverse-primary": "rgb(var(--color-inverse-primary-rgb) / <alpha-value>)",
+                        "secondary": "rgb(var(--color-secondary-rgb) / <alpha-value>)",
+                        "secondary-container": "rgb(var(--color-secondary-container-rgb) / <alpha-value>)",
+                        "on-secondary": "rgb(var(--color-on-secondary-rgb) / <alpha-value>)",
+                        "on-secondary-container": "rgb(var(--color-on-secondary-container-rgb) / <alpha-value>)",
+                        "secondary-fixed": "rgb(var(--color-secondary-fixed-rgb) / <alpha-value>)",
+                        "secondary-fixed-dim": "rgb(var(--color-secondary-fixed-dim-rgb) / <alpha-value>)",
+                        "on-secondary-fixed": "rgb(var(--color-on-secondary-fixed-rgb) / <alpha-value>)",
+                        "on-secondary-fixed-variant": "rgb(var(--color-on-secondary-fixed-variant-rgb) / <alpha-value>)",
+                        "tertiary": "rgb(var(--color-tertiary-rgb) / <alpha-value>)",
+                        "tertiary-container": "rgb(var(--color-tertiary-container-rgb) / <alpha-value>)",
+                        "on-tertiary": "rgb(var(--color-on-tertiary-rgb) / <alpha-value>)",
+                        "on-tertiary-container": "rgb(var(--color-on-tertiary-container-rgb) / <alpha-value>)",
+                        "tertiary-fixed": "rgb(var(--color-tertiary-fixed-rgb) / <alpha-value>)",
+                        "tertiary-fixed-dim": "rgb(var(--color-tertiary-fixed-dim-rgb) / <alpha-value>)",
+                        "on-tertiary-fixed": "rgb(var(--color-on-tertiary-fixed-rgb) / <alpha-value>)",
+                        "on-tertiary-fixed-variant": "rgb(var(--color-on-tertiary-fixed-variant-rgb) / <alpha-value>)",
+                        "error": "rgb(var(--color-error-rgb) / <alpha-value>)",
+                        "error-container": "rgb(var(--color-error-container-rgb) / <alpha-value>)",
+                        "on-error": "rgb(var(--color-on-error-rgb) / <alpha-value>)",
+                        "on-error-container": "rgb(var(--color-on-error-container-rgb) / <alpha-value>)"
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    spacing: { "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "gutter": "1.25rem", "space-xs": "0.25rem" },
+                    fontFamily: { "metric-display-mobile": ["Inter"], "code-sm": ["JetBrains Mono"], "body-sm": ["Inter"], "label-sm": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "label-md": ["Inter"], "metric-display": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Inter"] },
+                    fontSize: { "metric-display-mobile": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "code-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.005em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }], "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "metric-display": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }] }
+                }
+            }
+        };
+    </script>
+
+    <!-- Script en HEAD anti-FOUC (Dark mode por defecto) -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme');
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex relative overflow-x-hidden">
+    <!-- Backdrop oscuro para móvil cuando el sidebar está abierto -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity cursor-pointer"></div>
+
+    <!-- Componente: Sidebar de Navegación Lateral (Off-canvas en móvil) -->
+    {% include "components/sidebar.html" %}
+
+    <!-- Contenedor Principal (con margen dinámico para escritorio lg:pl-72) -->
+    <div class="flex-1 flex flex-col min-w-0 lg:pl-72 w-full">
+        <!-- Componente: Header Superior con selector de corpus y botón día/noche -->
+        {% include "components/header.html" %}
+
+        <!-- Bloque de Contenido Específico de cada Vista -->
+        {% block content %}{% endblock %}
+
+        <!-- Componente: Footer con SLAs y Metadatos de Inferencia -->
+        {% include "components/footer.html" %}
+    </div>
+
+    <!-- Componente: Modal QR para Dispositivos Móviles -->
+    {% include "components/qr_modal.html" %}
+
+    <!-- Script de Motor QR Offline -->
+    <script src="{{ url_for('static', filename='js/qr_engine.js') }}"></script>
+    <!-- Script Principal de Interacciones y Modo Día/Noche -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

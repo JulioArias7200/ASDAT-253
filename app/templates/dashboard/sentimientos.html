@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Análisis de Sentimientos - SentiDataUMSA{% endblock %}
+
+{% block content %}
+<main class="w-full bg-background flex-1 transition-colors duration-200">
+    <div class="flex flex-col w-full">
+        <!-- Header Strip Institucional -->
+        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-4 sm:px-margin py-4 sm:py-space-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                            <span class="material-symbols-outlined text-[13px]">psychology</span>
+                            Motor Léxico SentiDataUMSA
+                        </span>
+                        <span class="text-outline text-xs">•</span>
+                        <span class="font-code-sm text-xs text-secondary font-medium">Polaridad Trilateral &bull; 8 Emociones Básicas</span>
+                    </div>
+                    <h1 class="font-headline-lg text-xl sm:text-headline-lg font-bold text-on-surface tracking-tight">
+                        Análisis de Sentimientos &amp; Tono Emocional
+                    </h1>
+                    <p class="font-body-sm text-xs sm:text-body-sm text-outline max-w-4xl">
+                        Evaluación semántica profunda sobre 23.4k mensajes estudiantiles. Clasificación en polaridad (positivo, neutro, negativo) 
+                        e inferencia de emociones dominantes (gratitud, frustración, confianza, tristeza, alegría) con resolución de negaciones.
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Positivo Dominante: {{ sent.pct_positivo }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:px-margin py-4 sm:py-space-lg flex flex-col gap-4 sm:gap-space-lg">
+            <!-- 4 Métricas de Polaridad Ejecutiva -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-emerald-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Polaridad Positiva</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-metric-display text-emerald-400 font-mono font-bold">{{ "{:,}".format(sent.positivo) }}</span>
+                        <span class="font-label-sm text-label-sm text-outline">msgs</span>
+                    </div>
+                    <span class="text-xs text-emerald-400 mt-2 font-code-sm font-semibold">{{ sent.pct_positivo }}% de mensajes evaluados</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-pink-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Polaridad Negativa</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-metric-display text-pink-400 font-mono font-bold">{{ "{:,}".format(sent.negativo) }}</span>
+                        <span class="font-label-sm text-label-sm text-outline">msgs</span>
+                    </div>
+                    <span class="text-xs text-pink-400 mt-2 font-code-sm font-semibold">{{ sent.pct_negativo }}% de mensajes evaluados</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-cyan-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Polaridad Neutra</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-metric-display text-cyan-400 font-mono font-bold">{{ "{:,}".format(sent.neutro) }}</span>
+                        <span class="font-label-sm text-label-sm text-outline">msgs</span>
+                    </div>
+                    <span class="text-xs text-cyan-400 mt-2 font-code-sm font-semibold">{{ sent.pct_neutro }}% de mensajes evaluados</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-outline flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Factual / Indeterminado</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-metric-display text-on-surface font-mono font-bold">{{ "{:,}".format(sent.indeterminado) }}</span>
+                        <span class="font-label-sm text-label-sm text-outline">msgs</span>
+                    </div>
+                    <span class="text-xs text-outline mt-2 font-code-sm">Consultas sin carga polar explícita</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Desglose de Emociones Dominantes (7 cols) -->
+                <div class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">sentiment_satisfied</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Top Emociones Detectadas en el Corpus
+                            </h2>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">dominant_emotion</span>
+                    </div>
+
+                    <div class="flex flex-col gap-3 py-space-md">
+                        {% for emo in sent.emociones %}
+                        <div class="flex items-center justify-between gap-3 font-mono text-xs">
+                            <span class="w-28 font-semibold capitalize text-on-surface flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full {% if emo.dominant_emotion in ['gratitud', 'alegria', 'confianza', 'orgullo'] %}bg-emerald-400{% else %}bg-pink-400{% endif %}"></span>
+                                {{ emo.dominant_emotion }}
+                            </span>
+                            <div class="flex-1 bg-surface-container-high h-3 rounded-full overflow-hidden">
+                                <div class="{% if emo.dominant_emotion in ['gratitud', 'alegria', 'confianza', 'orgullo'] %}bg-emerald-400{% else %}bg-pink-400{% endif %} h-full rounded-full transition-all" style="width: {{ (emo.total / 863) * 100 }}%;"></div>
+                            </div>
+                            <span class="w-16 text-right font-bold text-on-surface-variant">{{ emo.total }} msgs</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="bg-surface-container-low p-space-sm rounded-lg border border-outline/10 text-xs text-outline flex items-center justify-between">
+                        <span>Emociones calculadas con el léxico calibrado SentiDataUMSA.</span>
+                        <span class="text-tertiary font-semibold">PostgreSQL 17.5 Indexado</span>
+                    </div>
+                </div>
+
+                <!-- Perfil Emocional hacia Docentes (5 cols) -->
+                <div class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">person_heart</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Clima Afectivo hacia Docentes
+                            </h2>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">Top Menciones</span>
+                    </div>
+
+                    <div class="flex flex-col gap-2 py-space-sm font-mono text-xs overflow-y-auto max-h-[360px]">
+                        {% for doc in perfil_emocional %}
+                        <div class="p-2 rounded-lg bg-surface-container-low border border-outline/10 flex flex-col gap-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-sans font-semibold text-on-surface truncate max-w-[200px]">{{ doc.docente }}</span>
+                                <span class="text-outline text-[11px]">{{ doc.total_menciones }} menciones</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-[11px]">
+                                <span class="text-emerald-400 font-semibold">{{ doc.positivos }} pos</span>
+                                <span class="text-outline">/</span>
+                                <span class="text-pink-400 font-semibold">{{ doc.negativos }} neg</span>
+                                <span class="text-outline">/</span>
+                                <span class="text-cyan-400">{{ doc.neutros }} neu</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

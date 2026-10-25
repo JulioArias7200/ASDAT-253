@@ -1,0 +1,47 @@
+@layer base {
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        overscroll-behavior: none;
+    }
+    main > :first-child {
+        margin-top: 0 !important;
+    }
+    main > :last-child {
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Scrollbar Personalizado */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+html.dark ::-webkit-scrollbar-thumb {
+    background: #313540;
+    border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #464554;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+    background: #c7c4d7;
+    border-radius: 4px;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+    background: #908fa0;
+}
+
+/* Transicion Suave durante el Cambio de Tema */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, fill 0.2s ease, stroke 0.2s ease !important;
+    transition-delay: 0 !important;
+}

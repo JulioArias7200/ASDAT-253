@@ -1,0 +1,168 @@
+    <aside id="main-sidebar"
+        class="w-72 bg-surface-container-lowest border-r border-surface-container-high/60 flex flex-col shrink-0 fixed inset-y-0 left-0 z-50 h-screen -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none">
+        <!-- Logo & Brand Header -->
+        <div
+            class="h-20 px-space-md border-b border-surface-container-high/40 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-space-sm min-w-0">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary via-secondary to-tertiary flex items-center justify-center text-on-primary font-bold shadow-md shrink-0">
+                    <span class="material-symbols-outlined text-[20px]">analytics</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                    <span class="font-headline-sm text-[15px] font-bold tracking-tight text-on-surface truncate">SentiDataUMSA</span>
+                    <span class="font-label-sm text-[10px] text-outline tracking-wider uppercase truncate">Minería de Textos &amp; NLP</span>
+                </div>
+            </div>
+            <button
+                class="min-w-[44px] min-h-[44px] flex items-center justify-center text-outline hover:text-on-surface rounded-xl hover:bg-surface-container-high transition-colors lg:hidden cursor-pointer"
+                id="close-sidebar-btn" type="button" aria-label="Cerrar barra lateral">
+                <span class="material-symbols-outlined text-[22px]">close</span>
+            </button>
+        </div>
+
+        <!-- Sidebar Navigation Content (Sin Numeración) -->
+        <div class="flex-1 overflow-y-auto px-space-sm py-space-md flex flex-col gap-space-md">
+            
+            <!-- Grupo 1: Visión Ejecutiva & Tiempo -->
+            <div class="flex flex-col gap-1">
+                <span class="px-space-sm font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold">Visión Ejecutiva &amp; Tiempo</span>
+                
+                <!-- Resumen Ejecutivo -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/' or request.path == '/dashboard' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/' or request.path == '/dashboard' %}text-primary{% endif %}">dashboard</span>
+                    <span class="text-body-sm text-[13px] flex-1">Resumen Ejecutivo</span>
+                    <span class="font-code-sm text-[9px] text-outline font-mono">23.4k</span>
+                </a>
+
+                <!-- Análisis por Periodos -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/periodos' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/periodos">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/periodos' %}text-primary{% endif %}">history_toggle_off</span>
+                    <span class="text-body-sm text-[13px] flex-1">Análisis por Periodos</span>
+                    <span class="font-code-sm text-[9px] bg-secondary-container/30 text-secondary px-1.5 py-0.5 rounded font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>Live
+                    </span>
+                </a>
+            </div>
+
+            <!-- Grupo 2: Pipeline de Preprocesamiento & Datos -->
+            <div class="flex flex-col gap-1">
+                <span class="px-space-sm font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold">Pipeline &amp; Minería NLP</span>
+                
+                <!-- Preprocesamiento del Corpus -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/preprocesamiento' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/preprocesamiento">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/preprocesamiento' %}text-primary{% endif %}">tune</span>
+                    <span class="text-body-sm text-[13px] flex-1">Preprocesamiento del Corpus</span>
+                </a>
+
+                <!-- Emojis, Reacciones y Mensajes -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/emojis-mensajes' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/emojis-mensajes">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/emojis-mensajes' %}text-primary{% endif %}">mood</span>
+                    <span class="text-body-sm text-[13px] flex-1">Emojis, Reacciones y Mensajes</span>
+                    <span class="font-code-sm text-[9px] text-outline font-mono">13.4k</span>
+                </a>
+            </div>
+
+            <!-- Grupo 3: Modelos & Benchmark de Sentimiento -->
+            <div class="flex flex-col gap-1">
+                <span class="px-space-sm font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold">Modelos &amp; Benchmark</span>
+                
+                <!-- Análisis de Sentimientos SentiData -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/sentimientos' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/sentimientos">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/sentimientos' %}text-primary{% endif %}">psychology</span>
+                    <span class="text-body-sm text-[13px] flex-1">Análisis de Sentimientos SentiData</span>
+                </a>
+
+                <!-- Comparativa Librerías vs DS propio -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/comparativa-librerias-ds' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/comparativa-librerias-ds">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/comparativa-librerias-ds' %}text-primary{% endif %}">balance</span>
+                    <span class="text-body-sm text-[13px] flex-1">Comparativa Librerías vs DS propio</span>
+                    <span class="font-code-sm text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded font-semibold">Benchmark</span>
+                </a>
+            </div>
+
+            <!-- Grupo 4: Ingestión & Gobernanza -->
+            <div class="flex flex-col gap-1">
+                <span class="px-space-sm font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold">Ingestión &amp; Gobernanza</span>
+                
+                <!-- Importar Datos & Análisis -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/importar-datos' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/importar-datos">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/importar-datos' %}text-primary{% endif %}">cloud_upload</span>
+                    <span class="text-body-sm text-[13px] flex-1">Importar Datos &amp; Análisis</span>
+                </a>
+
+                <!-- Control Bitácora CDC -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/bitacora' %}bg-surface-container-high text-tertiary font-medium border border-tertiary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/bitacora">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/bitacora' %}text-tertiary{% endif %}">verified_user</span>
+                    <span class="text-body-sm text-[13px] flex-1">Bitácora de Transformaciones</span>
+                    <span class="font-code-sm text-[9px] bg-tertiary-container/30 text-tertiary px-1.5 py-0.5 rounded font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>Audit
+                    </span>
+                </a>
+            </div>
+
+            <!-- Grupo 5: Telemetría Neon Cloud -->
+            <div class="flex flex-col gap-1">
+                <span class="px-space-sm font-label-sm text-[10px] uppercase tracking-wider text-outline font-semibold">Telemetría Neon Cloud</span>
+                
+                <!-- Healthcheck API -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+                    href="/api/v1/health" target="_blank" rel="noopener noreferrer">
+                    <span class="material-symbols-outlined text-[18px] text-tertiary">speed</span>
+                    <span class="text-body-sm text-[13px] flex-1">Healthcheck Status</span>
+                    <span class="font-code-sm text-[9px] bg-surface-container text-tertiary px-1 rounded font-mono font-bold">200 OK</span>
+                </a>
+
+                <!-- Stats API -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+                    href="/api/v1/stats" target="_blank" rel="noopener noreferrer">
+                    <span class="material-symbols-outlined text-[18px] text-secondary">analytics</span>
+                    <span class="text-body-sm text-[13px] flex-1">Métricas en JSON</span>
+                    <span class="font-code-sm text-[9px] bg-surface-container text-secondary px-1 rounded font-mono">LIVE API</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sidebar Bottom Section: Neon Cloud Engine & Analyst Profile -->
+        <div
+            class="p-space-sm border-t border-surface-container-high/50 flex flex-col gap-space-xs shrink-0 bg-surface-container-low/70">
+            <!-- Neon Cloud Engine Active Status Indicator -->
+            <div
+                class="p-2.5 rounded-xl bg-surface-container-lowest border border-surface-container-high/60 flex flex-col gap-1.5">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                        <span class="font-code-sm text-[11px] text-tertiary-fixed font-semibold">Neon Serverless</span>
+                    </div>
+                    <span class="font-code-sm text-[10px] text-tertiary bg-tertiary-container/20 px-1 rounded font-mono">Live</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px]">
+                    <span class="font-code-sm text-on-surface-variant truncate max-w-[150px]">TGBase (sa-east-1)</span>
+                    <span class="font-code-sm text-secondary font-medium font-mono">16 Tablas CDC</span>
+                </div>
+            </div>
+
+            <!-- User / Analyst Profile Pill -->
+            <div
+                class="flex items-center justify-between p-1.5 rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+                <div class="flex items-center gap-2 min-w-0">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs shrink-0 shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">shield_person</span>
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                        <span class="text-on-surface text-body-sm text-[12px] font-semibold truncate leading-tight">Analista Principal</span>
+                        <span class="text-outline text-[10px] font-label-sm truncate leading-tight">C-Level Telemetry Ops</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-outline text-[16px] shrink-0">verified</span>
+            </div>
+        </div>
+    </aside>

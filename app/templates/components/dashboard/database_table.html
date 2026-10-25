@@ -1,0 +1,169 @@
+            <!-- SECTION 3: Registro de Base de Datos Neon y Directorio Docente -->
+            <div id="directorio-docentes" class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md scroll-mt-24">
+                <!-- Neon PostgreSQL Serverless Top Status Strip -->
+                <div
+                    class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-sm bg-surface-container-high p-space-md rounded-lg">
+                    <div class="flex items-center gap-space-md">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shadow-inner">
+                            <span class="material-symbols-outlined text-[28px] text-tertiary">cloud_done</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-space-sm flex-wrap">
+                                <span
+                                    class="font-headline-sm text-headline-sm text-on-surface font-semibold">{{ neon_status.database }} • Neon Serverless PostgreSQL</span>
+                                <span
+                                    class="bg-surface-container px-2 py-0.5 rounded font-code-sm text-code-sm text-secondary font-mono">{{ neon_status.size }}</span>
+                                <span
+                                    class="bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                                    {{ neon_status.status }}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-space-md text-outline font-body-sm text-body-sm mt-1 flex-wrap">
+                                <span>{{ neon_status.version }}</span>
+                                <span>•</span>
+                                <span>Región: <strong class="text-on-surface-variant font-code-sm text-code-sm">{{ neon_status.region }}</strong></span>
+                                <span>•</span>
+                                <span>Catálogo: <strong class="text-on-surface-variant font-code-sm text-code-sm">{{ neon_status.tables_count }} tablas físicas • {{ neon_status.views_count }} vistas analíticas</strong></span>
+                                <span>•</span>
+                                <span>Índice: <strong class="text-tertiary">GIN FTS Activo</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-sm flex-wrap">
+                        <button
+                            id="check-neon-health-btn"
+                            class="bg-surface-container hover:bg-surface-container-highest text-on-surface px-space-md py-2 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-1.5 shadow-sm"
+                            type="button">
+                            <span class="material-symbols-outlined text-[18px] text-tertiary">speed</span>
+                            <span>Ping Healthcheck</span>
+                        </button>
+                        <a
+                            href="https://console.neon.tech"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="bg-secondary-container text-on-secondary hover:brightness-110 px-space-md py-2 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-1.5 shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                            <span>Consola Neon Cloud</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Barra de Búsqueda y Filtro de Directorio Docente -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">Directorio de Docentes &amp; Menciones Estudiantiles</h3>
+                        <span class="bg-surface-container-high text-outline text-label-sm px-2 py-0.5 rounded">{{ directorio_docentes|length }} registros</span>
+                    </div>
+                    <div class="w-full sm:w-72">
+                        <input
+                            type="text"
+                            id="docente-search-input"
+                            placeholder="Buscar docente o departamento..."
+                            class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-1.5 font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary text-sm"
+                            onkeyup="filterDocentesTable()"
+                        />
+                    </div>
+                </div>
+
+                <!-- Stylized Analytical Execution History Table -->
+                <div class="overflow-x-auto w-full max-h-[460px] overflow-y-auto rounded-lg border border-surface-container-high/40">
+                    <table id="docentes-table" class="w-full text-left font-body-sm text-body-sm border-collapse">
+                        <thead class="sticky top-0 z-10">
+                            <tr class="bg-surface-container-low text-outline font-label-sm text-label-sm uppercase tracking-wider">
+                                <th class="py-space-sm px-space-md">ID</th>
+                                <th class="py-space-sm px-space-md">Docente / Catedrático</th>
+                                <th class="py-space-sm px-space-md">Departamento</th>
+                                <th class="py-space-sm px-space-md text-right">Menciones</th>
+                                <th class="py-space-sm px-space-md text-right">Reacciones</th>
+                                <th class="py-space-sm px-space-md text-right">Consultas</th>
+                                <th class="py-space-sm px-space-md text-center">Estado Académico</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-surface-container-high/40">
+                            {% for doc in directorio_docentes %}
+                            <tr class="bg-surface-container hover:bg-surface-container-high/50 transition-colors docente-row">
+                                <td class="py-space-sm px-space-md font-mono font-code-sm text-primary font-semibold">
+                                    {{ doc.docente_id }}
+                                </td>
+                                <td class="py-space-sm px-space-md font-medium text-on-surface docente-nombre">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-outline text-[12px] font-bold font-mono">
+                                            {{ doc.docente[:2] }}
+                                        </div>
+                                        <span>{{ doc.docente }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-space-sm px-space-md text-outline font-label-sm docente-depto">
+                                    {{ doc.departamento or 'Informática' }}
+                                </td>
+                                <td class="py-space-sm px-space-md text-right font-code-sm font-bold text-on-surface">
+                                    <span class="{% if doc.total_menciones > 100 %}text-tertiary{% elif doc.total_menciones > 20 %}text-secondary{% else %}text-outline{% endif %}">
+                                        {{ doc.total_menciones }}
+                                    </span>
+                                </td>
+                                <td class="py-space-sm px-space-md text-right font-code-sm text-outline">
+                                    {{ doc.total_reacciones }}
+                                </td>
+                                <td class="py-space-sm px-space-md text-right font-code-sm text-outline">
+                                    {{ doc.consultas }}
+                                </td>
+                                <td class="py-space-sm px-space-md text-center">
+                                    {% if doc.total_menciones > 0 %}
+                                    <span class="bg-tertiary-container/30 text-tertiary font-label-sm text-[11px] px-2 py-0.5 rounded-full font-medium">Evaluado</span>
+                                    {% else %}
+                                    <span class="bg-surface-container-high text-outline font-label-sm text-[11px] px-2 py-0.5 rounded-full font-medium">Sin menciones</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="7" class="py-space-lg text-center text-outline font-body-sm">
+                                    Cargando directorio docente desde Neon Serverless PostgreSQL...
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex items-center justify-between text-outline font-code-sm text-code-sm pt-space-xs">
+                    <span>* Mostrando los docentes con menciones y consultas registradas en la carrera</span>
+                    <span class="text-tertiary font-mono">Total Docentes: {{ kpis.total_docentes }}</span>
+                </div>
+            </div>
+
+            <script>
+            function filterDocentesTable() {
+                const query = document.getElementById('docente-search-input').value.toLowerCase();
+                const rows = document.querySelectorAll('.docente-row');
+                rows.forEach(row => {
+                    const nombre = row.querySelector('.docente-nombre').textContent.toLowerCase();
+                    const depto = row.querySelector('.docente-depto').textContent.toLowerCase();
+                    if (nombre.includes(query) || depto.includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            document.getElementById('check-neon-health-btn')?.addEventListener('click', () => {
+                const btn = document.getElementById('check-neon-health-btn');
+                const prev = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Probando...';
+                fetch('/api/v1/health')
+                    .then(r => r.json())
+                    .then(data => {
+                        alert('Neon Healthcheck OK:\n• Estado: ' + data.status + '\n• Engine: ' + data.engine);
+                    })
+                    .catch(err => {
+                        alert('Error al comprobar salud de Neon: ' + err);
+                    })
+                    .finally(() => {
+                        btn.innerHTML = prev;
+                    });
+            });
+            </script>

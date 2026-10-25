@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}SentiDataUMSA - Overview Ejecutivo de Minería de Textos{% endblock %}
+
+{% block content %}
+<main class="w-full bg-background flex-1 transition-colors duration-200">
+    <div class="flex flex-col w-full">
+        <!-- Top Executive Action Header Strip Component -->
+        {% include "components/dashboard/action_header.html" %}
+
+        <div class="w-full px-3 sm:px-margin py-4 sm:py-space-lg flex flex-col gap-4 sm:gap-space-lg">
+            <!-- SECTION 1: 5 Executive KPI Metric Blocks Component -->
+            {% include "components/dashboard/kpi_cards.html" %}
+
+            <!-- SECTION 2: Advanced Interactive Visualizations Grid Component -->
+            {% include "components/dashboard/charts_section.html" %}
+
+            <!-- SECTION 2.5: NLP Avanzado (LDA Topic Modeling, TF-IDF Multidimensional y Emociones UMSA) -->
+            {% include "components/dashboard/nlp_section.html" %}
+
+            <!-- SECTION 3: Registro de Corrida y Snapshot de Base de Datos Component -->
+            {% include "components/dashboard/database_table.html" %}
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/timeline_chart.js') }}"></script>
+{% endblock %}
+

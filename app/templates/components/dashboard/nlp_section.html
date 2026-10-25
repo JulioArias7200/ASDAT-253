@@ -1,0 +1,242 @@
+<!-- SECTION: NLP Avanzado (Topic Modeling LDA, TF-IDF Multidimensional y Emociones Context-Aware) -->
+<div id="pln-avanzado" class="mt-space-lg scroll-mt-24">
+    <!-- Header de Sección NLP -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-sm mb-space-sm border-b border-surface-container-highest">
+        <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-primary text-[24px]">psychology</span>
+            <div>
+                <h2 class="font-headline-md text-headline-md text-on-surface">Procesamiento de Lenguaje Natural (PLN)</h2>
+                <p class="font-body-sm text-body-sm text-outline">Modelado de Temas (LDA k=4), Descriptores TF-IDF y Análisis Dual de Emociones UMSA</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 mt-2 sm:mt-0">
+            <span class="bg-primary/10 text-primary border border-primary/20 text-xs px-2.5 py-1 rounded-full font-mono flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                TF-IDF: {{ "{:,}".format(nlp_kpis.get('total_descriptores_tfidf', 4193)) }} descriptores
+            </span>
+            <span class="bg-secondary/10 text-secondary border border-secondary/20 text-xs px-2.5 py-1 rounded-full font-mono">
+                LDA Beta: {{ nlp_kpis.get('total_terminos_lda', 80) }} términos
+            </span>
+        </div>
+    </div>
+
+    <!-- Grid de Métricas NLP -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-space-lg">
+        
+        <!-- CARD 1: Modelado de Tópicos Latentes LDA (7 columnas en lg) -->
+        <div id="topicos-lda" class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between scroll-mt-24">
+            <div class="flex items-center justify-between pb-space-xs">
+                <div class="flex items-center gap-space-xs">
+                    <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Topic Modeling (Latent Dirichlet Allocation)</h3>
+                </div>
+                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded">k = 4 Tópicos</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-outline mb-space-sm">
+                Distribución probabilística Dirichlet ($\beta$ palabra-tema y $\gamma$ documento-tema) ajustada sobre 23,462 mensajes.
+            </p>
+
+            <!-- Lista de Tópicos Descubiertos -->
+            <div class="space-y-3 my-space-xs">
+                {% for t in lda_topics %}
+                <div class="p-3 bg-surface-container-low rounded-lg border border-surface-container-highest/60 hover:border-secondary/40 transition-colors">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-secondary/20 text-secondary font-code-sm text-xs flex items-center justify-center font-bold">
+                                #{{ t.topico_id }}
+                            </span>
+                            <span class="font-body-md text-sm font-semibold text-on-surface">{{ t.nombre_etiqueta }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-code-sm text-xs font-bold text-secondary">{{ t.porcentaje_corpus }}%</span>
+                            <span class="font-label-sm text-xs text-outline">({{ "{:,}".format(t.total_mensajes_asignados) }} msgs)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Barra de Proporción Gamma -->
+                    <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mb-2">
+                        <div class="bg-gradient-to-r from-secondary to-primary h-full rounded-full transition-all duration-500"
+                             style="width: {{ t.porcentaje_corpus }}%;"></div>
+                    </div>
+
+                    <!-- Palabras clave Beta (Top Dirichlet Probs) -->
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                        {% for v in t.vocabulario_top[:6] %}
+                        <span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface-variant text-[11px] px-2 py-0.5 rounded border border-surface-container-highest/80 font-mono">
+                            <span>{{ v.termino }}</span>
+                            <span class="text-secondary opacity-75 text-[10px]">β={{ v.beta_prob }}</span>
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="text-center py-6 text-outline font-body-sm">Cargando tópicos LDA desde Neon...</div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-xs">
+                <span>Inferencia Bayesiana Batch</span>
+                <span class="text-secondary flex items-center gap-1 font-mono">
+                    <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                    100% Mensajes Clasificados
+                </span>
+            </div>
+        </div>
+
+        <!-- CARD 2: Análisis Dual de Emociones (5 columnas en lg) -->
+        <div id="emociones-tono" class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between scroll-mt-24">
+            <div class="flex items-center justify-between pb-space-xs">
+                <div class="flex items-center gap-space-xs">
+                    <span class="material-symbols-outlined text-tertiary text-[20px]">sentiment_satisfied</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Emociones UMSA & Plutchik</h3>
+                </div>
+                <span class="bg-surface-container-high text-tertiary font-code-sm text-xs px-2 py-0.5 rounded">Context-Aware</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-outline mb-space-sm">
+                Parser heurístico UMSA con ventana contextual de 3 tokens e inversión de polaridad + NRC Lexicon.
+            </p>
+
+            <!-- Métricas de Emociones Propias (Léxico UMSA) -->
+            <div class="space-y-2 mb-space-md">
+                <!-- Incertidumbre / Ansiedad -->
+                <div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                        <span class="font-body-sm text-xs text-on-surface font-medium">Incertidumbre / Ansiedad</span>
+                    </div>
+                    <div class="flex items-center gap-2 font-mono">
+                        <span class="text-amber-400 font-bold text-xs">{{ nlp_kpis.get('emo_ansiedad', 1005) }}</span>
+                        <span class="text-[10px] text-outline">parciales, notas</span>
+                    </div>
+                </div>
+
+                <!-- Conformidad / Recomendación -->
+                <div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        <span class="font-body-sm text-xs text-on-surface font-medium">Conformidad / Recomendación</span>
+                    </div>
+                    <div class="flex items-center gap-2 font-mono">
+                        <span class="text-emerald-400 font-bold text-xs">{{ nlp_kpis.get('emo_conformidad', 215) }}</span>
+                        <span class="text-[10px] text-outline">buen docente, capo</span>
+                    </div>
+                </div>
+
+                <!-- Alivio / Aprobación -->
+                <div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+                        <span class="font-body-sm text-xs text-on-surface font-medium">Alivio / Aprobación</span>
+                    </div>
+                    <div class="flex items-center gap-2 font-mono">
+                        <span class="text-cyan-400 font-bold text-xs">{{ nlp_kpis.get('emo_alivio', 203) }}</span>
+                        <span class="text-[10px] text-outline">salvar, barco, fácil</span>
+                    </div>
+                </div>
+
+                <!-- Frustración / Dificultad -->
+                <div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                        <span class="font-body-sm text-xs text-on-surface font-medium">Frustración / Dificultad</span>
+                    </div>
+                    <div class="flex items-center gap-2 font-mono">
+                        <span class="text-rose-400 font-bold text-xs">{{ nlp_kpis.get('emo_frustracion', 110) }}</span>
+                        <span class="text-[10px] text-outline">fregado, matador</span>
+                    </div>
+                </div>
+
+                <!-- Descontento / Crítica -->
+                <div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-purple-400"></span>
+                        <span class="font-body-sm text-xs text-on-surface font-medium">Descontento / Crítica</span>
+                    </div>
+                    <div class="flex items-center gap-2 font-mono">
+                        <span class="text-purple-400 font-bold text-xs">{{ nlp_kpis.get('emo_descontento', 83) }}</span>
+                        <span class="text-[10px] text-outline">no enseña, falton</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desglose Plutchik NRCLex -->
+            <div class="bg-surface-container-low p-space-sm rounded-lg border border-surface-container-highest">
+                <span class="font-label-sm text-xs text-outline uppercase font-semibold mb-1 block">Validación Plutchik (NRCLex Español):</span>
+                <div class="grid grid-cols-3 gap-2 text-center pt-1 font-mono">
+                    <div class="bg-surface-container-high p-1.5 rounded">
+                        <span class="text-[10px] text-outline block">Anticipation</span>
+                        <span class="text-xs font-bold text-tertiary">{{ nlp_kpis.get('nrc_anticipation', 1720) }}</span>
+                    </div>
+                    <div class="bg-surface-container-high p-1.5 rounded">
+                        <span class="text-[10px] text-outline block">Trust</span>
+                        <span class="text-xs font-bold text-emerald-400">{{ nlp_kpis.get('nrc_trust', 833) }}</span>
+                    </div>
+                    <div class="bg-surface-container-high p-1.5 rounded">
+                        <span class="text-[10px] text-outline block">Fear</span>
+                        <span class="text-xs font-bold text-rose-400">{{ nlp_kpis.get('nrc_fear', 534) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TF-IDF Multidimensional: Docentes y Ciclos Académicos -->
+    <div id="descriptores-tfidf" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-space-lg scroll-mt-24">
+        <!-- TF-IDF por Docentes Destacados -->
+        <div class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-space-xs">
+                <div class="flex items-center gap-space-xs">
+                    <span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">TF-IDF por Docente (Términos Distintivos)</h3>
+                </div>
+                <span class="bg-surface-container-high text-primary font-code-sm text-xs px-2 py-0.5 rounded">Top Ponderación</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-outline mb-space-sm">
+                Vocablos exclusivos que diferencian las opiniones hacia cada catedrático respecto al corpus general.
+            </p>
+            <div class="flex flex-wrap gap-2 my-space-xs">
+                {% for w in top_tfidf_docentes %}
+                <div class="bg-surface-container-low px-2.5 py-1.5 rounded-lg border border-surface-container-highest flex items-center gap-2 hover:border-primary/50 transition-colors">
+                    <span class="text-xs text-on-surface font-medium">{{ w.termino }}</span>
+                    <span class="text-[10px] font-mono bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold">TF-IDF {{ w.score_tfidf }}</span>
+                </div>
+                {% else %}
+                <span class="text-outline text-xs">Cargando términos TF-IDF...</span>
+                {% endfor %}
+            </div>
+            <div class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-xs">
+                <span>Granularidad por 85 Catedráticos</span>
+                <span class="text-primary font-mono">N-Gramas (1, 2)</span>
+            </div>
+        </div>
+
+        <!-- TF-IDF por Ciclos Académicos (Básico, Intermedio, Superior) -->
+        <div class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-space-xs">
+                <div class="flex items-center gap-space-xs">
+                    <span class="material-symbols-outlined text-secondary text-[20px]">school</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">TF-IDF por Ciclo Académico</h3>
+                </div>
+                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded">Básico / Intermedio / Superior</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-outline mb-space-sm">
+                Evolución de las inquietudes estudiantiles según el semestre y la madurez académica del estudiante.
+            </p>
+            <div class="flex flex-wrap gap-2 my-space-xs">
+                {% for w in top_tfidf_ciclos %}
+                <div class="bg-surface-container-low px-2.5 py-1.5 rounded-lg border border-surface-container-highest flex items-center gap-2 hover:border-secondary/50 transition-colors">
+                    <span class="text-xs text-outline font-mono text-[10px]">[{{ w.entidad_id }}]</span>
+                    <span class="text-xs text-on-surface font-medium">{{ w.termino }}</span>
+                    <span class="text-[10px] font-mono bg-secondary/10 text-secondary px-1.5 py-0.5 rounded font-bold">{{ w.score_tfidf }}</span>
+                </div>
+                {% else %}
+                <span class="text-outline text-xs">Cargando términos por ciclo...</span>
+                {% endfor %}
+            </div>
+            <div class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-xs">
+                <span>Segmentación Curricular UMSA</span>
+                <span class="text-secondary font-mono">158 Materias</span>
+            </div>
+        </div>
+    </div>
+</div>

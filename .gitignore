@@ -63,8 +63,11 @@ _*.log
 *.bak
 __pycache__/
 *.pyc
+venv/
+.venv/
 
 # --- Sistema -----------------------------------------------------------------
 .DS_Store
 Thumbs.db
 .vscode/*.log
+

@@ -117,16 +117,31 @@ class TimelineChartEngine {
             });
         }
 
-        // 4. Eventos de ratón para Tooltip, Crosshair y Clic Drill-down
+        // 4. Eventos de ratón y táctiles (Touch Mobile) para Tooltip, Crosshair y Clic Drill-down
         if (this.svg) {
             this.svg.addEventListener('mousemove', (e) => this.handleMouseMove(e));
             this.svg.addEventListener('mouseleave', () => this.handleMouseLeave());
-            this.svg.addEventListener('touchmove', (e) => {
-                if (e.touches.length > 0) {
+
+            this.touchTimer = null;
+            this.svg.addEventListener('touchstart', (e) => {
+                if (this.touchTimer) clearTimeout(this.touchTimer);
+                if (e.touches && e.touches.length > 0) {
                     this.handleMouseMove(e.touches[0]);
                 }
+            }, { passive: true });
+
+            this.svg.addEventListener('touchmove', (e) => {
+                if (this.touchTimer) clearTimeout(this.touchTimer);
+                if (e.touches && e.touches.length > 0) {
+                    this.handleMouseMove(e.touches[0]);
+                }
+            }, { passive: true });
+
+            this.svg.addEventListener('touchend', () => {
+                if (this.touchTimer) clearTimeout(this.touchTimer);
+                this.touchTimer = setTimeout(() => this.handleMouseLeave(), 3500);
             });
-            this.svg.addEventListener('touchend', () => this.handleMouseLeave());
+
             this.svg.addEventListener('click', (e) => this.handleClick(e));
         }
 
@@ -670,8 +685,13 @@ class TimelineChartEngine {
             const posX = ((closest.x / 740) * rect.width);
             const posY = ((closest.yTotal / 240) * rect.height);
 
-            this.tooltip.style.left = `${Math.min(Math.max(posX, 90), containerRect.width - 140)}px`;
-            this.tooltip.style.top = `${Math.max(posY - 20, 30)}px`;
+            // Responsive clamping for small screen mobile phones (< 420px)
+            const tooltipEstW = Math.min(220, containerRect.width - 24);
+            const maxLeft = Math.max(10, containerRect.width - tooltipEstW - 10);
+            const clampedLeft = Math.min(Math.max(posX - 40, 10), maxLeft);
+
+            this.tooltip.style.left = `${clampedLeft}px`;
+            this.tooltip.style.top = `${Math.max(posY - 20, 20)}px`;
         }
     }
 

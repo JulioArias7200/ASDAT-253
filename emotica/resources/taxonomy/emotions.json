@@ -1,0 +1,17 @@
+[
+  {"id": "alegria", "nombre": "Alegría", "valencia": "positiva", "activacion": "alta", "opuesta": "tristeza", "activa": true},
+  {"id": "gratitud", "nombre": "Gratitud", "valencia": "positiva", "activacion": "media", "opuesta": null, "activa": true},
+  {"id": "esperanza", "nombre": "Esperanza", "valencia": "positiva", "activacion": "media", "opuesta": "decepcion", "activa": true},
+  {"id": "amor", "nombre": "Amor", "valencia": "positiva", "activacion": "media", "opuesta": null, "activa": true},
+  {"id": "admiracion", "nombre": "Admiración", "valencia": "positiva", "activacion": "media", "opuesta": null, "activa": true},
+  {"id": "tranquilidad", "nombre": "Tranquilidad", "valencia": "positiva", "activacion": "baja", "opuesta": "preocupacion", "activa": true},
+  {"id": "sorpresa", "nombre": "Sorpresa", "valencia": "ambigua", "activacion": "alta", "opuesta": null, "activa": true},
+  {"id": "curiosidad", "nombre": "Curiosidad", "valencia": "positiva", "activacion": "media", "opuesta": null, "activa": true},
+  {"id": "confusion", "nombre": "Confusión", "valencia": "negativa", "activacion": "media", "opuesta": null, "activa": true},
+  {"id": "preocupacion", "nombre": "Preocupación", "valencia": "negativa", "activacion": "media", "opuesta": "tranquilidad", "activa": true},
+  {"id": "tristeza", "nombre": "Tristeza", "valencia": "negativa", "activacion": "baja", "opuesta": "alegria", "activa": true},
+  {"id": "enojo", "nombre": "Enojo", "valencia": "negativa", "activacion": "alta", "opuesta": "tranquilidad", "activa": true},
+  {"id": "decepcion", "nombre": "Decepción", "valencia": "negativa", "activacion": "media", "opuesta": "esperanza", "activa": true},
+  {"id": "cansancio", "nombre": "Cansancio", "valencia": "negativa", "activacion": "baja", "opuesta": null, "activa": true},
+  {"id": "verguenza", "nombre": "Vergüenza", "valencia": "negativa", "activacion": "media", "opuesta": null, "activa": true}
+]

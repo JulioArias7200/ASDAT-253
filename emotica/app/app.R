@@ -1,4 +1,9 @@
-# Dashboard local con carga en vivo.  Uso:  shiny::runApp("app")   (desde la raiz del proyecto)
+# ==============================================================================
+# [DEPRECATED / ARCHIVED] - Migrado al Dashboard Unificado en Python Flask
+# Todo el pipeline de ingesta, preprocesamiento y motor de 15 emociones ahora corre
+# nativamente en Python en: app/core/emotica/ y en la web en /importar-datos
+# ==============================================================================
+# Dashboard local R Shiny legado. Uso histórico: shiny::runApp("app")
 library(shiny)
 raiz_proy <- if (file.exists("DESCRIPTION") && dir.exists("R")) normalizePath(".") else normalizePath("..")
 options(emotica.raiz = raiz_proy, shiny.maxRequestSize = 500 * 1024^2)

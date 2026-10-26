@@ -1,0 +1,18 @@
+{
+  "zona_horaria": "UTC",
+  "umbral_idioma": 0.10,
+  "min_caracteres_token": 2,
+  "conservar_siempre": [
+    "no", "nunca", "ni", "sin", "tampoco", "jamas", "jamás", "nada", "nadie",
+    "ningun", "ningún", "ninguno", "ninguna", "pero", "muy", "mas", "más",
+    "menos", "poco", "poca", "bastante", "demasiado", "tan", "casi", "not",
+    "never", "nor", "without", "none", "nobody", "nothing", "but", "very",
+    "too", "so", "really", "more", "less", "quite", "não", "nem", "sem",
+    "muito", "mais", "pouco", "demais"
+  ],
+  "anuncios": {
+    "umbral": 2,
+    "min_chars": 280,
+    "min_lineas": 4
+  }
+}

@@ -6,6 +6,14 @@ Inicia el servidor Flask en modo de desarrollo con recarga en caliente y conexi�
 import os
 import sys
 
+try:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 # Asegurar que el directorio raíz del proyecto esté en el PYTHONPATH
 project_root = os.path.dirname(os.path.abspath(__file__))
 if project_root not in sys.path:

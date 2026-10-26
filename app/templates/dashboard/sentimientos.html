@@ -15,18 +15,23 @@
                             Motor Léxico SentiDataUMSA
                         </span>
                         <span class="text-outline text-xs">•</span>
-                        <span class="font-code-sm text-xs text-secondary font-medium">Polaridad Trilateral &bull; 8 Emociones Básicas</span>
+                        <span class="font-code-sm text-xs text-secondary font-medium">Polaridad Trilateral &bull; Motor 15 Emociones (Emotica Python)</span>
                     </div>
                     <h1 class="font-headline-lg text-xl sm:text-headline-lg font-bold text-on-surface tracking-tight">
                         Análisis de Sentimientos &amp; Tono Emocional
                     </h1>
                     <p class="font-body-sm text-xs sm:text-body-sm text-outline max-w-4xl">
-                        Evaluación semántica profunda sobre 23.4k mensajes estudiantiles. Clasificación en polaridad (positivo, neutro, negativo) 
-                        e inferencia de emociones dominantes (gratitud, frustración, confianza, tristeza, alegría) con resolución de negaciones.
+                        Evaluación semántica profunda sobre el corpus estudiantil. Clasificación en polaridad (positivo, neutro, negativo) 
+                        e inferencia de 15 emociones dominantes con resolución de negaciones, intensificadores léxicos y calibración contextual.
                     </p>
                 </div>
                 
                 <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+                    <a href="{{ url_for('web.importar_datos_view') }}" 
+                       class="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-mono text-xs transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">cloud_upload</span>
+                        <span>Procesar Nuevo Chat</span>
+                    </a>
                     <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span>Positivo Dominante: {{ sent.pct_positivo }}%</span>

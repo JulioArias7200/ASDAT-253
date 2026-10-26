@@ -1,0 +1,18 @@
+{
+  "ventana_modificadores": 3,
+  "factor_negacion_opuesta": 0.5,
+  "escala_intensidad": 2.0,
+  "niveles": {
+    "leve": 0.30,
+    "moderada": 0.60,
+    "alta": 0.85
+  },
+  "senales": {
+    "exclamacion": 0.15,
+    "exclamacion_max": 3,
+    "mayusculas": 0.20,
+    "alargamiento": 0.15,
+    "tope": 0.60
+  },
+  "excluir_anuncios": true
+}

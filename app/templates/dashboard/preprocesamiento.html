@@ -75,74 +75,153 @@
                 </div>
             </div>
 
-            <!-- Muestreo Antes y Después (Tabla Comparativa Interactiva) -->
-            <div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md border border-outline/10">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-high/60 pb-space-sm">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary text-[20px]">compare</span>
-                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
-                            Muestreo Antes vs Después: Normalización del Dataset
-                        </h2>
+            <!-- Hero Sankey Flow: Flujo Analítico del Pipeline ETL & NLP -->
+            <div id="sankey-pipeline-card" class="bg-surface-container rounded-xl p-space-md sm:p-space-lg shadow-md flex flex-col gap-space-md border border-outline/10">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-surface-container-high/60 pb-space-sm">
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[22px]">account_tree</span>
+                            <h2 class="font-headline-sm text-base sm:text-headline-sm text-on-surface font-semibold">
+                                Diagrama de Flujo del Pipeline (Sankey Flow)
+                            </h2>
+                        </div>
+                        <p id="sankey-mode-desc" class="text-xs text-outline font-body-sm max-w-3xl">
+                            Flujo de compresión desde los 1,469,733 caracteres crudos hacia los tokens canónicos refinados.
+                        </p>
                     </div>
-                    <span class="font-code-sm text-xs bg-surface-container-high text-outline px-2.5 py-1 rounded-md">
-                        Muestras en Vivo desde Neon PostgreSQL
-                    </span>
+
+                    <!-- Controles de Modo del Sankey -->
+                    <div class="flex flex-wrap items-center gap-2 self-start lg:self-auto">
+                        <span id="sankey-mode-badge" class="font-mono text-[11px] bg-surface-container-high text-primary px-2.5 py-1 rounded-lg border border-primary/20 hidden sm:inline-block">
+                            Métrica: Volumen de Caracteres &amp; Tokens
+                        </span>
+                        <div class="flex items-center bg-surface-container-high p-1 rounded-xl border border-outline/20">
+                            <button type="button" id="btn-sankey-volumen"
+                                class="px-3 py-1 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-all shadow-sm flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[14px]">data_object</span>
+                                <span>Volumen Textual</span>
+                            </button>
+                            <button type="button" id="btn-sankey-tipologia"
+                                class="px-3 py-1 rounded-lg text-xs font-medium text-outline hover:text-on-surface transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[14px]">category</span>
+                                <span>Tipología Mensajes</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Vista Móvil: Tarjetas Apiladas (Smartphones < 768px) -->
-                <div class="flex flex-col gap-3 md:hidden">
-                    {% for m in prep.muestras %}
-                    <div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-high/80 flex flex-col gap-2 shadow-sm">
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="font-mono text-outline font-semibold">#{{ m.message_id }}</span>
-                            <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full {% if m.len_orig > m.len_norm %}bg-emerald-500/20 text-emerald-400 border border-emerald-500/30{% else %}bg-surface-container-high text-outline{% endif %}">
-                                -{{ m.len_orig - m.len_norm }} chars
+                <!-- Canvas del Diagrama de Sankey (ECharts) -->
+                <div class="w-full relative min-h-[380px] sm:min-h-[440px] flex items-center justify-center">
+                    <div id="sankey-chart-container" class="w-full h-[380px] sm:h-[440px]"></div>
+                </div>
+
+                <!-- Leyenda Rápida del Flujo -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-space-xs border-t border-surface-container-high/40 text-[11px] font-mono text-outline">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span> Ingesta Cruda
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Stopwords &amp; Ruido
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span> Tokens Canónicos
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Capas de Minería
+                        </span>
+                    </div>
+                    <span class="text-secondary font-code-sm">Haz hover sobre nodos o flujos para aislar trayectorias</span>
+                </div>
+            </div>
+
+            <!-- Grid Analítico Cuantitativo: Histograma de Longitud + Matriz de Reglas ETL -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+                <!-- Columna Izquierda (6 cols): Histograma de Distribución de Longitud -->
+                <div id="length-distribution-card" class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10 min-h-[430px]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm border-b border-surface-container-high/60 shrink-0">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">bar_chart</span>
+                            <div>
+                                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Distribución de Longitud de Texto</h3>
+                                <p class="text-[11px] text-outline">Densidad de caracteres: Original vs Normalizado (23,371 mensajes)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs font-mono">
+                            <span class="flex items-center gap-1.5 text-red-400 font-semibold">
+                                <span class="w-2 h-2 rounded-full bg-red-400"></span> Original
+                            </span>
+                            <span class="flex items-center gap-1.5 text-sky-400 font-semibold">
+                                <span class="w-2 h-2 rounded-full bg-sky-400"></span> Normalizado
                             </span>
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[10px] uppercase font-bold text-outline">Original Crudo (Telegram):</span>
-                            <div class="p-2 rounded-lg bg-surface-container text-xs text-on-surface font-sans leading-relaxed border border-outline/10">
-                                {{ m.text_original }}
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[10px] uppercase font-bold text-primary">Normalizado (text_norm):</span>
-                            <div class="p-2 rounded-lg bg-primary/10 text-xs text-primary font-mono leading-relaxed border border-primary/20">
-                                {{ m.text_norm }}
-                            </div>
-                        </div>
                     </div>
-                    {% endfor %}
+
+                    <!-- Canvas SVG del Histograma (Ajustado proporcionalmente sin vacío) -->
+                    <div class="w-full flex-1 flex flex-col justify-center relative my-2">
+                        <svg id="length-distribution-svg" viewBox="0 0 640 270" class="w-full h-auto max-h-[280px] overflow-visible"></svg>
+                        <div id="hist-tooltip" class="absolute pointer-events-none hidden bg-surface-container-highest/95 backdrop-blur-md px-3 py-2 rounded-xl border border-outline/20 shadow-xl z-20 text-xs"></div>
+                    </div>
+
+                    <div class="p-2.5 rounded-lg bg-surface-container-low border border-outline/10 flex items-center justify-between text-xs font-mono text-outline shrink-0">
+                        <span class="flex items-center gap-1.5 text-on-surface">
+                            <span class="material-symbols-outlined text-[16px] text-emerald-400">insights</span>
+                            Mediana de compresión:
+                        </span>
+                        <span class="font-bold text-primary">{{ prep.avg_len_norm }} chars <span class="text-outline font-normal">(antes {{ prep.avg_len_orig }} chars)</span></span>
+                    </div>
                 </div>
 
-                <!-- Vista Escritorio y Tableta: Tabla Completa (>= 768px) -->
-                <div class="hidden md:block overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="border-b border-surface-container-high text-outline uppercase font-mono tracking-wider">
-                                <th class="p-2.5 w-16">ID</th>
-                                <th class="p-2.5 w-1/2">Texto Crudo Original (Raw Telegram)</th>
-                                <th class="p-2.5 w-1/2 text-primary">Texto Limpio Tokenizado (text_norm)</th>
-                                <th class="p-2.5 text-center">Δ Chars</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-surface-container-high/40 font-mono">
-                            {% for m in prep.muestras %}
-                            <tr class="hover:bg-surface-container-high/30 transition-colors">
-                                <td class="p-2.5 text-outline">#{{ m.message_id }}</td>
-                                <td class="p-2.5 text-on-surface font-sans text-xs leading-relaxed max-w-md break-words">
-                                    {{ m.text_original }}
-                                </td>
-                                <td class="p-2.5 text-primary font-mono text-xs leading-relaxed max-w-md break-words bg-primary/5 rounded">
-                                    {{ m.text_norm }}
-                                </td>
-                                <td class="p-2.5 text-center font-bold {% if m.len_orig > m.len_norm %}text-emerald-400{% else %}text-outline{% endif %}">
-                                    -{{ m.len_orig - m.len_norm }}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <!-- Columna Derecha (6 cols): Matriz Técnica de Reglas ETL & NLP con Scroll Interno -->
+                <div id="rules-matrix-card" class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between border border-outline/10 min-h-[430px]">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 shrink-0">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-tertiary text-[20px]">fact_check</span>
+                            <div>
+                                <h3 class="font-headline-sm text-sm font-semibold text-on-surface">Matriz Técnica de Reglas ETL &amp; NLP</h3>
+                                <p class="text-[11px] text-outline">Impacto algorítmico y reducción neta verificada</p>
+                            </div>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">5 Reglas Validadas</span>
+                    </div>
+
+                    <!-- Contenedor con Scroll Vertical Interno -->
+                    <div class="overflow-x-auto overflow-y-auto max-h-[290px] my-2 pr-1 flex-1">
+                        <table class="w-full text-left border-collapse text-xs font-mono">
+                            <thead class="sticky top-0 bg-surface-container z-10 shadow-sm">
+                                <tr class="border-b border-surface-container-high text-outline uppercase tracking-wider text-[11px]">
+                                    <th class="py-2 px-2 bg-surface-container">Regla / Módulo</th>
+                                    <th class="py-2 px-2 text-right bg-surface-container">Volumen</th>
+                                    <th class="py-2 px-2 text-right bg-surface-container">Reducción</th>
+                                    <th class="py-2 px-2 text-center bg-surface-container">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-surface-container-high/40">
+                                {% for r in prep.matriz_reglas %}
+                                <tr class="hover:bg-surface-container-high/30 transition-colors">
+                                    <td class="py-2.5 px-2">
+                                        <div class="flex flex-col">
+                                            <span class="font-semibold text-on-surface text-[12px] font-sans">{{ r.regla }}</span>
+                                            <span class="text-[10px] text-outline leading-tight">{{ r.modulo }} &bull; {{ r.descripcion }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-2.5 px-2 text-right text-outline whitespace-nowrap">{{ r.impacto_volumen }}</td>
+                                    <td class="py-2.5 px-2 text-right font-bold text-emerald-400 whitespace-nowrap">{{ r.reduccion }}</td>
+                                    <td class="py-2.5 px-2 text-center whitespace-nowrap">
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+                                            {{ r.estado }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p-2.5 rounded-lg bg-surface-container-low border border-outline/10 flex items-center justify-between text-xs text-outline shrink-0">
+                        <span class="font-mono text-[11px]">Pipeline determinístico: Cero sesgo en polaridad léxica</span>
+                        <span class="font-code-sm text-xs font-semibold text-primary">100% Python Nativo</span>
+                    </div>
                 </div>
             </div>
 
@@ -213,4 +292,16 @@
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- Inyección de Datos Analíticos para ECharts y SVG Histogram -->
+<script>
+    window.__PREP_SANKEY_DATA__ = {{ prep.sankey_data | tojson | safe }};
+    window.__PREP_HISTOGRAM_DATA__ = {{ prep.histograma | tojson | safe }};
+</script>
+<!-- Apache ECharts v5.4.3 (Motor para Diagrama de Sankey con aceleración Bezier) -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- Motor de Analítica de Preprocesamiento -->
+<script src="{{ url_for('static', filename='js/sankey_engine.js') }}"></script>
 {% endblock %}

@@ -1,9 +1,9 @@
-﻿emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironia
+emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironia
 👍,Pulgar arriba,Como reacción es un acuse de recibo: 'visto / de acuerdo / gracias por avisar'. No siempre implica entusiasmo; en el chat es la reacción por defecto para confirmar que se leyó un comunicado o una respuesta.,acuse_recibo,reaccion,aprobación,positivo,no
 👎,Pulgar abajo,"Reacción de desacuerdo o rechazo: mala noticia, respuesta que no gusta o mensaje criticado. A veces se usa como 'voto en contra' en tono de burla hacia una pregunta o queja.",rechazo,reaccion,desaprobación,negativo,posible
 🤣,Risa a carcajadas,Algo gracioso o absurdo. Como reacción también puede ser risa de resignación ante un problema administrativo ('ya ni modo').,risa,reaccion,alegría,positivo,posible
 👉,Dedo a la derecha,"En anuncios señala la acción o el enlace principal ('👉 inscríbete aquí', 'comparte este enlace'). Es un 'haz clic acá'. Junto a 👈 es pedido tímido.",llamado_accion,anuncio,dirección,neutro,no
-❤,Corazón rojo,"Como reacción: agradecimiento o aprecio ('me encantó / gracias'). En anuncios, adorno afectivo.",afecto,reaccion,amor,positivo,no
+❤️,Corazón rojo,"Como reacción: agradecimiento o aprecio ('me encantó / gracias'). En anuncios, adorno afectivo.",afecto,reaccion,amor,positivo,no
 ✅,Marca de verificación,"Ítem confirmado: requisito, beneficio, 'aplica para' o 'incluye'. Equivale a 'sí'.",vineta_positiva,anuncio,confirmación,positivo,no
 🙏,Manos juntas,"En conversación casi siempre significa 'por favor' al pedir ayuda (¿hay grupo?, ¿alguien me pasa...?). En anuncios, 'gracias por participar'.",pedir_favor,conversacion,súplica,positivo,no
 🔹,Viñeta,"Viñeta de lista (Materia, Sigla, Semestre...). No tiene carga emocional.",vineta,anuncio,neutro,neutro,no

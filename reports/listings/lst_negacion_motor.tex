@@ -1,0 +1,31 @@
+\begin{lstlisting}[language=Python, caption={Algoritmo de ventana de negacion contextual e inversion afectiva en Python (\texttt{engine.py})}, label={lst:negacion_motor}]
+def aplicar_negacion_contextual(tokens, lexicon, window_size=3):
+    """
+    Detecta particulas de negacion en una ventana k hacia atras e invierte
+    la polaridad hacia la emocion opuesta en la taxonomia.
+    """
+    scores = {}
+    negators = {"no", "nunca", "jamas", "tampoco", "nada"}
+    
+    for i, tok in enumerate(tokens):
+        if tok not in lexicon:
+            continue
+            
+        # Comprobar ventana previa de tokens
+        k_inicio = max(0, i - window_size)
+        precedentes = {t.lower() for t in tokens[k_inicio:i]}
+        negado = bool(precedentes.intersection(negators))
+        
+        entry = lexicon[tok]
+        emocion = entry["emocion_id"]
+        peso = entry.get("peso", 1.0)
+        
+        if negado and entry.get("negation_sensitive", True):
+            # Inversion de emocion hacia su opuesto semantico
+            emocion_opuesta = TAXONOMIA_OPUESTOS.get(emocion, "indeterminado")
+            scores[emocion_opuesta] = scores.get(emocion_opuesta, 0.0) + peso
+        else:
+            scores[emocion] = scores.get(emocion, 0.0) + peso
+            
+    return scores
+\end{lstlisting}

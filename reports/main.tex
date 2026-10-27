@@ -1,49 +1,93 @@
 % =============================================================================
-% main.tex — Informe de análisis de sentimiento y emociones (AS_Telegram)
-% Compilar (local):  pdflatex main ; bibtex main ; pdflatex main ; pdflatex main
-% Compilar (Overleaf): subir la carpeta "reports" completa como proyecto.
+% main.tex — Informe Académico de Minería de Datos (Norma APA 7ma Edición)
+% ASDAT-253: SentiDataUMSA / AS_Telegram
+% Universidad Mayor de San Andrés (UMSA) — Carrera de Informática
 % =============================================================================
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,letterpaper]{article}
 
 \input{preamble}
 
-\title{\textbf{Análisis de sentimiento y emociones en un grupo de Telegram
-       de gestión académica}\\[0.3em]
-       \large Un estudio exploratorio con un método léxico multietiqueta en español}
-\author{Proyecto AS\_Telegram}
-\date{\today}
-
 \begin{document}
-\maketitle
 
-\begin{abstract}
+% -----------------------------------------------------------------------------
+% PORTADA ESTUDIANTIL SEGÚN NORMAS APA 7MA EDICIÓN
+% -----------------------------------------------------------------------------
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  
+  % Título del trabajo (Negrita, Centrado)
+  {\fontsize{14}{18}\selectfont \textbf{Minería de Textos, Modelado Estocástico y Telemetría Analítica Multimodal en Conversaciones Académicas Universitarias: Un Enfoque Híbrido Basado en Reglas Léxicas, Tópicos Latentes (LDA) y Cadenas de Markov sobre Telegram}}\par
+  
+  \vspace{2.5cm}
+  
+  % Autores (Estudiantes)
+  {\fontsize{12}{15}\selectfont
+    Univ. Julio Nelson Arias Cruz\par
+    Univ. Yoshua Aaron Cordova Avendaño\par
+    Univ. Imanol Marcelo Moya Condori\par
+    Univ. Iver Samuel Medina Balboa\par
+  }
+  
+  \vspace{2.5cm}
+  
+  % Afiliación institucional
+  {\fontsize{12}{15}\selectfont
+    Carrera de Informática, Facultad de Ciencias Puras y Naturales\par
+    Universidad Mayor de San Andrés (UMSA)\par
+  }
+  
+  \vspace{1cm}
+  
+  % Asignatura y gestión
+  {\fontsize{12}{15}\selectfont
+    DAT-253: Minería de Datos\par
+    Gestión Académica II/2026\par
+    La Paz, Bolivia\par
+  }
+  
+  \vfill
+  {\fontsize{11}{13}\selectfont Octubre de 2026}
+\end{titlepage}
+
+% -----------------------------------------------------------------------------
+% RESUMEN Y ABSTRACT (PÁGINA 2)
+% -----------------------------------------------------------------------------
+\newpage
+\setcounter{page}{2}
+
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+
 \noindent
-Este informe presenta un estudio exploratorio del discurso de un grupo privado de
-Telegram dedicado a la gestión académica, con \nMensajes{} mensajes recuperados y
-\nAnalizados{} mensajes analizados entre \manualInicio{} y \manualFin{}. Se implementa
-un \emph{pipeline} reproducible de extracción, transformación y carga (ETL) que separa
-explícitamente tres señales de evidencia ---léxico, emojis y reacciones---, modela la
-negación mediante una ventana contextual, expande contracciones y emoticonos, y clasifica
-cada mensaje en una de dieciocho categorías emocionales y en una etiqueta de polaridad
-(positivo, negativo, neutro o indeterminado). La cobertura del diccionario es del
-\pctCobertura{}\%, de modo que \pctIndeterminado{}\% de los mensajes carece de evidencia
-suficiente y se reporta como \emph{indeterminado}; este resultado se asume como hallazgo
-central y no se rellena con etiquetas inventadas. Aun así, entre los mensajes con
-evidencia suficiente, los positivos (\pctPositivos{}\%) superan ampliamente a los
-negativos (\pctNegativos{}\%), con una emoción dominante de carácter
-\emph{\emocionTop{}}. El análisis temporal revela \diasActividad{} días con actividad y
-\meses{} meses de historia, con picos de volumen en el día \diaPico{} y en torno a las
-\;\horaPico{}. El modelado de tópicos (LDA) identifica \nTemas{} temas interpretables y
-las cadenas de Markov sugieren que el estado neutro es absorbente (\permanenciaNeutro{}
-mensajes de permanencia media). Una ampliación V2 incorpora n-gramas, características
-lingüísticas superficiales, TF--IDF e importación versionada de diccionarios, con sus
-resultados separados de los de V1. El informe documenta además las decisiones de
-reproducibilidad, las consideraciones éticas y las limitaciones del enfoque.
-\end{abstract}
+El presente trabajo de investigación implementa un sistema integral de minería de datos, procesamiento de lenguaje natural (PLN) y telemetría analítica multimodal aplicado a las conversaciones informales de la comunidad estudiantil de la Carrera de Informática de la Universidad Mayor de San Andrés (UMSA), recopiladas mediante la plataforma Telegram durante gestiones académicas y cursos de temporada. El corpus está conformado por \nMensajes{} mensajes y 2.051 remitentes únicos. Se desarrolló un \emph{pipeline} reproducible de extracción, transformación y carga (ETL) que segrega tres canales independientes de evidencia afectiva (léxico, emojis y reacciones), integra 538 modismos y expresiones locales paceñas, e implementa una ventana sintáctica contextual para la inversión de polaridad por negación. La cobertura léxica efectiva alcanza el \pctCobertura{}\%, identificándose un \pctIndeterminado{}\% de mensajes predominantemente factuales categorizados como \emph{indeterminados}, evitando la imputación artificial de neutralidad. Entre los mensajes con carga afectiva, los positivos (\pctPositivos{}\%) superan ampliamente a los negativos (\pctNegativos{}\%), siendo la emoción dominante \emph{\emocionTop{}}. Mediante Asignación Latente de Dirichlet (LDA) se descubrieron 5 tópicos latentes asociados a trámites, paralelos, matrículas y coordinación. La dinámica estocástica modelada con Cadenas de Markov reveló que el estado neutro es persistente (\permanenciaNeutro{} turnos de residencia media) y que los episodios negativos se disipan con resiliencia (\recuperacionNegativa{} turnos). La persistencia transaccional se consolidó en una base de datos distribuida en Neon Serverless PostgreSQL (16 tablas) con captura de cambios (CDC) mediante triggers PL/pgSQL y una plataforma web en Flask con visualizadores analíticos en SVG y Sankey ECharts, validándose la paridad matemática 1:1 entre R y Python con pruebas unitarias automatizadas.
 
+\vspace{0.8em}
+\noindent
+\textbf{\textit{Palabras clave:}} Minería de datos, procesamiento de lenguaje natural, análisis de sentimientos, asignación latente de Dirichlet, cadenas de Markov, change data capture, Neon PostgreSQL.
+
+\vspace{1.5cm}
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+\noindent
+This research presents a comprehensive data mining, natural language processing (NLP), and multimodal analytical telemetry system applied to informal student conversations from the Computer Science program at Universidad Mayor de San Andrés (UMSA), retrieved via Telegram during academic terms and winter/summer school courses. The dataset comprises \nMensajes{} messages across 2,051 unique senders. A reproducible extraction, transformation, and loading (ETL) pipeline was developed to segregate three distinct affective evidence streams (lexicon, emojis, and reactions), incorporating 538 regional student idioms and contextual negation-window polarity inversion. Dictionary coverage achieved \pctCobertura{}\%, accurately labeling \pctIndeterminado{}\% of strictly factual messages as \emph{indeterminate}, thereby avoiding artificial neutral imputation. Among messages with affective evidence, positive expressions (\pctPositivos{}\%) substantially outnumber negative ones (\pctNegativos{}\%), with \emph{\emocionTop{}} emerging as the dominant emotion. Latent Dirichlet Allocation (LDA) uncovered 5 cohesive academic topics, while Markov Chains demonstrated strong neutral state persistence (\permanenciaNeutro{} messages average residence) alongside prompt emotional recovery following negative peaks (\recuperacionNegativa{} turns). The persistence layer was engineered over Neon Serverless PostgreSQL (16 relational tables) with real-time Change Data Capture (CDC) powered by PL/pgSQL triggers, backed by a Flask web architecture with native SVG spline and Sankey charts, formally validated through 1:1 mathematical parity unit testing between R and Python.
+
+\vspace{0.8em}
+\noindent
+\textbf{\textit{Keywords:}} Text mining, natural language processing, sentiment analysis, Latent Dirichlet Allocation, Markov chains, change data capture, Neon PostgreSQL.
+
+% -----------------------------------------------------------------------------
+% ÍNDICE DE CONTENIDO (PÁGINA 3)
+% -----------------------------------------------------------------------------
+\newpage
 \tableofcontents
 \newpage
 
+% -----------------------------------------------------------------------------
+% CUERPO CAPITULAR DEL INFORME
+% -----------------------------------------------------------------------------
 \input{sections/01_resumen}
 \input{sections/02_introduccion}
 \input{sections/03_marco_teorico}
@@ -51,6 +95,8 @@ reproducibilidad, las consideraciones éticas y las limitaciones del enfoque.
 \input{sections/05_datos}
 \input{sections/06_resultados}
 \input{sections/06b_mineria_v2}
+\input{sections/06c_arquitectura_datos}
+\input{sections/06d_paridad_experimental}
 \input{sections/07_discusion}
 \input{sections/08_limitaciones}
 \input{sections/09_conclusiones}
@@ -58,6 +104,10 @@ reproducibilidad, las consideraciones éticas y las limitaciones del enfoque.
 \input{sections/11_reproducibilidad}
 \input{sections/12_apendice}
 
+% -----------------------------------------------------------------------------
+% REFERENCIAS BIBLIOGRÁFICAS (APA 7)
+% -----------------------------------------------------------------------------
+\newpage
 \bibliographystyle{apalike}
 \bibliography{references}
 

@@ -1,0 +1,421 @@
+{% extends "base.html" %}
+
+{% block title %}Tópicos de Frecuencia & Minería Temática - SentiDataUMSA{% endblock %}
+
+{% block content %}
+<main class="w-full bg-background flex-1 transition-colors duration-200">
+    <div class="flex flex-col w-full">
+        <!-- Header Strip Institucional -->
+        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-4 sm:px-margin py-4 sm:py-space-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                            <span class="material-symbols-outlined text-[13px]">topic</span>
+                            LDA &bull; Prevalencia Temática
+                        </span>
+                        <span class="text-outline text-xs">•</span>
+                        <span class="font-code-sm text-xs text-secondary font-medium">Latent Dirichlet Allocation &bull; Gibbs Sampling (R 4.6.1 + Neon PostgreSQL)</span>
+                    </div>
+                    <h1 class="font-headline-lg text-xl sm:text-headline-lg font-bold text-on-surface tracking-tight">
+                        Tópicos de Frecuencia &amp; Estructura Temática
+                    </h1>
+                    <p class="font-body-sm text-xs sm:text-body-sm text-outline max-w-4xl">
+                        Descomposición analítica del corpus estudiantil en {{ data.total_topicos }} temas latentes canónicos. Cuantificación de prevalencia documental (&theta;), 
+                        frecuencias y probabilidades léxicas (&beta;, TF-IDF y Term-Score), evolución cronológica mensual e intersección afectiva con las 18 emociones.
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-2 self-start md:self-auto shrink-0">
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Neon DB: 16,064 Clasificados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:px-margin py-4 sm:py-space-lg flex flex-col gap-4 sm:gap-space-lg">
+            
+            <!-- 4 Tarjetas de Métricas Ejecutivas de Tópicos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-indigo-500 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Tópico Dominante (#1)</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-2xl lg:text-metric-display text-indigo-400 font-mono font-bold">26.4%</span>
+                        <span class="font-label-sm text-outline">del corpus</span>
+                    </div>
+                    <span class="text-xs text-indigo-300 mt-2 font-code-sm font-semibold truncate">Trámites, Kardex y Pagos</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-cyan-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Tópicos Evaluados</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-2xl lg:text-metric-display text-cyan-400 font-mono font-bold">{{ data.total_topicos }}</span>
+                        <span class="font-label-sm text-outline">temas</span>
+                    </div>
+                    <span class="text-xs text-cyan-300 mt-2 font-code-sm font-semibold">Modelo Óptimo por Perplejidad</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-emerald-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Términos Ponderados</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-2xl lg:text-metric-display text-emerald-400 font-mono font-bold">{{ data.terminos|length * data.total_topicos }}</span>
+                        <span class="font-label-sm text-outline">tokens &beta;</span>
+                    </div>
+                    <span class="text-xs text-emerald-300 mt-2 font-code-sm font-semibold">Vocabulario de 4,177 palabras</span>
+                </div>
+
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md border-t-2 border-amber-400 flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Cohortes Mensuales</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="font-metric-display text-2xl lg:text-metric-display text-amber-400 font-mono font-bold">{{ data.timeline_labels|length }}</span>
+                        <span class="font-label-sm text-outline">meses</span>
+                    </div>
+                    <span class="text-xs text-amber-300 mt-2 font-code-sm font-semibold">Series Temporales 2018 - 2026</span>
+                </div>
+            </div>
+
+            <!-- Selector Interactivo de Tópicos (Pills dinámicas) -->
+            <div class="bg-surface-container rounded-xl p-3 sm:p-space-md border border-outline/10 shadow-sm flex flex-col gap-3">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <span class="font-label-sm text-xs uppercase tracking-wider text-outline font-semibold flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px] text-primary">filter_list</span>
+                        Seleccionar Tópico para Inspección Detallada:
+                    </span>
+                    <span class="font-code-sm text-xs text-outline font-mono">Tópico Activo: <strong class="text-primary font-bold">T{{ data.filtro_topico }}</strong></span>
+                </div>
+                
+                <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                    {% for cat in data.catalogo %}
+                    <a href="?topic={{ cat.topico_id }}" 
+                       class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all whitespace-nowrap shrink-0 border
+                       {% if cat.topico_id == data.filtro_topico %}
+                           bg-primary text-on-primary border-primary shadow-md font-bold
+                       {% else %}
+                           bg-surface-container-high text-on-surface hover:bg-surface-container-highest border-outline/20
+                       {% endif %}">
+                        <span class="w-2 h-2 rounded-full 
+                            {% if cat.topico_id == 1 %}bg-indigo-400
+                            {% elif cat.topico_id == 2 %}bg-cyan-400
+                            {% elif cat.topico_id == 3 %}bg-emerald-400
+                            {% elif cat.topico_id == 4 %}bg-amber-400
+                            {% else %}bg-pink-400{% endif %}"></span>
+                        <span>T{{ cat.topico_id }}: {{ cat.nombre_etiqueta.split('.')[1].strip() if '.' in cat.nombre_etiqueta else cat.nombre_etiqueta }}</span>
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono {% if cat.topico_id == data.filtro_topico %}bg-black/20 text-white{% else %}bg-surface-container-lowest text-outline{% endif %}">
+                            {{ cat.prevalencia_pct }}%
+                        </span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Fila 1: Panel de Términos (2/3) + Ficha Temática & N-gramas (1/3) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                
+                <!-- Panel Izquierdo: Vocabulario de Términos y Probabilidades Beta / TF-IDF -->
+                <div class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 mb-space-sm flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">sort</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Términos Distintivos de Mayor Frecuencia (&beta; &bull; TF-IDF &bull; Term-Score)
+                            </h2>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">Top {{ data.terminos|length }} Tokens Clave</span>
+                    </div>
+
+                    <!-- Tabla de Términos con Barras Visuales -->
+                    <div class="overflow-x-auto max-h-[420px] overflow-y-auto">
+                        <table class="w-full text-left text-xs font-mono">
+                            <thead class="bg-surface-container-low text-outline uppercase sticky top-0 border-b border-outline/20">
+                                <tr>
+                                    <th class="py-2 px-3">#</th>
+                                    <th class="py-2 px-3">Término</th>
+                                    <th class="py-2 px-3">Frecuencia ($n$)</th>
+                                    <th class="py-2 px-3">Probabilidad (&beta;)</th>
+                                    <th class="py-2 px-3">TF-IDF Ponderado</th>
+                                    <th class="py-2 px-3">Term-Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline/10 text-on-surface">
+                                {% for term in data.terminos %}
+                                <tr class="hover:bg-surface-container-high/40 transition-colors">
+                                    <td class="py-2 px-3 text-outline">{{ term.ranking_pos }}</td>
+                                    <td class="py-2 px-3 font-semibold text-primary font-sans">{{ term.termino }}</td>
+                                    <td class="py-2 px-3">{{ "{:,}".format(term.frecuencia_abs) }}</td>
+                                    <td class="py-2 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-16 bg-surface-container-high h-2 rounded-full overflow-hidden">
+                                                <div class="bg-primary h-full rounded-full" style="width: {{ [term.beta_prob * 1000, 100]|min }}%;"></div>
+                                            </div>
+                                            <span>{{ "%.4f"|format(term.beta_prob) }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-2 px-3">
+                                        <span class="px-1.5 py-0.5 rounded bg-secondary/15 text-secondary font-bold">
+                                            {{ "%.2f"|format(term.tfidf_score) }}
+                                        </span>
+                                    </td>
+                                    <td class="py-2 px-3 text-tertiary font-semibold">
+                                        {{ "%.4f"|format(term.term_score_blei) }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-3 pt-2 border-t border-outline/10 text-[11px] text-outline flex items-center justify-between">
+                        <span>Fórmula Blei &amp; Lafferty: Term-Score penaliza términos comunes en múltiples tópicos.</span>
+                        <span class="text-secondary font-mono font-semibold">R topicmodels &bull; Gibbs</span>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho: Ficha del Tópico & N-gramas -->
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    
+                    <!-- Ficha Resumen -->
+                    <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-3">
+                        <div class="flex items-center justify-between border-b border-surface-container-high/60 pb-2">
+                            <span class="font-label-sm text-xs uppercase tracking-wider text-outline font-semibold">Ficha del Tópico</span>
+                            <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-primary/20 text-primary">
+                                Prevalencia: {{ data.topico_activo.prevalencia_pct }}%
+                            </span>
+                        </div>
+                        
+                        <h3 class="font-headline-sm text-base font-bold text-on-surface">
+                            {{ data.topico_activo.nombre_etiqueta }}
+                        </h3>
+                        
+                        <p class="font-body-sm text-xs text-outline leading-relaxed">
+                            {{ data.topico_activo.descripcion_tematica }}
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-outline/10 text-xs font-mono">
+                            <div class="bg-surface-container-low p-2 rounded-lg border border-outline/10">
+                                <span class="text-outline text-[10px] block">Mensajes Dominados</span>
+                                <span class="text-on-surface font-bold text-sm">{{ "{:,}".format(data.topico_activo.total_mensajes) }}</span>
+                            </div>
+                            <div class="bg-surface-container-low p-2 rounded-lg border border-outline/10">
+                                <span class="text-outline text-[10px] block">Coherencia UMass</span>
+                                <span class="text-secondary font-bold text-sm">{{ data.topico_activo.coherencia_score }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- N-gramas Característicos -->
+                    <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-3 flex-1">
+                        <div class="flex items-center justify-between border-b border-surface-container-high/60 pb-2">
+                            <span class="font-label-sm text-xs uppercase tracking-wider text-outline font-semibold flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[16px] text-secondary">format_quote</span>
+                                Frases y N-Gramas Clave
+                            </span>
+                            <span class="font-code-sm text-[10px] text-outline font-mono">Bigramas &bull; Trigramas</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-1.5 py-1 max-h-[220px] overflow-y-auto">
+                            {% for ng in data.ngrams %}
+                            <div class="px-2.5 py-1 rounded-lg bg-surface-container-high border border-outline/15 flex items-center gap-1.5 text-xs font-mono">
+                                <span class="text-primary font-semibold font-sans">{{ ng.ngram }}</span>
+                                <span class="px-1 py-0.2 rounded text-[10px] bg-surface-container-lowest text-outline font-bold">
+                                    {{ ng.frecuencia }}x
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Fila 2: Serie Temporal Multilínea (Chart.js) + Cruce Emocional -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                
+                <!-- Gráfico de Evolución Cronológica de Tópicos (8 cols) -->
+                <div class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 mb-space-sm flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Evolución Temporal de Frecuencia por Tópico (2018 - 2026)
+                            </h2>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">{{ data.timeline_labels|length }} Cohortes Mensuales</span>
+                    </div>
+
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="topicsTimelineChart"></canvas>
+                    </div>
+
+                    <div class="mt-3 pt-2 border-t border-outline/10 text-[11px] text-outline flex items-center justify-between">
+                        <span>Picos cíclicos de T1 (Trámites) y T3 (Inscripciones) en Febrero y Agosto de cada gestión.</span>
+                        <span class="text-tertiary font-mono">Neon DB &bull; topicos_serie_temporal</span>
+                    </div>
+                </div>
+
+                <!-- Cruce de Frecuencia con las 18 Emociones (4 cols) -->
+                <div class="lg:col-span-4 bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 mb-space-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-tertiary text-[20px]">psychology_alt</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Perfil Emocional del Tópico
+                            </h2>
+                        </div>
+                        <span class="font-code-sm text-xs text-outline font-mono">T{{ data.filtro_topico }}</span>
+                    </div>
+
+                    <div class="flex flex-col gap-2.5 py-1 overflow-y-auto max-h-[300px]">
+                        {% for emo in data.emociones_cruce %}
+                        <div class="flex flex-col gap-1 text-xs font-mono">
+                            <div class="flex items-center justify-between">
+                                <span class="font-sans font-semibold capitalize flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full 
+                                        {% if emo.emocion in ['gratitud', 'alegria', 'confianza', 'alivio'] %}bg-emerald-400
+                                        {% elif emo.emocion in ['frustracion', 'enojo', 'ansiedad', 'tristeza'] %}bg-pink-400
+                                        {% else %}bg-cyan-400{% endif %}"></span>
+                                    {{ emo.emocion }}
+                                </span>
+                                <span class="text-outline">{{ emo.porcentaje_relativo }}% ({{ emo.frecuencia }} msgs)</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+                                <div class="{% if emo.emocion in ['gratitud', 'alegria', 'confianza', 'alivio'] %}bg-emerald-400
+                                            {% elif emo.emocion in ['frustracion', 'enojo', 'ansiedad', 'tristeza'] %}bg-pink-400
+                                            {% else %}bg-cyan-400{% endif %} h-full rounded-full transition-all"
+                                     style="width: {{ emo.porcentaje_relativo }}%;"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-3 pt-2 border-t border-outline/10 text-[11px] text-outline flex items-center justify-between">
+                        <span>Distribución afectiva de mensajes dominados por este tema.</span>
+                        <span class="text-primary font-semibold">SentiDataUMSA</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Fila 3: Muestras de Mensajes Reales del Tópico Seleccionado -->
+            <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-3">
+                <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">chat</span>
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                            Muestreo de Mensajes Reales Clasificados en T{{ data.filtro_topico }}
+                        </h2>
+                    </div>
+                    <span class="font-code-sm text-xs text-outline font-mono">Evidencia empírica recuperada de Neon PostgreSQL</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {% for msg in data.muestras %}
+                    <div class="p-3 rounded-xl bg-surface-container-low border border-outline/10 flex flex-col justify-between gap-2 text-xs">
+                        <div class="flex items-center justify-between text-outline text-[11px] font-mono">
+                            <span>ID: {{ msg.message_id }}</span>
+                            <span>{{ msg.fecha[:10] if msg.fecha else '' }}</span>
+                        </div>
+                        <p class="font-sans text-on-surface leading-snug line-clamp-3">
+                            "{{ msg.texto }}"
+                        </p>
+                        <div class="flex items-center gap-2 pt-1 border-t border-outline/10 font-mono text-[10px]">
+                            <span class="px-2 py-0.5 rounded font-bold
+                                {% if msg.polarity_label == 'positivo' %}bg-emerald-500/20 text-emerald-400
+                                {% elif msg.polarity_label == 'negativo' %}bg-pink-500/20 text-pink-400
+                                {% elif msg.polarity_label == 'neutro' %}bg-cyan-500/20 text-cyan-400
+                                {% else %}bg-outline/20 text-outline{% endif %}">
+                                {{ msg.polarity_label|upper }}
+                            </span>
+                            <span class="text-outline truncate">Emoción: {{ msg.dominant_emotion }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Chart.js para el gráfico interactivo de la serie temporal -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('topicsTimelineChart');
+    if (!ctx) return;
+
+    const labels = {{ data.timeline_labels|tojson }};
+    const rawDatasets = {{ data.timeline_datasets|tojson }};
+
+    const datasets = rawDatasets.map(d => ({
+        label: d.label,
+        data: d.data,
+        borderColor: d.color,
+        backgroundColor: d.color + '22',
+        borderWidth: 2,
+        tension: 0.3,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        fill: false
+    }));
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: document.documentElement.classList.contains('dark') ? '#c7c4d7' : '#2c303b',
+                        font: { size: 11, family: 'Inter' },
+                        boxWidth: 12
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 19, 29, 0.95)',
+                    titleColor: '#c0c1ff',
+                    bodyColor: '#dfe2f1',
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    borderWidth: 1,
+                    padding: 10
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: {
+                        color: '#908fa0',
+                        maxRotation: 45,
+                        font: { size: 10, family: 'JetBrains Mono' }
+                    }
+                },
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: {
+                        color: '#908fa0',
+                        font: { size: 10, family: 'JetBrains Mono' }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Volumen de Mensajes',
+                        color: '#908fa0',
+                        font: { size: 11, family: 'Inter' }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

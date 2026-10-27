@@ -1,0 +1,45 @@
+\section{Arquitectura de Persistencia, CDC y Plataforma Web}
+\label{sec:arquitectura_datos}
+
+Para superar las limitaciones inherentes a los archivos planos y permitir la interoperabilidad transaccional multiusuario, el proyecto evolucionó desde una base de datos local embebida hacia una arquitectura distribuida basada en \emph{Neon Serverless PostgreSQL} (compatible con versiones 17.5 y 18.x), alojada en la nube con conexión cifrada SSL obligatoria (\texttt{sslmode=require}).
+
+\subsection{Esquema Físico Relacional y Modelado de Datos}
+
+El modelo relacional está compuesto por 16 tablas organizadas en cuatro subsistemas lógicos:
+\begin{enumerate}[label=\alph*)]
+  \item \textbf{Catálogo Académico Institucional:} Tablas \texttt{docentes}, \texttt{materias} y \texttt{oferta\_}\allowbreak\texttt{academica\_}\allowbreak\texttt{semestral}. Modela la estructura curricular de la Carrera de Informática de la UMSA y gestiona la evolución temporal de asignaturas y paralelos mediante una estrategia de dimensión de cambio lento (SCD Tipo 2).
+  \item \textbf{Tabla de Hechos Central:} La tabla \texttt{mensajes} almacena los 23.371 mensajes del corpus, desnormalizando atributos calculados de alto acceso (polaridad léxica, emoción dominante, banderas multimodales para OCR, stickers y GIFs, e índices numéricos de intensidad afectiva).
+  \item \textbf{Matrices Analíticas de Alta Densidad:} Las tablas \texttt{tfidf\_mensajes} (122.971 registros ponderados), \texttt{ngrams\_frecuencias} (27.334 filas) y \texttt{metricas\_temporales} desacoplan el cálculo computacional intensivo de la capa de visualización.
+  \item \textbf{Trazabilidad y Menciones Académicas:} La tabla \texttt{menciones\_docentes} vincula los mensajes con las entidades docentes identificadas mediante expresiones regulares compiladas (\texttt{alias\_regex}).
+\end{enumerate}
+
+\input{tables/tab_kpis_corpus}
+
+\subsection{Captura de Cambios de Datos en Tiempo Real (CDC)}
+
+La trazabilidad del sistema se garantiza a nivel de motor de base de datos mediante la tabla \texttt{bitacora\_cambios} y una función disparadora genérica (\texttt{fn\_registrar\_bitacora\_cambio()}) escrita en PL/pgSQL (Listado~\ref{lst:cdc_trigger}). Ante cualquier operación de actualización (\texttt{UPDATE}) o eliminación (\texttt{DELETE}), el trigger intercepta los registros \texttt{OLD} y \texttt{NEW}, compara campo por campo utilizando funciones de introspección JSONB y genera un delta granular (\texttt{diff\_modificaciones}).
+
+\input{listings/lst_cdc_trigger}
+
+\subsubsection{Optimización y Prevención de Amplificación de Escritura}
+Durante la fase experimental, la inserción masiva de 12.581 tokens y registros lingüísticos generó un fenómeno de amplificación de escritura (\emph{write amplification}), saturando la bitácora con más de 12.000 eventos atómicos. Como solución ingenieril documentada en \path{database/optimize_bitacora.py}, se desactivaron los triggers de fila sobre tablas analíticas transitorias (\texttt{tokens\_frecuencia} y \texttt{shadow\_linguistics}), canalizando la trazabilidad de lotes hacia \texttt{bitacora\_procesos\_mineria}.
+
+\subsection{Plataforma Web y Analítica Visual en Tiempo Real}
+
+El consumo de datos y la interacción del usuario se centralizan en una aplicación web modular desarrollada en Python mediante el microframework Flask, organizada bajo el patrón \emph{Application Factory} con dos Blueprints:
+\begin{itemize}
+  \item \textbf{Blueprint Web (\texttt{app/routes/web}):} Renderizado del lado del servidor (SSR) mediante plantillas Jinja2, diseño responsive basado en tokens de Material Design 3, modo oscuro nativo anti-FOUC y visualizadores especializados.
+  \item \textbf{Blueprint API REST v1 (\texttt{app/routes/api\_v1}):} Endpoints de telemetría y el controlador de ingesta (\texttt{/api/v1/ingest/upload}).
+\end{itemize}
+
+\subsubsection{Aislamiento In-Memory para Ingesta Multimodal}
+Para proteger la integridad del corpus oficial de la UMSA, la subida de nuevos paquetes de chat (archivos JSON o archivos comprimidos ZIP de Telegram Desktop con imágenes y stickers) opera bajo un esquema de \emph{aislamiento de escritura cero} (\emph{zero-write isolation}). Tal como se aprecia en el Listado~\ref{lst:ingest_memory}, el motor en Python (\texttt{app.core.emotica}) parsea, normaliza y puntúa las emociones íntegramente en memoria RAM, realizando únicamente consultas de solo lectura (\texttt{SELECT}) a Neon PostgreSQL para contrastar el nuevo chat contra el promedio histórico.
+
+\input{listings/lst_ingest_memory}
+
+\subsubsection{Ingeniería de Motores Gráficos Especializados}
+A diferencia de tableros convencionales que delegan la representación a bibliotecas genéricas rígidas, la plataforma incorpora dos motores visuales avanzados:
+\begin{enumerate}
+  \item \textbf{Motor Spline SVG Nativo (\texttt{timeline\_chart.js}):} Renderiza curvas continuas de Bézier sobre el DOM mediante elementos vectoriales \texttt{<path>}, soportando selector dinámico de granularidad (anual, semestral, mensual, 24 horas), crosshair magnético con interpolación de coordenadas y tooltips glassmórficos.
+  \item \textbf{Flujo ETL en Sankey (\texttt{sankey\_engine.js}):} Emplea Apache ECharts para graficar la reducción de dimensionalidad y pérdida de volumen del dato desde su estado crudo hasta los tokens afectivos útiles.
+\end{enumerate}

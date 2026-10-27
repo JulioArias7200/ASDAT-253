@@ -1,75 +1,75 @@
-\section{Ap\'endice}
+\section{Apéndices}
 \label{sec:apendice}
 
-\subsection{A. Glosario de categor\'\i{}as emocionales}
+\subsection{Apéndice A. Glosario de Categorías Emocionales}
 
-El esquema multietiqueta emplea dieciocho categor\'\i{}as, agrupables en tres grandes
-familias. La Tabla~\ref{tab:glosario} las resume.
+El esquema analítico multietiqueta implementado en SentiDataUMSA evalúa dieciocho categorías afectivas adaptadas a la interacción universitaria (Tabla~\ref{tab:glosario}).
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Familias de categor\'\i{}as emocionales del esquema (resumen).}
+  \caption{Familias de Categorías Emocionales y Definición Operacional}
   \label{tab:glosario}
   \begin{tabular}{lp{9.5cm}}
     \toprule
-    Familia & Categor\'\i{}as (ejemplos) \\
+    Familia & Categorías y Términos Representativos \\
     \midrule
-    Positivas sociales & gratitud, alegr\'\i{}a, satisfacci\'on, confianza, entusiasmo, empat\'\i{}a \\
-    Negativas & frustraci\'on, ansiedad, enojo, tristeza, decepci\'on \\
-    Cognitivas/neutras & duda, sorpresa, curiosidad, esperanza \\
+    Positivas Sociales & Gratitud (\emph{gracias, bendiciones, auxi}), alegría (\emph{aprobé, genial}), satisfacción, confianza, entusiasmo y empatía. \\
+    Negativas Académicas& Frustración (\emph{falla el sistema, no cargó}), ansiedad (\emph{plazos, nota}), enojo (\emph{estafa, injusto}), tristeza y decepción. \\
+    Cognitivas / Neutras & Duda (\emph{alguien sabe, qué paralelo}), sorpresa, curiosidad y anticipación. \\
     \bottomrule
   \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} La asignación es probabilística multietiqueta y permite la coexistencia de estados afectivos mixtos en un mismo mensaje.
+  \end{minipage}
 \end{table}
 
-\subsection{B. Par\'ametros de configuraci\'on}
+\subsection{Apéndice B. Parámetros Globales de Ejecución}
 
-La Tabla~\ref{tab:params} recoge los principales par\'ametros del an\'alisis y sus
-valores por defecto, todos ellos modificables sin tocar el c\'odigo.
+La Tabla~\ref{tab:params} resume los hiperparámetros del sistema persistidos en la base de datos y en los archivos de configuración centralizados.
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Par\'ametros principales del \emph{pipeline}.}
+  \caption{Parámetros de Configuración del Pipeline y Motores Analíticos}
   \label{tab:params}
   \begin{tabular}{lll}
     \toprule
-    Par\'ametro & Valor & Descripci\'on \\
+    Parámetro Técnico & Valor Asignado & Justificación y Descripción \\
     \midrule
-    negation.window & 3 & Tama\~no de la ventana de negaci\'on \\
-    sentiment.min\_evidence\_terms & 1 & Umbral $\tau$ de evidencia \\
-    sentiment.emoji\_weight & 1 & Peso $\alpha$ de los emojis \\
-    sentiment.reaction\_weight & 0 & Peso de las reacciones \\
-    topics.k & \nTemas{} & N\'umero de t\'opicos LDA \\
-    topics.seed & 42 & Semilla de reproducibilidad \\
-    markov.order & 1 & Orden de la cadena de Markov \\
-    cleaning.keep\_emojis & true & Conservar emojis \\
+    \texttt{negation.window}        & 3          & Ventana sintáctica previa de tokens evaluados \\
+    \texttt{sentiment.min\_evidence}& 1          & Umbral $\tau$ de evidencia para descartar indeterminación \\
+    \texttt{sentiment.emoji\_weight}& 1,0        & Ponderación $\alpha$ de valencia en emojis del texto \\
+    \texttt{sentiment.reaction\_wt} & 0,0        & Ponderación desacoplada para reacciones interactivas \\
+    \texttt{topics.k}               & 5          & Número de tópicos latentes evaluados por Gibbs Sampling \\
+    \texttt{markov.order}           & 1          & Orden estocástico de la cadena de estados polares \\
+    \texttt{db.pool\_size}          & 5          & Conexiones concurrentes recomendadas en Neon PostgreSQL \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{C. Figuras complementarias}
+\subsection{Apéndice C. Modelo de Transición Estocástica (TikZ)}
 
-Las Figuras~\ref{fig:pol_diaria} y~\ref{fig:vol_diario} ofrecen el detalle diario de la
-polaridad y del volumen, complementando las series agregadas presentadas en la
-Secci\'on~\ref{sec:resultados}.
+La Figura~\ref{fig:grafo_markov_tikz} ilustra la máquina de estados estocástica finita de Cadenas de Markov estimada por máxima verosimilitud a partir de las transiciones entre mensajes consecutivos del corpus.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\textwidth]{polaridad_diaria.png}
-  \caption{Polaridad media diaria.}
-  \label{fig:pol_diaria}
+  \input{figures/grafo_markov}
+  \vspace{4pt}
+  \caption{Grafo de Transición de Estados Emocionales y Probabilidades Estacionarias}
+  \label{fig:grafo_markov_tikz}
 \end{figure}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.95\textwidth]{volumen_diario.png}
-  \caption{Volumen diario de mensajes.}
-  \label{fig:vol_diario}
-\end{figure}
+\subsection{Apéndice D. Menciones Docentes y Resolución Semestral}
 
-\subsection{D. Resumen de m\'etricas globales}
+La Tabla~\ref{tab:menciones_docentes} resume los resultados del módulo de resolución de entidades docentes y materias contra la oferta académica semestral UMSA.
 
-La Tabla~\ref{tab:resumen_general} recapitula las m\'etricas globales del an\'alisis.
+\input{tables/tab_menciones_docentes}
+
+\subsection{Apéndice E. Ficha Técnica General del Corpus}
+
+La Tabla~\ref{tab:resumen_general} recapitula la ficha técnica consolidada del corpus y la infraestructura desarrollada.
 
 \input{tables/resumen_general}

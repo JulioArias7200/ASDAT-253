@@ -1,96 +1,48 @@
 \section{Introducción}
 \label{sec:intro}
 
-\subsection{Contexto}
+\subsection{Contexto y Justificación Académica}
 
-La comunicación digital se ha convertido en el canal primario de coordinación en
-entornos educativos. Grupos de mensajería instantánea como Telegram, WhatsApp o Discord
-albergan hoy una parte sustancial de la interacción informal entre estudiantes,
-docentes y personal administrativo. Estos espacios no solo transmiten información
-logística ---fechas, requisitos, procedimientos--- sino que también vehiculan estados
-afectivos: dudas ansiosas ante plazos, gratitud por la ayuda recibida, frustración ante
-trámites fallidos o entusiasmo colectivo por logros compartidos.
+En la educación superior contemporánea, los canales de mensajería instantánea grupal (predominantemente Telegram y WhatsApp) han trascendido su rol original como herramientas informales de comunicación para consolidarse como la infraestructura primaria de interacción, soporte y coordinación logística entre estudiantes, auxiliares de docencia y docentes. En la Carrera de Informática de la Universidad Mayor de San Andrés (UMSA), los cursos de temporada (invierno y verano) representan periodos académicos de alta intensidad temporal y exigencia cognitiva, donde se comprimen programas semestrales completos en lapsos de cuatro a cinco semanas. 
 
-El proyecto AS\_Telegram se propone analizar, de manera exploratoria y sistemática, la
-carga emocional y la estructura temática de uno de esos espacios: el grupo privado de
-Telegram ``Curso de Temporada Invierno 2026'', dedicado a la gestión académica de un
-programa universitario. El objetivo no es evaluar a personas ni instituciones, sino
-caracterizar el clima emocional agregado y comprender qué tipos de intercambio dominan
-la conversación.
+En este contexto de compresión temporal, los canales virtuales experimentan una afluencia masiva de consultas operativas (procesos de matriculación, boletas de inscripción, habilitación de cupos y horarios) y, de forma paralela, canalizan estados afectivos críticos: incertidumbre ante los plazos de retiro de materias, ansiedad por publicaciones de notas de exámenes parciales, frustración ante fallas de sistemas administrativos y expresiones de gratitud por la resolución colaborativa de dudas académicas. El análisis sistemático de estas interacciones permite caracterizar el clima socioafectivo de la comunidad y detectar cuellos de botella en la gestión universitaria mediante técnicas formales de minería de textos.
 
-\subsection{Problema de investigación}
+\subsection{Planteamiento del Problema}
 
-El análisis de sentimiento en español aplicado a contextos operativos plantea tres
-dificultades que motivan este trabajo. En primer lugar, la mayor parte del contenido de
-un grupo de gestión académica es \emph{factual} y no \emph{afectivo}: preguntas por
-horarios, enlaces a formularios o confirmaciones de pago rara vez contienen palabras
-cargadas de sentimiento. Un método que fuerce una etiqueta en todos los mensajes
-producirá una proporción artificialmente alta de \emph{neutro}, confundiendo la ausencia
-de señal con la neutralidad. En segundo lugar, el texto informal está poblado de emojis,
-jerga, abreviaturas y errores tipográficos que los métodos entrenados sobre texto formal
-manejan mal. En tercer lugar, la negación y las construcciones irónicas pueden invertir
-el sentido de un término léxico.
-
-Este informe sostiene que un análisis honesto debe (i) distinguir explícitamente entre
-\emph{ausencia de evidencia} y \emph{neutralidad}, (ii) aprovechar los emojis como
-señal informativa en lugar de descartarlos y (iii) reportar la cobertura del método como
-un resultado de primer orden, no como una nota al pie.
-
-\subsection{Objetivos}
-
-El objetivo general es dise\~nar, ejecutar y documentar un \emph{pipeline} reproducible
-de análisis de sentimiento y emociones para un corpus real de Telegram en español. Los
-objetivos específicos son:
-
-\begin{enumerate}[label=\textbf{O\arabic*.}]
-  \item Construir una infraestructura ETL trazable que importe, valide, limpie y
-        persista el corpus, registrando cada operación en una base de datos de
-        auditoría.
-  \item Desarrollar un clasificador léxico multietiqueta en español que integre las
-        señales del léxico, los emojis y las reacciones, y que modele la negación de
-        forma contextual.
-  \item Caracterizar la distribución de polaridad y emociones, prestando especial
-        atención a la cobertura del diccionario y a los mensajes indeterminados.
-  \item Describir la evolución temporal y los patrones de actividad (día y hora).
-  \item Descubrir la estructura temática latente del corpus mediante LDA.
-  \item Modelar las transiciones entre estados de polaridad mediante cadenas de Markov.
-  \item Generar de forma automática un informe reproducible que se actualice con los
-        datos.
+La aplicación de técnicas convencionales de minería de datos y procesamiento de lenguaje natural (PLN) sobre interacciones estudiantiles en mensajería instantánea enfrenta cuatro desafíos metodológicos y computacionales fundamentales:
+\begin{enumerate}
+  \item \textbf{Distinción entre Factualidad y Neutralidad:} La literatura clásica suele clasificar forzosamente cualquier mensaje sin carga afectiva manifiesta como \emph{neutro}. En un grupo universitario, donde más del 80\% de los intercambios son consultas procedimentales desprovistas de emoción (e.g., \emph{"¿dónde se paga la matrícula?"}), asumir neutralidad distorsiona severamente la distribución real de la polaridad. Es imperativo discernir formalmente entre la \emph{ausencia de evidencia} y la \emph{neutralidad afectiva}.
+  \item \textbf{Multimodalidad y Variación Lingüística Regional:} El discurso informal estudiantil paceño está altamente enriquecido por modismos locales (\emph{corcho, raspar, auxi, kardex, fletear}), colocaciones irónicas, secuencias de emojis polisémicos, stickers y capturas de pantalla de comunicados oficiales. Los clasificadores entrenados sobre español peninsular o texto formal fracasan al procesar estas expresiones.
+  \item \textbf{Resolución Temporal de Entidades:} Las consultas sobre docentes y materias fluctúan semestralmente. Identificar el impacto de un docente exige un mapeo temporal cruzado (SCD Tipo 2) entre el mensaje emitido y la oferta académica vigente en dicha fecha.
+  \item \textbf{Trazabilidad y Rendimiento en Persistencia Distribuida:} La minería de datos aplicada a la analítica web en tiempo real exige arquitecturas transaccionales robustas capaces de auditar cambios (CDC) sin degradar el tiempo de respuesta mediante sobrecargas de conexión en la nube.
 \end{enumerate}
 
-\subsection{Preguntas de investigación}
+\subsection{Objetivos del Proyecto}
 
-El estudio se guía por las siguientes preguntas:
+El objetivo general es diseñar, implementar y validar un sistema integral de minería de datos, modelado estocástico y telemetría analítica multimodal sobre las conversaciones de Telegram de la Carrera de Informática (UMSA), garantizando reproducibilidad científica y paridad matemática entre entornos analíticos.
 
+Los objetivos específicos son:
+\begin{enumerate}[label=\textbf{O\arabic*.}]
+  \item Construir un pipeline ETL reproducible que limpie, normalice y preserve las señales multimodales del corpus (texto, emojis, stickers, GIFs y OCR de comunicados).
+  \item Desarrollar un clasificador léxico multietiqueta en español adaptado con 538 modismos universitarios paceños, ventana contextual de negación ($k=3$) y manejo estricto de evidencia.
+  \item Descubrir la estructura temática latente del discurso académico mediante Asignación Latente de Dirichlet (LDA).
+  \item Modelar la dinámica estocástica de transición entre estados afectivos mediante Cadenas de Markov de tiempo discreto, computando probabilidades estacionarias y tiempos de recuperación.
+  \item Diseñar un esquema de persistencia en Neon Serverless PostgreSQL (16 tablas) con captura de cambios (CDC) mediante triggers PL/pgSQL y telemetría interactiva en Flask.
+  \item Validar formalmente la paridad matemática y metodológica 1:1 entre el motor original en R y el motor de producción en Python mediante pruebas unitarias automatizadas.
+\end{enumerate}
+
+\subsection{Preguntas de Investigación}
+
+El estudio responde a las siguientes interrogantes científicas:
 \begin{description}[style=nextline,leftmargin=1.2cm]
-  \item[PI1.] ¿Qué proporción del corpus contiene evidencia afectiva suficiente y, por
-        tanto, qué fracción queda indeterminada?
-  \item[PI2.] Entre los mensajes con evidencia, ¿cuál es el balance entre polaridad
-        positiva y negativa, y qué emociones predominan?
-  \item[PI3.] ¿Cómo se distribuye la actividad y la polaridad a lo largo del tiempo?
-  \item[PI4.] ¿Qué temas latentes estructuran la conversación?
-  \item[PI5.] ¿Cómo se transita entre estados emocionales y qué estados son más
-        persistentes?
+  \item[PI1.] ¿Qué proporción del corpus de Telegram contiene evidencia afectiva explícita frente al volumen de intercambios estrictamente factuales?
+  \item[PI2.] Entre los mensajes con evidencia afectiva, ¿cuál es la correlación y balance entre polaridades positivas y negativas, y qué emociones dominan la interacción estudiantil?
+  \item[PI3.] ¿Cuáles son los patrones temporales de actividad (concentración semanal, horaria y picos estacionales de exámenes)?
+  \item[PI4.] ¿Qué tópicos latentes estructuran las conversaciones académicas en la UMSA?
+  \item[PI5.] ¿Cómo se comporta la dinámica de transición afectiva a través de Cadenas de Markov y cuál es la resiliencia temporal de la comunidad ante episodios de frustración?
+  \item[PI6.] ¿Es factible garantizar paridad matemática estricta al migrar el núcleo computacional de R hacia un microservicio web en Python?
 \end{description}
 
-\subsection{Contribuciones}
+\subsection{Estructura del Documento}
 
-Este trabajo realiza cuatro contribuciones. Primero, ofrece un \emph{pipeline} completo,
-abierto y reproducible para el análisis de sentimiento en grupos de Telegram en español,
-incluyendo el tratamiento de emojis, reacciones y negación. Segundo, propone una
-convención explícita para el manejo de la evidencia que evita la imputación de
-neutralidad. Tercero, aplica el método a un corpus real de más de veinte mil mensajes,
-ofreciendo estadísticas descriptivas detalladas. Cuarto, integra la generación
-automática del informe en el propio \emph{pipeline}, de modo que las cifras del documento
-se derivan directamente de los datos.
-
-\subsection{Estructura del documento}
-
-El resto del informe se organiza así. La Sección~\ref{sec:marco} presenta el marco
-teórico. La Sección~\ref{sec:metodologia} describe la metodología. La
-Sección~\ref{sec:datos} caracteriza los datos. La Sección~\ref{sec:resultados} presenta
-los resultados. La Sección~\ref{sec:discusion} los discute. La
-Sección~\ref{sec:limitaciones} aborda las limitaciones. La Sección~\ref{sec:conclusiones}
-concluye. La Sección~\ref{sec:etica} trata la ética, la
-Sección~\ref{sec:reproducibilidad} la reproducibilidad, y el apéndice recoge material
-complementario.
+El presente informe se organiza según el estándar APA 7: la Sección~\ref{sec:marco} fundamenta el marco teórico; la Sección~\ref{sec:metodologia} describe la metodología ETL y de clasificación léxica; la Sección~\ref{sec:datos} detalla el corpus multimodal; la Sección~\ref{sec:resultados} y la Sección~\ref{sec:v2} exponen los hallazgos en polaridad, tópicos y n-gramas; la Sección~\ref{sec:arquitectura_datos} y la Sección~\ref{sec:paridad_experimental} detallan la ingeniería de datos en Neon PostgreSQL, CDC, Flask y la paridad experimental; las Secciones~\ref{sec:discusion}, \ref{sec:limitaciones} y \ref{sec:conclusiones} discuten los resultados; y las Secciones~\ref{sec:etica}, \ref{sec:reproducibilidad} y \ref{sec:apendice} abordan la ética, reproducibilidad y anexos técnicos.

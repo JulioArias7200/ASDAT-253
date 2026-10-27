@@ -1648,3 +1648,142 @@ def get_sentimientos_overview_data():
         }
 
 
+def get_topicos_frecuencia_page_data(selected_topic_id=None):
+    """
+    Recupera el conjunto exhaustivo de analítica de Tópicos de Frecuencia
+    desde Neon PostgreSQL para la vista /topicos-frecuencia.
+    """
+    try:
+        t_id = int(selected_topic_id) if selected_topic_id and str(selected_topic_id).isdigit() and int(selected_topic_id) > 0 else None
+    except Exception:
+        t_id = None
+
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                # 1. Catálogo maestro de tópicos
+                cur.execute("""
+                    SELECT 
+                        topico_id, nombre_etiqueta, descripcion_tematica, 
+                        prevalencia_pct, total_mensajes, coherencia_score, actualizado_en
+                    FROM topicos_catalogo
+                    ORDER BY topico_id ASC;
+                """)
+                catalogo = cur.fetchall()
+
+                # Si no se pasó tópico específico, por defecto tomamos el primero o None (global)
+                filtro_topico = t_id if t_id else (catalogo[0]["topico_id"] if catalogo else 1)
+
+                # 2. Términos del tópico seleccionado
+                cur.execute("""
+                    SELECT 
+                        topico_id, termino, frecuencia_abs, beta_prob, 
+                        tfidf_score, term_score_blei, ranking_pos
+                    FROM topicos_terminos
+                    WHERE topico_id = %s
+                    ORDER BY ranking_pos ASC
+                    LIMIT 20;
+                """, (filtro_topico,))
+                terminos = cur.fetchall()
+
+                # 3. Serie temporal de todos los tópicos (para gráfico multilínea)
+                cur.execute("""
+                    SELECT 
+                        topico_id, anio_mes, volumen_mensajes, 
+                        polaridad_media, emocion_predominante
+                    FROM topicos_serie_temporal
+                    ORDER BY anio_mes ASC, topico_id ASC;
+                """)
+                series_raw = cur.fetchall()
+
+                # 4. Cruce de emociones para el tópico seleccionado
+                cur.execute("""
+                    SELECT 
+                        topico_id, emocion, frecuencia, porcentaje_relativo
+                    FROM topicos_emociones
+                    WHERE topico_id = %s
+                    ORDER BY frecuencia DESC
+                    LIMIT 10;
+                """, (filtro_topico,))
+                emociones_cruce = cur.fetchall()
+
+                # 5. N-gramas del tópico seleccionado
+                cur.execute("""
+                    SELECT 
+                        topico_id, ngram, tipo_ngram, frecuencia
+                    FROM topicos_ngrams
+                    WHERE topico_id = %s
+                    ORDER BY frecuencia DESC
+                    LIMIT 12;
+                """, (filtro_topico,))
+                ngrams = cur.fetchall()
+
+                # 6. Mensajes de muestra reales asignados a este tópico
+                cur.execute("""
+                    SELECT 
+                        message_id, 
+                        timestamp_local::text AS fecha,
+                        COALESCE(text_norm, text_original) AS texto,
+                        polarity_label,
+                        dominant_emotion
+                    FROM mensajes
+                    WHERE topico_lda_id = %s AND (text_norm IS NOT NULL AND text_norm != '')
+                    ORDER BY message_id DESC
+                    LIMIT 6;
+                """, (filtro_topico,))
+                muestras_mensajes = cur.fetchall()
+
+                # Formatear series temporales para Chart.js
+                meses_set = sorted(list(set(r["anio_mes"] for r in series_raw)))
+                datasets_series = []
+                colores_topicos = {
+                    1: "#4f46e5", # Indigo
+                    2: "#06b6d4", # Cyan
+                    3: "#10b981", # Emerald
+                    4: "#f59e0b", # Amber
+                    5: "#ec4899"  # Pink
+                }
+                for cat in catalogo:
+                    tid = cat["topico_id"]
+                    mes_dict = {r["anio_mes"]: r["volumen_mensajes"] for r in series_raw if r["topico_id"] == tid}
+                    data_points = [mes_dict.get(m, 0) for m in meses_set]
+                    datasets_series.append({
+                        "id": tid,
+                        "label": f"T{tid}: {cat['nombre_etiqueta'].split('.')[1].strip() if '.' in cat['nombre_etiqueta'] else cat['nombre_etiqueta']}",
+                        "color": colores_topicos.get(tid, "#6366f1"),
+                        "data": data_points
+                    })
+
+                # Datos del tópico activo
+                topico_activo = next((c for c in catalogo if c["topico_id"] == filtro_topico), (catalogo[0] if catalogo else {}))
+
+                return {
+                    "catalogo": catalogo,
+                    "topico_activo": topico_activo,
+                    "filtro_topico": filtro_topico,
+                    "terminos": terminos,
+                    "emociones_cruce": emociones_cruce,
+                    "ngrams": ngrams,
+                    "muestras": muestras_mensajes,
+                    "timeline_labels": meses_set,
+                    "timeline_datasets": datasets_series,
+                    "total_topicos": len(catalogo)
+                }
+
+    except Exception as e:
+        print(f"Error en get_topicos_frecuencia_page_data: {e}")
+        return {
+            "catalogo": [],
+            "topico_activo": {},
+            "filtro_topico": 1,
+            "terminos": [],
+            "emociones_cruce": [],
+            "ngrams": [],
+            "muestras": [],
+            "timeline_labels": [],
+            "timeline_datasets": [],
+            "total_topicos": 5
+        }
+
+
+

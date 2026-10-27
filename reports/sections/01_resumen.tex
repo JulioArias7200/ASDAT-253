@@ -1,58 +1,12 @@
-\section*{Resumen ejecutivo}
-\addcontentsline{toc}{section}{Resumen ejecutivo}
+\section*{Resumen Ejecutivo}
+\addcontentsline{toc}{section}{Resumen Ejecutivo}
 
-El presente documento describe, de forma metodológica y reproducible, el análisis de
-sentimiento y emociones aplicado a la conversación de un grupo privado de Telegram
-vinculado a la gestión académica de un programa universitario. El corpus comprende
-\nMensajes{} mensajes recuperados desde una exportación en formato JSON de Telegram
-Desktop, de los cuales \nAnalizados{} resultaron aptos para el análisis tras descartar
-mensajes de servicio y contenidos multimedia sin texto. La ventana temporal abarca desde
-\manualInicio{} hasta \manualFin{}.
+El presente documento describe, de forma metodológica y reproducible, la investigación aplicada en minería de datos, procesamiento de lenguaje natural (PLN) y telemetría analítica realizada por los universitarios Julio Nelson Arias Cruz, Yoshua Aaron Cordova Avendaño, Imanol Marcelo Moya Condori e Iver Samuel Medina Balboa para la materia Minería de Datos (DAT-253) de la Carrera de Informática en la Universidad Mayor de San Andrés (UMSA). El estudio analiza la dinámica comunicacional, emocional y logística de la comunidad estudiantil a través de las conversaciones del grupo oficial de Telegram vinculado a cursos de temporada y gestiones académicas. El corpus consolidado comprende \nMensajes{} mensajes y 2.051 usuarios únicos recopilados entre \manualInicio{} y \manualFin{}.
 
-El trabajo se articula en torno a un \emph{pipeline} ETL explícito con diez etapas
-encadenadas: importación, validación, limpieza, procesamiento de emojis, detección de
-negación, análisis léxico de sentimiento, análisis temporal, modelado de tópicos,
-modelado de cadenas de Markov y generación automática del informe. Cada etapa registra su
-ejecución en una base de datos SQLite de auditoría, lo que permite reconstruir el
-linaje de cada mensaje y cada artefacto.
+La investigación se articula sobre un \emph{pipeline} reproducible de extracción, transformación y carga (ETL) que procesa señales multimodales (texto normalizado en Unicode NFC, transcripción de comunicados mediante OCR, 2.180 stickers y 24 animaciones GIF). Se implementó un clasificador léxico multietiqueta en español que contempla 18 categorías emocionales y segrega estrictamente tres fuentes de evidencia (léxico, emojis y reacciones). Para capturar el registro sociocultural de la comunidad, se integró un catálogo de 538 modismos y jergas estudiantiles paceñas, complementado con una ventana contextual de negación ($k=3$) con inversión de valencia afectiva y reglas para dobles negaciones. Se adoptó el principio epistemológico de no imputar neutralidad ante la ausencia de señal informativa: aquellos enunciados factuales desprovistos de carga afectiva se catalogan como \emph{indeterminados}.
 
-El método de clasificación es de naturaleza léxica multietiqueta y opera en español.
-A diferencia de los enfoques que reducen el sentimiento a un único número, el método
-separa explícitamente tres fuentes de evidencia: (i) el léxico, mediante un diccionario
-de términos ponderados; (ii) los emojis, que nunca se eliminan y que aportan polaridad y
-emociones propias; y (iii) las reacciones, que se registran aunque no se ponderan por
-defecto. Además, se modela la negación con una ventana contextual de tres tokens y se
-expande la contracción de dobles negaciones según configuración. Cuando un mensaje no
-aporta evidencia suficiente, se etiqueta como \emph{indeterminado} y nunca como
-\emph{neutro} por defecto, evitando así imputar neutralidad donde solo hay silencio
-informativo.
+Los resultados empíricos indican que la cobertura léxica efectiva es del \pctCobertura{}\%, dejando un \pctIndeterminado{}\% de mensajes predominantemente logísticos e informativos categorizados como indeterminados. Entre los mensajes con evidencia afectiva suficiente, los estados positivos (\pctPositivos{}\%) superan con holgura a los negativos (\pctNegativos{}\%), manifestándose la \emph{\emocionTop{}} como la categoría afectiva predominante. El modelado de tópicos latentes (LDA) identificó 5 núcleos temáticos asociados a trámites en Kardex, paralelos y docentes, inscripciones presenciales, grupos de coordinación en WhatsApp y consultas generales. Asimismo, el modelado estocástico mediante Cadenas de Markov sobre los estados afectivos demostró que el estado neutro/factual posee una fuerte persistencia con un tiempo de residencia media de \permanenciaNeutro{} turnos, mientras que los estados de frustración o ansiedad exhiben una resiliencia notable, disipándose en un promedio de \recuperacionNegativa{} turnos.
 
-La cobertura efectiva del diccionario es del \pctCobertura{}\%. Esto implica que
-\pctIndeterminado{}\% de los mensajes queda sin evidencia suficiente y, por tanto,
-indeterminado. Lejos de ocultarse, este resultado se presenta como un hallazgo principal:
-un corpus de naturaleza operativa y logística ---consultas de trámites, avisos de fechas
-y coordinación de asignaturas--- contiene un volumen muy alto de enunciados factuales que,
-por diseño, no expresan carga afectiva explícita. Entre los mensajes que sí aportan
-evidencia, el balance es marcadamente positivo: \pctPositivos{}\% se clasifican como
-positivos frente a \pctNegativos{}\% como negativos. La emoción más frecuente es
-\emph{\emocionTop{}}, coherente con un entorno de ayuda mutua y cooperación académica.
+A nivel de ingeniería de sistemas, la persistencia transaccional y la telemetría fueron modernizadas mediante una base de datos distribuida en Neon Serverless PostgreSQL (16 tablas normalizadas), dotada de un sistema de captura de cambios (CDC) en tiempo real mediante triggers PL/pgSQL y campos JSONB. La analítica interactiva se materializó en una plataforma web en Flask con visualizadores en SVG nativo para series temporales spline y diagramas de Sankey en Apache ECharts, validándose la paridad matemática 1:1 entre R y Python con una suite de pruebas automatizadas aprobadas al 100\%.
 
-El análisis temporal muestra \diasActividad{} días con actividad distribuidos en \meses{}
-meses. La actividad se concentra en el día \diaPico{} y en torno a las \horaPico{}. El
-modelado de tópicos con asignación latente de Dirichlet (LDA) recupera \nTemas{} temas
-interpretables, relacionados con pagos y matrículas, horarios y paralelos, procesos de
-inscripción, comunicación institucional y consultas generales. El análisis de cadenas de
-Markov sobre la secuencia de estados de polaridad revela que el estado neutro es
-fuertemente persistente (permanencia media de \permanenciaNeutro{} turnos), mientras que
-los episodios negativos tienden a disiparse con relativa rapidez (recuperación media de
-\recuperacionNegativa{} turnos).
-
-El documento se organiza de la siguiente manera. La Sección~\ref{sec:intro} presenta el
-contexto y los objetivos. La Sección~\ref{sec:marco} desarrolla el marco teórico. La
-Sección~\ref{sec:metodologia} describe la metodología y la arquitectura del pipeline. La
-Sección~\ref{sec:datos} caracteriza el corpus. La Sección~\ref{sec:resultados} expone los
-resultados. La Sección~\ref{sec:discusion} discute los hallazgos y la
-Sección~\ref{sec:limitaciones} explicita sus limitaciones. La Sección~\ref{sec:conclusiones}
-cierra con las conclusiones y el trabajo futuro. La Sección~\ref{sec:etica} aborda las
-consideraciones éticas y la Sección~\ref{sec:reproducibilidad} detalla los mecanismos de
-reproducción. El apéndice reúne las figuras y tablas complementarias.
+El documento se estructura de la siguiente manera: la Sección~\ref{sec:intro} introduce el contexto y los objetivos; la Sección~\ref{sec:marco} expone el marco teórico; la Sección~\ref{sec:metodologia} detalla el diseño del pipeline y el preprocesamiento; la Sección~\ref{sec:datos} caracteriza el corpus; la Sección~\ref{sec:resultados} y la Sección~\ref{sec:v2} presentan los hallazgos en sentimientos, tópicos, n-gramas y TF-IDF; la Sección~\ref{sec:arquitectura_datos} y la Sección~\ref{sec:paridad_experimental} documentan la arquitectura en Neon PostgreSQL, CDC, Flask y la paridad experimental; las Secciones~\ref{sec:discusion}, \ref{sec:limitaciones} y \ref{sec:conclusiones} discuten los resultados y prospectivas; y las Secciones~\ref{sec:etica}, \ref{sec:reproducibilidad} y \ref{sec:apendice} detallan los protocolos éticos, los entornos de reproducción y los anexos técnicos.

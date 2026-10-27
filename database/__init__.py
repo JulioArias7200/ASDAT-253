@@ -16,5 +16,6 @@ from database.queries import (
     get_nlp_kpis_summary,
     get_tfidf_keywords,
     get_bitacora_reciente,
-    get_timeline_series_data
+    get_timeline_series_data,
+    get_topicos_frecuencia_page_data
 )

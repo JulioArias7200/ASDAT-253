@@ -25,7 +25,8 @@ from database.queries import (
     get_preprocessing_pipeline_data,
     get_emojis_messages_data,
     get_sentimientos_overview_data,
-    get_timeline_series_data
+    get_timeline_series_data,
+    get_topicos_frecuencia_page_data
 )
 
 @web_bp.route("/")
@@ -244,6 +245,26 @@ def importar_datos_view():
         kpis=kpis,
         neon_status=neon_status
     )
+
+
+@web_bp.route("/topicos-frecuencia")
+def topicos_frecuencia_view():
+    """
+    Renderiza la vista analítica dedicada de Tópicos de Frecuencia (LDA & Term-Prevalence)
+    con selector dinámico de tópicos, barras de términos beta/TF-IDF, serie temporal y cruce emocional.
+    """
+    topic_param = request.args.get("topic", "1").strip()
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    data = get_topicos_frecuencia_page_data(selected_topic_id=topic_param)
+    return render_template(
+        "dashboard/topicos_frecuencia.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        data=data,
+        topic_seleccionado=topic_param
+    )
+
 
 
 

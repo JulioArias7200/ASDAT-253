@@ -46,7 +46,7 @@ emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironi
 🤖,Robot,"Inteligencia artificial, robótica o innovación tecnológica.",tema_tecnologia,anuncio,informativo,neutro,no
 🎯,Diana,"Objetivo, meta o categoría ('🎯 Premios', 'Dirigido a').",marcador_objetivo,anuncio,logro,positivo,no
 ⚙,Engranaje,"Ingeniería, sistemas, configuración o 'por dentro'.",tema_tecnologia,anuncio,informativo,neutro,no
-🗓,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
+📅,Calendario,"Fecha fijada: precede el día del evento, clase o plazo ('📅 Fecha: jueves 17'). Equivale a 'anota esta fecha'.",marcador_fecha,anuncio,informativo,neutro,no
 📲,Celular con flecha,"'Únete / inscríbete desde tu celular': WhatsApp, QR o formulario.",marcador_contacto,anuncio,informativo,neutro,no
 🙌,Manos arriba,"Celebración o ánimo grupal: '¡lo logramos!', '¡anímense!', 'gracias de antemano'. En anuncios invita a participar con buena vibra.",celebracion,anuncio,entusiasmo,positivo,no
 💰,Dinero,"Costo, inscripción o premio ('💰 Inscripción: 10 Bs', '💸 Gratuito'). Aun con 'gratis' sigue marcando el apartado del precio.",marcador_costo,anuncio,informativo,neutro,no
@@ -234,7 +234,7 @@ emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironi
 🗣,Cabeza hablando,Anuncio de charla o 'se comenta que'.,anuncio_charla,anuncio,informativo,neutro,no
 🕺,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
 💃,Bailarines,"Fiesta, baile, evento social.",fiesta,anuncio,celebración,positivo,no
-☠,Calavera con huesos,Igual que 💀: 'estoy muerto / no hay solución'.,hiperbole,conversacion,resignación,negativo,si
+☠️,Calavera con huesos,Igual que 💀: 'estoy muerto / no hay solución'.,hiperbole,conversacion,resignación,negativo,si
 😥,Triste pero aliviado,Preocupación leve.,preocupacion,conversacion,preocupación,negativo,no
 😵‍💫,Cara aturdida,Desorientación: 'no entiendo nada de este trámite'.,confusion,conversacion,confusión,negativo,no
 🫥,Cara punteada,'Me desvanezco / sin respuesta': sentirse invisible o sin información.,resignacion,conversacion,apatía,negativo,posible
@@ -286,11 +286,11 @@ emoji,nombre,significado_es,funcion,registro,categoria_emocional,polaridad,ironi
 🔌,Enchufe,Hardware/electrónica.,tema_tecnologia,anuncio,informativo,neutro,no
 🐲,Dragón,Mascota del grupo GUILD (desarrolladores de videojuegos).,identidad_grupo,anuncio,informativo,neutro,no
 📺,Televisión,Transmisión.,tema_evento,anuncio,informativo,neutro,no
-🌡,Termómetro,Física (carrera).,tema_ciencia,anuncio,informativo,neutro,no
+🌡️,Termómetro,Física (carrera).,tema_ciencia,anuncio,informativo,neutro,no
 ☄,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
 🛸,Espacio,Tema espacial (NASA Space Apps).,tema_evento,anuncio,informativo,neutro,no
 🔮,Bola de cristal,Predicción/misterio.,tema_evento,anuncio,informativo,neutro,no
-✈,Avión,Viaje / movilidad.,tema_evento,anuncio,informativo,neutro,no
+🛩️,Avión,Viaje / movilidad.,tema_evento,anuncio,informativo,neutro,no
 🌴,Palmera,Verano.,tema_evento,anuncio,informativo,neutro,no
 🍷,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no
 🍸,Bebidas,Fiesta o brindis (facultad party).,fiesta,anuncio,celebración,positivo,no

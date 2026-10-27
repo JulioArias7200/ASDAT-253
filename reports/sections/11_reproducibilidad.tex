@@ -1,81 +1,41 @@
-\section{Reproducibilidad}
+\section{Reproducibilidad y Entornos de Ejecución}
 \label{sec:reproducibilidad}
 
-La reproducibilidad es un requisito de dise\~no, no un a\~nadido. Todo el an\'alisis se
-organiza como una sucesi\'on de etapas independientes, deterministas y auditadas, de modo
-que cualquier tercero pueda reconstruir los resultados desde el corpus original.
+La reproducibilidad científica fue un principio rector en el diseño de ASDAT-253. Para garantizar que cualquier investigador o evaluador académico pueda replicar la totalidad de los experimentos, transformaciones y reportes, el proyecto implementa un protocolo determinista basado en aislamiento de dependencias, semillas pseudoaleatorias fijas y trazabilidad transaccional.
 
-\subsection{Estructura del proyecto}
+\subsection{Gestión Dual de Entornos: R y Python}
 
-El repositorio se organiza en directorios con responsabilidades claras: \texttt{R/}
-contiene los m\'odulos del \emph{pipeline}; \texttt{scripts/} los puntos de entrada
-numerados; \texttt{data/} los datos en sus distintos niveles de procesamiento;
-\texttt{database/} el esquema y la base de datos de auditor\'ia; \texttt{dashboard/} el
-panel interactivo; \texttt{tests/} la suite de pruebas; y \texttt{reports/} los
-artefactos y el presente informe.
+El sistema desacopla sus dos núcleos computacionales mediante gestores de paquetes reproducibles:
+\begin{itemize}
+  \item \textbf{Ecosistema R (Investigación y Modelado Clásico):} Las librerías estadísticas (\texttt{quanteda}, \texttt{topicmodels}, \texttt{testthat}) se congelan mediante \texttt{renv} con el archivo de bloqueo \texttt{renv.lock} (248 KB con hashes de integridad).
+  \item \textbf{Ecosistema Python (Producción Web y Paridad):} El microframework Flask, los adaptadores \texttt{psycopg2-binary}, \texttt{pandas} y la suite \texttt{pytest} se gestionan mediante \texttt{requirements.txt} sobre Python 3.12.
+\end{itemize}
 
-\subsection{Pipeline de ejecuci\'on}
+\subsection{Pipeline de Ejecución Secuencial}
 
-La ejecuci\'on completa se realiza mediante diez scripts encadenados:
-
+La pipeline de investigación en R se ejecuta de forma determinista mediante scripts numerados:
 \begin{verbatim}
-Rscript scripts/01_import.R
-Rscript scripts/02_validate.R
-Rscript scripts/03_clean.R
-Rscript scripts/04_sentiment.R
-Rscript scripts/05_topics.R
-Rscript scripts/06_temporal.R
-Rscript scripts/07_markov.R
-Rscript scripts/08_evaluate.R
-Rscript scripts/09_generate_report.R
-Rscript scripts/10_test.R
+Rscript scripts/00_run_all.R         # Orquestador V1 y V2 completo
+Rscript scripts/10_test.R            # Suite de pruebas unitarias testthat
 \end{verbatim}
 
-Cada script imprime una marca de finalizaci\'on (\texttt{OK <etapa>}) y registra su
-ejecuci\'on en la base de datos.
+De forma paralela, la suite de paridad matemática y los servicios web en Python se ejecutan mediante:
+\begin{verbatim}
+python -m pytest tests/test_emotica_parity.py -v  # Paridad R-Python
+python -m pytest tests/test_ingest_endpoint.py -v# Ingesta multipart/ZIP
+python run.py                                    # Servidor Flask (puerto 5000)
+\end{verbatim}
 
-\subsection{Gesti\'on del entorno}
+\subsection{Persistencia y Trazabilidad en Neon PostgreSQL}
 
-Las dependencias de R se fijan mediante \texttt{renv}, con el archivo \texttt{renv.lock}
-como fuente de verdad de las versiones de los paquetes. La configuraci\'on se define en
-un archivo \texttt{YAML} de ejemplo que el usuario copia y ajusta. Los par\'ametros
-clave ---ventana de negaci\'on, umbral de evidencia, n\'umero de t\'opicos, semilla---
-están centralizados en esa configuraci\'on, lo que permite reproducir experimentos bajo
-condiciones controladas.
+El aprovisionamiento de la base de datos distribuida en la nube se ejecuta de forma automatizada mediante scripts idempotentes en \texttt{database/}:
+\begin{enumerate}
+  \item \texttt{neon\_complete\_schema.sql}: DDL maestro con las 16 tablas, índices y triggers CDC.
+  \item \texttt{migrate\_all\_to\_neon.py}: Migración masiva de 23.371 mensajes, matrices TF-IDF y tópicos.
+  \item \texttt{sync\_catalogos\_umsa.py}: Sincronización de docentes, materias y oferta semestral.
+  \item \texttt{detectar\_menciones\_umsa.py}: Escaneo y resolución de entidades con expresiones regulares.
+\end{enumerate}
 
-\subsection{Determinismo y semillas}
+\subsection{Generación Automatizada del Informe}
 
-El modelado de t\'opicos emplea una semilla fija, de modo que la estimaci\'on de LDA es
-reproducible. Las operaciones de anonimizaci\'on aplican funciones de \emph{hash}
-deterministas. Las marcas temporales se almacenan en UTC para evitar ambig\"uedades de
-zona horaria.
-
-\subsection{Trazabilidad}
-
-Cada etapa registra en la base SQLite la versi\'on del diccionario, los par\'ametros
-empleados, el n\'umero de elementos procesados y los artefactos producidos. Esto permite
-responder preguntas como ``¿qu\'e versi\'on del diccionario gener\'o esta figura?'' o
-``¿cu\'antos mensajes se procesaron en la \'ultima ejecuci\'on?''.
-
-\subsection{Generaci\'on autom\'atica del informe}
-
-Este documento no contiene cifras escritas a mano. Todas las macros num\'ericas
-(\texttt{\textbackslash nMensajes}, \texttt{\textbackslash pctCobertura},
-\texttt{\textbackslash emocionTop}, etc.), las tablas y las figuras se generan a partir
-de los resultados de la \'ultima ejecuci\'on. Recompilar despu\'es de una nueva ejecuci\'on
-actualiza autom\'aticamente el informe, garantizando la coherencia entre datos y texto.
-
-\subsection{Pruebas automatizadas}
-
-La suite de pruebas, construida con \texttt{testthat}, cubre la importaci\'on, la
-validaci\'on, la limpieza, el procesamiento de emojis, la detecci\'on de negaci\'on, el
-an\'alisis de sentimiento, el modelado de t\'opicos y de Markov, la base de datos y los
-m\'odulos del panel. Su ejecuci\'on (\texttt{scripts/10\_test.R}) forma parte del
-\emph{pipeline} y sirve como red de seguridad frente a regresiones.
-
-\subsection{Panel interactivo}
-
-El panel Shiny (\texttt{dashboard/run.R}) ofrece una exploraci\'on interactiva de los
-resultados: visi\'on general, sentimiento, temporal, t\'opicos, Markov, auditor\'ia y un
-avatar emocional agregado. El panel lee los mismos artefactos que el informe, de modo que
-ambas salidas son consistentes por construcci\'on.
+Ninguna cifra en este informe ha sido digitada manualmente. Todas las macros estadísticas (\texttt{\textbackslash nMensajes}, \texttt{\textbackslash pctCobertura}, \texttt{\textbackslash piNeutro}, etc.) y las tablas formales se regeneran automáticamente desde las salidas analíticas en \texttt{reports/generated/values.tex} y \texttt{reports/tables/}.

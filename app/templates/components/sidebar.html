@@ -63,6 +63,14 @@
                     <span class="text-body-sm text-[13px] flex-1">Emojis, Reacciones y Mensajes</span>
                     <span class="font-code-sm text-[9px] text-outline font-mono">13.4k</span>
                 </a>
+
+                <!-- Tópicos de Frecuencia (LDA & Prevalencia) -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/topicos-frecuencia' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/topicos-frecuencia">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/topicos-frecuencia' %}text-primary{% endif %}">topic</span>
+                    <span class="text-body-sm text-[13px] flex-1">Tópicos de Frecuencia</span>
+                    <span class="font-code-sm text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded font-semibold">LDA K=5</span>
+                </a>
             </div>
 
             <!-- Grupo 3: Modelos & Benchmark de Sentimiento -->

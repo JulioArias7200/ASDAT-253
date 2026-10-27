@@ -266,18 +266,37 @@
                         <span class="font-code-sm text-xs text-outline font-mono">T{{ data.filtro_topico }}</span>
                     </div>
 
-                    <div class="flex flex-col gap-2.5 py-1 overflow-y-auto max-h-[300px]">
+                    <!-- Banner de Cobertura Léxica Afectiva -->
+                    <div class="p-2.5 rounded-lg bg-surface-container-low border border-outline/10 flex flex-col gap-1.5 text-xs font-mono mb-3">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="text-secondary font-bold flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                Carga Afectiva: {{ data.cobertura.pct_afectivo }}% ({{ "{:,}".format(data.cobertura.total_afectivo) }} msgs)
+                            </span>
+                            <span class="text-outline">
+                                {{ data.cobertura.pct_indeterminado }}% Fáctico / Administrativo
+                            </span>
+                        </div>
+                        <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden flex">
+                            <div class="bg-secondary h-full transition-all" style="width: {{ data.cobertura.pct_afectivo }}%;"></div>
+                            <div class="bg-outline/20 h-full" style="width: {{ data.cobertura.pct_indeterminado }}%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Emociones del Léxico SentiDataUMSA (Normalizadas al 100% de la carga afectiva) -->
+                    <div class="flex flex-col gap-2 py-1 overflow-y-auto max-h-[260px]">
                         {% for emo in data.emociones_cruce %}
-                        <div class="flex flex-col gap-1 text-xs font-mono">
+                        <div class="flex flex-col gap-1 text-xs font-mono group cursor-pointer p-1.5 rounded-lg hover:bg-surface-container-high/60 transition-colors btn-filtro-emocion-card" 
+                             data-emocion="{{ emo.emocion }}" title="Filtrar mensajes por {{ emo.emocion }}">
                             <div class="flex items-center justify-between">
-                                <span class="font-sans font-semibold capitalize flex items-center gap-1.5">
+                                <span class="font-sans font-semibold capitalize flex items-center gap-1.5 text-on-surface group-hover:text-primary transition-colors">
                                     <span class="w-2 h-2 rounded-full 
                                         {% if emo.emocion in ['gratitud', 'alegria', 'confianza', 'alivio'] %}bg-emerald-400
                                         {% elif emo.emocion in ['frustracion', 'enojo', 'ansiedad', 'tristeza'] %}bg-pink-400
                                         {% else %}bg-cyan-400{% endif %}"></span>
                                     {{ emo.emocion }}
                                 </span>
-                                <span class="text-outline">{{ emo.porcentaje_relativo }}% ({{ emo.frecuencia }} msgs)</span>
+                                <span class="text-outline font-bold">{{ emo.porcentaje_relativo }}% <span class="text-[10px] font-normal text-outline/80">({{ emo.frecuencia }} msgs)</span></span>
                             </div>
                             <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
                                 <div class="{% if emo.emocion in ['gratitud', 'alegria', 'confianza', 'alivio'] %}bg-emerald-400
@@ -290,47 +309,104 @@
                     </div>
 
                     <div class="mt-3 pt-2 border-t border-outline/10 text-[11px] text-outline flex items-center justify-between">
-                        <span>Distribución afectiva de mensajes dominados por este tema.</span>
-                        <span class="text-primary font-semibold">SentiDataUMSA</span>
+                        <span>Léxico UMSA &bull; Haz clic en una emoción para filtrar</span>
+                        <span class="text-primary font-semibold">18 Emociones</span>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Fila 3: Muestras de Mensajes Reales del Tópico Seleccionado -->
-            <div class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-3">
-                <div class="flex items-center justify-between pb-space-sm border-b border-surface-container-high/60 flex-wrap gap-2">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary text-[20px]">chat</span>
-                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
-                            Muestreo de Mensajes Reales Clasificados en T{{ data.filtro_topico }}
-                        </h2>
+            <!-- Fila 3: Muestras de Mensajes Reales con Filtro Dinámico y Botón "Cargar Más" -->
+            <div id="seccion-mensajes" class="bg-surface-container rounded-xl p-space-md shadow-md border border-outline/10 flex flex-col gap-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-sm border-b border-surface-container-high/60 gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="material-symbols-outlined text-primary text-[22px]">chat</span>
+                        <div>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                Muestreo de Mensajes Reales Clasificados en T{{ data.filtro_topico }}
+                            </h2>
+                            <p class="text-xs text-outline font-mono">Evidencia empírica recuperada de Neon PostgreSQL</p>
+                        </div>
                     </div>
-                    <span class="font-code-sm text-xs text-outline font-mono">Evidencia empírica recuperada de Neon PostgreSQL</span>
+                    <div class="flex items-center gap-2 text-xs font-mono">
+                        <span id="contador-mensajes-mostrados" class="px-2.5 py-1 rounded-lg bg-surface-container-high border border-outline/10 text-on-surface font-semibold">
+                            Mostrando: <strong class="text-primary" id="num-mostrados">{{ data.muestras|length }}</strong> mensajes
+                        </span>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <!-- Barra de Filtros Interactivos por Tipo de Emoción -->
+                <div class="flex items-center gap-1.5 flex-wrap overflow-x-auto pb-1 text-xs font-mono" id="barra-filtros-emocion">
+                    <button type="button" data-emocion="todos"
+                            class="filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-primary text-on-primary border-primary shadow-sm cursor-pointer">
+                        Todos
+                    </button>
+                    <button type="button" data-emocion="con_emocion"
+                            class="filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-surface-container-high text-on-surface hover:bg-surface-container-highest border-outline/20 cursor-pointer flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        Solo con Emoción
+                    </button>
+                    {% for emo in data.emociones_cruce %}
+                    <button type="button" data-emocion="{{ emo.emocion }}"
+                            class="filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-surface-container-high text-on-surface hover:bg-surface-container-highest border-outline/20 cursor-pointer capitalize flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full 
+                            {% if emo.emocion in ['gratitud', 'alegria', 'confianza', 'alivio'] %}bg-emerald-400
+                            {% elif emo.emocion in ['frustracion', 'enojo', 'ansiedad', 'tristeza'] %}bg-pink-400
+                            {% else %}bg-cyan-400{% endif %}"></span>
+                        {{ emo.emocion }}
+                        <span class="text-[10px] text-outline font-normal">({{ emo.frecuencia }})</span>
+                    </button>
+                    {% endfor %}
+                    <button type="button" data-emocion="indeterminado"
+                            class="filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-surface-container-high text-on-surface hover:bg-surface-container-highest border-outline/20 cursor-pointer flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-outline/40"></span>
+                        Fácticos / Indeterminados
+                    </button>
+                </div>
+
+                <!-- Grid de Mensajes (Se alimenta con 6 iniciales y se expande con Cargar Más) -->
+                <div id="mensajes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {% for msg in data.muestras %}
-                    <div class="p-3 rounded-xl bg-surface-container-low border border-outline/10 flex flex-col justify-between gap-2 text-xs">
+                    <div class="msg-card p-3 rounded-xl bg-surface-container-low border border-outline/10 flex flex-col justify-between gap-2.5 text-xs transition-all hover:border-outline/30 hover:shadow-sm">
                         <div class="flex items-center justify-between text-outline text-[11px] font-mono">
-                            <span>ID: {{ msg.message_id }}</span>
-                            <span>{{ msg.fecha[:10] if msg.fecha else '' }}</span>
+                            <span class="font-bold text-on-surface-variant">ID: {{ msg.message_id }}</span>
+                            <span>{{ msg.fecha }}</span>
                         </div>
                         <p class="font-sans text-on-surface leading-snug line-clamp-3">
                             "{{ msg.texto }}"
                         </p>
-                        <div class="flex items-center gap-2 pt-1 border-t border-outline/10 font-mono text-[10px]">
+                        <div class="flex items-center justify-between pt-1 border-t border-outline/10 font-mono text-[10px]">
                             <span class="px-2 py-0.5 rounded font-bold
                                 {% if msg.polarity_label == 'positivo' %}bg-emerald-500/20 text-emerald-400
                                 {% elif msg.polarity_label == 'negativo' %}bg-pink-500/20 text-pink-400
                                 {% elif msg.polarity_label == 'neutro' %}bg-cyan-500/20 text-cyan-400
-                                {% else %}bg-outline/20 text-outline{% endif %}">
+                                {% else %}bg-surface-container-high text-outline border border-outline/20{% endif %}">
                                 {{ msg.polarity_label|upper }}
                             </span>
-                            <span class="text-outline truncate">Emoción: {{ msg.dominant_emotion }}</span>
+                            <span class="font-mono text-outline">
+                                Emoción: 
+                                {% if msg.dominant_emotion and msg.dominant_emotion|lower not in ['indeterminado', 'none', ''] %}
+                                    <span class="px-2 py-0.5 rounded font-semibold bg-primary/20 text-primary capitalize">{{ msg.dominant_emotion }}</span>
+                                {% else %}
+                                    <span class="text-outline">None</span>
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+
+                <!-- Botón Interactivo "Cargar Más Mensajes" -->
+                <div class="flex flex-col sm:flex-row items-center justify-center pt-3 border-t border-outline/10 gap-2">
+                    <button id="btn-cargar-mas" type="button"
+                            class="px-5 py-2.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-sm active:scale-95">
+                        <span id="btn-spinner" class="material-symbols-outlined text-[18px] hidden animate-spin">progress_activity</span>
+                        <span id="btn-icon" class="material-symbols-outlined text-[18px]">expand_more</span>
+                        <span id="btn-text">Cargar más mensajes (+6)</span>
+                    </button>
+                    <span id="mensaje-fin-lista" class="text-xs text-outline font-mono hidden">
+                        ✓ Todos los mensajes de este filtro han sido cargados.
+                    </span>
                 </div>
             </div>
 
@@ -342,79 +418,248 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // 1. Gráfico Chart.js de la Serie Temporal
     const ctx = document.getElementById('topicsTimelineChart');
-    if (!ctx) return;
+    if (ctx) {
+        const labels = {{ data.timeline_labels|tojson }};
+        const rawDatasets = {{ data.timeline_datasets|tojson }};
 
-    const labels = {{ data.timeline_labels|tojson }};
-    const rawDatasets = {{ data.timeline_datasets|tojson }};
+        const datasets = rawDatasets.map(d => ({
+            label: d.label,
+            data: d.data,
+            borderColor: d.color,
+            backgroundColor: d.color + '22',
+            borderWidth: 2,
+            tension: 0.3,
+            pointRadius: 2,
+            pointHoverRadius: 5,
+            fill: false
+        }));
 
-    const datasets = rawDatasets.map(d => ({
-        label: d.label,
-        data: d.data,
-        borderColor: d.color,
-        backgroundColor: d.color + '22',
-        borderWidth: 2,
-        tension: 0.3,
-        pointRadius: 2,
-        pointHoverRadius: 5,
-        fill: false
-    }));
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: datasets
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false,
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
             },
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        color: document.documentElement.classList.contains('dark') ? '#c7c4d7' : '#2c303b',
-                        font: { size: 11, family: 'Inter' },
-                        boxWidth: 12
-                    }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
                 },
-                tooltip: {
-                    backgroundColor: 'rgba(15, 19, 29, 0.95)',
-                    titleColor: '#c0c1ff',
-                    bodyColor: '#dfe2f1',
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                    borderWidth: 1,
-                    padding: 10
-                }
-            },
-            scales: {
-                x: {
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: {
-                        color: '#908fa0',
-                        maxRotation: 45,
-                        font: { size: 10, family: 'JetBrains Mono' }
-                    }
-                },
-                y: {
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: {
-                        color: '#908fa0',
-                        font: { size: 10, family: 'JetBrains Mono' }
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: document.documentElement.classList.contains('dark') ? '#c7c4d7' : '#2c303b',
+                            font: { size: 11, family: 'Inter' },
+                            boxWidth: 12
+                        }
                     },
-                    title: {
-                        display: true,
-                        text: 'Volumen de Mensajes',
-                        color: '#908fa0',
-                        font: { size: 11, family: 'Inter' }
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 19, 29, 0.95)',
+                        titleColor: '#c0c1ff',
+                        bodyColor: '#dfe2f1',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        padding: 10
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: {
+                            color: '#908fa0',
+                            maxRotation: 45,
+                            font: { size: 10, family: 'JetBrains Mono' }
+                        }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: {
+                            color: '#908fa0',
+                            font: { size: 10, family: 'JetBrains Mono' }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Volumen de Mensajes',
+                            color: '#908fa0',
+                            font: { size: 11, family: 'Inter' }
+                        }
                     }
                 }
             }
+        });
+    }
+
+    // 2. Control de Mensajes Dinámicos (Filtro por Tipo de Emoción y Paginación 'Cargar Más')
+    const currentTopicId = {{ data.filtro_topico }};
+    let currentEmotion = 'todos';
+    let currentOffset = {{ data.muestras|length }};
+    const limitPerPage = 6;
+    let isLoading = false;
+
+    const mensajesGrid = document.getElementById('mensajes-grid');
+    const btnCargarMas = document.getElementById('btn-cargar-mas');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnText = document.getElementById('btn-text');
+    const mensajeFinLista = document.getElementById('mensaje-fin-lista');
+    const numMostrados = document.getElementById('num-mostrados');
+    const filtroBtns = document.querySelectorAll('.filtro-emo-btn');
+    const emocionCards = document.querySelectorAll('.btn-filtro-emocion-card');
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        const p = document.createElement('p');
+        p.textContent = text;
+        return p.innerHTML;
+    }
+
+    function createCardElement(msg) {
+        const polUpper = (msg.polarity_label || 'INDETERMINADO').toUpperCase();
+        let polClass = 'bg-surface-container-high text-outline border border-outline/20';
+        if (polUpper === 'POSITIVO') polClass = 'bg-emerald-500/20 text-emerald-400';
+        else if (polUpper === 'NEGATIVO') polClass = 'bg-pink-500/20 text-pink-400';
+        else if (polUpper === 'NEUTRO') polClass = 'bg-cyan-500/20 text-cyan-400';
+
+        const emo = (msg.dominant_emotion || 'None').trim();
+        const isRealEmo = emo && !['indeterminado', 'none', 'null', ''].includes(emo.toLowerCase());
+        const emoHtml = isRealEmo 
+            ? `<span class="px-2 py-0.5 rounded font-semibold bg-primary/20 text-primary capitalize">${escapeHtml(emo)}</span>`
+            : `<span class="text-outline">None</span>`;
+
+        const card = document.createElement('div');
+        card.className = 'msg-card p-3 rounded-xl bg-surface-container-low border border-outline/10 flex flex-col justify-between gap-2.5 text-xs transition-all hover:border-outline/30 hover:shadow-sm animate-fadeIn';
+        card.innerHTML = `
+            <div class="flex items-center justify-between text-outline text-[11px] font-mono">
+                <span class="font-bold text-on-surface-variant">ID: ${msg.message_id}</span>
+                <span>${msg.fecha || ''}</span>
+            </div>
+            <p class="font-sans text-on-surface leading-snug line-clamp-3">
+                "${escapeHtml(msg.texto || '')}"
+            </p>
+            <div class="flex items-center justify-between pt-1 border-t border-outline/10 font-mono text-[10px]">
+                <span class="px-2 py-0.5 rounded font-bold ${polClass}">
+                    ${polUpper}
+                </span>
+                <span class="font-mono text-outline">
+                    Emoción: ${emoHtml}
+                </span>
+            </div>
+        `;
+        return card;
+    }
+
+    async function fetchMensajes(append = false) {
+        if (isLoading) return;
+        isLoading = true;
+
+        if (!append) {
+            currentOffset = 0;
+            mensajesGrid.innerHTML = `
+                <div class="col-span-full py-8 text-center text-outline flex flex-col items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-[28px] animate-spin text-primary">progress_activity</span>
+                    <span class="text-xs font-mono">Consultando Neon PostgreSQL (LIMIT 6)...</span>
+                </div>
+            `;
         }
+
+        btnCargarMas.disabled = true;
+        btnSpinner.classList.remove('hidden');
+        btnIcon.classList.add('hidden');
+        btnText.textContent = append ? 'Cargando mensajes...' : 'Filtrando...';
+
+        try {
+            const url = `/api/topicos/mensajes?topico_id=${currentTopicId}&emocion=${encodeURIComponent(currentEmotion)}&offset=${currentOffset}&limit=${limitPerPage}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (data.status === 'success') {
+                if (!append) {
+                    mensajesGrid.innerHTML = '';
+                }
+
+                if (data.mensajes.length === 0 && !append) {
+                    mensajesGrid.innerHTML = `
+                        <div class="col-span-full py-8 text-center text-outline">
+                            <span class="material-symbols-outlined text-[32px] mb-1">sentiment_dissatisfied</span>
+                            <p class="text-xs font-mono">No se encontraron mensajes registrados para este filtro en T${currentTopicId}.</p>
+                        </div>
+                    `;
+                    btnCargarMas.classList.add('hidden');
+                    mensajeFinLista.classList.remove('hidden');
+                } else {
+                    data.mensajes.forEach(msg => {
+                        mensajesGrid.appendChild(createCardElement(msg));
+                    });
+
+                    currentOffset = data.next_offset;
+
+                    if (data.has_more) {
+                        btnCargarMas.classList.remove('hidden');
+                        mensajeFinLista.classList.add('hidden');
+                    } else {
+                        btnCargarMas.classList.add('hidden');
+                        mensajeFinLista.classList.remove('hidden');
+                    }
+                }
+
+                const totalCards = mensajesGrid.querySelectorAll('.msg-card').length;
+                numMostrados.textContent = totalCards;
+            } else {
+                console.error("Error devuelto por la API:", data.message);
+            }
+        } catch (err) {
+            console.error("Error al consultar la API de mensajes:", err);
+        } finally {
+            isLoading = false;
+            btnCargarMas.disabled = false;
+            btnSpinner.classList.add('hidden');
+            btnIcon.classList.remove('hidden');
+            btnText.textContent = 'Cargar más mensajes (+6)';
+        }
+    }
+
+    // Manejar clics en los botones de filtro de emoción
+    filtroBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const emo = this.dataset.emocion;
+            if (emo === currentEmotion) return;
+
+            filtroBtns.forEach(b => {
+                b.className = 'filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-surface-container-high text-on-surface hover:bg-surface-container-highest border-outline/20 cursor-pointer flex items-center gap-1';
+            });
+            this.className = 'filtro-emo-btn px-3 py-1.5 rounded-xl font-semibold transition-all border bg-primary text-on-primary border-primary shadow-sm cursor-pointer flex items-center gap-1';
+
+            currentEmotion = emo;
+            fetchMensajes(false);
+        });
+    });
+
+    // Clic en las barras de emociones superiores para filtrar de inmediato
+    emocionCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const emo = this.dataset.emocion;
+            let targetBtn = Array.from(filtroBtns).find(b => b.dataset.emocion === emo);
+            if (!targetBtn) {
+                targetBtn = Array.from(filtroBtns).find(b => b.dataset.emocion === 'con_emocion');
+            }
+            if (targetBtn) {
+                targetBtn.click();
+                const seccion = document.getElementById('seccion-mensajes');
+                if (seccion) {
+                    seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+
+    // Clic en el botón "Cargar Más"
+    btnCargarMas.addEventListener('click', function() {
+        fetchMensajes(true);
     });
 });
 </script>

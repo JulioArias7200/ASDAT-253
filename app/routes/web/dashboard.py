@@ -2,7 +2,7 @@
 """
 Controlador de vistas web para el dashboard de analítica y telemetría.
 """
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from app.routes.web import web_bp
 from database.queries import (
     get_dashboard_kpis,
@@ -26,7 +26,8 @@ from database.queries import (
     get_emojis_messages_data,
     get_sentimientos_overview_data,
     get_timeline_series_data,
-    get_topicos_frecuencia_page_data
+    get_topicos_frecuencia_page_data,
+    get_mensajes_por_topico_y_emocion
 )
 
 @web_bp.route("/")
@@ -264,6 +265,27 @@ def topicos_frecuencia_view():
         data=data,
         topic_seleccionado=topic_param
     )
+
+
+@web_bp.route("/api/topicos/mensajes")
+def api_topicos_mensajes():
+    """
+    Endpoint JSON de alto rendimiento para paginación y filtrado dinámico
+    de mensajes por tópico y tipo de emoción con botón 'Cargar Más'.
+    """
+    topico_id = request.args.get("topico_id", "1")
+    emocion = request.args.get("emocion", "todos")
+    offset = request.args.get("offset", "0")
+    limit = request.args.get("limit", "6")
+
+    res = get_mensajes_por_topico_y_emocion(
+        topico_id=topico_id,
+        emocion=emocion,
+        offset=offset,
+        limit=limit
+    )
+    return jsonify(res)
+
 
 
 

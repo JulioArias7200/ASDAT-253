@@ -84,7 +84,16 @@
                     <span class="text-body-sm text-[13px] flex-1">Análisis de Sentimientos SentiData</span>
                 </a>
 
-                <!-- Comparativa Librerías vs DS propio -->
+                
+                <!-- 15 Emociones Motor Emotica -->
+                <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/emociones-15' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
+                    href="/emociones-15">
+                    <span class="material-symbols-outlined text-[18px] {% if request.path == '/emociones-15' %}text-primary{% endif %}">emoji_emotions</span>
+                    <span class="text-body-sm text-[13px] flex-1">15 Emociones — Análisis Temporal</span>
+                    <span class="font-code-sm text-[9px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded font-semibold">Neon SQL</span>
+                </a>
+
+<!-- Comparativa Librerías vs DS propio -->
                 <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl transition-colors {% if request.path == '/comparativa-librerias-ds' %}bg-surface-container-high text-primary font-medium border border-primary/20 shadow-sm{% else %}text-on-surface-variant hover:text-on-surface hover:bg-surface-container{% endif %}"
                     href="/comparativa-librerias-ds">
                     <span class="material-symbols-outlined text-[18px] {% if request.path == '/comparativa-librerias-ds' %}text-primary{% endif %}">balance</span>
@@ -175,3 +184,5 @@
             </div>
         </div>
     </aside>
+
+

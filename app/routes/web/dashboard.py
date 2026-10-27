@@ -247,3 +247,63 @@ def importar_datos_view():
 
 
 
+
+# =============================================================================
+#  RUTAS — Módulo de 15 Emociones (SQLite local)
+# =============================================================================
+
+from database.queries import (
+    get_emociones_15_barras,
+    get_emociones_15_serie_temporal,
+    get_emociones_15_polar,
+)
+import json as _json
+from flask import jsonify as _jsonify
+
+
+@web_bp.route("/emociones-15")
+def emociones_15_view():
+    """
+    Renderiza el análisis de las 15 emociones del corpus estudiantil.
+    Gráficas: barras comparativas, serie temporal filtrable y coordenadas polares.
+    Todos los datos provienen de consultas SQL a la base SQLite local.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+
+    # Datos para las 3 gráficas — consultas SQL a SQLite
+    barras_data = get_emociones_15_barras()
+    polar_data = get_emociones_15_polar()
+    # Serie temporal: carga inicial sin filtros (todo el rango)
+    serie_data = get_emociones_15_serie_temporal()
+
+    return render_template(
+        "dashboard/emociones_15.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        barras=barras_data,
+        polar=polar_data,
+        serie=serie_data,
+        serie_json=_json.dumps(serie_data, ensure_ascii=False),
+        barras_json=_json.dumps(barras_data, ensure_ascii=False),
+        polar_json=_json.dumps(polar_data, ensure_ascii=False),
+    )
+
+
+@web_bp.route("/api/emociones-15/serie")
+def api_emociones_15_serie():
+    """
+    API JSON para actualizar la serie temporal de emociones con filtros dinámicos.
+    Parámetros GET: fecha_inicio, fecha_fin, emociones (separadas por coma).
+    """
+    fecha_inicio = request.args.get("fecha_inicio", "").strip() or None
+    fecha_fin = request.args.get("fecha_fin", "").strip() or None
+    emociones_raw = request.args.get("emociones", "").strip()
+    emociones_filtro = [e.strip() for e in emociones_raw.split(",") if e.strip()] or None
+
+    data = get_emociones_15_serie_temporal(
+        fecha_inicio=fecha_inicio,
+        fecha_fin=fecha_fin,
+        emociones_filtro=emociones_filtro,
+    )
+    return _jsonify(data)

@@ -1,0 +1,522 @@
+{% extends "base.html" %}
+
+{% block title %}15 Emociones — Análisis Temporal - SentiDataUMSA{% endblock %}
+
+{% block content %}
+<main class="w-full bg-background flex-1 transition-colors duration-200">
+    <div class="flex flex-col w-full">
+
+        <!-- Header Strip Institucional -->
+        <div class="w-full bg-surface-container-low border-b border-surface-container-high/60 px-4 sm:px-margin py-4 sm:py-space-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                            <span class="material-symbols-outlined text-[13px]">database</span>
+                            <span id="motor-badge">{{ barras.motor_origen | default('Neon PostgreSQL') }}</span>
+                        </span>
+                        <span class="text-outline text-xs">•</span>
+                        <span class="font-code-sm text-xs text-secondary font-medium">{{ barras.total_con_emocion }} mensajes clasificados · {{ barras.pct_cobertura }}% cobertura</span>
+                    </div>
+                    <h1 class="font-headline-lg text-xl sm:text-headline-lg font-bold text-on-surface tracking-tight">
+                        Análisis de 15 Emociones del Corpus Estudiantil
+                    </h1>
+                    <p class="font-body-sm text-xs sm:text-body-sm text-outline max-w-4xl">
+                        Distribución, evolución temporal e intensidad de las 15 emociones inferidas por el motor Emotica.
+                        Consultas SQL ejecutadas primariamente sobre <strong>Neon Serverless PostgreSQL (TGBase)</strong>
+                        con fallback automático a SQLite local (<code class="font-mono text-primary font-semibold">mensajes</code>).
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap self-start md:self-auto shrink-0">
+                    <a href="{{ url_for('web.sentimientos_view') }}"
+                       class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline/20 px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-mono text-xs transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">psychology</span>
+                        <span>Polaridad General</span>
+                    </a>
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>{{ barras.total_mensajes | default(0) | int }} msgs totales</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:px-margin py-4 sm:py-space-lg flex flex-col gap-4 sm:gap-space-lg">
+
+            <!-- KPI Cards: Top 4 emociones -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+                {% for emo in barras.emociones[:4] %}
+                <div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between"
+                     style="border-top: 2px solid {{ emo.color }};">
+                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider text-xs">{{ emo.label }}</span>
+                    <div class="flex items-baseline gap-2 mt-space-xs">
+                        <span class="text-2xl font-mono font-bold" style="color: {{ emo.color }};">{{ "{:,}".format(emo.total) }}</span>
+                        <span class="font-label-sm text-label-sm text-outline text-xs">msgs</span>
+                    </div>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-xs font-code-sm font-semibold" style="color: {{ emo.color }};">{{ emo.pct }}%</span>
+                        <span class="text-xs text-outline font-mono">Int: {{ emo.avg_intensity }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- ================================================================ -->
+            <!--  GRÁFICA 1: Barras comparativas de las 15 emociones              -->
+            <!-- ================================================================ -->
+            <div class="bg-surface-container rounded-2xl p-space-md shadow-md border border-surface-container-high/40">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h2 class="font-headline-sm text-base font-bold text-on-surface">
+                            Comparativa de Emociones — Barras
+                        </h2>
+                        <p class="font-body-sm text-xs text-outline mt-0.5">
+                            SQL: <code class="text-primary font-mono">SELECT dominant_emotion, COUNT(*) FROM mensajes GROUP BY dominant_emotion</code>
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button id="btn-barras-freq" onclick="switchBarrasMode('freq')"
+                            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-colors">
+                            Frecuencia
+                        </button>
+                        <button id="btn-barras-pct" onclick="switchBarrasMode('pct')"
+                            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-high text-on-surface transition-colors hover:bg-surface-container-highest">
+                            Porcentaje
+                        </button>
+                        <button id="btn-barras-intens" onclick="switchBarrasMode('intens')"
+                            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-high text-on-surface transition-colors hover:bg-surface-container-highest">
+                            Intensidad
+                        </button>
+                    </div>
+                </div>
+                <div class="relative" style="height: 340px;">
+                    <canvas id="chartBarras"></canvas>
+                </div>
+            </div>
+
+            <!-- ================================================================ -->
+            <!--  GRÁFICA 2: Serie temporal de emociones con filtros              -->
+            <!-- ================================================================ -->
+            <div class="bg-surface-container rounded-2xl p-space-md shadow-md border border-surface-container-high/40">
+                <div class="flex flex-col gap-3 mb-4">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                        <div>
+                            <h2 class="font-headline-sm text-base font-bold text-on-surface">
+                                Evolución Temporal de Emociones
+                            </h2>
+                            <p class="font-body-sm text-xs text-outline mt-0.5">
+                                SQL: <code class="text-primary font-mono">strftime('%Y-%m', timestamp_utc)</code> — granularidad mensual
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Filtros: rango de fechas + selección de emociones -->
+                    <div class="bg-surface-container-low rounded-xl p-3 border border-outline/10 flex flex-col gap-3">
+                        <div class="flex flex-wrap gap-3 items-end">
+                            <div class="flex flex-col gap-1 flex-1 min-w-[130px]">
+                                <label class="text-xs font-semibold text-outline uppercase tracking-wider">Fecha inicio</label>
+                                <input type="date" id="fechaInicio" value="{{ serie.fecha_min }}"
+                                    min="{{ serie.fecha_min }}" max="{{ serie.fecha_max }}"
+                                    class="bg-surface-container-high text-on-surface border border-outline/20 rounded-lg px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-primary w-full">
+                            </div>
+                            <div class="flex flex-col gap-1 flex-1 min-w-[130px]">
+                                <label class="text-xs font-semibold text-outline uppercase tracking-wider">Fecha fin</label>
+                                <input type="date" id="fechaFin" value="{{ serie.fecha_max }}"
+                                    min="{{ serie.fecha_min }}" max="{{ serie.fecha_max }}"
+                                    class="bg-surface-container-high text-on-surface border border-outline/20 rounded-lg px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-primary w-full">
+                            </div>
+                            <div class="flex items-center gap-2 w-full sm:w-auto">
+                                <button onclick="actualizarSerie()"
+                                    class="flex-1 sm:flex-none justify-center bg-primary hover:bg-primary/90 text-on-primary px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                                    Actualizar
+                                </button>
+                                <button onclick="resetSerie()"
+                                    class="flex-1 sm:flex-none justify-center bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">
+                                    Resetear
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes de selección de emociones -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-outline uppercase tracking-wider">Emociones a mostrar</span>
+                                <div class="flex gap-2">
+                                    <button onclick="seleccionarTodas()" class="text-xs text-primary hover:text-primary/80 font-semibold transition-colors">Todas</button>
+                                    <span class="text-outline">|</span>
+                                    <button onclick="deseleccionarTodas()" class="text-xs text-outline hover:text-on-surface font-semibold transition-colors">Ninguna</button>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2" id="emocionCheckboxes">
+                                {% for emo in serie.emociones_disponibles %}
+                                <label class="flex items-center gap-1.5 cursor-pointer group">
+                                    <input type="checkbox" class="emocion-check" value="{{ emo.id }}"
+                                        checked
+                                        style="accent-color: {{ emo.color }};"
+                                        onchange="actualizarCheckboxChip(this)">
+                                    <span class="text-xs px-2 py-0.5 rounded-full border font-semibold transition-all"
+                                          id="chip-{{ emo.id }}"
+                                          style="border-color: {{ emo.color }}; color: {{ emo.color }}; background-color: {{ emo.color }}20;">
+                                        {{ emo.label }}
+                                    </span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative" style="height: 360px;">
+                    <canvas id="chartSerie"></canvas>
+                </div>
+                <p class="text-xs text-outline text-center mt-2 font-mono" id="serie-status">
+                    Mostrando {{ serie.labels | length }} periodos con {{ serie.datasets | length }} emociones activas
+                </p>
+            </div>
+
+            <!-- ================================================================ -->
+            <!--  GRÁFICA 3: Radar / Coordenadas Polares de intensidad            -->
+            <!-- ================================================================ -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+
+                <!-- Radar Chart -->
+                <div class="bg-surface-container rounded-2xl p-space-md shadow-md border border-surface-container-high/40">
+                    <div class="mb-4">
+                        <h2 class="font-headline-sm text-base font-bold text-on-surface">
+                            Intensidad Emocional — Radar Polar
+                        </h2>
+                        <p class="font-body-sm text-xs text-outline mt-0.5">
+                            Score = 60% frecuencia + 40% intensidad promedio (normalizado 0–100)
+                        </p>
+                    </div>
+                    <div class="relative" style="height: 380px;">
+                        <canvas id="chartRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tabla de detalle de emociones -->
+                <div class="bg-surface-container rounded-2xl p-space-md shadow-md border border-surface-container-high/40 flex flex-col">
+                    <div class="mb-4">
+                        <h2 class="font-headline-sm text-base font-bold text-on-surface">
+                            Detalle por Emoción
+                        </h2>
+                        <p class="font-body-sm text-xs text-outline mt-0.5">
+                            Frecuencia, intensidad promedio y score polar
+                        </p>
+                    </div>
+                    <div class="overflow-auto flex-1">
+                        <table class="w-full text-xs min-w-[340px]">
+                            <thead>
+                                <tr class="border-b border-surface-container-high/60">
+                                    <th class="text-left py-2 px-2 text-outline font-semibold uppercase tracking-wider">Emoción</th>
+                                    <th class="text-left py-2 px-2 text-outline font-semibold uppercase tracking-wider">Valencia</th>
+                                    <th class="text-right py-2 px-2 text-outline font-semibold uppercase tracking-wider">Msgs</th>
+                                    <th class="text-right py-2 px-2 text-outline font-semibold uppercase tracking-wider">Intens.</th>
+                                    <th class="text-right py-2 px-2 text-outline font-semibold uppercase tracking-wider">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for emo in polar.emociones %}
+                                {% if emo.total > 0 %}
+                                <tr class="border-b border-surface-container-high/30 hover:bg-surface-container-high/30 transition-colors">
+                                    <td class="py-1.5 px-2 font-semibold" style="color: {{ emo.color }};">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background: {{ emo.color }};"></span>
+                                            {{ emo.label }}
+                                        </div>
+                                    </td>
+                                    <td class="py-1.5 px-2 text-outline">
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold
+                                            {% if emo.valence == 'positiva' %}bg-emerald-400/20 text-emerald-400
+                                            {% elif emo.valence == 'negativa' %}bg-red-400/20 text-red-400
+                                            {% else %}bg-orange-400/20 text-orange-400{% endif %}">
+                                            {{ emo.valence }}
+                                        </span>
+                                    </td>
+                                    <td class="py-1.5 px-2 text-right font-mono text-on-surface">{{ "{:,}".format(emo.total) }}</td>
+                                    <td class="py-1.5 px-2 text-right font-mono text-outline">{{ emo.avg_intensity }}</td>
+                                    <td class="py-1.5 px-2 text-right font-mono font-bold" style="color: {{ emo.color }};">{{ emo.score_polar }}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /contenedor principal -->
+    </div>
+</main>
+
+<!-- ======================================================================= -->
+<!--  SCRIPTS — Chart.js + lógica interactiva                                 -->
+<!-- ======================================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+// Datos inyectados desde Flask (consultas SQL)
+const barrasData  = {{ barras_json | safe }};
+const serieData   = {{ serie_json  | safe }};
+const polarData   = {{ polar_json  | safe }};
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r},${g},${b},${alpha})`;
+}
+
+const chartDefaults = {
+    font:   { family: "'JetBrains Mono', monospace", size: 11 },
+    color:  'rgba(180,185,210,0.85)',
+};
+Chart.defaults.font.family = chartDefaults.font.family;
+Chart.defaults.color       = chartDefaults.color;
+
+// ─── GRÁFICA 1: Barras comparativas ───────────────────────────────────────────
+const barrasEmociones = barrasData.emociones.filter(e => e.total > 0);
+let barrasMode = 'freq';
+
+const chartBarras = new Chart(document.getElementById('chartBarras'), {
+    type: 'bar',
+    data: {
+        labels:   barrasEmociones.map(e => e.label),
+        datasets: [{
+            label: 'Mensajes',
+            data:  barrasEmociones.map(e => e.total),
+            backgroundColor: barrasEmociones.map(e => hexToRgba(e.color, 0.75)),
+            borderColor:     barrasEmociones.map(e => e.color),
+            borderWidth: 1.5,
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => {
+                        const e = barrasEmociones[ctx.dataIndex];
+                        if (barrasMode === 'freq')   return ` ${e.total.toLocaleString()} mensajes (${e.pct}%)`;
+                        if (barrasMode === 'pct')    return ` ${e.pct}% del total clasificado`;
+                        return ` Intensidad promedio: ${e.avg_intensity}`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: 'rgba(120,125,150,0.15)' },
+                ticks: { maxRotation: 35 }
+            },
+            y: {
+                grid: { color: 'rgba(120,125,150,0.15)' },
+                beginAtZero: true,
+            }
+        }
+    }
+});
+
+function switchBarrasMode(mode) {
+    barrasMode = mode;
+    const dataMap = {
+        freq:   barrasEmociones.map(e => e.total),
+        pct:    barrasEmociones.map(e => e.pct),
+        intens: barrasEmociones.map(e => e.avg_intensity),
+    };
+    const labelMap = { freq: 'Mensajes', pct: 'Porcentaje (%)', intens: 'Intensidad promedio' };
+    chartBarras.data.datasets[0].data  = dataMap[mode];
+    chartBarras.data.datasets[0].label = labelMap[mode];
+    chartBarras.update();
+    // Actualizar botones
+    ['freq','pct','intens'].forEach(m => {
+        const btn = document.getElementById(`btn-barras-${m}`);
+        if (m === mode) {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-colors';
+        } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-high text-on-surface transition-colors hover:bg-surface-container-highest';
+        }
+    });
+}
+
+// ─── GRÁFICA 2: Serie temporal ─────────────────────────────────────────────────
+let chartSerie = null;
+
+function buildSerieChart(data) {
+    if (chartSerie) chartSerie.destroy();
+
+    const datasets = data.datasets.map(ds => ({
+        label:           ds.label,
+        data:            ds.data,
+        borderColor:     ds.color,
+        backgroundColor: hexToRgba(ds.color, 0.12),
+        pointBackgroundColor: ds.color,
+        pointRadius:     3,
+        pointHoverRadius: 6,
+        borderWidth: 2,
+        fill: false,
+        tension: 0.35,
+    }));
+
+    chartSerie = new Chart(document.getElementById('chartSerie'), {
+        type: 'line',
+        data: { labels: data.labels, datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { boxWidth: 14, padding: 10, font: { size: 10 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} mensajes`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(120,125,150,0.15)' },
+                    ticks: { maxRotation: 45, font: { size: 10 } }
+                },
+                y: {
+                    grid: { color: 'rgba(120,125,150,0.15)' },
+                    beginAtZero: true,
+                    ticks: { font: { size: 10 } }
+                }
+            }
+        }
+    });
+}
+
+buildSerieChart(serieData);
+
+async function actualizarSerie() {
+    const fi = document.getElementById('fechaInicio').value;
+    const ff = document.getElementById('fechaFin').value;
+    const checks = Array.from(document.querySelectorAll('.emocion-check:checked')).map(c => c.value);
+    if (checks.length === 0) {
+        document.getElementById('serie-status').textContent = 'Selecciona al menos una emoción.';
+        return;
+    }
+    const params = new URLSearchParams({
+        fecha_inicio: fi,
+        fecha_fin:    ff,
+        emociones:    checks.join(','),
+    });
+    document.getElementById('serie-status').textContent = 'Consultando SQLite…';
+    try {
+        const resp = await fetch(`/api/emociones-15/serie?${params}`);
+        const data = await resp.json();
+        buildSerieChart(data);
+        document.getElementById('serie-status').textContent =
+            `Mostrando ${data.labels.length} periodos · ${data.datasets.length} emociones · fi=${fi} ff=${ff}`;
+    } catch(e) {
+        document.getElementById('serie-status').textContent = 'Error al consultar: ' + e;
+    }
+}
+
+function resetSerie() {
+    document.getElementById('fechaInicio').value = serieData.fecha_min;
+    document.getElementById('fechaFin').value    = serieData.fecha_max;
+    seleccionarTodas();
+    buildSerieChart(serieData);
+    document.getElementById('serie-status').textContent =
+        `Mostrando ${serieData.labels.length} periodos con ${serieData.datasets.length} emociones activas`;
+}
+
+function seleccionarTodas() {
+    document.querySelectorAll('.emocion-check').forEach(c => {
+        c.checked = true;
+        actualizarCheckboxChip(c);
+    });
+}
+function deseleccionarTodas() {
+    document.querySelectorAll('.emocion-check').forEach(c => {
+        c.checked = false;
+        actualizarCheckboxChip(c);
+    });
+}
+function actualizarCheckboxChip(input) {
+    const chip = document.getElementById('chip-' + input.value);
+    if (!chip) return;
+    if (input.checked) {
+        chip.style.opacity = '1';
+        chip.style.textDecoration = 'none';
+    } else {
+        chip.style.opacity = '0.3';
+        chip.style.textDecoration = 'line-through';
+    }
+}
+
+// ─── GRÁFICA 3: Radar / Polar ──────────────────────────────────────────────────
+const radarEmociones = polarData.emociones.filter(e => e.total > 0);
+
+new Chart(document.getElementById('chartRadar'), {
+    type: 'radar',
+    data: {
+        labels: radarEmociones.map(e => e.label),
+        datasets: [
+            {
+                label: 'Score Polar (Freq + Intens)',
+                data:  radarEmociones.map(e => e.score_polar),
+                backgroundColor: 'rgba(99,102,241,0.25)',
+                borderColor:     'rgba(99,102,241,0.90)',
+                pointBackgroundColor: radarEmociones.map(e => e.color),
+                pointBorderColor: '#fff',
+                pointRadius: 5,
+                borderWidth: 2,
+            },
+            {
+                label: 'Intensidad Promedio (×20)',
+                data:  radarEmociones.map(e => Math.min(100, e.avg_intensity * 20)),
+                backgroundColor: 'rgba(16,185,129,0.15)',
+                borderColor:     'rgba(16,185,129,0.80)',
+                pointRadius: 3,
+                borderWidth: 1.5,
+                borderDash: [4,3],
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { boxWidth: 14, padding: 10, font: { size: 10 } }
+            },
+            tooltip: {
+                callbacks: {
+                    label: ctx => {
+                        const e = radarEmociones[ctx.dataIndex];
+                        if (ctx.datasetIndex === 0) return ` Score polar: ${ctx.parsed.r.toFixed(1)}`;
+                        return ` Intensidad avg: ${e.avg_intensity}`;
+                    }
+                }
+            }
+        },
+        scales: {
+            r: {
+                angleLines: { color: 'rgba(120,125,150,0.20)' },
+                grid:       { color: 'rgba(120,125,150,0.20)' },
+                pointLabels: { font: { size: 10 }, color: chartDefaults.color },
+                ticks: {
+                    backdropColor: 'transparent',
+                    font: { size: 9 },
+                    stepSize: 20,
+                },
+                min: 0,
+                max: 100,
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

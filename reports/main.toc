@@ -1,0 +1,99 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{Resumen}{2}{Doc-Start}%
+\contentsline {section}{Abstract}{2}{Doc-Start}%
+\contentsline {section}{Resumen Ejecutivo}{8}{Doc-Start}%
+\contentsline {section}{\numberline {1}Introducción}{9}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Contexto y Justificación Académica}{9}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Planteamiento del Problema}{9}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Objetivos del Proyecto}{10}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Preguntas de Investigación}{11}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Estructura del Documento}{11}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Marco teórico}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Análisis de sentimiento}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Enfoques léxicos en espa\~nol}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tratamiento de la negación}{12}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Emojis y reacciones como señal}{12}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Modelos de emociones}{13}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Modelado de tópicos}{13}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Cadenas de Markov}{13}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Metodología}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Diseño de la Investigación y Ciclo CRISP-DM}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Adquisición, ETL Multimodal y Jergas Estudiantiles}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Señales de Evidencia y Motor Léxico Multietiqueta}{14}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Puntuación de Polaridad y Ventana de Negación}{15}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Nivel de Evidencia y la Regla de Indeterminación}{15}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Modelado de Tópicos (LDA) y Cadenas de Markov}{16}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Datos y preprocesamiento}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Origen y naturaleza del corpus}{16}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Proceso de extracción, transformación y carga}{16}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Composición por tipo de contenido}{17}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Distribución temporal del volumen}{17}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Patrones de actividad}{17}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Limpieza y normalizaci\'on}{19}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Emojis y reacciones}{21}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Privacidad de los datos}{21}{subsection.4.8}%
+\contentsline {section}{\numberline {5}Resultados}{22}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Cobertura del diccionario y nivel de evidencia}{22}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Distribución de polaridad}{23}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Frecuencia de emociones}{23}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Emojis y reacciones como señal afectiva}{27}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Evolución temporal}{27}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Modelado de tópicos}{29}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Transiciones de estado (cadenas de Markov)}{29}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}S\'intesis de hallazgos}{31}{subsection.5.8}%
+\contentsline {section}{\numberline {6}Ampliación V2: minería de texto}{32}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Arquitectura y separación de versiones}{32}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Unigramas, bigramas y n-gramas}{32}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Características lingüísticas superficiales}{32}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}TF, IDF y TF--IDF}{33}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Importación y versionado de diccionarios}{34}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Dashboard V2 y avatar emocional}{34}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Bitácora, pruebas y reproducibilidad}{35}{subsection.6.7}%
+\contentsline {section}{\numberline {7}Arquitectura de Persistencia, CDC y Plataforma Web}{35}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Esquema Físico Relacional y Modelado de Datos}{35}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Captura de Cambios de Datos en Tiempo Real (CDC)}{35}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Optimización y Prevención de Amplificación de Escritura}{37}{subsubsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.3}Plataforma Web y Analítica Visual en Tiempo Real}{37}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Aislamiento In-Memory para Ingesta Multimodal}{38}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Ingeniería de Motores Gráficos Especializados}{39}{subsubsection.7.3.2}%
+\contentsline {section}{\numberline {8}Validación Experimental de Paridad Matemática}{39}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Estrategia de Pruebas de Paridad}{39}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Dimensiones Evaluadas}{39}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Resultados de la Batería de Pruebas}{41}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Discusión}{41}{section.9}%
+\contentsline {subsection}{\numberline {9.1}La cobertura baja como hallazgo, no como defecto}{41}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Un clima predominantemente positivo}{42}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Temas y estructura latente}{42}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Dinámica de estados}{42}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Implicaciones pr\'acticas}{42}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Comparaci\'on con la literatura}{43}{subsection.9.6}%
+\contentsline {section}{\numberline {10}Limitaciones y amenazas a la validez}{43}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Limitaciones del diccionario}{43}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Ironía, sarcasmo y negaci\'on compleja}{43}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Validez de constructo}{43}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Validez externa y generalizaci\'on}{44}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Sesgos de selecci\'on y de registro}{44}{subsection.10.5}%
+\contentsline {subsection}{\numberline {10.6}Reacciones y multimedia}{44}{subsection.10.6}%
+\contentsline {subsection}{\numberline {10.7}Ausencia de validaci\'on supervisada}{44}{subsection.10.7}%
+\contentsline {subsection}{\numberline {10.8}Limitaciones del an\'alisis de tópicos y Markov}{44}{subsection.10.8}%
+\contentsline {section}{\numberline {11}Conclusiones y Trabajo Futuro}{45}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Conclusiones}{45}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Trabajo Futuro}{45}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Consideraciones éticas}{46}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Finalidad y consentimiento}{46}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Anonimización y minimizaci\'on}{46}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Interpretaci\'on prudente}{46}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Transparencia}{47}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Riesgos y mitigaciones}{47}{subsection.12.5}%
+\contentsline {subsection}{\numberline {12.6}Cumplimiento normativo}{47}{subsection.12.6}%
+\contentsline {section}{\numberline {13}Reproducibilidad y Entornos de Ejecución}{47}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Gestión Dual de Entornos: R y Python}{47}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Pipeline de Ejecución Secuencial}{48}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Persistencia y Trazabilidad en Neon PostgreSQL}{48}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Generación Automatizada del Informe}{48}{subsection.13.4}%
+\contentsline {section}{\numberline {14}Apéndices}{48}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Apéndice A. Glosario de Categorías Emocionales}{48}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Apéndice B. Parámetros Globales de Ejecución}{48}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Apéndice C. Modelo de Transición Estocástica (TikZ)}{49}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Apéndice D. Menciones Docentes y Resolución Semestral}{49}{subsection.14.4}%
+\contentsline {subsection}{\numberline {14.5}Apéndice E. Ficha Técnica General del Corpus}{49}{subsection.14.5}%

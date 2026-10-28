@@ -1,0 +1,29 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Métricas Operativas Globales y Composición Multimodal del Corpus de la UMSA}
+  \label{tab:kpis_corpus}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{lrr}
+    \toprule
+    Métrica / Dimensión & Valor Observado & Observación Metodológica \\
+    \midrule
+    Total de mensajes persistidos          & 23.371 & Corpus histórico consolidado en Neon PostgreSQL \\
+    Usuarios únicos remitentes             & 2.051  & Estudiantes, auxiliares y coordinadores \\
+    Promedio de mensajes por usuario       & 11,4   & Distribución de cola larga con alta dispersión \\
+    Total de elementos multimodales        & 4.919  & Imágenes, stickers y animaciones GIF \\
+    Imágenes procesadas con OCR            & 1.782  & Capturas de comunicados y boletas de inscripción \\
+    Stickers analizados                    & 2.180  & Clasificados por carga afectiva y emoji asociado \\
+    Animaciones GIF documentadas           & 24     & Reacciones animadas catalogadas \\
+    Reacciones interactivas de Telegram    & 2.575  & Emojis directos en globos de mensaje \\
+    Modismos y jergas locales de la UMSA   & 538    & Catálogo léxico contextual paceño \\
+    Términos procesados en TF-IDF          & 122.971 & Matriz dispersa de términos ponderados \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize
+    \textit{Nota.} Datos extraídos en tiempo real desde las tablas operativas \texttt{mensajes}, \texttt{menciones\_docentes} y \texttt{tfidf\_mensajes} en Neon Serverless PostgreSQL (región AWS us-east-2 / sa-east-1).
+  \end{minipage}
+\end{table}

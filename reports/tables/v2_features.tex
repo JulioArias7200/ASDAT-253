@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Estadísticas Descriptivas de las Características Lingüísticas Superficiales por Mensaje}
+  \label{tab:v2_features}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Indicador Lingüístico & Media ($\mu$) & Mediana & Desv. Est. ($\sigma$) & Máximo \\
+    \midrule
+    Longitud en caracteres (\texttt{n\_chars})        & 48,32 & 42,00 & 44,18 & 1.250 \\
+    Tokens totales (\texttt{n\_tokens})              & 9,41  & 8,00  & 8,76  & 245   \\
+    Palabras (\texttt{n\_words})                     & 8,12  & 7,00  & 7,85  & 218   \\
+    Proporción de palabras únicas (\texttt{unique\_ratio}) & 0,92  & 0,94  & 0,11  & 1,00  \\
+    Signos de interrogación (\texttt{n\_questions})  & 0,42  & 0,00  & 0,78  & 12    \\
+    Signos de exclamación (\texttt{n\_exclamations}) & 0,11  & 0,00  & 0,45  & 8     \\
+    Palabras en mayúsculas (\texttt{n\_upper\_words})& 0,38  & 0,00  & 0,92  & 15    \\
+    Emojis detectados (\texttt{n\_emojis})           & 0,29  & 0,00  & 0,81  & 14    \\
+    Puntuación de intensidad (\texttt{n\_intensity}) & 0,65  & 0,00  & 1,22  & 18    \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} Evaluado sobre \nMensajes{} mensajes del corpus en la tabla \texttt{mensajes}. Los indicadores superficiales confirman la brevedad de los enunciados propios de mensajería instantánea y la alta prevalencia de estructuras interrogativas vinculadas a consultas académicas.
+  \end{minipage}
+\end{table}

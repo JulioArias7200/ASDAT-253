@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Emojis Más Frecuentes en el Cuerpo del Texto y su Categorización Semántica}
+  \label{tab:top_emojis}
+  \begin{tabular}{llrr}
+    \toprule
+    Emoji / Descripción & Emoción Asignada & Frecuencia ($n$) & Proporción (\%) \\
+    \midrule
+    \texttt{[U+1F44D]} Pulgar arriba (\emph{thumbs up})   & Aprobación / Gratitud  & 412 & 23,8 \\
+    \texttt{[U+1F602]} Risa con lágrimas (\emph{joy})     & Diversión / Alegría    & 385 & 22,2 \\
+    \texttt{[U+1F64F]} Manos juntas (\emph{pray})         & Gratitud / Ruego        & 310 & 17,9 \\
+    \texttt{[U+1F914]} Cara pensativa (\emph{thinking})   & Duda / Anticipación     & 280 & 16,2 \\
+    \texttt{[U+1F525]} Fuego (\emph{fire})                & Entusiasmo / Intensidad & 195 & 11,3 \\
+    \texttt{[U+1F62D]} Llanto intenso (\emph{sob})        & Tristeza / Frustración  & 140 & 8,1  \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} Extraídos del campo \texttt{emoji\_list} en la tabla \texttt{mensajes}. No se purgan durante la tokenización para conservar su función como operadores léxicos afectivos independientes.
+  \end{minipage}
+\end{table}

@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Estructura Temática Latente Recuperada Mediante el Modelo LDA ($K = 5$)}
+  \label{tab:topicos_lda}
+  \label{tab:topicos}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{clp{9.8cm}}
+    \toprule
+    Tópico ($k$) & Etiqueta Semántica & Términos Clave de Mayor Probabilidad Posterior ($\beta$) \\
+    \midrule
+    1 & Trámites, Kardex y Pagos        & \textit{si, solo, puede, materias, horario, hacer, pago, pagar, kardex, puedo, sistema, boleta} \\
+    2 & Interacción y Gestión de Clases & \textit{si, gracias, x2, clases, hoy, retiro, mañana, q, horarios, comunicado, docentes, bien} \\
+    3 & Inscripción Presencial UMSA     & \textit{carrera, día, informática, hora, inscripción, formulario, piso, ser, cómo, estudiantes, fecha} \\
+    4 & Grupos WhatsApp de Temporada    & \textit{grupo, materia, inf, semestre, temporada, whatsapp, datos, materias, nuevo, curso, sistemas} \\
+    5 & Consultas a la Comunidad        & \textit{alguien, lic, sabe, buenas, paralelo, favor, saben, disculpen, tardes, pasando, recomiendan} \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize
+    \textit{Nota.} Estimación inferida por muestreo de Gibbs sobre la matriz documento-término de mensajes depurados. Los tópicos reflejan con nitidez las tres fases del periodo académico: consultas iniciales de oferta (T4, T5), trámites formales de inscripción y pago (T1, T3), y coordinación operativa diaria durante el curso (T2).
+  \end{minipage}
+\end{table}

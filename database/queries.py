@@ -2356,52 +2356,69 @@ def _get_sqlite_conn():
     return conn
 
 
+def _load_emociones_15_desde_json():
+    """Carga el dataset analítico precalculado de respaldo para las 15 emociones."""
+    json_path = BASE_DIR / "data" / "results" / "emociones_15.json"
+    if json_path.exists():
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Aviso] No se pudo leer emociones_15.json: {e}")
+    return None
+
 
 _SQL_EMOCION_CASE = """
     CASE
-        WHEN dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
-                                  'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
-                                  'enojo','decepcion','cansancio','ironia','curiosidad')
-            THEN dominant_emotion
-        WHEN dominant_emotion = 'confianza'                            THEN 'seguridad'
-        WHEN dominant_emotion = 'orgullo'                              THEN 'admiracion'
-        WHEN dominant_emotion = 'alivio'                               THEN 'tranquilidad'
-        WHEN dominant_emotion = 'verguenza'                            THEN 'confusion'
-        WHEN dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
-        WHEN dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
-        WHEN dominant_emotion = 'frustracion'                          THEN 'decepcion'
-        WHEN dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
-        WHEN dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
-        WHEN dominant_emotion = 'diversion'                            THEN 'alegria'
+        WHEN LOWER(dominant_emotion) IN ('alegria', 'alegría')                             THEN 'alegria'
+        WHEN LOWER(dominant_emotion) IN ('gratitud')                                       THEN 'gratitud'
+        WHEN LOWER(dominant_emotion) IN ('esperanza')                                      THEN 'esperanza'
+        WHEN LOWER(dominant_emotion) IN ('seguridad', 'confianza')                         THEN 'seguridad'
+        WHEN LOWER(dominant_emotion) IN ('admiracion', 'admiración', 'orgullo')            THEN 'admiracion'
+        WHEN LOWER(dominant_emotion) IN ('tranquilidad', 'alivio')                         THEN 'tranquilidad'
+        WHEN LOWER(dominant_emotion) IN ('sorpresa')                                       THEN 'sorpresa'
+        WHEN LOWER(dominant_emotion) IN ('confusion', 'confusión', 'verguenza', 'vergüenza') THEN 'confusion'
+        WHEN LOWER(dominant_emotion) IN ('preocupacion', 'preocupación', 'ansiedad', 'miedo') THEN 'preocupacion'
+        WHEN LOWER(dominant_emotion) IN ('tristeza')                                       THEN 'tristeza'
+        WHEN LOWER(dominant_emotion) IN ('enojo', 'ira', 'asco')                           THEN 'enojo'
+        WHEN LOWER(dominant_emotion) IN ('decepcion', 'decepción', 'frustracion', 'frustración') THEN 'decepcion'
+        WHEN LOWER(dominant_emotion) IN ('cansancio', 'aburrimiento')                      THEN 'cansancio'
+        WHEN LOWER(dominant_emotion) IN ('ironia', 'ironía')                               THEN 'ironia'
+        WHEN LOWER(dominant_emotion) IN ('curiosidad', 'anticipacion', 'anticipación')     THEN 'curiosidad'
+        WHEN LOWER(dominant_emotion) IN ('diversion', 'diversión')                         THEN 'alegria'
         ELSE NULL
     END
 """
 
 _SQL_EMOCION_CASE_SR = """
     CASE
-        WHEN sr.dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
-                                     'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
-                                     'enojo','decepcion','cansancio','ironia','curiosidad')
-            THEN sr.dominant_emotion
-        WHEN sr.dominant_emotion = 'confianza'                            THEN 'seguridad'
-        WHEN sr.dominant_emotion = 'orgullo'                              THEN 'admiracion'
-        WHEN sr.dominant_emotion = 'alivio'                               THEN 'tranquilidad'
-        WHEN sr.dominant_emotion = 'verguenza'                            THEN 'confusion'
-        WHEN sr.dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
-        WHEN sr.dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
-        WHEN sr.dominant_emotion = 'frustracion'                          THEN 'decepcion'
-        WHEN sr.dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
-        WHEN sr.dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
-        WHEN sr.dominant_emotion = 'diversion'                            THEN 'alegria'
+        WHEN LOWER(sr.dominant_emotion) IN ('alegria', 'alegría')                             THEN 'alegria'
+        WHEN LOWER(sr.dominant_emotion) IN ('gratitud')                                       THEN 'gratitud'
+        WHEN LOWER(sr.dominant_emotion) IN ('esperanza')                                      THEN 'esperanza'
+        WHEN LOWER(sr.dominant_emotion) IN ('seguridad', 'confianza')                         THEN 'seguridad'
+        WHEN LOWER(sr.dominant_emotion) IN ('admiracion', 'admiración', 'orgullo')            THEN 'admiracion'
+        WHEN LOWER(sr.dominant_emotion) IN ('tranquilidad', 'alivio')                         THEN 'tranquilidad'
+        WHEN LOWER(sr.dominant_emotion) IN ('sorpresa')                                       THEN 'sorpresa'
+        WHEN LOWER(sr.dominant_emotion) IN ('confusion', 'confusión', 'verguenza', 'vergüenza') THEN 'confusion'
+        WHEN LOWER(sr.dominant_emotion) IN ('preocupacion', 'preocupación', 'ansiedad', 'miedo') THEN 'preocupacion'
+        WHEN LOWER(sr.dominant_emotion) IN ('tristeza')                                       THEN 'tristeza'
+        WHEN LOWER(sr.dominant_emotion) IN ('enojo', 'ira', 'asco')                           THEN 'enojo'
+        WHEN LOWER(sr.dominant_emotion) IN ('decepcion', 'decepción', 'frustracion', 'frustración') THEN 'decepcion'
+        WHEN LOWER(sr.dominant_emotion) IN ('cansancio', 'aburrimiento')                      THEN 'cansancio'
+        WHEN LOWER(sr.dominant_emotion) IN ('ironia', 'ironía')                               THEN 'ironia'
+        WHEN LOWER(sr.dominant_emotion) IN ('curiosidad', 'anticipacion', 'anticipación')     THEN 'curiosidad'
+        WHEN LOWER(sr.dominant_emotion) IN ('diversion', 'diversión')                         THEN 'alegria'
         ELSE NULL
     END
 """
+
 
 def get_emociones_15_barras():
     """
     Consulta SQL de conteo total de mensajes por emoción dominante:
     1. Intenta consultar Neon Serverless PostgreSQL (Tabla: mensajes).
-    2. Si Neon no está disponible (ej. sin conexión), conmuta transparentemente a SQLite local.
+    2. Fallback a SQLite local (as_telegram.sqlite).
+    3. Fallback a respaldo analítico JSON precalculado (emociones_15.json).
     """
     rows = []
     total_msgs = 0
@@ -2413,45 +2430,66 @@ def get_emociones_15_barras():
             with conn.cursor() as cur:
                 cur.execute(f"""
                     SELECT
-                        ({_SQL_EMOCION_CASE})          AS emocion_id,
+                        emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
-                    FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    FROM (
+                        SELECT
+                            ({_SQL_EMOCION_CASE})          AS emocion_id,
+                            intensity
+                        FROM mensajes
+                        WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
                     GROUP BY emocion_id
-                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
                 cur.execute("SELECT COUNT(*) AS total FROM mensajes;")
-                total_msgs = cur.fetchone()["total"]
+                t_row = cur.fetchone()
+                total_msgs = t_row["total"] if t_row else 0
+        if not rows:
+            raise Exception("Neon devolvió 0 emociones clasificadas.")
     except Exception as e_neon:
-        # Intento 2: Fallback a SQLite local (Respaldo offline)
-        print(f"[Aviso] Neon no disponible ({e_neon}). Usando SQLite local para barras.")
+        # Intento 2: Fallback a SQLite local
+        print(f"[Aviso] Neon barras ({e_neon}). Conmutando a SQLite local.")
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
                 cur.execute(f"""
                     SELECT
-                        ({_SQL_EMOCION_CASE})          AS emocion_id,
+                        emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
-                    FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    FROM (
+                        SELECT
+                            ({_SQL_EMOCION_CASE})          AS emocion_id,
+                            intensity
+                        FROM sentiment_results
+                        WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
                     GROUP BY emocion_id
-                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
                 cur.execute("SELECT COUNT(*) AS total FROM messages;")
-                total_msgs = cur.fetchone()["total"]
+                t_row = cur.fetchone()
+                total_msgs = t_row["total"] if t_row else 0
                 motor_origen = "SQLite Local (Respaldo Offline)"
+            if not rows:
+                raise Exception("SQLite devolvió 0 emociones.")
         except Exception as e_sql:
-            print(f"[Error crítico] Fallback SQLite falló: {e_sql}")
+            # Intento 3: Fallback a JSON precalculado
+            print(f"[Aviso] SQLite barras ({e_sql}). Conmutando a JSON precalculado.")
+            fb = _load_emociones_15_desde_json()
+            if fb and "barras" in fb:
+                res = fb["barras"]
+                res["motor_origen"] = "Respaldo Analítico Precalculado"
+                return res
             return {"emociones": [], "total_con_emocion": 0, "total_mensajes": 0, "pct_cobertura": 0, "motor_origen": "Error"}
 
     meta = {e["id"]: e for e in _EMOCIONES_15}
-    # Filtrar estrictamente solo las 15 emociones oficiales (descartar cualquier otra)
     rows = [r for r in rows if r["emocion_id"] in meta]
     total_con_emocion = sum(r["total"] for r in rows)
 
@@ -2494,8 +2532,9 @@ def get_emociones_15_barras():
 def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones_filtro=None):
     """
     Consulta SQL de evolución temporal mensual de emociones:
-    1. Intenta consultar Neon Serverless PostgreSQL (TO_CHAR(timestamp_utc, 'YYYY-MM')).
-    2. Si Neon no está disponible, conmuta a SQLite (strftime('%Y-%m', timestamp_utc)).
+    1. Intenta consultar Neon Serverless PostgreSQL.
+    2. Fallback a SQLite local.
+    3. Fallback a respaldo analítico JSON precalculado con filtrado en memoria.
     """
     emociones_activas = emociones_filtro if emociones_filtro else [e["id"] for e in _EMOCIONES_15]
     rows = []
@@ -2520,22 +2559,25 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                     where_clauses.append("timestamp_utc <= %s")
                     params.append(fecha_fin + " 23:59:59")
 
-                placeholders = ",".join(["%s"] * len(emociones_activas))
-                where_clauses.append(f"dominant_emotion IN ({placeholders})")
-                params.extend(emociones_activas)
-
                 cur.execute(f"""
                     SELECT
-                        TO_CHAR(timestamp_utc, 'YYYY-MM')   AS periodo,
-                        ({_SQL_EMOCION_CASE})         AS emocion_id,
+                        periodo,
+                        emocion_id,
                         COUNT(*)                            AS total
-                    FROM mensajes
-                    WHERE {" AND ".join(where_clauses)}
+                    FROM (
+                        SELECT
+                            TO_CHAR(timestamp_utc, 'YYYY-MM')   AS periodo,
+                            ({_SQL_EMOCION_CASE})               AS emocion_id
+                        FROM mensajes
+                        WHERE {" AND ".join(where_clauses)}
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
                     GROUP BY periodo, emocion_id
-                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
+                set_activas = set(emociones_activas)
+                rows = [r for r in rows if r["emocion_id"] in set_activas]
 
                 cur.execute("""
                     SELECT MIN(timestamp_utc) AS fecha_min,
@@ -2550,9 +2592,11 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 if rng and rng["fecha_max"]:
                     fmax = rng["fecha_max"]
                     fecha_max_db = fmax.strftime("%Y-%m-%d") if hasattr(fmax, "strftime") else str(fmax)[:10]
+        if not rows:
+            raise Exception("Neon serie devolvió 0 periodos.")
     except Exception as e_neon:
         # Intento 2: Fallback a SQLite local
-        print(f"[Aviso] Neon no disponible ({e_neon}). Usando SQLite local para serie temporal.")
+        print(f"[Aviso] Neon serie ({e_neon}). Conmutando a SQLite local.")
         try:
             where_clauses = [
                 "sr.dominant_emotion IS NOT NULL",
@@ -2567,25 +2611,28 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 where_clauses.append("m.timestamp_utc <= ?")
                 params.append(fecha_fin + "T23:59:59Z")
 
-            placeholders = ",".join("?" * len(emociones_activas))
-            where_clauses.append(f"sr.dominant_emotion IN ({placeholders})")
-            params.extend(emociones_activas)
-
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
                 cur.execute(f"""
                     SELECT
-                        strftime('%Y-%m', m.timestamp_utc)  AS periodo,
-                        ({_SQL_EMOCION_CASE_SR})      AS emocion_id,
+                        periodo,
+                        emocion_id,
                         COUNT(*)                             AS total
-                    FROM sentiment_results sr
-                    JOIN messages m ON sr.message_id = m.message_id
-                    WHERE {" AND ".join(where_clauses)}
+                    FROM (
+                        SELECT
+                            strftime('%Y-%m', m.timestamp_utc)  AS periodo,
+                            ({_SQL_EMOCION_CASE_SR})            AS emocion_id
+                        FROM sentiment_results sr
+                        JOIN messages m ON sr.message_id = m.message_id
+                        WHERE {" AND ".join(where_clauses)}
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
                     GROUP BY periodo, emocion_id
-                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
+                set_activas = set(emociones_activas)
+                rows = [r for r in rows if r["emocion_id"] in set_activas]
 
                 cur.execute("""
                     SELECT MIN(timestamp_utc) AS fecha_min,
@@ -2594,11 +2641,46 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                     WHERE timestamp_utc IS NOT NULL;
                 """)
                 rng = cur.fetchone()
-                fecha_min_db = rng["fecha_min"][:10] if rng["fecha_min"] else "2022-01-01"
-                fecha_max_db = rng["fecha_max"][:10] if rng["fecha_max"] else "2026-12-31"
+                fecha_min_db = rng["fecha_min"][:10] if rng and rng["fecha_min"] else "2022-01-01"
+                fecha_max_db = rng["fecha_max"][:10] if rng and rng["fecha_max"] else "2026-12-31"
                 motor_origen = "SQLite Local (Respaldo Offline)"
+            if not rows:
+                raise Exception("SQLite serie devolvió 0 periodos.")
         except Exception as e_sql:
-            print(f"[Error crítico] Fallback SQLite falló: {e_sql}")
+            # Intento 3: Fallback a JSON precalculado con filtrado en memoria
+            print(f"[Aviso] SQLite serie ({e_sql}). Conmutando a JSON precalculado.")
+            fb = _load_emociones_15_desde_json()
+            if fb and "serie" in fb:
+                base_serie = fb["serie"]
+                labels = base_serie.get("labels", [])
+                p_start = (fecha_inicio[:7] if fecha_inicio else labels[0]) if labels else ""
+                p_end = (fecha_fin[:7] if fecha_fin else labels[-1]) if labels else ""
+
+                valid_indices = [i for i, p in enumerate(labels) if p_start <= p <= p_end]
+                filtered_labels = [labels[i] for i in valid_indices]
+
+                filter_set = set(emociones_filtro) if emociones_filtro else None
+                filtered_datasets = []
+                for ds in base_serie.get("datasets", []):
+                    if filter_set and ds["emocion_id"] not in filter_set:
+                        continue
+                    filtered_data = [ds["data"][i] for i in valid_indices] if valid_indices else ds["data"]
+                    filtered_datasets.append({
+                        "emocion_id": ds["emocion_id"],
+                        "label": ds["label"],
+                        "color": ds["color"],
+                        "valence": ds.get("valence", "desconocida"),
+                        "data": filtered_data,
+                        "total": sum(filtered_data),
+                    })
+                return {
+                    "labels": filtered_labels,
+                    "datasets": filtered_datasets,
+                    "emociones_disponibles": base_serie.get("emociones_disponibles", _EMOCIONES_15),
+                    "fecha_min": base_serie.get("fecha_min", "2022-01-01"),
+                    "fecha_max": base_serie.get("fecha_max", "2026-12-31"),
+                    "motor_origen": "Respaldo Analítico Precalculado",
+                }
             return {
                 "labels": [], "datasets": [],
                 "emociones_disponibles": _EMOCIONES_15,
@@ -2649,8 +2731,9 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
 def get_emociones_15_polar():
     """
     Consulta SQL de intensidad promedio y frecuencia para coordenadas polares (radar):
-    1. Intenta consultar Neon Serverless PostgreSQL (mensajes).
-    2. Si Neon no está disponible, conmuta a SQLite (sentiment_results).
+    1. Intenta consultar Neon Serverless PostgreSQL.
+    2. Fallback a SQLite local.
+    3. Fallback a respaldo analítico JSON precalculado.
     """
     rows = []
     motor_origen = "Neon Serverless PostgreSQL (TGBase)"
@@ -2661,41 +2744,60 @@ def get_emociones_15_polar():
             with conn.cursor() as cur:
                 cur.execute(f"""
                     SELECT
-                        ({_SQL_EMOCION_CASE})        AS emocion_id,
+                        emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
-                    FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
-                    GROUP BY emocion_id
-                    HAVING emocion_id IS NOT NULL;
+                    FROM (
+                        SELECT
+                            ({_SQL_EMOCION_CASE})        AS emocion_id,
+                            intensity
+                        FROM mensajes
+                        WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
+                    GROUP BY emocion_id;
                 """)
                 rows = cur.fetchall()
+        if not rows:
+            raise Exception("Neon polar devolvió 0 emociones.")
     except Exception as e_neon:
         # Intento 2: Fallback a SQLite local
-        print(f"[Aviso] Neon no disponible ({e_neon}). Usando SQLite local para radar polar.")
+        print(f"[Aviso] Neon polar ({e_neon}). Conmutando a SQLite local.")
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
                 cur.execute(f"""
                     SELECT
-                        ({_SQL_EMOCION_CASE})        AS emocion_id,
+                        emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
-                    FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
-                    GROUP BY emocion_id
-                    HAVING emocion_id IS NOT NULL;
+                    FROM (
+                        SELECT
+                            ({_SQL_EMOCION_CASE})        AS emocion_id,
+                            intensity
+                        FROM sentiment_results
+                        WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    ) sub
+                    WHERE emocion_id IS NOT NULL
+                    GROUP BY emocion_id;
                 """)
                 rows = cur.fetchall()
                 motor_origen = "SQLite Local (Respaldo Offline)"
+            if not rows:
+                raise Exception("SQLite polar devolvió 0 emociones.")
         except Exception as e_sql:
-            print(f"[Error crítico] Fallback SQLite falló: {e_sql}")
+            # Intento 3: Fallback a JSON precalculado
+            print(f"[Aviso] SQLite polar ({e_sql}). Conmutando a JSON precalculado.")
+            fb = _load_emociones_15_desde_json()
+            if fb and "polar" in fb:
+                res = fb["polar"]
+                res["motor_origen"] = "Respaldo Analítico Precalculado"
+                return res
             return {"emociones": [], "motor_origen": "Error"}
 
     meta = {e["id"]: e for e in _EMOCIONES_15}
-    # Filtrar estrictamente solo las 15 emociones oficiales
     rows = [r for r in rows if r["emocion_id"] in meta]
     max_total = max((r["total"] for r in rows), default=1)
     max_avg_int = max((float(r["avg_intensity"] or 1.0) for r in rows), default=1.0)
@@ -2730,7 +2832,6 @@ def get_emociones_15_polar():
         }))
 
     return {"emociones": ordered, "motor_origen": motor_origen}
-
 
 
 # =============================================================================

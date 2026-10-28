@@ -53,5 +53,8 @@ Thumbs.db
 .vscode/*.log
 ChatExport/
 
-
+# Ignora todos los archivos generados con el nombre main.*
 reports/main.*
+
+# Excepción: permite rastrear únicamente el PDF compilado
+!reports/main.pdf

@@ -28,6 +28,7 @@ from database.queries import (
     get_timeline_series_data,
     get_topicos_frecuencia_page_data,
     get_mensajes_por_topico_y_emocion,
+    get_objetos_perdidos_data,
     get_mensajes_docente_paginados
 )
 
@@ -279,7 +280,8 @@ def api_topicos_mensajes():
     offset = request.args.get("offset", "0")
     limit = request.args.get("limit", "6")
 
-    res = get_mensajes_por_topico_y_emocion(
+    res = get_mensajes_por_topico_y_emocion,
+    get_objetos_perdidos_data(
         topico_id=topico_id,
         emocion=emocion,
         offset=offset,
@@ -301,7 +303,10 @@ def api_docente_mensajes(docente_id):
         offset=offset,
         limit=limit
     )
-    return jsonify(res)# =============================================================================
+    return jsonify(res)
+
+
+# =============================================================================
 #  RUTAS — Módulo de 15 Emociones (SQLite local)
 # =============================================================================
 
@@ -360,3 +365,27 @@ def api_emociones_15_serie():
         emociones_filtro=emociones_filtro,
     )
     return _jsonify(data)
+
+
+
+# =============================================================================
+#  RUTA — Módulo de Comunidad: Objetos Perdidos y Encontrados
+# =============================================================================
+
+@web_bp.route("/objetos-perdidos")
+def objetos_perdidos_view():
+    """
+    Renderiza el tablón analítico de Objetos Perdidos y Encontrados:
+    análisis de estacionalidad por temporadas vs semestres, intensidad de urgencia,
+    frecuencia de objetos, mapas de calor por aulas/pisos y muro interactivo.
+    """
+    kpis = get_dashboard_kpis()
+    neon_status = get_neon_health_telemetry()
+    data = get_objetos_perdidos_data()
+    return render_template(
+        "dashboard/objetos_perdidos.html",
+        kpis=kpis,
+        neon_status=neon_status,
+        data=data,
+        charts_json=_json.dumps(data["charts"], ensure_ascii=False)
+    )

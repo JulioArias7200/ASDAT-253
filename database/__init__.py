@@ -19,5 +19,6 @@ from database.queries import (
     get_timeline_series_data,
     get_topicos_frecuencia_page_data,
     get_mensajes_por_topico_y_emocion,
+    get_objetos_perdidos_data,
     get_mensajes_docente_paginados
 )

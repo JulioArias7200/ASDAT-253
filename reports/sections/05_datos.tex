@@ -53,9 +53,27 @@ de inicio de semestre.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\textwidth]{volumen_mensual.png}
-  \caption{Volumen de mensajes por mes.}
+  \includegraphics[width=0.92\textwidth]{volumen_mensual.png}
+  \caption{Volumen consolidado de mensajes por mes a lo largo del historial del corpus.}
   \label{fig:vol_mensual}
+\end{figure}
+
+Para permitir una exploración interactiva y con granularidad dinámica, la plataforma SentiDataUMSA implementó el visualizador temporal spline documentado en la Figura~\ref{fig:ui_serie_spline}, donde se integran franjas cromáticas semestrales para identificar los meses de clases regulares frente a los recesos académicos. Complementariamente, la Figura~\ref{fig:ui_hitos_academicos} exhibe el desglose cronológico de 47 cohortes mensuales con detección automatizada de anomalías de volumen (valles de hasta 36 mensajes en recesos y crestas superiores a 1.200 mensajes en períodos de segundos parciales y exámenes de mesa).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP2JNAC.png}
+  \vspace{4pt}
+  \caption{Evolución temporal continua (Spline SVG) con franjas semestrales y distribución de consultas académicas.}
+  \label{fig:ui_serie_spline}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP5JNAC.png}
+  \vspace{4pt}
+  \caption{Análisis temporal longitudinal y detección de hitos académicos en las 47 cohortes mensuales.}
+  \label{fig:ui_hitos_academicos}
 \end{figure}
 
 \subsection{Patrones de actividad}

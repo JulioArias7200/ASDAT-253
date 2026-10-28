@@ -3,20 +3,20 @@
 
 \subsection{Apéndice A. Glosario de Categorías Emocionales}
 
-El esquema analítico multietiqueta implementado en SentiDataUMSA evalúa dieciocho categorías afectivas adaptadas a la interacción universitaria (Tabla~\ref{tab:glosario}).
+El esquema analítico multietiqueta implementado en SentiDataUMSA evalúa quince categorías afectivas canónicas adaptadas a la interacción universitaria (Tabla~\ref{tab:glosario}).
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Familias de Categorías Emocionales y Definición Operacional}
+  \caption{Familias de las 15 Categorías Emocionales Canónicas y Definición Operacional}
   \label{tab:glosario}
   \begin{tabular}{lp{9.5cm}}
     \toprule
     Familia & Categorías y Términos Representativos \\
     \midrule
-    Positivas Sociales & Gratitud (\emph{gracias, bendiciones, auxi}), alegría (\emph{aprobé, genial}), satisfacción, confianza, entusiasmo y empatía. \\
-    Negativas Académicas& Frustración (\emph{falla el sistema, no cargó}), ansiedad (\emph{plazos, nota}), enojo (\emph{estafa, injusto}), tristeza y decepción. \\
-    Cognitivas / Neutras & Duda (\emph{alguien sabe, qué paralelo}), sorpresa, curiosidad y anticipación. \\
+    Positivas Sociales & Gratitud (\emph{gracias, bendiciones, auxi}), alegría (\emph{aprobé, genial}), confianza (\emph{seguro, excelente}), esperanza (\emph{ojalá, fe}) y alivio (\emph{al fin, logré}). \\
+    Negativas Académicas& Frustración (\emph{falla el sistema, no cargó}), ansiedad (\emph{plazos, nota}), enojo (\emph{estafa, injusto}), tristeza (\emph{reprobé}), preocupación (\emph{tranca}), desánimo y cansancio. \\
+    Cognitivas / De Transición & Sorpresa (\emph{en serio, wow}), anticipación (\emph{esperando listas}) y confusión (\emph{no entiendo el enunciado}). \\
     \bottomrule
   \end{tabular}
   \vspace{4pt}
@@ -35,6 +35,7 @@ La Tabla~\ref{tab:params} resume los hiperparámetros del sistema persistidos en
   \small
   \caption{Parámetros de Configuración del Pipeline y Motores Analíticos}
   \label{tab:params}
+  \resizebox{0.95\textwidth}{!}{
   \begin{tabular}{lll}
     \toprule
     Parámetro Técnico & Valor Asignado & Justificación y Descripción \\
@@ -48,6 +49,7 @@ La Tabla~\ref{tab:params} resume los hiperparámetros del sistema persistidos en
     \texttt{db.pool\_size}          & 5          & Conexiones concurrentes recomendadas en Neon PostgreSQL \\
     \bottomrule
   \end{tabular}
+  }
 \end{table}
 
 \subsection{Apéndice C. Modelo de Transición Estocástica (TikZ)}
@@ -80,7 +82,7 @@ Para facilitar la inspección pedagógica y la auditoría cualitativa de estas e
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.88\textwidth]{figures/CAP5JNAC.png}
+  \includegraphics[width=0.88\textwidth]{figures/CAP4.1JNAC.png}
   \vspace{4pt}
   \caption{Ventana modal interactiva para la exploración detallada de mensajes, reacciones y resolución contextual de materias por docente.}
   \label{fig:ui_modal_docente}

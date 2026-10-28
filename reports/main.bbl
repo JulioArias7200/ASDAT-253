@@ -1,11 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Benoit et~al., 2018]{benoit2018quanteda}
-Benoit, K., Watanabe, K., Wang, H., Nulty, P., Obeng, A., M{\"u}ller, S., and
-  Matsuo, A. (2018).
-\newblock quanteda: An r package for the quantitative analysis of textual data.
-\newblock {\em Journal of Open Source Software}, 3(30):774.
-
 \bibitem[Blei, 2012]{blei2012topicmodels}
 Blei, D.~M. (2012).
 \newblock Probabilistic topic models.
@@ -27,10 +21,27 @@ Brooke, J., Tofiloski, M., and Taboada, M. (2009).
 \newblock {\em Proceedings of the International Conference RANLP}, pages
   50--56.
 
+\bibitem[Ca{\~n}ete et~al., 2020]{canete2020beto}
+Ca{\~n}ete, J., Chaperon, G., Fuentes, R., Ho, J.-H., Kang, H., and P{\'e}rez,
+  J. (2020).
+\newblock Spanish pre-trained {BERT} model and evaluation data.
+\newblock In {\em PML4DC at ICLR 2020}.
+
+\bibitem[Chapman et~al., 2000]{chapman2000crisp}
+Chapman, P., Clinton, J., Kerber, R., Khabaza, T., Reinartz, T., Shearer, C.,
+  and Wirth, R. (2000).
+\newblock {CRISP-DM} 1.0: Step-by-step data mining guide.
+\newblock {\em SPSS inc}.
+
+\bibitem[Cohen, 1960]{cohen1960kappa}
+Cohen, J. (1960).
+\newblock A coefficient of agreement for nominal scales.
+\newblock {\em Educational and Psychological Measurement}, 20(1):37--46.
+
 \bibitem[Ekman, 1992]{ekman1992emotions}
 Ekman, P. (1992).
 \newblock An argument for basic emotions.
-\newblock volume~6, pages 169--200.
+\newblock {\em Cognition and Emotion}, 6(3--4):169--200.
 
 \bibitem[Freelon, 2018]{freelon2019computational}
 Freelon, D. (2018).
@@ -49,6 +60,16 @@ Grimmer, J. and Stewart, B.~M. (2013).
   methods for political texts.
 \newblock {\em Political Analysis}, 21(3):267--297.
 
+\bibitem[Grinberg, 2018]{grinberg2018flask}
+Grinberg, M. (2018).
+\newblock {\em Flask Web Development: Developing Web Applications with Python}.
+\newblock O'Reilly Media, 2nd edition.
+
+\bibitem[Honnibal et~al., 2020]{honnibal2020spacy}
+Honnibal, M., Montani, I., Van~Landeghem, S., and Boyd, A. (2020).
+\newblock spacy: Industrial-strength natural language processing in python.
+\newblock In {\em Proceedings of the EMNLP System Demonstrations}. Explosion.
+
 \bibitem[Hutto and Gilbert, 2014]{hutto2014vader}
 Hutto, C.~J. and Gilbert, E. (2014).
 \newblock {VADER}: A parsimonious rule-based model for sentiment analysis of
@@ -59,7 +80,12 @@ Hutto, C.~J. and Gilbert, E. (2014).
 \bibitem[Kralj~Novak et~al., 2015]{novak2015emojis}
 Kralj~Novak, P., Smailovi{\'c}, J., Sluban, B., and Mozeti{\v{c}}, I. (2015).
 \newblock Sentiment of emojis.
-\newblock volume~10, page e0144296.
+\newblock {\em PLOS ONE}, 10(12):e0144296.
+
+\bibitem[Landis and Koch, 1977]{landis1977kappa}
+Landis, J.~R. and Koch, G.~G. (1977).
+\newblock The measurement of observer agreement for categorical data.
+\newblock {\em Biometrics}, 33(1):159--174.
 
 \bibitem[Liu, 2012]{liu2012sentiment}
 Liu, B. (2012).
@@ -67,10 +93,14 @@ Liu, B. (2012).
 \newblock Synthesis Lectures on Human Language Technologies. Morgan \& Claypool
   Publishers.
 
+\bibitem[Loria, 2018]{loria2018textblob}
+Loria, S. (2018).
+\newblock {\em TextBlob: Simplified Text Processing}.
+
 \bibitem[Mohammad and Turney, 2013]{mohammad2013emolex}
 Mohammad, S.~M. and Turney, P.~D. (2013).
 \newblock Crowdsourcing a word--emotion association lexicon.
-\newblock volume~29, pages 436--465.
+\newblock {\em Computational Intelligence}, 29(3):436--465.
 
 \bibitem[Morante and Daelemans, 2012]{morante2012negation}
 Morante, R. and Daelemans, W. (2012).
@@ -93,9 +123,17 @@ Plutchik, R. (1980).
 \newblock {\em Emotion: A Psychoevolutionary Synthesis}.
 \newblock Harper \& Row.
 
+\bibitem[Qi et~al., 2020]{qi2020stanza}
+Qi, P., Zhang, Y., Zhang, Y., Bolton, J., and Manning, C.~D. (2020).
+\newblock Stanza: A python natural language processing toolkit for many human
+  languages.
+\newblock In {\em Proceedings of the 58th Annual Meeting of the Association for
+  Computational Linguistics: System Demonstrations}, pages 101--108.
+
 \bibitem[Russell, 1980]{russell1980circumplex}
 Russell, J.~A. (1980).
-\newblock {\em A Circumplex Model of Affect}, volume~39.
+\newblock A circumplex model of affect.
+\newblock {\em Journal of Personality and Social Psychology}, 39(6):1161--1178.
 
 \bibitem[Taboada et~al., 2011]{taboada2011socal}
 Taboada, M., Brooke, J., Tofiloski, M., Voll, K., and Stede, M. (2011).

@@ -1,0 +1,29 @@
+\begin{lstlisting}[language=Python, caption={Ingesta en memoria con aislamiento de transacciones de escritura (\texttt{ingest.py})}, label={lst:ingest_memory}]
+@api_v1_bp.route("/ingest/upload", methods=["POST"])
+def ingest_upload_view():
+    """
+    Procesa lotes de Telegram (JSON o ZIP) 100% en memoria en Python.
+    Compara las metricas resultantes contra el baseline de Neon (Read-Only).
+    """
+    archivos = request.files.getlist("files")
+    if not archivos:
+        return jsonify({"error": "No se recibieron archivos"}), 400
+
+    # 1. Parseo y extraccion en memoria sin mutacion de base de datos
+    df_mensajes = parsear_paquete_telegram(archivos)
+    
+    # 2. Preprocesamiento y scoring lexico
+    df_limpio = preprocess_chat(df_mensajes)
+    scores_df = score_emotions(df_limpio)
+    
+    # 3. Consulta de solo lectura (SELECT) contra Neon PostgreSQL
+    baseline = consultar_baseline_corpus_neon()
+    timeline = calcular_timeline_chat(df_limpio)
+
+    return jsonify({
+        "status": "success",
+        "total_mensajes": len(df_mensajes),
+        "timeline": timeline,
+        "comparativa_neon": {"chat": scores_df, "baseline": baseline}
+    }), 200
+\end{lstlisting}

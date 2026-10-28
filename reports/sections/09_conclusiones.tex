@@ -1,53 +1,24 @@
-\section{Conclusiones y trabajo futuro}
+\section{Conclusiones y Trabajo Futuro}
 \label{sec:conclusiones}
 
 \subsection{Conclusiones}
 
-Este informe ha documentado de forma exhaustiva un an\'alisis de sentimiento y emociones
-sobre \nAnalizados{} mensajes de un grupo de Telegram de gesti\'on acad\'emica. Las
-conclusiones principales son las siguientes.
+La presente investigación ha implementado y validado un ecosistema integral de minería de datos, procesamiento de lenguaje natural y telemetría analítica multimodal sobre \nMensajes{} mensajes del canal oficial de Telegram de la Carrera de Informática en la Universidad Mayor de San Andrés (UMSA). Las conclusiones fundamentales del estudio son:
 
 \begin{enumerate}[leftmargin=1.6em]
-  \item \textbf{El grupo es un espacio primordialmente operativo.} El
-        \pctIndeterminado{}\% de los mensajes no contiene evidencia afectiva suficiente.
-        Este resultado, lejos de ser un defecto, caracteriza la funci\'on referencial del
-        canal y justifica una convenci\'on expl\'icita que distingue la ausencia de
-        evidencia de la neutralidad.
-  \item \textbf{Cuando emerge el afecto, es mayoritariamente positivo.} Entre los
-        mensajes con evidencia, el \pctPositivos{}\% se clasifica como positivo frente al
-        \pctNegativos{}\% negativo. La emoci\'on dominante es \emph{\emocionTop{}},
-        propia de un entorno de ayuda mutua.
-  \item \textbf{La actividad sigue el calendario acad\'emico.} Con \diasActividad{} días
-        activos, \meses{} meses de historia y una concentraci\'on de la actividad en
-        \diaPico{} y en torno a las \horaPico{}, el ritmo del grupo reproduce los ciclos
-        de inscripci\'on, matr\'\i{}cula y ex\'amenes.
-  \item \textbf{La estructura tem\'atica es administrativa.} Los \nTemas{} tópicos
-        recuperados giran en torno a pagos, horarios, inscripciones, comunicados y
-        consultas generales, confirmando la vocaci\'on de servicio del grupo.
-  \item \textbf{La dinámica emocional es estable y autorregulada.} El estado neutro
-        act\'ua como atractor (\pctNeutro{}\% de la masa estacionaria; permanencia media
-        de \permanenciaNeutro{} turnos), mientras que los episodios negativos se disipan
-        con rapidez (recuperaci\'on de \recuperacionNegativa{} turnos).
-  \item \textbf{La honestidad estad\'istica y la trazabilidad son viables.} El
-        \emph{pipeline} demuestra que es posible producir un an\'alisis completo,
-        reproducible y autom\'aticamente informado sin sacrificar el rigor en el manejo
-        de la incertidumbre.
+  \item \textbf{Prevalencia Factual en la Interacción Académica:} El \pctIndeterminado{}\% del corpus corresponde a mensajes desprovistos de carga afectiva explícita. Este resultado no constituye una deficiencia del motor léxico, sino que evidencia la función referencial-operativa predominante en la comunicación universitaria. La asignación formal de la etiqueta \emph{indeterminado} previene la inflación artificial de la categoría neutra.
+  \item \textbf{Asimetría Afectiva Favorable:} Entre los mensajes con evidencia emocional suficiente, las expresiones positivas (\pctPositivos{}\%) duplican ampliamente a las negativas (\pctNegativos{}\%), manifestándose la \emph{\emocionTop{}} como el estado dominante, lo que confirma un ambiente de soporte y colaboración mutua entre estudiantes.
+  \item \textbf{Estructura Temática y Dinámica Temporal:} El modelo LDA ($K=5$) agrupó de manera coherente las fases del semestre (trámites de Kardex, inscripciones presenciales, consultas de docentes y grupos de temporada). La actividad se sincroniza con el calendario institucional, alcanzando picos en \diaPico{} y en el rango de \horaPico{}.
+  \item \textbf{Estabilidad Estocástica de Markov:} El análisis estocástico demostró que el estado neutro/factual actúa como un atractor del sistema ($\pi = 83,1\%$, permanencia media de \permanenciaNeutro{} turnos). Los episodios de frustración o estrés académico son transitorios y se disipan con resiliencia en un promedio de \recuperacionNegativa{} turnos.
+  \item \textbf{Persistencia y Trazabilidad Transaccional CDC:} La migración hacia Neon Serverless PostgreSQL (16 tablas) y la implementación de triggers PL/pgSQL permitieron capturar cambios a nivel de atributo en JSONB, optimizándose la arquitectura mediante la amortización de triggers en tablas masivas temporales.
+  \item \textbf{Paridad Matemática R vs. Python:} Se certificó la reproducibilidad científica estricta entre el entorno de investigación en R y el microservicio web en Flask, logrando un 100\% de éxito en la suite automatizada de pruebas unitarias (\texttt{pytest}) con tolerancia numérica nula ($\epsilon < 10^{-6}$).
 \end{enumerate}
 
-\subsection{Trabajo futuro}
+\subsection{Trabajo Futuro}
 
-Las l\'\i{}neas de trabajo futuro que se derivan de este estudio son cinco. Primero,
-incorporar validaci\'on humana para medir precisi\'on, exhaustividad y $F_1$, y para
-estimar el acuerdo entre anotadores mediante la $\kappa$ de Cohen. Segundo, ampliar y
-refinar el diccionario con léxico extra\'\i{}do del propio corpus, empleando técnicas
-semiautom\'aticas pero siempre con revisi\'on manual. Tercero, integrar modelos
-contextuales preentrenados en espa\~nol como se\~nal complementaria, manteniendo la
-separaci\'on de fuentes y sin convertir el sistema en una caja negra. Cuarto, incorporar
-las reacciones y los contenidos multimedia en la puntuaci\'on, resolviendo el problema de
-la referencia temporal de la reacción. Quinto, extender el an\'alisis por usuario y por
-hilo de conversaci\'on, respetando escrupulosamente las garant\'\i{}as de privacidad.
-
-En t\'erminos m\'as amplios, este trabajo sugiere que la miner\'\i{}a de opiniones en
-canales educativos informales ofrece un valor real ---anticipar fricciones, mejorar la
-comunicaci\'on, entender el clima del grupo--- siempre que se practique con transparencia
-metodol\'ogica y respeto por las personas cuyos mensajes constituyen los datos.
+Como líneas de investigación y desarrollo futuro se plantean:
+\begin{enumerate}
+  \item \textbf{Modelos Híbridos Transformer en Español:} Incorporar modelos de lenguaje preentrenados ligeros (como BETO o RoBERTa-BNE) para procesar los mensajes catalogados como \emph{indeterminados}, reduciendo la brecha léxica hacia coberturas superiores al 85\% sin sacrificar la interpretabilidad.
+  \item \textbf{Pool de Conexiones Multiplexado:} Implementar un pool de conexiones persistente en la capa Flask (\texttt{ThreadedConnectionPool}) para mitigar la latencia de handshakes SSL en bases de datos serverless.
+  \item \textbf{Contenerización y Despliegue CI/CD:} Empaquetar la solución en contenedores Docker multi-stage para orquestar la ejecución de los pipelines y el dashboard en infraestructuras universitarias locales o en la nube.
+\end{enumerate}

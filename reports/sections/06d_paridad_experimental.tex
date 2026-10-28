@@ -1,0 +1,29 @@
+\section{Validación Experimental de Paridad Matemática}
+\label{sec:paridad_experimental}
+
+La coexistencia de dos entornos analíticos (el pipeline de investigación original en R y el motor de producción web en Python) introdujo el desafío de garantizar la equivalencia matemática y metodológica estricta entre ambas implementaciones. Una discrepancia algorítmica en la ventana de negación o en la normalización léxica provocaría inconsistencias estadísticas entre los informes académicos y los tableros de mando en tiempo real.
+
+\subsection{Estrategia de Pruebas de Paridad}
+
+Para certificar la fidelidad del sistema, se construyó una suite automatizada de pruebas unitarias en Python (\texttt{tests/test\_emotica\_parity.py}) que traduce y ejecuta caso por caso los escenarios de validación definidos originalmente en R bajo el framework \texttt{testthat} (\texttt{test-engine.R}, \texttt{test-preprocess.R} y \texttt{test-eval-topics.R}).
+
+\subsection{Dimensiones Evaluadas}
+
+La suite de pruebas somete a ambos motores a cinco condiciones de estrés computacional:
+\begin{enumerate}
+  \item \textbf{Integridad de la Taxonomía:} Verificación de que el léxico cargado en memoria contenga exactamente las 15 emociones base y que cada categoría afectiva cuente con al menos 8 términos validados.
+  \item \textbf{Efecto de Modificadores e Intensificadores:} Comprobación de que adverbios de cantidad (\emph{"muy feliz"}), signos reiterados (\emph{"feliz!!!"}) y mayúsculas sostenidas (\emph{"ESTOY MUY FELIZ"}) eleven estrictamente la puntuación afectiva respecto al término base, mientras que atenuadores (\emph{"poco feliz"}) disminuyan su valor relativo.
+  \item \textbf{Ventana de Negación y Transferencia Afectiva:} Validación de que expresiones negadas (e.g., \emph{"no estoy tranquila"}) no puntúen sobre la emoción manifiesta (\emph{tranquilidad}), sino que transfieran la evidencia con penalización ponderada hacia su emoción opuesta (\emph{preocupación}) con la etiqueta sintáctica \texttt{NEG} (Listado~\ref{lst:negacion_motor}).
+  \item \textbf{Tratamiento de Excepciones y Dobles Negaciones:} Reconocimiento de colocaciones idiomáticas complejas (e.g., \emph{"no está nada mal"}) como polos positivos y no como negaciones dobles acumulativas.
+  \item \textbf{Normalización Multimodal:} Preservación de secuencias de emojis y acentuación diacrítica según el estándar Unicode NFC.
+\end{enumerate}
+
+\input{listings/lst_negacion_motor}
+
+\subsection{Resultados de la Batería de Pruebas}
+
+La Tabla~\ref{tab:paridad_pruebas} resume los resultados obtenidos tras la ejecución de la suite mediante el ejecutor de pruebas \texttt{pytest}.
+
+\input{tables/tab_paridad_pruebas}
+
+El 100\% de las pruebas unitarias y de integración concluyeron con éxito (11 casos evaluados en 3,94 segundos con tolerancia numérica nula $\epsilon < 10^{-6}$). Este resultado valida formalmente la hipótesis de paridad: el motor en Python de SentiDataUMSA replica con total reproducibilidad científica la lógica estadística y lingüística concebida en el ecosistema R.

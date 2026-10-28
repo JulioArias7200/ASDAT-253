@@ -1,0 +1,76 @@
+"topico_id","ngram","tipo_ngram","frecuencia"
+1,"pasando clases","bigrama",111
+1,"tal lic","bigrama",106
+1,"álgebra lineal","bigrama",101
+1,"grupo whatsapp","bigrama",96
+1,"base datos","bigrama",81
+1,"enseña bien","bigrama",74
+1,"inf paralelo","bigrama",71
+1,"sabe pasando","bigrama",68
+1,"buenos días","bigrama",67
+1,"electrónica general","bigrama",67
+1,"sabe cómo lic","trigrama",30
+1,"sabe tal lic","trigrama",29
+1,"sabe pasando clases","trigrama",23
+1,"está pasando clases","trigrama",21
+1,"sabe dónde pasando","trigrama",21
+2,"retiro adicion","bigrama",193
+2,"retiro adición","bigrama",170
+2,"verificar pago","bigrama",81
+2,"puede pagar","bigrama",50
+2,"generar cpt","bigrama",42
+2,"dos materias","bigrama",37
+2,"esperar retiro","bigrama",36
+2,"puedo inscribirme","bigrama",32
+2,"pagar cpt","bigrama",30
+2,"código cpt","bigrama",27
+2,"debes verificar pago","trigrama",19
+2,"esperar retiro adicion","trigrama",18
+2,"esperar retiro adición","trigrama",17
+2,"generar código cpt","trigrama",13
+2,"sale fuera rango","trigrama",11
+3,"carrera informática","bigrama",155
+3,"informática umsa","bigrama",60
+3,"inteligencia artificial","bigrama",44
+3,"grupo whatsapp","bigrama",32
+3,"hora lugar","bigrama",32
+3,"únete grupo","bigrama",30
+3,"ciencia datos","bigrama",27
+3,"convocatoria pasantía","bigrama",27
+3,"formulario inscripción","bigrama",27
+3,"grupo oficial","bigrama",27
+3,"carrera informática umsa","trigrama",42
+3,"artificial ciencia datos","trigrama",19
+3,"inteligencia artificial ciencia","trigrama",19
+3,"josé luis zeballos","trigrama",19
+3,"lic josé luis","trigrama",18
+4,"grupo whatsapp","bigrama",322
+4,"base datos","bigrama",205
+4,"únete grupo","bigrama",169
+4,"curso temporada","bigrama",144
+4,"grupo inf","bigrama",143
+4,"plan antiguo","bigrama",134
+4,"plan nuevo","bigrama",133
+4,"algún grupo","bigrama",97
+4,"inf plan","bigrama",90
+4,"diseño sistemas","bigrama",85
+4,"únete grupo whatsapp","trigrama",105
+4,"análisis diseño sistemas","trigrama",69
+4,"enlace unirte grupo","trigrama",63
+4,"unirte grupo whatsapp","trigrama",63
+4,"inf plan antiguo","trigrama",56
+5,"buenos días","bigrama",70
+5,"buen día","bigrama",61
+5,"buenos dias","bigrama",32
+5,"boleta inscripción","bigrama",30
+5,"entregar documentos","bigrama",30
+5,"dejar documentos","bigrama",27
+5,"curso temporada","bigrama",26
+5,"puede entregar","bigrama",25
+5,"puede pagar","bigrama",23
+5,"cada materia","bigrama",21
+5,"fotocopia boleta inscripción","trigrama",13
+5,"oficina curso temporada","trigrama",11
+5,"buenos días consulta","trigrama",10
+5,"buenos días sabe","trigrama",9
+5,"puede entregar documentos","trigrama",9

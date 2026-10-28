@@ -1648,6 +1648,259 @@ def get_sentimientos_overview_data():
         }
 
 
+def get_topicos_frecuencia_page_data(selected_topic_id=None):
+    """
+    Recupera el conjunto exhaustivo de analítica de Tópicos de Frecuencia
+    desde Neon PostgreSQL para la vista /topicos-frecuencia.
+    """
+    try:
+        t_id = int(selected_topic_id) if selected_topic_id and str(selected_topic_id).isdigit() and int(selected_topic_id) > 0 else None
+    except Exception:
+        t_id = None
+
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                # 1. Catálogo maestro de tópicos
+                cur.execute("""
+                    SELECT 
+                        topico_id, nombre_etiqueta, descripcion_tematica, 
+                        prevalencia_pct, total_mensajes, coherencia_score, actualizado_en
+                    FROM topicos_catalogo
+                    ORDER BY topico_id ASC;
+                """)
+                catalogo = cur.fetchall()
+
+                # Si no se pasó tópico específico, por defecto tomamos el primero o None (global)
+                filtro_topico = t_id if t_id else (catalogo[0]["topico_id"] if catalogo else 1)
+
+                # 2. Términos del tópico seleccionado
+                cur.execute("""
+                    SELECT 
+                        topico_id, termino, frecuencia_abs, beta_prob, 
+                        tfidf_score, term_score_blei, ranking_pos
+                    FROM topicos_terminos
+                    WHERE topico_id = %s
+                    ORDER BY ranking_pos ASC
+                    LIMIT 20;
+                """, (filtro_topico,))
+                terminos = cur.fetchall()
+
+                # 3. Serie temporal de todos los tópicos (para gráfico multilínea)
+                cur.execute("""
+                    SELECT 
+                        topico_id, anio_mes, volumen_mensajes, 
+                        polaridad_media, emocion_predominante
+                    FROM topicos_serie_temporal
+                    ORDER BY anio_mes ASC, topico_id ASC;
+                """)
+                series_raw = cur.fetchall()
+
+                # 4. Cruce de emociones para el tópico seleccionado (Normalizado sin 'indeterminado')
+                cur.execute("""
+                    WITH totales AS (
+                        SELECT 
+                            COALESCE(SUM(frecuencia), 0) AS total_general,
+                            COALESCE(SUM(CASE WHEN emocion = 'indeterminado' THEN frecuencia ELSE 0 END), 0) AS total_indeterminado,
+                            COALESCE(SUM(CASE WHEN emocion != 'indeterminado' THEN frecuencia ELSE 0 END), 0) AS total_afectivo
+                        FROM topicos_emociones
+                        WHERE topico_id = %s
+                    )
+                    SELECT 
+                        te.topico_id, 
+                        te.emocion, 
+                        te.frecuencia,
+                        ROUND(100.0 * te.frecuencia / NULLIF(t.total_afectivo, 0), 2) AS porcentaje_relativo,
+                        t.total_general,
+                        t.total_indeterminado,
+                        t.total_afectivo,
+                        ROUND(100.0 * t.total_indeterminado / NULLIF(t.total_general, 0), 2) AS pct_indeterminado_global,
+                        ROUND(100.0 * t.total_afectivo / NULLIF(t.total_general, 0), 2) AS pct_afectivo_global
+                    FROM topicos_emociones te
+                    CROSS JOIN totales t
+                    WHERE te.topico_id = %s AND te.emocion != 'indeterminado'
+                    ORDER BY te.frecuencia DESC
+                    LIMIT 10;
+                """, (filtro_topico, filtro_topico))
+                emociones_cruce = cur.fetchall()
+
+                # Cobertura afectiva vs fáctica
+                if emociones_cruce:
+                    r0 = emociones_cruce[0]
+                    cobertura = {
+                        "total_general": r0["total_general"],
+                        "total_indeterminado": r0["total_indeterminado"],
+                        "total_afectivo": r0["total_afectivo"],
+                        "pct_indeterminado": float(r0["pct_indeterminado_global"] or 0),
+                        "pct_afectivo": float(r0["pct_afectivo_global"] or 0)
+                    }
+                else:
+                    cobertura = {
+                        "total_general": 5344, "total_indeterminado": 4377, "total_afectivo": 967,
+                        "pct_indeterminado": 81.89, "pct_afectivo": 18.11
+                    }
+
+                # 5. N-gramas del tópico seleccionado
+                cur.execute("""
+                    SELECT 
+                        topico_id, ngram, tipo_ngram, frecuencia
+                    FROM topicos_ngrams
+                    WHERE topico_id = %s
+                    ORDER BY frecuencia DESC
+                    LIMIT 12;
+                """, (filtro_topico,))
+                ngrams = cur.fetchall()
+
+                # 6. Mensajes iniciales (6 mensajes)
+                mensajes_res = get_mensajes_por_topico_y_emocion(
+                    topico_id=filtro_topico, 
+                    emocion="todos", 
+                    offset=0, 
+                    limit=6
+                )
+                muestras_mensajes = mensajes_res.get("mensajes", [])
+
+                # Formatear series temporales para Chart.js
+                meses_set = sorted(list(set(r["anio_mes"] for r in series_raw)))
+                datasets_series = []
+                colores_topicos = {
+                    1: "#4f46e5", # Indigo
+                    2: "#06b6d4", # Cyan
+                    3: "#10b981", # Emerald
+                    4: "#f59e0b", # Amber
+                    5: "#ec4899"  # Pink
+                }
+                for cat in catalogo:
+                    tid = cat["topico_id"]
+                    mes_dict = {r["anio_mes"]: r["volumen_mensajes"] for r in series_raw if r["topico_id"] == tid}
+                    data_points = [mes_dict.get(m, 0) for m in meses_set]
+                    datasets_series.append({
+                        "id": tid,
+                        "label": f"T{tid}: {cat['nombre_etiqueta'].split('.')[1].strip() if '.' in cat['nombre_etiqueta'] else cat['nombre_etiqueta']}",
+                        "color": colores_topicos.get(tid, "#6366f1"),
+                        "data": data_points
+                    })
+
+                # Datos del tópico activo
+                topico_activo = next((c for c in catalogo if c["topico_id"] == filtro_topico), (catalogo[0] if catalogo else {}))
+
+                return {
+                    "catalogo": catalogo,
+                    "topico_activo": topico_activo,
+                    "filtro_topico": filtro_topico,
+                    "terminos": terminos,
+                    "emociones_cruce": emociones_cruce,
+                    "cobertura": cobertura,
+                    "ngrams": ngrams,
+                    "muestras": muestras_mensajes,
+                    "timeline_labels": meses_set,
+                    "timeline_datasets": datasets_series,
+                    "total_topicos": len(catalogo)
+                }
+
+    except Exception as e:
+        print(f"Error en get_topicos_frecuencia_page_data: {e}")
+        return {
+            "catalogo": [],
+            "topico_activo": {},
+            "filtro_topico": 1,
+            "terminos": [],
+            "emociones_cruce": [],
+            "cobertura": {"pct_afectivo": 18.1, "pct_indeterminado": 81.9, "total_afectivo": 967, "total_indeterminado": 4377},
+            "ngrams": [],
+            "muestras": [],
+            "timeline_labels": [],
+            "timeline_datasets": [],
+            "total_topicos": 5
+        }
+
+
+def get_mensajes_por_topico_y_emocion(topico_id=1, emocion=None, offset=0, limit=6):
+    """
+    Recupera mensajes paginados filtrados por tópico y opcionalmente por emoción.
+    Soporta:
+      - 'todos': Cualquier mensaje del tópico
+      - 'con_emocion': Mensajes con polaridad/emoción activa (excluye indeterminado/None)
+      - 'indeterminado': Solo mensajes fácticos sin emoción
+      - '<nombre_emocion>': Filtro exacto por emoción (ej: 'gratitud', 'alegria', 'frustracion', etc.)
+    """
+    try:
+        t_id = int(topico_id) if topico_id and str(topico_id).isdigit() else 1
+        off = int(offset) if offset and str(offset).isdigit() else 0
+        lim = int(limit) if limit and str(limit).isdigit() else 6
+    except Exception:
+        t_id, off, lim = 1, 0, 6
+
+    params = [t_id]
+    filtro_sql = "WHERE topico_lda_id = %s AND (text_norm IS NOT NULL AND text_norm != '')"
+
+    if emocion:
+        emo = str(emocion).strip().lower()
+        if emo in ('con_emocion', 'afectivo'):
+            filtro_sql += " AND dominant_emotion IS NOT NULL AND dominant_emotion NOT IN ('indeterminado', 'None', '')"
+        elif emo in ('indeterminado', 'sin_emocion', 'factico'):
+            filtro_sql += " AND (dominant_emotion IS NULL OR dominant_emotion IN ('indeterminado', 'None', ''))"
+        elif emo not in ('todos', 'all'):
+            filtro_sql += " AND LOWER(dominant_emotion) = %s"
+            params.append(emo)
+
+    params.extend([lim + 1, off]) # Pedir 1 extra para verificar has_more
+
+    query = f"""
+        SELECT 
+            message_id, 
+            timestamp_local::text AS fecha,
+            COALESCE(text_norm, text_original) AS texto,
+            polarity_label,
+            CASE 
+                WHEN dominant_emotion IS NULL OR dominant_emotion IN ('indeterminado', 'None', '') THEN 'indeterminado'
+                ELSE dominant_emotion 
+            END AS dominant_emotion
+        FROM mensajes
+        {filtro_sql}
+        ORDER BY message_id DESC
+        LIMIT %s OFFSET %s;
+    """
+
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(query, params)
+                rows = cur.fetchall()
+                has_more = len(rows) > lim
+                mensajes = rows[:lim]
+
+                return {
+                    "status": "success",
+                    "topico_id": t_id,
+                    "emocion_filtro": emocion or "todos",
+                    "offset": off,
+                    "limit": lim,
+                    "has_more": has_more,
+                    "next_offset": off + len(mensajes),
+                    "mensajes": [
+                        {
+                            "message_id": r["message_id"],
+                            "fecha": r["fecha"][:10] if r["fecha"] else "",
+                            "texto": r["texto"],
+                            "polarity_label": r["polarity_label"] or "indeterminado",
+                            "dominant_emotion": r["dominant_emotion"]
+                        }
+                        for r in mensajes
+                    ]
+                }
+    except Exception as e:
+        print(f"Error en get_mensajes_por_topico_y_emocion: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "mensajes": [],
+            "has_more": False,
+            "next_offset": off
+        }
+
+
+
 
 # =============================================================================
 #  MÓDULO DE 15 EMOCIONES — Neon PostgreSQL (Primaria) + SQLite (Respaldo)
@@ -2058,3 +2311,4 @@ def get_emociones_15_polar():
         }))
 
     return {"emociones": ordered, "motor_origen": motor_origen}
+

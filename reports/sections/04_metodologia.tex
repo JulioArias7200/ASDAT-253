@@ -23,6 +23,24 @@ La exportación en formato JSON de Telegram Desktop genera estructuras heterogé
   \item \textbf{Resolución de Entidades Docentes y Materias (SCD Tipo 2):} Mediante el script \texttt{detectar\_menciones\_umsa.py}, se compilan expresiones regulares (\texttt{alias\_regex}) para docentes y materias, resolviendo su correspondencia contextual contra la tabla \texttt{oferta\_}\allowbreak\texttt{academica\_semestral} según la fecha del mensaje.
 \end{enumerate}
 
+Para ilustrar de forma intuitiva la pérdida controlada de dimensionalidad y el saneamiento textual a lo largo del flujo de ingeniería, la Figura~\ref{fig:sankey_volumen_etl} detalla el diagrama Sankey del volumen de datos, transitando desde 1.46M de caracteres crudos hasta los tokens canónicos limpios. Complementariamente, la Figura~\ref{fig:sankey_tipologia_mensajes} exhibe la distribución estructural y la bifurcación sintáctica de los mensajes (estándar, preguntas, emojis y modismos) hacia sus respectivos módulos de procesamiento afectivo y temático.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP7JNAC.png}
+  \vspace{4pt}
+  \caption{Diagrama de flujo Sankey de la compresión y reducción de volumen textual en el pipeline ETL.}
+  \label{fig:sankey_volumen_etl}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP8JNAC.png}
+  \vspace{4pt}
+  \caption{Bifurcación y ruteo metodológico según tipología de mensaje y canal multimodal.}
+  \label{fig:sankey_tipologia_mensajes}
+\end{figure}
+
 \subsection{Señales de Evidencia y Motor Léxico Multietiqueta}
 
 El clasificador discrimina tres fuentes independientes de evidencia afectiva (Tabla~\ref{tab:senales}).

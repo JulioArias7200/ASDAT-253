@@ -107,6 +107,16 @@ acad\'emicos.
   \label{fig:emo_anio}
 \end{figure}
 
+En la plataforma interactiva SentiDataUMSA, este comportamiento se consolida en el módulo de telemetría afectiva exhibido en la Figura~\ref{fig:ui_sentimientos_global}, donde se contrastan los indicadores globales de polaridad (resaltando la predominancia de mensajes fácticos sobre la masa afectiva) junto con el escalafón jerárquico de emociones dominantes del corpus.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP13JNAC.png}
+  \vspace{4pt}
+  \caption{Módulo interactivo de telemetría afectiva, balance de polaridad y distribución de emociones en SentiDataUMSA.}
+  \label{fig:ui_sentimientos_global}
+\end{figure}
+
 \subsection{Emojis y reacciones como señal afectiva}
 
 Una parte de la carga afectiva se canaliza a través de emojis, que el método conserva
@@ -119,6 +129,16 @@ claramente el repertorio.
 
 \input{tables/top_emojis}
 \input{tables/top_reacciones}
+
+La Figura~\ref{fig:ui_temporal_reacciones} presenta la vista de producción donde la serie temporal spline interactiva correlaciona los picos de actividad con las franjas semestrales (Mayo--Agosto y Diciembre--Febrero) y visualiza la distribución empírica de reacciones emoji de Telegram, confirmando la supremacía de reacciones afirmativas y de gratitud.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP2JNAC.png}
+  \vspace{4pt}
+  \caption{Evolución temporal continua (Spline SVG) con franjas semestrales y distribución de reacciones nativas de Telegram.}
+  \label{fig:ui_temporal_reacciones}
+\end{figure}
 
 \subsection{Evolución temporal}
 \label{sec:res-temporal}
@@ -155,6 +175,16 @@ minoritario, es persistente a lo largo de toda la historia del grupo.
   \label{fig:pol_apilada}
 \end{figure}
 
+Para profundizar en la estacionalidad académica, la Figura~\ref{fig:ui_periodos_academicos} ilustra la descomposición longitudinal a lo largo de 47 cohortes mensuales, evidenciando cómo los ciclos de matrícula y exámenes parciales modulan el volumen conversacional en la comunidad estudiantil.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP6JNAC.png}
+  \vspace{4pt}
+  \caption{Descomposición de la actividad conversacional por hitos académicos y cohortes mensuales.}
+  \label{fig:ui_periodos_academicos}
+\end{figure}
+
 \subsection{Modelado de tópicos}
 \label{sec:res-topicos}
 
@@ -177,6 +207,48 @@ razonablemente equilibrada, sin un tópico que absorba la mayor\'\i{}a del corpu
   \includegraphics[width=0.7\textwidth]{prevalencia_topicos.png}
   \caption{Prevalencia de tópicos (documentos con tópico dominante).}
   \label{fig:topicos_prev}
+\end{figure}
+
+El entorno analítico de SentiDataUMSA extiende la interpretabilidad de los tópicos latentes mediante un conjunto de vistas especializadas. La Figura~\ref{fig:ui_lda_emociones} exhibe la configuración global de los cinco tópicos con sus distribuciones de probabilidad $\beta$ y el perfil afectivo asociado. En la Figura~\ref{fig:ui_topicos_metricas} se detalla la matriz de términos distintivos y las puntuaciones TF-IDF por componente temático, mientras que la Figura~\ref{fig:ui_topicos_ngrams} extrae las colocaciones sintácticas y frases multipalabra características (e.g., \emph{"pasando clases"}, \emph{"álgebra lineal"}, \emph{"grupo whatsapp"}). Asimismo, la Figura~\ref{fig:ui_topicos_tiempo} proyecta la evolución temporal histórica (2018--2026) y el balance de carga emocional intrínseco de cada tópico. Finalmente, la Figura~\ref{fig:ui_topicos_mensajes} muestra el muestreo empírico de mensajes reales anonimizados clasificados dentro de cada categoría temática desde la base de datos distribuida en Neon PostgreSQL.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP3JNAC.png}
+  \vspace{4pt}
+  \caption{Estructura temática latente (LDA, $K=5$) y panel de emociones contextuales UMSA/Plutchik.}
+  \label{fig:ui_lda_emociones}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP9JNAC.png}
+  \vspace{4pt}
+  \caption{Matriz analítica de términos distintivos, pesos $\beta$, perplejidad y ponderación TF-IDF por tópico.}
+  \label{fig:ui_topicos_metricas}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP10JNAC.png}
+  \vspace{4pt}
+  \caption{Extracción de colocaciones, frases y n-gramas frecuentes asociados a los tópicos temáticos.}
+  \label{fig:ui_topicos_ngrams}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP11JNAC.png}
+  \vspace{4pt}
+  \caption{Trayectoria temporal de prevalencia temática (2018--2026) y perfil de carga afectiva del tópico.}
+  \label{fig:ui_topicos_tiempo}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP12JNAC.png}
+  \vspace{4pt}
+  \caption{Muestreo empírico de mensajes reales anonimizados clasificados en el modelo temático en Neon PostgreSQL.}
+  \label{fig:ui_topicos_mensajes}
 \end{figure}
 
 \subsection{Transiciones de estado (cadenas de Markov)}

@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Clasificación y Frecuencia de los Tipos de Mensajes y Contenidos Multimodales}
+  \label{tab:tipos_media}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{llrr}
+    \toprule
+    Tipología de Contenido & Modalidad de Procesamiento & Frecuencia ($n$) & Proporción (\%) \\
+    \midrule
+    Texto plano estándar    & Normalización Unicode NFC y lematización & 16.400 & 70,2 \\
+    Fotografías y capturas  & Extracción de texto mediante motor OCR   & 1.782  & 7,6  \\
+    Stickers animados/fijos & Mapeo con emoji y etiqueta emocional     & 2.180  & 9,3  \\
+    Documentos y boletas PDF& Análisis de metadatos y texto descriptivo & 2.985  & 12,8 \\
+    Animaciones GIF         & Catalogación de intencionalidad afectiva & 24     & 0,1  \\
+    \midrule
+    Total Registros         &                                          & 23.371 & 100,0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} Categorización respaldada por las columnas booleanas \texttt{tiene\_imagen}, \texttt{es\_sticker} y \texttt{es\_gif} en el esquema relacional de Neon PostgreSQL.
+  \end{minipage}
+\end{table}

@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Matriz de Paridad Experimental y Cobertura de Pruebas Unitarias R vs. Python}
+  \label{tab:paridad_pruebas}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{lllcc}
+    \toprule
+    Módulo Analítico & Caso de Prueba Validado & Módulo R (\texttt{testthat}) & Módulo Python (\texttt{pytest}) & Estado \\
+    \midrule
+    Taxonomía Léxica & Validación de 15 emociones base y $>8$ términos & \texttt{test-engine.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Ponderación Sintáctica & Intensificadores, atenuadores y mayúsculas & \texttt{test-engine.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Negación Contextual & Inversión de valencia y transferencia a opuesta & \texttt{test-engine.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Doble Negación & Excepción sintáctica (\emph{"no está nada mal"}) & \texttt{test-engine.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Normalización Texto & Preservación de emojis y acentos Unicode NFC & \texttt{test-preprocess.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Partición Temporal & Asignación de semana, mes e hitos académicos & \texttt{test-preprocess.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    Modelado Temático & Generación de matriz documento-término & \texttt{test-eval-topics.R} & \texttt{test\_emotica\_parity.py} & \textbf{PASÓ} \\
+    API Ingesta Web & Procesamiento multipart JSON/ZIP y series 24h & -- & \texttt{test\_ingest\_endpoint.py} & \textbf{PASÓ} \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize
+    \textit{Nota.} Las pruebas fueron ejecutadas con el entorno Python 3.12 y pytest 7.4. El 100\% de las aserciones de equivalencia matemática (tolerancia numérica $\epsilon < 10^{-6}$) resultaron satisfactorias.
+  \end{minipage}
+\end{table}

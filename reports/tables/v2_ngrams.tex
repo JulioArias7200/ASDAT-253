@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Términos y N-gramas Más Frecuentes en el Corpus de Conversaciones}
+  \label{tab:v2_ngrams}
+  \begin{tabular}{llrrlrr}
+    \toprule
+    Tipo & N-grama & Conteo & Tipo & N-grama & Conteo \\
+    \midrule
+    Unigrama  & \textit{no}             & 4.124 & Bigrama  & \textit{alguien sabe}     & 1.192 \\
+    Unigrama  & \textit{si}             & 2.871 & Bigrama  & \textit{grupo whatsapp}   & 456   \\
+    Unigrama  & \textit{alguien}        & 2.315 & Bigrama  & \textit{buenas tardes}    & 412   \\
+    Unigrama  & \textit{grupo}          & 1.942 & Bigrama  & \textit{curso temporada}  & 388   \\
+    Unigrama  & \textit{materia}        & 1.830 & Trigrama & \textit{alguien sabe si}  & 425   \\
+    Unigrama  & \textit{paralelo}       & 1.420 & Trigrama & \textit{enlace del grupo} & 231   \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} Datos calculados a partir de los 27.334 registros de frecuencias almacenados en la tabla \texttt{ngrams\_frecuencias}. Las stopwords estándar del español fueron excluidas a excepción de los marcadores de negación sintáctica (\emph{no}, \emph{nunca}, \emph{tampoco}).
+  \end{minipage}
+\end{table}

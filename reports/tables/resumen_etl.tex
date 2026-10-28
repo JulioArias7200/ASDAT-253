@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Depuración y Rendimiento del Proceso ETL desde el Formato Crudo al Corpus Analítico}
+  \label{tab:resumen_etl}
+  \begin{tabular}{lrr}
+    \toprule
+    Etapa del Procesamiento ETL & Registros & Proporción Retenida (\%) \\
+    \midrule
+    Mensajes totales extraídos del archivo JSON crudo     & 24.120 & 100,0 \\
+    Descarte de eventos de servicio del sistema Telegram  & 658    & --    \\
+    Mensajes multimodales sin texto ni stickers evaluables& 91     & --    \\
+    \midrule
+    Corpus consolidado en base de datos (\texttt{mensajes})& 23.371 & 96,9  \\
+    Mensajes con contenido textual apto para PLN          & 18.450 & 76,5  \\
+    Mensajes con señal afectiva suficiente ($\ge 1$)      & 3.423  & 14,2  \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} La alta retención inicial (96,9\%) refleja la capacidad del pipeline para procesar no solo texto plano, sino también contenido visual enriquecido mediante OCR y catálogos de stickers.
+  \end{minipage}
+\end{table}

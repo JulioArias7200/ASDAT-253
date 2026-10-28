@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Términos Académicos con Mayor Ponderación TF-IDF Promedio en el Corpus}
+  \label{tab:v2_tfidf}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Término Clave & Frecuencia TF ($tf$) & Documentos DF ($df$) & Ponderación IDF ($idf$) & Score TF-IDF \\
+    \midrule
+    \textit{kardex}       & 1.120 & 890 & 2,98 & 0,182 \\
+    \textit{boleta}       & 845   & 710 & 3,21 & 0,165 \\
+    \textit{habilitado}   & 680   & 540 & 3,48 & 0,154 \\
+    \textit{convalidar}   & 490   & 395 & 3,81 & 0,148 \\
+    \textit{retiro}       & 730   & 620 & 3,35 & 0,142 \\
+    \textit{auxiliatura}  & 510   & 430 & 3,71 & 0,139 \\
+    \textit{paralelo}     & 1.420 & 1.250 & 2,65 & 0,135 \\
+    \textit{formulario}   & 620   & 515 & 3,52 & 0,131 \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} Extraído de los 122.971 registros ponderados en la tabla \texttt{tfidf\_mensajes}. La métrica prioriza palabras de alta especificidad semántica en trámites de la Carrera de Informática, penalizando términos ubicuos.
+  \end{minipage}
+\end{table}

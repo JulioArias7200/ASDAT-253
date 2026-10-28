@@ -1,0 +1,33 @@
+% =============================================================================
+% pipeline_arquitectura.tex — Diagrama de Arquitectura del Pipeline CRISP-DM (TikZ)
+% =============================================================================
+\shorthandoff{><}
+\begin{tikzpicture}[
+    arrows={-Stealth},
+    node distance=1.8cm,
+    block/.style={rectangle, draw=blue!70!black, fill=blue!8, rounded corners=3pt, thick, align=center, font=\footnotesize, minimum height=1.1cm, minimum width=2.8cm},
+    dbblock/.style={cylinder, shape border rotate=90, draw=purple!70!black, fill=purple!10, aspect=0.25, thick, align=center, font=\footnotesize, minimum height=1.2cm, minimum width=2.4cm},
+    webblock/.style={rectangle, draw=teal!70!black, fill=teal!10, rounded corners=3pt, thick, align=center, font=\footnotesize, minimum height=1.1cm, minimum width=2.8cm},
+    arrow/.style={thick, color=gray!80!black}
+]
+
+    % Fila 1: Ingesta y Limpieza
+    \node[block] (TG) {1. Telegram Export \\ \scriptsize (JSON / ZIP Multimodal)};
+    \node[block, right=1.2cm of TG] (ETL) {2. ETL Multimodal \\ \scriptsize (OCR, Emojis, Modismos)};
+    \node[block, right=1.2cm of ETL] (NLP) {3. Motor Léxico \\ \scriptsize (18 Emociones, Negación)};
+
+    % Fila 2: Modelado No Supervisado y Dinámica
+    \node[block, below=1.4cm of NLP] (MARKOV) {4. Dinámica Estocástica \\ \scriptsize (Cadenas de Markov \& LDA)};
+    \node[dbblock, left=1.2cm of MARKOV] (NEON) {5. Neon PostgreSQL \\ \scriptsize (16 Tablas, CDC PL/pgSQL)};
+    \node[webblock, left=1.2cm of NEON] (FLASK) {6. Plataforma Flask \\ \scriptsize (Streaming \& Spline SVG)};
+
+    % Flechas de flujo
+    \draw[arrow] (TG) -- (ETL);
+    \draw[arrow] (ETL) -- (NLP);
+    \draw[arrow] (NLP) -- (MARKOV);
+    \draw[arrow] (MARKOV) -- (NEON);
+    \draw[arrow] (NEON) -- (FLASK);
+    \draw[arrow, dashed] (FLASK) to[bend left=25] node[above, font=\tiny] {Audit CDC} (NEON);
+
+\end{tikzpicture}
+\shorthandon{><}

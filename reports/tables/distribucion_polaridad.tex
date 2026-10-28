@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Distribución Global de Polaridad Afectiva sobre Mensajes con Evidencia y Corpus Total}
+  \label{tab:distribucion_polaridad}
+  \begin{tabular}{lrrr}
+    \toprule
+    Etiqueta de Polaridad & Frecuencia ($n$) & \% con Evidencia & \% Corpus Total \\
+    \midrule
+    Positivo              & 2.520            & 61,8             & 10,8            \\
+    Negativo              & 1.190            & 29,2             & 5,1             \\
+    Neutro                & 368              & 9,0              & 1,6             \\
+    Indeterminado         & 19.293           & --               & 82,5            \\
+    \midrule
+    Total General         & 23.371           & 100,0            & 100,0           \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.88\textwidth}
+    \footnotesize
+    \textit{Nota.} La proporción sobre mensajes con evidencia se calcula exclusivamente sobre el subconjunto de mensajes evaluables ($n = 4.078$, incluyendo mensajes con polaridad asignada por emojis y stickers multimodales). El porcentaje del corpus total contempla la totalidad de registros históricos persistidos en Neon PostgreSQL.
+  \end{minipage}
+\end{table}

@@ -330,17 +330,27 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<!-- Librería Chart.js para renderizado de gráficas analíticas -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script>
 // ─── DATOS PASADOS DESDE PYTHON ─────────────────────────────────────────────
-const chartsData = {{ charts_json | safe }};
+const chartsData = {{ charts_json | safe }} || {};
 
 // Configuración visual compartida de Chart.js
 const chartColor = 'rgba(156, 163, 175, 0.9)'; // Text outline
 const chartGrid = 'rgba(75, 85, 99, 0.2)';     // Surface container border
 
-// ─── GRÁFICA 1: Periodos vs Intensidad (Mixta: Barras Apiladas + Línea) ─────
-const ctxPeriodos = document.getElementById('chartPeriodosIntensidad').getContext('2d');
-new Chart(ctxPeriodos, {
+// Inicializar gráficas cuando el DOM y Chart.js estén listos
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js no se pudo cargar.');
+        return;
+    }
+
+    // ─── GRÁFICA 1: Periodos vs Intensidad (Mixta: Barras Apiladas + Línea) ─────
+    const elPeriodos = document.getElementById('chartPeriodosIntensidad');
+    if (elPeriodos && chartsData.periodos_labels) {
+        new Chart(elPeriodos.getContext('2d'), {
     type: 'bar',
     data: {
         labels: chartsData.periodos_labels,
@@ -416,12 +426,13 @@ new Chart(ctxPeriodos, {
                 title: { display: true, text: 'Intensidad / Urgencia', color: '#fbbf24', font: { size: 10 } }
             }
         }
+    });
     }
-});
 
-// ─── GRÁFICA 2: Ranking de Objetos (Horizontal Bar) ──────────────────────────
-const ctxObjetos = document.getElementById('chartObjetosFrecuencia').getContext('2d');
-new Chart(ctxObjetos, {
+    // ─── GRÁFICA 2: Ranking de Objetos (Horizontal Bar) ──────────────────────────
+    const elObjetos = document.getElementById('chartObjetosFrecuencia');
+    if (elObjetos && chartsData.objetos_labels) {
+        new Chart(elObjetos.getContext('2d'), {
     type: 'bar',
     data: {
         labels: chartsData.objetos_labels,
@@ -457,12 +468,13 @@ new Chart(ctxObjetos, {
                 ticks: { color: chartColor, font: { size: 10 } }
             }
         }
+    });
     }
-});
 
-// ─── GRÁFICA 3: Zonas Calientes / Ubicaciones (Doughnut) ──────────────────────
-const ctxZonas = document.getElementById('chartZonasCalientes').getContext('2d');
-new Chart(ctxZonas, {
+    // ─── GRÁFICA 3: Zonas Calientes / Ubicaciones (Doughnut) ──────────────────────
+    const elZonas = document.getElementById('chartZonasCalientes');
+    if (elZonas && chartsData.lugares_labels) {
+        new Chart(elZonas.getContext('2d'), {
     type: 'doughnut',
     data: {
         labels: chartsData.lugares_labels,
@@ -495,8 +507,10 @@ new Chart(ctxZonas, {
             }
         },
         cutout: '60%'
+    });
     }
-});
+
+}); // Fin de DOMContentLoaded para Chart.js
 
 // ─── FILTROS DINÁMICOS DEL TABLÓN ───────────────────────────────────────────
 let filtroTipoActivo = 'TODOS';
@@ -565,5 +579,7 @@ function aplicarFiltros() {
         }
     }
 }
+window.filtrarTipo = filtrarTipo;
+window.aplicarFiltros = aplicarFiltros;
 </script>
 {% endblock %}

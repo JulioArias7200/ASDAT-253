@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Matriz de Probabilidades de Transición, Distribución Estacionaria y Tiempos de Residencia}
+  \label{tab:transicion_markov}
+  \label{tab:markov}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Estado & \multicolumn{3}{c}{Probabilidad de Transición hacia Estado Destino} & Distr. Estacionaria & T. Residencia \\
+    \cmidrule(lr){2-4}
+    Origen ($S_t$) & Positivo ($S_{t+1}$) & Negativo ($S_{t+1}$) & Neutro ($S_{t+1}$) & ($\pi_j$) & (turnos) \\
+    \midrule
+    Positivo & 0,160 & 0,064 & 0,776 & 0,115 (11,5\%) & 1,19 \\
+    Negativo & 0,102 & 0,075 & 0,823 & 0,054 (5,4\%)  & 1,08 \\
+    Neutro   & 0,109 & 0,051 & 0,839 & 0,831 (83,1\%) & 6,22 \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize
+    \textit{Nota.} Tiempo de recuperación ante episodios negativos: $\tau_{rec} = 1,08$ turnos. El análisis estocástico demuestra que el estado neutro/factual actúa como un atractor cuasi-absorbente dentro de la dinámica de conversación universitaria, absorbiendo más del 77\% de las transiciones salientes de los estados polares.
+  \end{minipage}
+\end{table}

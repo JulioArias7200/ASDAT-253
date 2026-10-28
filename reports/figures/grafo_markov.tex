@@ -1,0 +1,36 @@
+% =============================================================================
+% grafo_markov.tex — Diagrama Estocástico de Transición de Estados (TikZ)
+% =============================================================================
+\shorthandoff{><}
+\begin{tikzpicture}[
+    arrows={-Stealth},
+    node distance=3.2cm,
+    state/.style={circle, draw=blue!70!black, fill=blue!10, thick, minimum size=1.8cm, font=\bfseries\small, align=center},
+    state_pos/.style={circle, draw=green!60!black, fill=green!15, thick, minimum size=1.8cm, font=\bfseries\small, align=center},
+    state_neg/.style={circle, draw=red!70!black, fill=red!15, thick, minimum size=1.8cm, font=\bfseries\small, align=center},
+    state_neu/.style={circle, draw=gray!70!black, fill=gray!15, thick, minimum size=1.8cm, font=\bfseries\small, align=center},
+    prob/.style={font=\footnotesize\itshape, fill=white, inner sep=1.5pt, rounded corners=2pt}
+]
+
+    % Nodos de estados
+    \node[state_pos] (POS) at (0, 2.5) {Positivo \\ \scriptsize ($\pi=11,5\%$)};
+    \node[state_neg] (NEG) at (6, 2.5) {Negativo \\ \scriptsize ($\pi=5,4\%$)};
+    \node[state_neu] (NEU) at (3, -1.8) {Neutro \\ \scriptsize ($\pi=83,1\%$)};
+
+    % Bucles autorregresivos
+    \path[thick] (POS) edge [loop left] node [prob] {$p = 0,160$} (POS);
+    \path[thick] (NEG) edge [loop right] node [prob] {$p = 0,075$} (NEG);
+    \path[thick] (NEU) edge [loop below] node [prob] {$p = 0,839$} (NEU);
+
+    % Transiciones entre estados
+    \path[thick, bend left=15] (POS) edge node [prob, above] {$0,064$} (NEG);
+    \path[thick, bend left=15] (NEG) edge node [prob, below] {$0,102$} (POS);
+
+    \path[thick, bend left=20] (POS) edge node [prob, left] {$0,776$} (NEU);
+    \path[thick, bend left=20] (NEU) edge node [prob, right] {$0,109$} (POS);
+
+    \path[thick, bend left=20] (NEG) edge node [prob, right] {$0,823$} (NEU);
+    \path[thick, bend left=20] (NEU) edge node [prob, left] {$0,051$} (NEG);
+
+\end{tikzpicture}
+\shorthandon{><}

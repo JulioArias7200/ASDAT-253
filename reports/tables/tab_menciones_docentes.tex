@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Ranking de Docentes Más Mencionados, Materias Asociadas y Polaridad Observada}
+  \label{tab:menciones_docentes}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{llrrrl}
+    \toprule
+    Identificador & Nombre Docente & Menciones & \% Positivo & \% Negativo & Materia Principal \\
+    \midrule
+    DOC\_01 & Lic. Marcelo Balboa     & 342 & 68,4 & 14,2 & INF-131: Algoritmos \\
+    DOC\_02 & M.Sc. Carmen Velasco    & 289 & 74,1 & 8,6  & INF-141: Base de Datos \\
+    DOC\_03 & Lic. Rolando Huanca     & 245 & 55,2 & 28,1 & INF-111: Introducción \\
+    DOC\_04 & Ing. Edgar Clavijo      & 218 & 62,0 & 16,5 & INF-121: Programación \\
+    DOC\_05 & Lic. Patricia Condori   & 194 & 71,8 & 9,3  & INF-161: Minería de Datos \\
+    DOC\_06 & Ing. Ramiro Quispe      & 165 & 49,4 & 32,1 & INF-144: Sistemas Operativos \\
+    DOC\_07 & M.Sc. Fernando Terán    & 142 & 66,2 & 12,0 & INF-153: Redes \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize
+    \textit{Nota.} Resolución automática ejecutada por \texttt{detectar\_menciones\_umsa.py} cruzando expresiones regulares compiladas (\texttt{alias\_regex}) contra la tabla \texttt{oferta\_academica\_semestral} (SCD Tipo 2). La tasa residual corresponde a menciones catalogadas como neutras o indeterminadas.
+  \end{minipage}
+\end{table}

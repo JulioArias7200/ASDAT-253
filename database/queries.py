@@ -2179,6 +2179,47 @@ def _get_sqlite_conn():
     return conn
 
 
+
+_SQL_EMOCION_CASE = """
+    CASE
+        WHEN dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
+                                  'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
+                                  'enojo','decepcion','cansancio','ironia','curiosidad')
+            THEN dominant_emotion
+        WHEN dominant_emotion = 'confianza'                            THEN 'seguridad'
+        WHEN dominant_emotion = 'orgullo'                              THEN 'admiracion'
+        WHEN dominant_emotion = 'alivio'                               THEN 'tranquilidad'
+        WHEN dominant_emotion = 'verguenza'                            THEN 'confusion'
+        WHEN dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
+        WHEN dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
+        WHEN dominant_emotion = 'frustracion'                          THEN 'decepcion'
+        WHEN dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
+        WHEN dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
+        WHEN dominant_emotion = 'diversion'                            THEN 'alegria'
+        ELSE NULL
+    END
+"""
+
+_SQL_EMOCION_CASE_SR = """
+    CASE
+        WHEN sr.dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
+                                     'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
+                                     'enojo','decepcion','cansancio','ironia','curiosidad')
+            THEN sr.dominant_emotion
+        WHEN sr.dominant_emotion = 'confianza'                            THEN 'seguridad'
+        WHEN sr.dominant_emotion = 'orgullo'                              THEN 'admiracion'
+        WHEN sr.dominant_emotion = 'alivio'                               THEN 'tranquilidad'
+        WHEN sr.dominant_emotion = 'verguenza'                            THEN 'confusion'
+        WHEN sr.dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
+        WHEN sr.dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
+        WHEN sr.dominant_emotion = 'frustracion'                          THEN 'decepcion'
+        WHEN sr.dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
+        WHEN sr.dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
+        WHEN sr.dominant_emotion = 'diversion'                            THEN 'alegria'
+        ELSE NULL
+    END
+"""
+
 def get_emociones_15_barras():
     """
     Consulta SQL de conteo total de mensajes por emoción dominante:
@@ -2193,15 +2234,15 @@ def get_emociones_15_barras():
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                     AS emocion_id,
+                        ({_SQL_EMOCION_CASE})          AS emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
                     FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
@@ -2213,15 +2254,15 @@ def get_emociones_15_barras():
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                     AS emocion_id,
+                        ({_SQL_EMOCION_CASE})          AS emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
                     FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
@@ -2309,11 +2350,12 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 cur.execute(f"""
                     SELECT
                         TO_CHAR(timestamp_utc, 'YYYY-MM')   AS periodo,
-                        dominant_emotion                    AS emocion_id,
+                        ({_SQL_EMOCION_CASE})         AS emocion_id,
                         COUNT(*)                            AS total
                     FROM mensajes
                     WHERE {" AND ".join(where_clauses)}
-                    GROUP BY periodo, dominant_emotion
+                    GROUP BY periodo, emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
@@ -2357,12 +2399,13 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 cur.execute(f"""
                     SELECT
                         strftime('%Y-%m', m.timestamp_utc)  AS periodo,
-                        sr.dominant_emotion                  AS emocion_id,
+                        ({_SQL_EMOCION_CASE_SR})      AS emocion_id,
                         COUNT(*)                             AS total
                     FROM sentiment_results sr
                     JOIN messages m ON sr.message_id = m.message_id
                     WHERE {" AND ".join(where_clauses)}
-                    GROUP BY periodo, sr.dominant_emotion
+                    GROUP BY periodo, emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
@@ -2439,16 +2482,16 @@ def get_emociones_15_polar():
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                   AS emocion_id,
+                        ({_SQL_EMOCION_CASE})        AS emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
                     FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion;
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL;
                 """)
                 rows = cur.fetchall()
     except Exception as e_neon:
@@ -2457,16 +2500,16 @@ def get_emociones_15_polar():
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                   AS emocion_id,
+                        ({_SQL_EMOCION_CASE})        AS emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
                     FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion;
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL;
                 """)
                 rows = cur.fetchall()
                 motor_origen = "SQLite Local (Respaldo Offline)"

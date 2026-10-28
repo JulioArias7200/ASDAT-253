@@ -218,7 +218,6 @@
                             </thead>
                             <tbody>
                                 {% for emo in polar.emociones %}
-                                {% if emo.total > 0 %}
                                 <tr class="border-b border-surface-container-high/30 hover:bg-surface-container-high/30 transition-colors">
                                     <td class="py-1.5 px-2 font-semibold" style="color: {{ emo.color }};">
                                         <div class="flex items-center gap-1.5">
@@ -238,7 +237,6 @@
                                     <td class="py-1.5 px-2 text-right font-mono text-outline">{{ emo.avg_intensity }}</td>
                                     <td class="py-1.5 px-2 text-right font-mono font-bold" style="color: {{ emo.color }};">{{ emo.score_polar }}</td>
                                 </tr>
-                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -276,7 +274,7 @@ Chart.defaults.font.family = chartDefaults.font.family;
 Chart.defaults.color       = chartDefaults.color;
 
 // ─── GRÁFICA 1: Barras comparativas ───────────────────────────────────────────
-const barrasEmociones = barrasData.emociones.filter(e => e.total > 0);
+const barrasEmociones = barrasData.emociones;
 let barrasMode = 'freq';
 
 const chartBarras = new Chart(document.getElementById('chartBarras'), {
@@ -456,7 +454,7 @@ function actualizarCheckboxChip(input) {
 }
 
 // ─── GRÁFICA 3: Radar / Polar ──────────────────────────────────────────────────
-const radarEmociones = polarData.emociones.filter(e => e.total > 0);
+const radarEmociones = polarData.emociones;
 
 new Chart(document.getElementById('chartRadar'), {
     type: 'radar',

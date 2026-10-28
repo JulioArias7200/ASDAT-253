@@ -253,10 +253,10 @@
 <!-- ======================================================================= -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script>
-// Datos inyectados desde Flask (consultas SQL)
-const barrasData  = {{ barras_json | safe }};
-const serieData   = {{ serie_json  | safe }};
-const polarData   = {{ polar_json  | safe }};
+// Datos inyectados desde Flask (consultas SQL con respaldo JSON automático)
+const barrasData  = {{ barras_json | safe }} || { emociones: [] };
+const serieData   = {{ serie_json  | safe }} || { labels: [], datasets: [] };
+const polarData   = {{ polar_json  | safe }} || { emociones: [] };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function hexToRgba(hex, alpha) {
@@ -274,7 +274,7 @@ Chart.defaults.font.family = chartDefaults.font.family;
 Chart.defaults.color       = chartDefaults.color;
 
 // ─── GRÁFICA 1: Barras comparativas ───────────────────────────────────────────
-const barrasEmociones = barrasData.emociones;
+const barrasEmociones = (barrasData && barrasData.emociones) ? barrasData.emociones : [];
 let barrasMode = 'freq';
 
 const chartBarras = new Chart(document.getElementById('chartBarras'), {
@@ -346,6 +346,9 @@ let chartSerie = null;
 
 function buildSerieChart(data) {
     if (chartSerie) chartSerie.destroy();
+    if (!data || !data.datasets || !Array.isArray(data.datasets) || data.datasets.length === 0) {
+        return;
+    }
 
     const datasets = data.datasets.map(ds => ({
         label:           ds.label,
@@ -454,7 +457,7 @@ function actualizarCheckboxChip(input) {
 }
 
 // ─── GRÁFICA 3: Radar / Polar ──────────────────────────────────────────────────
-const radarEmociones = polarData.emociones;
+const radarEmociones = (polarData && polarData.emociones) ? polarData.emociones : [];
 
 new Chart(document.getElementById('chartRadar'), {
     type: 'radar',

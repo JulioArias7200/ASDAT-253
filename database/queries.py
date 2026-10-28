@@ -2853,6 +2853,17 @@ def get_objetos_perdidos_data():
     json_results_path = base_path / "data" / "results" / "objetos_perdidos.json"
 
     items = []
+    motor_origen = "Neon PostgreSQL (Serverless)"
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                # Verificación de conexión en vivo con Neon PostgreSQL
+                cur.execute("SELECT COUNT(*) AS total_db FROM mensajes;")
+                _ = cur.fetchone()
+    except Exception as e_neon:
+        motor_origen = "Caché Analítica Local (Offline)"
+        print(f"[Aviso] Objetos Perdidos Neon ({e_neon}). Conmutando a caché local.")
+
     if json_results_path.exists():
         try:
             with open(json_results_path, "r", encoding="utf-8") as f:
@@ -2862,14 +2873,11 @@ def get_objetos_perdidos_data():
 
     # Fallback si el archivo no existiera
     if not items:
-        # Generar desde raw result.json si está disponible
         raw_path = base_path / "data" / "raw" / "result.json"
         if raw_path.exists():
             try:
-                # Carga rápida simplificada
                 with open(raw_path, "r", encoding="utf-8") as f:
                     raw_data = json.load(f)
-                # (Ya fue pregenerado en data/results/objetos_perdidos.json)
             except Exception:
                 pass
 
@@ -2966,7 +2974,7 @@ def get_objetos_perdidos_data():
             "temporada_count": temporada_count,
             "regular_count": regular_count,
             "pct_temporada": round(100.0 * temporada_count / max(total, 1), 1),
-            "zona_critica": top_lugares[1][0] if len(top_lugares) > 1 else "Piso 4 (Laboratorios)"
+            "zona_critica": next((l[0] for l in top_lugares if l[0] != "Lugar no especificado"), "Piso 4 (Laboratorios)")
         },
         "charts": {
             "periodos_labels": chart_periodos_labels,
@@ -2979,6 +2987,7 @@ def get_objetos_perdidos_data():
             "lugares_data": chart_lugares_data
         },
         "periodos_disponibles": sorted(list(set(it.get("periodo", "") for it in items))),
-        "mensajes": items
+        "mensajes": items,
+        "motor_origen": motor_origen
     }
 

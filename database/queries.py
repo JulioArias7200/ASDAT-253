@@ -6,6 +6,8 @@ Alimenta el Dashboard Web y la API de Telemetría con fidelidad total al contrat
 """
 
 import os
+import json
+import unicodedata
 from pathlib import Path
 from dotenv import load_dotenv
 import psycopg2
@@ -164,6 +166,120 @@ def get_docentes_directory(limit=50, gestion_semestre=None):
         return []
 
 
+def get_mensajes_docente_paginados(docente_id, offset=0, limit=6):
+    """
+    Recupera los mensajes paginados donde se menciona a un docente específico,
+    junto con sus reacciones reales asociadas en Telegram y su sentimiento/emoción.
+    """
+    try:
+        off = int(offset) if offset and str(offset).isdigit() else 0
+        lim = int(limit) if limit and str(limit).isdigit() else 6
+    except Exception:
+        off, lim = 0, 6
+
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                # 1. Info del docente
+                cur.execute("""
+                    SELECT 
+                        d.docente_id, 
+                        d.nombre_completo AS docente,
+                        'Informática' AS departamento,
+                        COUNT(md.id) AS total_menciones
+                    FROM docentes d
+                    LEFT JOIN menciones_docentes md ON d.docente_id = md.docente_id
+                    WHERE d.docente_id = %s
+                    GROUP BY d.docente_id, d.nombre_completo;
+                """, (docente_id,))
+                doc_row = cur.fetchone()
+                doc_nombre = doc_row["docente"] if doc_row else docente_id
+                total_menc = doc_row["total_menciones"] if doc_row else 0
+
+                # 2. Mensajes paginados (lim + 1 para has_more)
+                cur.execute("""
+                    SELECT 
+                        md.mensaje_id,
+                        md.fecha::text AS fecha,
+                        COALESCE(m.text_original, md.texto_limpio) AS texto,
+                        md.codigo_materia,
+                        md.materia_mencionada,
+                        md.sentimiento_propio,
+                        md.emocion_propia,
+                        m.reactions::text AS reactions_json,
+                        m.polarity_label
+                    FROM menciones_docentes md
+                    LEFT JOIN mensajes m ON md.mensaje_id = m.message_id
+                    WHERE md.docente_id = %s
+                    ORDER BY md.mensaje_id DESC
+                    LIMIT %s OFFSET %s;
+                """, (docente_id, lim + 1, off))
+                rows = cur.fetchall()
+                has_more = len(rows) > lim
+                mensajes_rows = rows[:lim]
+
+                mensajes_formateados = []
+                for r in mensajes_rows:
+                    reacciones_list = []
+                    if r["reactions_json"]:
+                        try:
+                            rx = json.loads(r["reactions_json"]) if isinstance(r["reactions_json"], str) else r["reactions_json"]
+                            if isinstance(rx, dict):
+                                for emj, cnt in rx.items():
+                                    reacciones_list.append({"emoji": emj, "count": cnt})
+                            elif isinstance(rx, list):
+                                for item in rx:
+                                    if isinstance(item, dict) and "emoji" in item:
+                                        reacciones_list.append({"emoji": item["emoji"], "count": item.get("count", 1)})
+                        except Exception:
+                            pass
+
+                    fecha_str = r["fecha"][:10] if r["fecha"] else ""
+                    pol = (r["sentimiento_propio"] or r["polarity_label"] or "indeterminado").lower()
+                    emo = (r["emocion_propia"] or "").lower()
+                    if emo in ("neutral", "none", "indeterminado"):
+                        emo = ""
+
+                    mensajes_formateados.append({
+                        "mensaje_id": r["mensaje_id"],
+                        "fecha": fecha_str,
+                        "texto": r["texto"] or "",
+                        "codigo_materia": r["codigo_materia"] or "",
+                        "materia": r["materia_mencionada"] or "",
+                        "materia_nombre": r["materia_mencionada"] or "",
+                        "polarity_label": pol,
+                        "dominant_emotion": emo,
+                        "sentimiento": pol,
+                        "emocion": emo,
+                        "reacciones": reacciones_list,
+                        "reactions": {item["emoji"]: item["count"] for item in reacciones_list}
+                    })
+
+                return {
+                    "status": "success",
+                    "docente_id": docente_id,
+                    "docente_nombre": doc_nombre,
+                    "total_menciones": total_menc,
+                    "offset": off,
+                    "limit": lim,
+                    "has_more": has_more,
+                    "next_offset": off + len(mensajes_formateados),
+                    "mensajes": mensajes_formateados
+                }
+    except Exception as e:
+        print(f"Error en get_mensajes_docente_paginados: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "docente_id": docente_id,
+            "docente_nombre": docente_id,
+            "total_menciones": 0,
+            "has_more": False,
+            "next_offset": off,
+            "mensajes": []
+        }
+
+
 
 def get_top_reacciones_telegram(limit=8):
     """Top emojis y reacciones en Telegram con claves exactas total y height_pct."""
@@ -312,13 +428,53 @@ def get_neon_health_telemetry():
 
 
 def get_lda_topics_summary():
-    """Tópicos LDA descubiertos estructurados con porcentaje_corpus y vocabulario_top."""
-    proporciones = {1: 28.4, 2: 24.1, 3: 20.2, 4: 15.8, 5: 11.5}
-    mensajes_asig = {1: 5800, 2: 4920, 3: 4120, 4: 3220, 5: 2271}
-
+    """
+    Retorna los tópicos LDA descubiertos estructurados con porcentaje_corpus y vocabulario_top.
+    Prioriza las tablas actualizadas 'topicos_catalogo' y 'topicos_terminos' de Neon.
+    """
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
+                # 1. Intentar consultar las tablas maestras de la última minería R
+                cur.execute("""
+                    SELECT 
+                        c.topico_id, 
+                        c.nombre_etiqueta, 
+                        c.prevalencia_pct, 
+                        c.total_mensajes,
+                        t.termino, 
+                        t.beta_prob, 
+                        t.ranking_pos
+                    FROM topicos_catalogo c
+                    JOIN topicos_terminos t ON c.topico_id = t.topico_id
+                    ORDER BY c.topico_id ASC, t.ranking_pos ASC;
+                """)
+                rows = cur.fetchall()
+                if rows:
+                    topics_dict = {}
+                    for r in rows:
+                        t_id = r["topico_id"]
+                        if t_id not in topics_dict:
+                            # Limpiar nombre si tiene prefijo numérico como '1. '
+                            raw_nom = r["nombre_etiqueta"]
+                            nom = raw_nom.split(".", 1)[1].strip() if "." in raw_nom and raw_nom.split(".", 1)[0].isdigit() else raw_nom
+                            topics_dict[t_id] = {
+                                "topico_id": t_id,
+                                "nombre_etiqueta": nom,
+                                "porcentaje_corpus": float(r["prevalencia_pct"]),
+                                "total_mensajes_asignados": int(r["total_mensajes"]),
+                                "vocabulario_top": []
+                            }
+                        if len(topics_dict[t_id]["vocabulario_top"]) < 8:
+                            topics_dict[t_id]["vocabulario_top"].append({
+                                "termino": r["termino"],
+                                "beta_prob": round(float(r["beta_prob"]), 4)
+                            })
+                    return list(topics_dict.values())
+
+                # 2. Fallback defensivo a lda_topicos si topicos_catalogo no estuviese poblada
+                proporciones = {1: 28.4, 2: 24.1, 3: 20.2, 4: 15.8, 5: 11.5}
+                mensajes_asig = {1: 5800, 2: 4920, 3: 4120, 4: 3220, 5: 2271}
                 cur.execute("""
                     SELECT topico_id, nombre_etiqueta, termino, beta_prob, ranking_pos
                     FROM lda_topicos
@@ -340,7 +496,8 @@ def get_lda_topics_summary():
                         {"termino": r["termino"], "beta_prob": r["beta_prob"]}
                     )
                 return list(topics_dict.values())
-    except Exception:
+    except Exception as e:
+        print(f"Error en get_lda_topics_summary: {e}")
         return []
 
 
@@ -414,24 +571,109 @@ def get_nlp_kpis_summary():
     }
 
 
+_TFIDF_STOPWORDS = {
+    'de', 'la', 'el', 'los', 'las', 'un', 'una', 'unos', 'unas', 'en', 'y', 'a',
+    'por', 'con', 'para', 'se', 'no', 'si', 'del', 'al', 'o', 'pero', 'mas', 'como',
+    'su', 'sus', 'ya', 'muy', 'que', 'es', 'son', 'fue', 'era', 'mi', 'tu', 'te',
+    'me', 'lo', 'le', 'nos', 'les', 'esta', 'este', 'estos', 'estas', 'esto',
+    'q', 'd', 'k', 'xq', 'x', 'tb', 'tmb', 'tmbn', 'pa', 'po', 'ps', 'pue', 'pues',
+    'ah', 'eh', 'oh', 'uh', 'mm', 'mmm', 'ok', 'oka', 'sip', 'sep', 'nop', 'yep',
+    'hola', 'buenas', 'buen', 'buena', 'buenos', 'tardes', 'dias', 'noches',
+    'gracias', 'favor', 'alguien', 'sabe', 'saben', 'pasa', 'pasando', 'puedo', 'puede',
+    'ser', 'hay', 'solo', 'hacer', 'bien', 'hoy', 'manana', 'comunicado', 'inf', 'com',
+    'van', 'voy', 'va', 'vamos', 'dio', 'dijo', 'año', 'mes', 'dia', 'grupo', 'chat',
+    'quien', 'cada', 'todo', 'todos', 'toda', 'todas', 'otro', 'otra', 'otros', 'otras'
+}
+
+
+def _is_clean_tfidf_term(t):
+    if not t:
+        return False
+    norm = unicodedata.normalize('NFKD', t).strip().lower()
+    if norm in _TFIDF_STOPWORDS or len(norm) < 3:
+        return False
+    # Descartar caracteres matemáticos/astrológicos o símbolos Unicode raros
+    if any(ord(c) > 0x2000 for c in t):
+        return False
+    if not any(c.isalpha() for c in norm):
+        return False
+    return True
+
+
 def get_tfidf_keywords(entidad_tipo="DOCENTE", limit=12):
-    """Palabras clave con mayor peso TF-IDF."""
+    """
+    Palabras clave con mayor peso TF-IDF filtrando stop words y glifos matemáticos.
+    - entidad_tipo="DOCENTE": Términos distintivos asociados a menciones docentes.
+    - entidad_tipo="SEMESTRE" o "CICLO": Términos asociados a semestres explícitos (1er Semestre, 2do Semestre... o Gestión).
+    """
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute(
-                    """
-                    SELECT termino, ROUND(AVG(tfidf)::numeric, 3) AS score_tfidf, 'CICLO-VERANO' AS entidad_id
-                    FROM tfidf_mensajes
-                    GROUP BY termino
-                    HAVING COUNT(*) >= 5
-                    ORDER BY AVG(tfidf) DESC
-                    LIMIT %s;
-                """,
-                    (limit,),
-                )
-                return [dict(r) for r in cur.fetchall()]
-    except Exception:
+                tipo = str(entidad_tipo).strip().upper()
+                if tipo == "DOCENTE":
+                    cur.execute("""
+                        SELECT tm.termino, ROUND(AVG(tm.tfidf)::numeric, 3) AS score_tfidf, COUNT(*) as cnt
+                        FROM tfidf_mensajes tm
+                        JOIN menciones_docentes md ON tm.message_id = md.mensaje_id
+                        WHERE LENGTH(tm.termino) >= 3
+                          AND tm.termino !~ '^[^a-zA-Z0-9ÁáÉéÍíÓóÚúÑñ]+'
+                        GROUP BY tm.termino
+                        HAVING COUNT(*) >= 3
+                        ORDER BY AVG(tm.tfidf) DESC
+                        LIMIT 60;
+                    """)
+                    doc_terms = []
+                    for r in cur.fetchall():
+                        t = r["termino"]
+                        if _is_clean_tfidf_term(t):
+                            doc_terms.append({
+                                "termino": t,
+                                "score_tfidf": float(r["score_tfidf"])
+                            })
+                        if len(doc_terms) == limit:
+                            break
+                    return doc_terms
+                else:
+                    # Semestre Académico Explícito (Sin Ciclos)
+                    cur.execute("""
+                        SELECT 
+                            CASE 
+                                WHEN md.codigo_materia LIKE '%11%' THEN '1er Semestre'
+                                WHEN md.codigo_materia LIKE '%12%' THEN '2do Semestre'
+                                WHEN md.codigo_materia LIKE '%13%' THEN '3er Semestre'
+                                WHEN md.codigo_materia LIKE '%14%' THEN '4to Semestre'
+                                WHEN md.codigo_materia LIKE '%15%' OR md.codigo_materia LIKE '%25%' THEN '5to Semestre'
+                                WHEN md.codigo_materia LIKE '%16%' OR md.codigo_materia LIKE '%26%' THEN '6to Semestre'
+                                WHEN md.codigo_materia LIKE '%27%' THEN '7mo Semestre'
+                                WHEN md.codigo_materia LIKE '%28%' THEN '8vo Semestre'
+                                WHEN md.gestion_semestre IS NOT NULL THEN md.gestion_semestre
+                                ELSE 'Semestre General'
+                            END AS entidad_id,
+                            tm.termino,
+                            ROUND(AVG(tm.tfidf)::numeric, 3) AS score_tfidf
+                        FROM tfidf_mensajes tm
+                        JOIN menciones_docentes md ON tm.message_id = md.mensaje_id
+                        WHERE LENGTH(tm.termino) >= 3
+                          AND tm.termino !~ '^[^a-zA-Z0-9ÁáÉéÍíÓóÚúÑñ]+'
+                        GROUP BY 1, tm.termino
+                        HAVING COUNT(*) >= 2
+                        ORDER BY AVG(tm.tfidf) DESC
+                        LIMIT 70;
+                    """)
+                    sem_terms = []
+                    for r in cur.fetchall():
+                        t = r["termino"]
+                        if _is_clean_tfidf_term(t):
+                            sem_terms.append({
+                                "entidad_id": r["entidad_id"],
+                                "termino": t,
+                                "score_tfidf": float(r["score_tfidf"])
+                            })
+                        if len(sem_terms) == limit:
+                            break
+                    return sem_terms
+    except Exception as e:
+        print(f"Error en get_tfidf_keywords: {e}")
         return []
 
 
@@ -1937,6 +2179,47 @@ def _get_sqlite_conn():
     return conn
 
 
+
+_SQL_EMOCION_CASE = """
+    CASE
+        WHEN dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
+                                  'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
+                                  'enojo','decepcion','cansancio','ironia','curiosidad')
+            THEN dominant_emotion
+        WHEN dominant_emotion = 'confianza'                            THEN 'seguridad'
+        WHEN dominant_emotion = 'orgullo'                              THEN 'admiracion'
+        WHEN dominant_emotion = 'alivio'                               THEN 'tranquilidad'
+        WHEN dominant_emotion = 'verguenza'                            THEN 'confusion'
+        WHEN dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
+        WHEN dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
+        WHEN dominant_emotion = 'frustracion'                          THEN 'decepcion'
+        WHEN dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
+        WHEN dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
+        WHEN dominant_emotion = 'diversion'                            THEN 'alegria'
+        ELSE NULL
+    END
+"""
+
+_SQL_EMOCION_CASE_SR = """
+    CASE
+        WHEN sr.dominant_emotion IN ('alegria','gratitud','esperanza','seguridad','admiracion',
+                                     'tranquilidad','sorpresa','confusion','preocupacion','tristeza',
+                                     'enojo','decepcion','cansancio','ironia','curiosidad')
+            THEN sr.dominant_emotion
+        WHEN sr.dominant_emotion = 'confianza'                            THEN 'seguridad'
+        WHEN sr.dominant_emotion = 'orgullo'                              THEN 'admiracion'
+        WHEN sr.dominant_emotion = 'alivio'                               THEN 'tranquilidad'
+        WHEN sr.dominant_emotion = 'verguenza'                            THEN 'confusion'
+        WHEN sr.dominant_emotion IN ('ansiedad', 'miedo')                 THEN 'preocupacion'
+        WHEN sr.dominant_emotion IN ('ira', 'asco')                       THEN 'enojo'
+        WHEN sr.dominant_emotion = 'frustracion'                          THEN 'decepcion'
+        WHEN sr.dominant_emotion = 'aburrimiento'                         THEN 'cansancio'
+        WHEN sr.dominant_emotion = 'anticipacion'                         THEN 'curiosidad'
+        WHEN sr.dominant_emotion = 'diversion'                            THEN 'alegria'
+        ELSE NULL
+    END
+"""
+
 def get_emociones_15_barras():
     """
     Consulta SQL de conteo total de mensajes por emoción dominante:
@@ -1951,15 +2234,15 @@ def get_emociones_15_barras():
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                     AS emocion_id,
+                        ({_SQL_EMOCION_CASE})          AS emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
                     FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
@@ -1971,15 +2254,15 @@ def get_emociones_15_barras():
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                     AS emocion_id,
+                        ({_SQL_EMOCION_CASE})          AS emocion_id,
                         COUNT(*)                             AS total,
                         AVG(COALESCE(intensity, 1.0))        AS avg_intensity
                     FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY total DESC;
                 """)
                 rows = cur.fetchall()
@@ -2067,11 +2350,12 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 cur.execute(f"""
                     SELECT
                         TO_CHAR(timestamp_utc, 'YYYY-MM')   AS periodo,
-                        dominant_emotion                    AS emocion_id,
+                        ({_SQL_EMOCION_CASE})         AS emocion_id,
                         COUNT(*)                            AS total
                     FROM mensajes
                     WHERE {" AND ".join(where_clauses)}
-                    GROUP BY periodo, dominant_emotion
+                    GROUP BY periodo, emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
@@ -2115,12 +2399,13 @@ def get_emociones_15_serie_temporal(fecha_inicio=None, fecha_fin=None, emociones
                 cur.execute(f"""
                     SELECT
                         strftime('%Y-%m', m.timestamp_utc)  AS periodo,
-                        sr.dominant_emotion                  AS emocion_id,
+                        ({_SQL_EMOCION_CASE_SR})      AS emocion_id,
                         COUNT(*)                             AS total
                     FROM sentiment_results sr
                     JOIN messages m ON sr.message_id = m.message_id
                     WHERE {" AND ".join(where_clauses)}
-                    GROUP BY periodo, sr.dominant_emotion
+                    GROUP BY periodo, emocion_id
+                    HAVING emocion_id IS NOT NULL
                     ORDER BY periodo ASC;
                 """, params)
                 rows = cur.fetchall()
@@ -2197,16 +2482,16 @@ def get_emociones_15_polar():
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                   AS emocion_id,
+                        ({_SQL_EMOCION_CASE})        AS emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
                     FROM mensajes
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion;
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL;
                 """)
                 rows = cur.fetchall()
     except Exception as e_neon:
@@ -2215,16 +2500,16 @@ def get_emociones_15_polar():
         try:
             with _get_sqlite_conn() as conn:
                 cur = conn.cursor()
-                cur.execute("""
+                cur.execute(f"""
                     SELECT
-                        dominant_emotion                   AS emocion_id,
+                        ({_SQL_EMOCION_CASE})        AS emocion_id,
                         COUNT(*)                           AS total,
                         AVG(COALESCE(intensity, 1.0))      AS avg_intensity,
                         MAX(COALESCE(intensity, 1.0))      AS max_intensity
                     FROM sentiment_results
-                    WHERE dominant_emotion IS NOT NULL
-                      AND dominant_emotion != ''
-                    GROUP BY dominant_emotion;
+                    WHERE dominant_emotion IS NOT NULL AND dominant_emotion != ''
+                    GROUP BY emocion_id
+                    HAVING emocion_id IS NOT NULL;
                 """)
                 rows = cur.fetchall()
                 motor_origen = "SQLite Local (Respaldo Offline)"

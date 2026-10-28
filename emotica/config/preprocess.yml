@@ -2,7 +2,7 @@ zona_horaria: UTC
 umbral_idioma: 0.10          # fraccion minima de stopwords para aceptar un idioma
 min_caracteres_token: 2
 # Palabras que NUNCA se eliminan como stopwords: cambian el sentido emocional del mensaje
-conservar_siempre: [no, nunca, ni, sin, tampoco, jamas, "jamás", nada, nadie, ningun, "ningún", ninguno, ninguna, pero, muy, mas, "más", menos, poco, poca, bastante, demasiado, tan, casi, not, never, nor, without, none, nobody, nothing, but, very, too, so, really, more, less, quite, "não", nem, sem, muito, mais, pouco, demais]
+conservar_siempre: [no, nunca, ni, sin, tampoco, jamas, "jamás", nada, nadie, ningun, "ningún", ninguno, ninguna, pero, muy, mas, "más", menos, poco, poca, bastante, demasiado, tan, casi, not, never, nor, without, none, nobody, nothing, but, very, too, so, really, more, less, quite, dont, doesnt, didnt, cant, cannot, wont, isnt, arent, wasnt, "não", nem, sem, muito, mais, pouco, demais]
 
 anuncios:                     # filtro de avisos, difusiones y spam (ver R/anuncios.R)
   umbral: 2

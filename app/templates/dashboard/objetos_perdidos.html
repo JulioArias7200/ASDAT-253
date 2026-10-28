@@ -29,13 +29,18 @@
                 </div>
 
                 <div class="flex items-center gap-2 flex-wrap self-start md:self-auto shrink-0">
-                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-emerald-400">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>{{ data.kpis.total }} reportes minados</span>
+                        <span class="material-symbols-outlined text-[15px]">database</span>
+                        <span>{{ data.motor_origen }}</span>
+                    </div>
+                    <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-on-surface">
+                        <span class="material-symbols-outlined text-[15px] text-primary">inventory_2</span>
+                        <span>{{ data.kpis.total }} reportes</span>
                     </div>
                     <div class="bg-surface-container-high px-3 py-1.5 rounded-xl border border-outline/20 flex items-center gap-2 font-mono text-xs text-amber-300">
                         <span class="material-symbols-outlined text-[16px]">schedule</span>
-                        <span>{{ data.kpis.pct_temporada }}% en Temporadas</span>
+                        <span>{{ data.kpis.pct_temporada }}% Temporadas</span>
                     </div>
                 </div>
             </div>
@@ -253,7 +258,35 @@
                 <!-- Rejilla de Tarjetas de Mensajes -->
                 <div id="grid-mensajes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                     {% for item in data.mensajes %}
-                    <div class="card-mensaje bg-surface-container-low border border-surface-container-high/70 hover:border-outline/40 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm transition-all hover:shadow-md"
+                    {% set obj_icon = 'inventory_2' %}
+                    {% if 'Cargador' in item.objeto_principal or 'Laptop' in item.objeto_principal %}
+                        {% set obj_icon = 'laptop_chromebook' %}
+                    {% elif 'Celular' in item.objeto_principal or 'Móvil' in item.objeto_principal %}
+                        {% set obj_icon = 'smartphone' %}
+                    {% elif 'Audífono' in item.objeto_principal %}
+                        {% set obj_icon = 'headphones' %}
+                    {% elif 'Mouse' in item.objeto_principal %}
+                        {% set obj_icon = 'mouse' %}
+                    {% elif 'Flash' in item.objeto_principal or 'USB' in item.objeto_principal %}
+                        {% set obj_icon = 'usb' %}
+                    {% elif 'Billetera' in item.objeto_principal or 'Cartera' in item.objeto_principal %}
+                        {% set obj_icon = 'account_balance_wallet' %}
+                    {% elif 'Carnet' in item.objeto_principal or 'Documento' in item.objeto_principal %}
+                        {% set obj_icon = 'badge' %}
+                    {% elif 'Llave' in item.objeto_principal %}
+                        {% set obj_icon = 'key' %}
+                    {% elif 'Cuaderno' in item.objeto_principal or 'Libro' in item.objeto_principal %}
+                        {% set obj_icon = 'menu_book' %}
+                    {% elif 'Chamarra' in item.objeto_principal or 'Chompa' in item.objeto_principal or 'Prenda' in item.objeto_principal %}
+                        {% set obj_icon = 'checkroom' %}
+                    {% elif 'Paraguas' in item.objeto_principal %}
+                        {% set obj_icon = 'umbrella' %}
+                    {% elif 'Estuchera' in item.objeto_principal or 'Cartuchera' in item.objeto_principal %}
+                        {% set obj_icon = 'backpack' %}
+                    {% elif 'Herramienta' in item.objeto_principal or 'Equipo' in item.objeto_principal %}
+                        {% set obj_icon = 'build' %}
+                    {% endif %}
+                    <div class="card-mensaje bg-surface-container-low border border-surface-container-high/70 hover:border-outline/40 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm transition-all hover:shadow-md {% if loop.index > 6 %}hidden{% endif %}"
                          data-tipo="{{ item.tipo }}"
                          data-custodia="{{ 'SI' if item.tiene_custodia else 'NO' }}"
                          data-periodo="{{ item.periodo }}"
@@ -262,9 +295,9 @@
                         <!-- Header de la tarjeta -->
                         <div class="flex items-start justify-between gap-2">
                             <div class="flex items-center gap-2 min-w-0">
-                                <div class="w-7 h-7 rounded-full {% if item.tipo == 'PERDIDO' %}bg-rose-500/20 text-rose-400{% else %}bg-emerald-500/20 text-emerald-400{% endif %} flex items-center justify-center font-bold text-xs shrink-0">
-                                    <span class="material-symbols-outlined text-[16px]">
-                                        {% if item.tipo == 'PERDIDO' %}search{% else %}check_circle{% endif %}
+                                <div class="w-8 h-8 rounded-full {% if item.tipo == 'PERDIDO' %}bg-rose-500/20 text-rose-400 border border-rose-500/30{% else %}bg-emerald-500/20 text-emerald-400 border border-emerald-500/30{% endif %} flex items-center justify-center font-bold text-xs shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">
+                                        {{ obj_icon }}
                                     </span>
                                 </div>
                                 <div class="flex flex-col min-w-0">
@@ -274,7 +307,7 @@
                             </div>
 
                             <!-- Badge Tipo -->
-                            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold shrink-0 {% if item.tipo == 'PERDIDO' %}bg-rose-500/20 text-rose-400 border border-rose-500/30{% else %}bg-emerald-500/20 text-emerald-400 border border-emerald-500/30{% endif %}">
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full font-semibold shrink-0 {% if item.tipo == 'PERDIDO' %}bg-rose-500/20 text-rose-400 border border-rose-500/30{% else %}bg-emerald-500/20 text-emerald-400 border border-emerald-500/30{% endif %}">
                                 {{ item.tipo }}
                             </span>
                         </div>
@@ -287,25 +320,26 @@
                         <!-- Footer con Metadatos: Objeto, Lugar e Intensidad -->
                         <div class="pt-2 border-t border-surface-container-high/50 flex flex-col gap-1.5 text-[11px]">
                             <div class="flex items-center justify-between gap-1 flex-wrap font-mono">
-                                <span class="inline-flex items-center gap-1 text-primary bg-primary/10 px-2 py-0.5 rounded font-medium">
-                                    <span class="material-symbols-outlined text-[12px]">inventory_2</span>
+                                <span class="inline-flex items-center gap-1.5 text-primary bg-primary/10 px-2 py-0.5 rounded font-medium">
+                                    <span class="material-symbols-outlined text-[13px]">{{ obj_icon }}</span>
                                     {{ item.objeto_principal }}
                                 </span>
                                 
                                 <!-- Nivel de Intensidad -->
-                                <span class="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded {% if item.intensidad >= 4 %}bg-rose-500/20 text-rose-300 font-bold{% elif item.intensidad == 3 %}bg-amber-400/20 text-amber-300{% else %}bg-surface-container-high text-outline{% endif %}">
-                                    Urgencia: {{ item.intensidad }}/5
+                                <span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded font-medium {% if item.intensidad >= 4 %}bg-rose-500/20 text-rose-300 font-bold border border-rose-500/30{% elif item.intensidad == 3 %}bg-amber-400/20 text-amber-300 border border-amber-400/30{% else %}bg-surface-container-high text-outline{% endif %}">
+                                    <span class="material-symbols-outlined text-[12px]">{% if item.intensidad >= 4 %}error{% else %}info{% endif %}</span>
+                                    Urgencia {{ item.intensidad }}/5
                                 </span>
                             </div>
 
-                            <div class="flex items-center justify-between text-outline text-[10px]">
-                                <span class="truncate flex items-center gap-1" title="{{ item.lugar }}">
+                            <div class="flex items-center justify-between text-outline text-[10px] pt-1">
+                                <span class="truncate flex items-center gap-1 max-w-[70%]" title="{{ item.lugar }}">
                                     <span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
                                     {{ item.lugar }}
                                 </span>
 
                                 {% if item.tiene_custodia %}
-                                <span class="text-emerald-400 font-semibold flex items-center gap-0.5 shrink-0" title="Depositado con personal de seguridad o secretaría">
+                                <span class="text-emerald-400 font-semibold flex items-center gap-0.5 shrink-0 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20" title="Depositado con personal de seguridad o secretaría">
                                     <span class="material-symbols-outlined text-[12px]">verified</span>
                                     En Custodia
                                 </span>
@@ -314,6 +348,20 @@
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+
+                <!-- Botón de Paginación Progresiva: Mostrar Más (+6) -->
+                <div id="contenedor-mostrar-mas" class="flex flex-col items-center justify-center pt-6 pb-2">
+                    <button type="button" id="btn-mostrar-mas" onclick="mostrarMas()"
+                            class="group px-6 py-2.5 rounded-xl font-semibold text-xs bg-surface-container-high hover:bg-primary text-on-surface hover:text-on-primary border border-outline/20 hover:border-primary/50 shadow-sm hover:shadow-md transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform">expand_more</span>
+                        <span>Mostrar más (+6 reportes)</span>
+                        <span id="badge-restantes" class="px-2 py-0.5 rounded-full text-[10px] bg-primary/20 text-primary group-hover:bg-on-primary/20 group-hover:text-on-primary font-mono font-bold"></span>
+                    </button>
+                    <span id="aviso-fin-lista" class="hidden text-xs text-outline font-medium flex items-center gap-1.5 mt-2">
+                        <span class="material-symbols-outlined text-[16px] text-emerald-400">task_alt</span>
+                        Todos los reportes están visibles en pantalla
+                    </span>
                 </div>
 
                 <!-- Mensaje de sin resultados -->
@@ -426,7 +474,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: { display: true, text: 'Intensidad / Urgencia', color: '#fbbf24', font: { size: 10 } }
             }
         }
-    });
+    }
+});
     }
 
     // ─── GRÁFICA 2: Ranking de Objetos (Horizontal Bar) ──────────────────────────
@@ -468,7 +517,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 ticks: { color: chartColor, font: { size: 10 } }
             }
         }
-    });
+    }
+});
     }
 
     // ─── GRÁFICA 3: Zonas Calientes / Ubicaciones (Doughnut) ──────────────────────
@@ -507,34 +557,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         cutout: '60%'
-    });
+    }
+});
     }
 
 }); // Fin de DOMContentLoaded para Chart.js
 
-// ─── FILTROS DINÁMICOS DEL TABLÓN ───────────────────────────────────────────
+// ─── FILTROS DINÁMICOS DEL TABLÓN Y PAGINACIÓN PROGRESIVA (+6) ───────────────
+const POR_PAGINA = 6;
+let visiblesMax = POR_PAGINA;
 let filtroTipoActivo = 'TODOS';
 
 function filtrarTipo(tipo) {
     filtroTipoActivo = tipo;
     
-    // Actualizar estilos de botones
+    // Actualizar estilos de botones de filtro
     document.querySelectorAll('.btn-tipo').forEach(btn => {
         if (btn.dataset.filter === tipo) {
-            btn.className = 'btn-tipo px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-all';
+            btn.className = 'btn-tipo px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-on-primary shadow-sm transition-all';
         } else {
             btn.className = 'btn-tipo px-3 py-1.5 rounded-lg text-xs text-outline hover:text-on-surface bg-surface-container-high transition-all';
         }
     });
 
-    aplicarFiltros();
+    aplicarFiltros(true);
 }
 
-function aplicarFiltros() {
+function aplicarFiltros(resetPagination = true) {
+    if (resetPagination) {
+        visiblesMax = POR_PAGINA;
+    }
     const busqueda = document.getElementById('filtro-busqueda').value.trim().toLowerCase();
     const periodo = document.getElementById('filtro-periodo').value;
     const cards = document.querySelectorAll('.card-mensaje');
-    let visibles = 0;
+    
+    let totalCoincidentes = 0;
+    let renderizados = 0;
 
     cards.forEach(card => {
         const tipoCard = card.dataset.tipo;
@@ -555,31 +613,66 @@ function aplicarFiltros() {
         let matchBusqueda = (!busqueda || searchText.includes(busqueda));
 
         if (matchTipo && matchPeriodo && matchBusqueda) {
-            card.classList.remove('hidden');
-            visibles++;
+            totalCoincidentes++;
+            if (totalCoincidentes <= visiblesMax) {
+                card.classList.remove('hidden');
+                renderizados++;
+            } else {
+                card.classList.add('hidden');
+            }
         } else {
             card.classList.add('hidden');
         }
     });
 
-    // Actualizar contador
-    const total = cards.length;
+    // Actualizar contador del header
     const contador = document.getElementById('contador-visibles');
     if (contador) {
-        contador.innerHTML = `Mostrando: <strong class="text-primary">${visibles}</strong> de ${total}`;
+        contador.innerHTML = `Mostrando: <strong class="text-primary">${renderizados}</strong> de ${totalCoincidentes}`;
     }
 
-    // Mostrar mensaje si no hay resultados
+    // Gestionar visibilidad del botón 'Mostrar más' y avisos
+    const btnMostrarMas = document.getElementById('btn-mostrar-mas');
+    const badgeRestantes = document.getElementById('badge-restantes');
+    const avisoFin = document.getElementById('aviso-fin-lista');
     const noResults = document.getElementById('no-results-msg');
-    if (noResults) {
-        if (visibles === 0) {
-            noResults.classList.remove('hidden');
+
+    if (totalCoincidentes === 0) {
+        if (btnMostrarMas) btnMostrarMas.classList.add('hidden');
+        if (avisoFin) avisoFin.classList.add('hidden');
+        if (noResults) noResults.classList.remove('hidden');
+    } else {
+        if (noResults) noResults.classList.add('hidden');
+        if (renderizados < totalCoincidentes) {
+            const restantes = totalCoincidentes - renderizados;
+            if (btnMostrarMas) {
+                btnMostrarMas.classList.remove('hidden');
+                if (badgeRestantes) badgeRestantes.textContent = `+${Math.min(POR_PAGINA, restantes)}`;
+            }
+            if (avisoFin) avisoFin.classList.add('hidden');
         } else {
-            noResults.classList.add('hidden');
+            if (btnMostrarMas) btnMostrarMas.classList.add('hidden');
+            if (avisoFin && totalCoincidentes > POR_PAGINA) {
+                avisoFin.classList.remove('hidden');
+            } else if (avisoFin) {
+                avisoFin.classList.add('hidden');
+            }
         }
     }
 }
+
+function mostrarMas() {
+    visiblesMax += POR_PAGINA;
+    aplicarFiltros(false);
+}
+
 window.filtrarTipo = filtrarTipo;
 window.aplicarFiltros = aplicarFiltros;
+window.mostrarMas = mostrarMas;
+
+// Inicialización de la paginación al cargar el DOM
+document.addEventListener('DOMContentLoaded', function() {
+    aplicarFiltros(true);
+});
 </script>
 {% endblock %}

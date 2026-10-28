@@ -1,34 +1,34 @@
 [
   {
-    "id": 30872,
-    "date": "2026-09-08",
-    "datetime": "2026-09-08T12:02:59",
+    "id": 31055,
+    "date": "2026-10-06",
+    "datetime": "2026-10-06 12:47:19+00:00",
     "periodo": "2026 - Semestre II (Regular)",
-    "sender": "Bm7",
-    "text": "Se encontró en el aula p1",
-    "tipo": "ENCONTRADO",
+    "sender": "RE YS",
+    "text": "Hola, ayer olvidé mi cargador de laptop HP en el aula P5 Lab1. Si alguien lo encontró o lo vio, ¿podrían avisarme, por favor? 🙏\nGracias de antemano",
+    "tipo": "PERDIDO",
     "objetos": [
-      "Otros Objetos"
+      "Cargador / Laptop"
     ],
-    "objeto_principal": "Otros Objetos",
-    "lugar": "Aulas Generales",
-    "intensidad": 2,
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 30725,
     "date": "2026-08-18",
-    "datetime": "2026-08-18T12:04:24",
+    "datetime": "2026-08-18 16:04:24+00:00",
     "periodo": "2026 - Semestre II (Regular)",
     "sender": "Jorge Miguel Mamani",
     "text": "Se encontró este teléfono en el aula P1-A1 hace unas semanas y el dueño aún no recupera el chip para poder devolverselo",
     "tipo": "ENCONTRADO",
     "objetos": [
-      "Otros Objetos"
+      "Celular / Móvil"
     ],
-    "objeto_principal": "Otros Objetos",
-    "lugar": "Aulas Generales",
+    "objeto_principal": "Celular / Móvil",
+    "lugar": "Aulas Piso 1 (P1-A1 / P1-A2)",
     "intensidad": 2,
     "tiene_custodia": false,
     "estado": "Encontrado (En espera)"
@@ -36,24 +36,25 @@
   {
     "id": 30627,
     "date": "2026-08-14",
-    "datetime": "2026-08-14T14:21:14",
+    "datetime": "2026-08-14 18:21:14+00:00",
     "periodo": "2026 - Semestre II (Regular)",
     "sender": "✨",
     "text": "Buena si alguien vio esta billetera ayer porfavor comunicarse al privado tenia documentos importantes se dará recompensa",
     "tipo": "PERDIDO",
     "objetos": [
-      "Billetera / Cartera"
+      "Billetera / Cartera",
+      "Carnet / Documento"
     ],
     "objeto_principal": "Billetera / Cartera",
     "lugar": "Lugar no especificado",
     "intensidad": 5,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 29935,
     "date": "2026-07-29",
-    "datetime": "2026-07-29T13:15:58",
+    "datetime": "2026-07-29 17:15:58+00:00",
     "periodo": "2026 - Invierno (Temporada)",
     "sender": "Edward German Vizcarra",
     "text": "Se encontró unos auriculares en biblioteca",
@@ -68,115 +69,29 @@
     "estado": "Encontrado (En espera)"
   },
   {
-    "id": 25719,
-    "date": "2025-12-13",
-    "datetime": "2025-12-13T12:27:11",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": "Cris_xD 🔱",
-    "text": "Buenas Tardes... Este jueves 11 nose si alguien vio un cargador de laptop HP, creo que lo deje el dia miercoles en la noche conectado en un enchufe, en el aula del piso 4 en el aula 1 al lado del laboratorio, si lo vieron pls se dara gratificacion si alguien lo tiene, creo que el lic. Felipez paso clases en la mañana ese jueves. Gracias de ante mano",
+    "id": 29934,
+    "date": "2026-07-29",
+    "datetime": "2026-07-29 03:08:16+00:00",
+    "periodo": "2026 - Invierno (Temporada)",
+    "sender": "Rene",
+    "text": "Buenas alguien que mañana pase en piso 3 lab 1  en la mañana  si ve un cargador de laptop xfa me avisa me olvidé en redes",
     "tipo": "PERDIDO",
     "objetos": [
       "Cargador / Laptop"
-    ],
-    "objeto_principal": "Cargador / Laptop",
-    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 4,
-    "tiene_custodia": true,
-    "estado": "Reportado Extraviado"
-  },
-  {
-    "id": 25650,
-    "date": "2025-11-29",
-    "datetime": "2025-11-29T22:21:08",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": ":)",
-    "text": "Buenas compañeros El día jueves se encontró esta maquina/equipo(parece ser un taladro) en el aula PB-A1. Si alguien es el dueño, por favor escríbame imbox para poder devolvérselo. Solo necesito que me confirme que es suyo con alguna prueba, descripción o detalle. Porfavor solo el verdadero dueño.",
-    "tipo": "ENCONTRADO",
-    "objetos": [
-      "Herramienta / Equipo"
-    ],
-    "objeto_principal": "Herramienta / Equipo",
-    "lugar": "Planta Baja / Portería",
-    "intensidad": 3,
-    "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
-  },
-  {
-    "id": 25609,
-    "date": "2025-11-27",
-    "datetime": "2025-11-27T09:11:32",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": "Joel Cruz",
-    "text": "Alguien olvidó su llave en el candado de su casillero",
-    "tipo": "ENCONTRADO",
-    "objetos": [
-      "Llaves"
-    ],
-    "objeto_principal": "Llaves",
-    "lugar": "Casilleros (Piso 1)",
-    "intensidad": 2,
-    "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
-  },
-  {
-    "id": 25100,
-    "date": "2025-10-07",
-    "datetime": "2025-10-07T11:44:40",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": ".",
-    "text": "Buenas, alguien vio cargador de laptop en el piso 3 lab 1 ?",
-    "tipo": "PERDIDO",
-    "objetos": [
-      "Cargador / Laptop"
-    ],
-    "objeto_principal": "Cargador / Laptop",
-    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 2,
-    "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
-  },
-  {
-    "id": 25097,
-    "date": "2025-10-02",
-    "datetime": "2025-10-02T10:24:49",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": "Soledad Pinedo",
-    "text": "Buen día compañeros  Disculpen el dia de ayer alguienpaso clases luego de las 6pm en el  LAB4 DEL PISO 3  AYER ME OLVIDE UN CARGADOR DE LAPTOP EN UNA MAQUINA   POR FAVOR EL QUE LO HAYA ENCONTRADO ME PUEDE AVISAR POR FAVOR",
-    "tipo": "PERDIDO",
-    "objetos": [
-      "Cargador / Laptop",
-      "Herramienta / Equipo"
     ],
     "objeto_principal": "Cargador / Laptop",
     "lugar": "Piso 3 (Lab 4 / Lasin)",
-    "intensidad": 3,
+    "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
-    "id": 24160,
-    "date": "2025-08-11",
-    "datetime": "2025-08-11T19:50:43",
-    "periodo": "2025 - Semestre II (Regular)",
-    "sender": "Red Jhon",
-    "text": "Encontre este audifono en el p4-lab1, por imbox el dueño contactarse para devolver ._.",
-    "tipo": "ENCONTRADO",
-    "objetos": [
-      "Otros Objetos"
-    ],
-    "objeto_principal": "Otros Objetos",
-    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 2,
-    "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
-  },
-  {
-    "id": 23261,
-    "date": "2025-07-29",
-    "datetime": "2025-07-29T12:48:23",
-    "periodo": "2025 - Invierno (Temporada)",
-    "sender": "🌸",
-    "text": "Se que esto no viene al caso pero alguien conoce un buen tecnico de celulares? 😅🙈 Si tienen info me escribe al inbox. Se me cayo el mio y su pantalla esta como fantasma pero necesito sacar informacion importante de mi cel sin mencionar que lo necesito para la U. 😭",
+    "id": 29933,
+    "date": "2026-07-29",
+    "datetime": "2026-07-29 00:01:14+00:00",
+    "periodo": "2026 - Invierno (Temporada)",
+    "sender": "Yuancito",
+    "text": "buenas noches compañer@s el dia de hoy en la aula 3 del piso 1 \na las horas 16:00 se extravio un celular de la marca Poco de color celeste con funda negra.\ndespués de finalizar la materia de Simulación de sistemas INF-381\nLos compañeros de INF-241 Análisis y diseño de sistemas 1 que \ningresaron a la aula tal vez lo vieron o lo alzaron, estaba un uno de los asientos\nde atrás cerca del enchufe.\nse les ruega la devolución, se les dará una gratificación considerable.\ncomunicarse al numero 67325950 de referencia",
     "tipo": "PERDIDO",
     "objetos": [
       "Celular / Móvil"
@@ -185,12 +100,200 @@
     "lugar": "Lugar no especificado",
     "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 28998,
+    "date": "2026-06-27",
+    "datetime": "2026-06-27 15:49:38+00:00",
+    "periodo": "2026 - Semestre I (Regular)",
+    "sender": "Y.S (Chunbot)",
+    "text": "Ya lo encontré xD\nEs q estaba en celular jsjs",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Celular / Móvil"
+    ],
+    "objeto_principal": "Celular / Móvil",
+    "lugar": "Lugar no especificado",
+    "intensidad": 2,
+    "tiene_custodia": false,
+    "estado": "Encontrado (En espera)"
+  },
+  {
+    "id": 25719,
+    "date": "2025-12-13",
+    "datetime": "2025-12-13 16:27:11+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Cris_xD 🔱",
+    "text": "Buenas Tardes...\nEste jueves 11 nose si alguien vio un cargador de laptop HP, creo que lo deje el dia miercoles en la noche conectado en un enchufe, en el aula del piso 4 en el aula 1 al lado del laboratorio, si lo vieron pls se dara gratificacion si alguien lo tiene, creo que el lic. Felipez paso clases en la mañana ese jueves.\nGracias de ante mano",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
+    "intensidad": 5,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 25671,
+    "date": "2025-12-03",
+    "datetime": "2025-12-03 23:58:40+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Xd",
+    "text": "Buenas noches compañeros, en la sala de estudios del piso 3 de la carrera del día de hoy se olvido mi compañero una laptop HP, es de suma urgencia ya que tiene los proyectos del semestre, cualquier referencia o tenga alguna información por favor comuníquense con el número 73516204, se dará buena gratificación",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 5,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 25650,
+    "date": "2025-11-30",
+    "datetime": "2025-11-30 02:21:08+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": ":)",
+    "text": "Buenas compañeros\nEl día jueves se encontró esta maquina/equipo(parece ser un taladro) en el aula PB-A1.\nSi alguien es el dueño, por favor escríbame imbox para poder devolvérselo.\nSolo necesito que me confirme que es suyo con alguna prueba, descripción o detalle. Porfavor solo el verdadero dueño.",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Equipo / Herramienta"
+    ],
+    "objeto_principal": "Equipo / Herramienta",
+    "lugar": "Planta Baja / Portería / Seguridad",
+    "intensidad": 2,
+    "tiene_custodia": false,
+    "estado": "Encontrado (En espera)"
+  },
+  {
+    "id": 25609,
+    "date": "2025-11-27",
+    "datetime": "2025-11-27 13:11:32+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Joel Cruz",
+    "text": "Alguien olvidó su llave en el candado de su casillero",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Llaves"
+    ],
+    "objeto_principal": "Llaves",
+    "lugar": "Casilleros (Piso 1)",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 25100,
+    "date": "2025-10-07",
+    "datetime": "2025-10-07 15:44:40+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": ".",
+    "text": "Buenas, alguien vio cargador de laptop en el piso 3 lab 1 ?",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 25097,
+    "date": "2025-10-02",
+    "datetime": "2025-10-02 14:24:49+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Soledad Pinedo",
+    "text": "Buen día compañeros \nDisculpen el dia de ayer alguienpaso clases luego de las 6pm en el  LAB4 DEL PISO 3\n\nAYER ME OLVIDE UN CARGADOR DE LAPTOP EN UNA MAQUINA \n\nPOR FAVOR EL QUE LO HAYA ENCONTRADO ME PUEDE AVISAR POR FAVOR",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop",
+      "Equipo / Herramienta"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 25026,
+    "date": "2025-09-17",
+    "datetime": "2025-09-17 14:38:10+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Hammer",
+    "text": "Buenos días, olvidé mi cargador de laptop el día lunes en la sala de estudio del piso 3 a lado de la puerta de entrada, en la tarde, se dará una gratificación porfavor 😞",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 5,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 24960,
+    "date": "2025-09-02",
+    "datetime": "2025-09-02 20:24:08+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Daniels",
+    "text": "Buenas tardes \nAyer por la tarde extravié un cargador de laptop en el laboratorio 4 del piso 3.\nSi alguien lo vio o tiene información por favor puede contactarse con mi persona.\nCargador HP",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 24328,
+    "date": "2025-08-13",
+    "datetime": "2025-08-13 16:35:11+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Jjfrank Px",
+    "text": "Alguien vio a la lic Brigida, por favor",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Otros Objetos"
+    ],
+    "objeto_principal": "Otros Objetos",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 24160,
+    "date": "2025-08-11",
+    "datetime": "2025-08-11 23:50:43+00:00",
+    "periodo": "2025 - Semestre II (Regular)",
+    "sender": "Red Jhon",
+    "text": "Encontre este audifono en el p4-lab1, por imbox el dueño contactarse para devolver ._.",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Audífonos"
+    ],
+    "objeto_principal": "Audífonos",
+    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
+    "intensidad": 2,
+    "tiene_custodia": false,
+    "estado": "Encontrado (En espera)"
   },
   {
     "id": 23212,
     "date": "2025-07-25",
-    "datetime": "2025-07-25T16:15:40",
+    "datetime": "2025-07-25 20:15:40+00:00",
     "periodo": "2025 - Invierno (Temporada)",
     "sender": "...",
     "text": "Buenas tardes disculpe de casualidad alguien vio un folder en el segundo patio (Frente al edificio de informática ) por favor me podría ayudar",
@@ -199,35 +302,52 @@
       "Cuaderno / Libros"
     ],
     "objeto_principal": "Cuaderno / Libros",
-    "lugar": "Patios / Gradas",
-    "intensidad": 3,
+    "lugar": "Patios y Gradas Exteriores",
+    "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 23129,
+    "date": "2025-07-14",
+    "datetime": "2025-07-14 22:14:14+00:00",
+    "periodo": "2025 - Invierno (Temporada)",
+    "sender": "Yuancito",
+    "text": "Buenas tardes compañer@s el día de hoy por la mañana en el laboratorio 3 del piso 3 me olvidé un tablero cafe con hojas, si alguien lo alzó o lo tiene se le rogaría que me lo devuelva por favor.",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cuaderno / Libros"
+    ],
+    "objeto_principal": "Cuaderno / Libros",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 5,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 23093,
     "date": "2025-07-10",
-    "datetime": "2025-07-10T09:05:24",
+    "datetime": "2025-07-10 13:05:24+00:00",
     "periodo": "2025 - Invierno (Temporada)",
     "sender": "Nninna",
     "text": "Se encontraron dos carnets en el subsuelo, los propietarios pueden recoger en la oficina de temporada piso 4.",
     "tipo": "ENCONTRADO",
     "objetos": [
-      "Carnet / CI"
+      "Carnet / Documento"
     ],
-    "objeto_principal": "Carnet / CI",
+    "objeto_principal": "Carnet / Documento",
     "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 2,
+    "intensidad": 1,
     "tiene_custodia": true,
-    "estado": "En Custodia / Entregado"
+    "estado": "En Custodia"
   },
   {
-    "id": 22866,
-    "date": "2025-07-02",
-    "datetime": "2025-07-02T17:30:13",
+    "id": 22966,
+    "date": "2025-07-03",
+    "datetime": "2025-07-03 19:57:40+00:00",
     "periodo": "2025 - Invierno (Temporada)",
-    "sender": "Vidal Choque",
-    "text": "Buenas tardes compañeros, hoy se encontró una llave de la materia de programacion2",
+    "sender": "Jesús",
+    "text": "Ya recogí mi llave 🔑",
     "tipo": "ENCONTRADO",
     "objetos": [
       "Llaves"
@@ -239,26 +359,43 @@
     "estado": "Encontrado (En espera)"
   },
   {
-    "id": 22716,
-    "date": "2025-07-02",
-    "datetime": "2025-07-02T09:24:10",
-    "periodo": "2025 - Invierno (Temporada)",
-    "sender": "Kevin Chambi",
-    "text": "Si mi materia esta por cerrarse (amarillo) y no retiro y no llega los cupos perdi la materia o igual podre cambiar???",
+    "id": 21552,
+    "date": "2025-06-28",
+    "datetime": "2025-06-28 00:08:13+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
+    "sender": "Efra",
+    "text": "por ahi alguien vio grupo de INF 330 ?",
     "tipo": "PERDIDO",
     "objetos": [
       "Otros Objetos"
     ],
     "objeto_principal": "Otros Objetos",
     "lugar": "Lugar no especificado",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 20638,
+    "date": "2025-05-09",
+    "datetime": "2025-05-09 04:24:13+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
+    "sender": "Cristian Huarca Mollo",
+    "text": "El pasado miércoles encontré este maletín de laptop, en el Piso 3-Lab3. El dueño se puede contactar  con mi persona.",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
     "intensidad": 2,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Encontrado (En espera)"
   },
   {
     "id": 20557,
-    "date": "2025-04-07",
-    "datetime": "2025-04-07T21:41:32",
+    "date": "2025-04-08",
+    "datetime": "2025-04-08 01:41:32+00:00",
     "periodo": "2025 - Semestre I (Regular)",
     "sender": ".",
     "text": "Buenas noches, la semana pasada de casualidad alguien vio un cuaderno tamaño carta de tapa celeste en la biblioteca?",
@@ -268,14 +405,14 @@
     ],
     "objeto_principal": "Cuaderno / Libros",
     "lugar": "Biblioteca",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 20542,
     "date": "2025-04-01",
-    "datetime": "2025-04-01T12:42:20",
+    "datetime": "2025-04-01 16:42:20+00:00",
     "periodo": "2025 - Semestre I (Regular)",
     "sender": "Erika",
     "text": "Disculpen Alguien vio un paraguas? Es de este color guindo, lo olvide en el ss-A3 en la clase del lic Ramiro Choque, de 10 a12, si alguien lo vio me avisa porfavor, gracias",
@@ -285,48 +422,82 @@
     ],
     "objeto_principal": "Paraguas",
     "lugar": "Subsuelo (Aulas SS-A1 / SS-A3)",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 20267,
+    "date": "2025-03-06",
+    "datetime": "2025-03-06 21:38:31+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
+    "sender": "Yop",
+    "text": "Hola, buenas tardes. Quisiera pedirte un favor.\n\nNose si vieron un libro de matemáticas en el aula de dinámica de sistemas. Es un libro del ingeniero Centellas y lo dejé debajo del pupitre por error. Es muy importante para mí, ya que lo olvidé hoy en el aula PB-A1.\nEl libro es de tamaño medio, tipo media hoja oficio, y contiene temas de álgebra como exponentes, polinomios, ecuaciones, división algebraica, cocientes, logaritmos, entre otros. Incluye tanto teoría como ejercicios prácticos.\nSi alguien lo encontró, agradecería mucho que me lo comuniquen. Ofrezco una pequeña gratificación como agradecimiento.",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cuaderno / Libros"
+    ],
+    "objeto_principal": "Cuaderno / Libros",
+    "lugar": "Planta Baja / Portería / Seguridad",
+    "intensidad": 5,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 19862,
+    "date": "2025-02-19",
+    "datetime": "2025-02-19 19:58:51+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
+    "sender": "Chelo",
+    "text": "Muchachos pregunta medio rara tal vez Pero perdí mi cel y estoy con otro pero en este no me da el wifi de la u saben q puedo hacer?",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Celular / Móvil"
+    ],
+    "objeto_principal": "Celular / Móvil",
+    "lugar": "Lugar no especificado",
     "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 19557,
     "date": "2025-02-12",
-    "datetime": "2025-02-12T19:40:01",
-    "periodo": "2025 - Verano (Temporada)",
+    "datetime": "2025-02-12 23:40:01+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
     "sender": "Man",
     "text": "Alguien vio el día de hoy una chamarra de dos caras negra y azul en el pabellón E, en la materia de criptografia?",
     "tipo": "PERDIDO",
     "objetos": [
-      "Prenda (Chamarra/Polera)"
+      "Prenda (Chamarra/Chompa)"
     ],
-    "objeto_principal": "Prenda (Chamarra/Polera)",
+    "objeto_principal": "Prenda (Chamarra/Chompa)",
     "lugar": "Pabellón E",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
-    "id": 18211,
-    "date": "2025-01-24",
-    "datetime": "2025-01-24T09:33:35",
-    "periodo": "2025 - Verano (Temporada)",
-    "sender": "Chrystian",
-    "text": "No encontre una opción con CPT solo QR",
-    "tipo": "ENCONTRADO",
+    "id": 18454,
+    "date": "2025-02-03",
+    "datetime": "2025-02-03 19:52:11+00:00",
+    "periodo": "2025 - Semestre I (Regular)",
+    "sender": "Red Jhon",
+    "text": "Lo de zeballos vi su caso de cerca y fue mas por infraestructura, en mi caso BD II el zeballos se quedo sin laboratorio, igual paso en otras materias de programacion pero en sub anteriores semestres el zeballos desde el primer dia avanzaba.",
+    "tipo": "PERDIDO",
     "objetos": [
       "Otros Objetos"
     ],
     "objeto_principal": "Otros Objetos",
     "lugar": "Lugar no especificado",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 18153,
     "date": "2025-01-17",
-    "datetime": "2025-01-17T19:59:01",
+    "datetime": "2025-01-17 23:59:01+00:00",
     "periodo": "2025 - Verano (Temporada)",
     "sender": "Adrian Merlo",
     "text": "Se encontró este cargador/adaptador en el P4-Lab1. Se dejó con el guardia de la carrera en el PB.",
@@ -336,14 +507,48 @@
     ],
     "objeto_principal": "Cargador / Laptop",
     "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 2,
+    "intensidad": 1,
     "tiene_custodia": true,
-    "estado": "En Custodia / Entregado"
+    "estado": "En Custodia"
+  },
+  {
+    "id": 18050,
+    "date": "2025-01-06",
+    "datetime": "2025-01-06 23:07:06+00:00",
+    "periodo": "2025 - Verano (Temporada)",
+    "sender": "Wolf@ > BioFox69! 💚",
+    "text": "Encontré un cuaderno, le pertenece a alguien llamada Claros Flored Elaine Sarai",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Cuaderno / Libros"
+    ],
+    "objeto_principal": "Cuaderno / Libros",
+    "lugar": "Lugar no especificado",
+    "intensidad": 2,
+    "tiene_custodia": false,
+    "estado": "Encontrado (En espera)"
+  },
+  {
+    "id": 17945,
+    "date": "2025-01-05",
+    "datetime": "2025-01-05 01:50:32+00:00",
+    "periodo": "2025 - Verano (Temporada)",
+    "sender": "ML",
+    "text": "Perdí mi voucher y el banco me dice que no puede hacer nada, alguien sabe si afecta si solo subo la boleta de inscripción?",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Carnet / Documento"
+    ],
+    "objeto_principal": "Carnet / Documento",
+    "lugar": "Lugar no especificado",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 17855,
     "date": "2025-01-02",
-    "datetime": "2025-01-02T19:55:43",
+    "datetime": "2025-01-02 23:55:43+00:00",
     "periodo": "2025 - Verano (Temporada)",
     "sender": "Compy",
     "text": "Buenas noches se encontró está cartera, lo deje  en la entrada del control policial de la Universidad",
@@ -352,49 +557,66 @@
       "Billetera / Cartera"
     ],
     "objeto_principal": "Billetera / Cartera",
-    "lugar": "Planta Baja / Portería",
+    "lugar": "Planta Baja / Portería / Seguridad",
     "intensidad": 2,
-    "tiene_custodia": true,
-    "estado": "En Custodia / Entregado"
+    "tiene_custodia": false,
+    "estado": "Encontrado (En espera)"
   },
   {
-    "id": 17822,
-    "date": "2025-01-02",
-    "datetime": "2025-01-02T18:28:36",
-    "periodo": "2025 - Verano (Temporada)",
-    "sender": "ML",
-    "text": "Disculpen el voucher es si o si necesario enviarlo, sino que sucede? Se me perdió pero tengo la boleta que genera el sistema",
+    "id": 15329,
+    "date": "2024-10-15",
+    "datetime": "2024-10-15 20:36:36+00:00",
+    "periodo": "2024 - Semestre II (Regular)",
+    "sender": "Angel",
+    "text": "Buenas tardes \nEl martes 8 de este mes por la tarde tipo 5 30 pm en el laboratorio 4 del  mismo piso me olvidé una caja de laptop Lenovo que dentro tenía una CONSOLA DJ se dará recompensa de 500 a 1000bs al persona quien lo encontró",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 15275,
+    "date": "2024-10-09",
+    "datetime": "2024-10-09 13:46:55+00:00",
+    "periodo": "2024 - Semestre II (Regular)",
+    "sender": "Angel",
+    "text": "Buen día ayer por la tarde tipo 5 30 pm en el laboratorio 4 del  mismo piso me olvidé una caja de laptop Lenovo que dentro tenía una consola dj se dará gratificación al que lo encontro o lo aya visto",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Cargador / Laptop"
+    ],
+    "objeto_principal": "Cargador / Laptop",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 14563,
+    "date": "2024-08-13",
+    "datetime": "2024-08-13 18:41:52+00:00",
+    "periodo": "2024 - Semestre II (Regular)",
+    "sender": "JP",
+    "text": "Alguien vio el Lic Contreras?",
     "tipo": "PERDIDO",
     "objetos": [
       "Otros Objetos"
     ],
     "objeto_principal": "Otros Objetos",
     "lugar": "Lugar no especificado",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
-  },
-  {
-    "id": 16236,
-    "date": "2024-12-22",
-    "datetime": "2024-12-22T19:04:41",
-    "periodo": "2024 - Semestre II (Regular)",
-    "sender": "Nohemy",
-    "text": "Alguien sabe si la universidad se encontrará abierta estos días?",
-    "tipo": "ENCONTRADO",
-    "objetos": [
-      "Otros Objetos"
-    ],
-    "objeto_principal": "Otros Objetos",
-    "lugar": "Lugar no especificado",
-    "intensidad": 2,
-    "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 13538,
     "date": "2024-07-18",
-    "datetime": "2024-07-18T14:10:11",
+    "datetime": "2024-07-18 18:10:11+00:00",
     "periodo": "2024 - Invierno (Temporada)",
     "sender": "™§§¢€",
     "text": "Alguien vio un cuaderno tamaño carta color amarillo en el aula P1-A1 en las oficinas del curso de temporada lo dejan por favor",
@@ -404,48 +626,116 @@
     ],
     "objeto_principal": "Cuaderno / Libros",
     "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 13537,
+    "date": "2024-07-18",
+    "datetime": "2024-07-18 17:18:20+00:00",
+    "periodo": "2024 - Invierno (Temporada)",
+    "sender": "Yudith Delicia Coyo Poma",
+    "text": "🟡 *Chicasss.una  pregunta*\n*Alguen vio en el baño de la mujeres Un billetera color mengrito?* 🥺\n🥺 *si lo vieron me pueden decir xfa ??*",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Billetera / Cartera"
+    ],
+    "objeto_principal": "Billetera / Cartera",
+    "lugar": "Lugar no especificado",
     "intensidad": 3,
-    "tiene_custodia": true,
-    "estado": "Reportado Extraviado"
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 13445,
+    "date": "2024-07-05",
+    "datetime": "2024-07-05 20:54:22+00:00",
+    "periodo": "2024 - Invierno (Temporada)",
+    "sender": "Dani",
+    "text": "Porfavor si alguien vio",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Otros Objetos"
+    ],
+    "objeto_principal": "Otros Objetos",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 13438,
+    "date": "2024-07-05",
+    "datetime": "2024-07-05 20:40:41+00:00",
+    "periodo": "2024 - Invierno (Temporada)",
+    "sender": "Dani",
+    "text": "Alguien vio",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Otros Objetos"
+    ],
+    "objeto_principal": "Otros Objetos",
+    "lugar": "Lugar no especificado",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 13437,
     "date": "2024-07-05",
-    "datetime": "2024-07-05T16:40:25",
+    "datetime": "2024-07-05 20:40:25+00:00",
     "periodo": "2024 - Invierno (Temporada)",
     "sender": "Dani",
     "text": "Una chamarra negra alguien vio en la aula subsuelo a 1",
     "tipo": "PERDIDO",
     "objetos": [
-      "Prenda (Chamarra/Polera)"
+      "Prenda (Chamarra/Chompa)"
     ],
-    "objeto_principal": "Prenda (Chamarra/Polera)",
+    "objeto_principal": "Prenda (Chamarra/Chompa)",
     "lugar": "Subsuelo (Aulas SS-A1 / SS-A3)",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 13229,
     "date": "2024-06-27",
-    "datetime": "2024-06-27T18:47:38",
+    "datetime": "2024-06-27 22:47:38+00:00",
     "periodo": "2024 - Semestre I (Regular)",
     "sender": "Angel",
     "text": "Alguien vio un CI por favor",
     "tipo": "PERDIDO",
     "objetos": [
-      "Carnet / CI"
+      "Carnet / Documento"
     ],
-    "objeto_principal": "Carnet / CI",
+    "objeto_principal": "Carnet / Documento",
     "lugar": "Lugar no especificado",
-    "intensidad": 3,
+    "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 13209,
+    "date": "2024-06-27",
+    "datetime": "2024-06-27 18:40:33+00:00",
+    "periodo": "2024 - Semestre I (Regular)",
+    "sender": "Mussani Ruelas",
+    "text": "Buenas tardes, encontré un mouse en el lab3 en el horario de 12:00 a 16:00, lo estoy dejando en la oficina del curso de temporada",
+    "tipo": "ENCONTRADO",
+    "objetos": [
+      "Mouse / Periférico"
+    ],
+    "objeto_principal": "Mouse / Periférico",
+    "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
+    "intensidad": 1,
+    "tiene_custodia": true,
+    "estado": "En Custodia"
   },
   {
     "id": 13023,
     "date": "2024-06-26",
-    "datetime": "2024-06-26T17:17:10",
+    "datetime": "2024-06-26 21:17:10+00:00",
     "periodo": "2024 - Semestre I (Regular)",
     "sender": "zander",
     "text": "Alguien vio un cargador en el piso 4 lab?",
@@ -455,14 +745,31 @@
     ],
     "objeto_principal": "Cargador / Laptop",
     "lugar": "Piso 4 (Laboratorios / Of. Temporada)",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 12874,
+    "date": "2024-06-25",
+    "datetime": "2024-06-25 23:15:00+00:00",
+    "periodo": "2024 - Semestre I (Regular)",
+    "sender": "Ángel Quino Chipana",
+    "text": "En el laboratorio 3, en la PC 24 olvidaron este mouse",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Mouse / Periférico"
+    ],
+    "objeto_principal": "Mouse / Periférico",
+    "lugar": "Lugar no especificado",
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 12836,
     "date": "2024-06-25",
-    "datetime": "2024-06-25T16:02:59",
+    "datetime": "2024-06-25 20:02:59+00:00",
     "periodo": "2024 - Semestre I (Regular)",
     "sender": "Kevin V.",
     "text": "Buenas tardes alguien vio una billetera negra con fondo rosado? Por el sub suelo",
@@ -472,14 +779,14 @@
     ],
     "objeto_principal": "Billetera / Cartera",
     "lugar": "Subsuelo (Aulas SS-A1 / SS-A3)",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 11190,
     "date": "2024-05-29",
-    "datetime": "2024-05-29T10:45:56",
+    "datetime": "2024-05-29 14:45:56+00:00",
     "periodo": "2024 - Semestre I (Regular)",
     "sender": "😶",
     "text": "Ayer se me quedó un cuaderno espiral negro en las gradas de informática. Si alguien lo encontró contactarse conmigo por favor.",
@@ -488,15 +795,33 @@
       "Cuaderno / Libros"
     ],
     "objeto_principal": "Cuaderno / Libros",
-    "lugar": "Patios / Gradas",
-    "intensidad": 3,
+    "lugar": "Patios y Gradas Exteriores",
+    "intensidad": 4,
     "tiene_custodia": false,
-    "estado": "Reportado Extraviado"
+    "estado": "Buscando / Perdido"
+  },
+  {
+    "id": 11025,
+    "date": "2024-04-10",
+    "datetime": "2024-04-10 01:32:49+00:00",
+    "periodo": "2024 - Semestre I (Regular)",
+    "sender": "Diegolas",
+    "text": "Muy buenas noches por casualidad alguien encontró una bolsa ploma deportiva de tela, adentro llevaba una polera de Brazil número 3 con el nombre DiezGo color azul, un corto Blanco, medias azules y tenis amarillo fosforescente no recuerdo si lo olvide en piso lab1 piso 3 o en la biblioteca de la carrera. Si alguien tienen algún dato o información quedaría agradecido. Se ofrece recompensa muchas gracias",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Prenda (Chamarra/Chompa)",
+      "Estuchera / Cartuchera"
+    ],
+    "objeto_principal": "Prenda (Chamarra/Chompa)",
+    "lugar": "Piso 3 (Lab 4 / Lasin)",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 10998,
     "date": "2024-04-03",
-    "datetime": "2024-04-03T13:42:23",
+    "datetime": "2024-04-03 17:42:23+00:00",
     "periodo": "2024 - Semestre I (Regular)",
     "sender": "Anonimo 🐯",
     "text": "Hola, encontre esta llave botada cerca de los casilleros del primer piso, supongo que a alguien se le perdio",
@@ -513,7 +838,7 @@
   {
     "id": 9635,
     "date": "2024-01-13",
-    "datetime": "2024-01-13T00:44:43",
+    "datetime": "2024-01-13 04:44:43+00:00",
     "periodo": "2024 - Verano (Temporada)",
     "sender": "Estudiante UMSA",
     "text": "Disculpen alguien me puede reenviar la 2da practica de inf 112 de temporada, perdi mi telefono, gracias",
@@ -523,59 +848,59 @@
     ],
     "objeto_principal": "Celular / Móvil",
     "lugar": "Lugar no especificado",
-    "intensidad": 2,
-    "tiene_custodia": true,
-    "estado": "Reportado Extraviado"
+    "intensidad": 3,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 9586,
     "date": "2024-01-08",
-    "datetime": "2024-01-08T11:11:21",
+    "datetime": "2024-01-08 15:11:21+00:00",
     "periodo": "2024 - Verano (Temporada)",
     "sender": ".",
     "text": "Alguien olvidó su estuchera",
-    "tipo": "ENCONTRADO",
+    "tipo": "PERDIDO",
     "objetos": [
       "Estuchera / Cartuchera"
     ],
     "objeto_principal": "Estuchera / Cartuchera",
     "lugar": "Lugar no especificado",
-    "intensidad": 2,
+    "intensidad": 3,
     "tiene_custodia": false,
-    "estado": "Encontrado (En espera)"
-  },
-  {
-    "id": 6082,
-    "date": "2023-07-19",
-    "datetime": "2023-07-19T11:03:22",
-    "periodo": "2023 - Invierno (Temporada)",
-    "sender": "£",
-    "text": "AVISO 📢  ✅ Se encontraron los siguiente objetos perdidos, los dueños Apersonarce a la oficina del curso de temporada 3er piso para su devolución.",
-    "tipo": "ENCONTRADO",
-    "objetos": [
-      "Otros Objetos"
-    ],
-    "objeto_principal": "Otros Objetos",
-    "lugar": "Aulas Generales",
-    "intensidad": 2,
-    "tiene_custodia": true,
-    "estado": "En Custodia / Entregado"
+    "estado": "Buscando / Perdido"
   },
   {
     "id": 5572,
     "date": "2023-06-27",
-    "datetime": "2023-06-27T07:32:05",
+    "datetime": "2023-06-27 11:32:05+00:00",
     "periodo": "2023 - Semestre I (Regular)",
     "sender": "Gladys VH",
     "text": "Buen día se encontró un flash en lasin 1",
     "tipo": "ENCONTRADO",
     "objetos": [
-      "Flash USB"
+      "Flash USB / Almacenamiento"
     ],
-    "objeto_principal": "Flash USB",
+    "objeto_principal": "Flash USB / Almacenamiento",
     "lugar": "Piso 3 (Lab 4 / Lasin)",
     "intensidad": 2,
     "tiene_custodia": false,
     "estado": "Encontrado (En espera)"
+  },
+  {
+    "id": 2572,
+    "date": "2022-12-27",
+    "datetime": "2022-12-27 19:46:10+00:00",
+    "periodo": "2022 - Semestre II (Regular)",
+    "sender": "Estudiante UMSA",
+    "text": "Buenas tardes Disculpen  \n¿las clases  van a ser presenciales o virtuales ? .  😅 Me olvide preguntar cuando deje los documentos😅",
+    "tipo": "PERDIDO",
+    "objetos": [
+      "Carnet / Documento"
+    ],
+    "objeto_principal": "Carnet / Documento",
+    "lugar": "Lugar no especificado",
+    "intensidad": 4,
+    "tiene_custodia": false,
+    "estado": "Buscando / Perdido"
   }
 ]

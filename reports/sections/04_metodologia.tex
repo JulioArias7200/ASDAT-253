@@ -3,7 +3,7 @@
 
 \subsection{Diseño de la Investigación y Ciclo CRISP-DM}
 
-El estudio adopta un diseño cuantitativo, observacional, retrospectivo y no experimental sobre un corpus conversacional generado de forma espontánea en Telegram. La metodología de trabajo se estructuró siguiendo las seis fases del estándar \emph{CRISP-DM} (\emph{Cross-Industry Standard Process for Data Mining}): comprensión del negocio/contexto académico, comprensión de los datos, preparación de los datos, modelado, evaluación y despliegue (Figura~\ref{fig:pipeline_arquitectura}).
+El estudio adopta un diseño cuantitativo, observacional, retrospectivo y no experimental sobre un corpus conversacional generado de forma espontánea en Telegram. La metodología de trabajo se estructuró siguiendo las seis fases del estándar \emph{CRISP-DM} (\emph{Cross-Industry Standard Process for Data Mining}) \citep{chapman2000crisp}: comprensión del negocio/contexto académico, comprensión de los datos, preparación de los datos, modelado, evaluación y despliegue (Figura~\ref{fig:pipeline_arquitectura}).
 
 \begin{figure}[htbp]
   \centering
@@ -23,7 +23,15 @@ La exportación en formato JSON de Telegram Desktop genera estructuras heterogé
   \item \textbf{Resolución de Entidades Docentes y Materias (SCD Tipo 2):} Mediante el script \texttt{detectar\_menciones\_umsa.py}, se compilan expresiones regulares (\texttt{alias\_regex}) para docentes y materias, resolviendo su correspondencia contextual contra la tabla \texttt{oferta\_}\allowbreak\texttt{academica\_semestral} según la fecha del mensaje.
 \end{enumerate}
 
-Para ilustrar de forma intuitiva la pérdida controlada de dimensionalidad y el saneamiento textual a lo largo del flujo de ingeniería, la Figura~\ref{fig:sankey_volumen_etl} detalla el diagrama Sankey del volumen de datos, transitando desde 1.46M de caracteres crudos hasta los tokens canónicos limpios. Complementariamente, la Figura~\ref{fig:sankey_tipologia_mensajes} exhibe la distribución estructural y la bifurcación sintáctica de los mensajes (estándar, preguntas, emojis y modismos) hacia sus respectivos módulos de procesamiento afectivo y temático.
+La Figura~\ref{fig:ui_preprocesamiento_corpus} exhibe la interfaz web de supervisión del preprocesamiento, detallando las métricas de compresión léxica, la longitud media de texto y la preservación de jergas regionales. Asimismo, para ilustrar de forma intuitiva la pérdida controlada de dimensionalidad y el saneamiento textual a lo largo del flujo de ingeniería, la Figura~\ref{fig:sankey_volumen_etl} detalla el diagrama Sankey del volumen de datos, transitando desde 1.46M de caracteres crudos hasta los tokens canónicos limpios. Complementariamente, la Figura~\ref{fig:sankey_tipologia_mensajes} exhibe la distribución estructural y la bifurcación sintáctica de los mensajes (estándar, preguntas, emojis y modismos) hacia sus respectivos módulos de procesamiento afectivo y temático.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP6JNAC.png}
+  \vspace{4pt}
+  \caption{Módulo de preprocesamiento, normalización textual y preservación de modismos en SentiDataUMSA.}
+  \label{fig:ui_preprocesamiento_corpus}
+\end{figure}
 
 \begin{figure}[htbp]
   \centering

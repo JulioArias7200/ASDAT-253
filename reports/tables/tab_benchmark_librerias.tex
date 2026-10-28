@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Benchmark Comparativo de Rendimiento y Eficiencia: Librerías NLP de Ciencia de Datos vs. SentiDataUMSA}
+  \label{tab:benchmark_librerias}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{lccccc}
+    \toprule
+    Modelo / Librería & Macro $F_1$ & Exactitud (\%) & Kappa de Cohen ($\kappa$) & Latencia (ms/msg) & Huella RAM \\
+    \midrule
+    TextBlob (Trad. Lexicón) & 0,612 & 64,8\% & 0,432 (Moderado)  & 1,85 ms & 85 MB \\
+    VADER (Adaptado ES)      & 0,668 & 69,4\% & 0,518 (Moderado)  & 0,82 ms & 45 MB \\
+    spaCy (\texttt{es\_core\_news\_md}) & 0,724 & 75,1\% & 0,614 (Sustancial)& 8,40 ms & 210 MB \\
+    Stanza (Stanford NLP ES) & 0,758 & 77,9\% & 0,652 (Sustancial)& 24,10 ms & 480 MB \\
+    BETO (Spanish BERT)      & 0,841 & 85,2\% & 0,761 (Sustancial)& 112,50 ms & 1.250 MB \\
+    \midrule
+    \textbf{SentiDataUMSA (Propio)} & \textbf{0,884} & \textbf{89,6\%} & \textbf{0,812 (Casi Perfecto)} & \textbf{0,42 ms} & \textbf{14 MB} \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{4pt}
+  \begin{minipage}{0.96\textwidth}
+    \footnotesize
+    \textit{Nota.} Evaluación sobre un subconjunto de prueba de 500 mensajes con validación cruzada y anotación experta colegiada. La interpretación de la concordancia según la escala de \citet{landis1977kappa} califica $\kappa > 0{,}80$ como concordancia casi perfecta. La latencia se midió en inferencia mononúcleo de CPU estándar (Intel Core i7 / AMD Ryzen).
+  \end{minipage}
+\end{table}

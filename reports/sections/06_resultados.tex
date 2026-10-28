@@ -78,7 +78,7 @@ moderadas sobre las extremas.
 \subsection{Frecuencia de emociones}
 \label{sec:res-emociones}
 
-La Tabla~\ref{tab:frecuencia_emociones} recoge las dieciocho categor\'\i{}as emocionales ordenadas por
+La Tabla~\ref{tab:frecuencia_emociones} recoge las quince categor\'\i{}as emocionales canónicas ordenadas por
 frecuencia, expresada como n\'umero de ocurrencias y como porcentaje sobre los mensajes
 con evidencia. Predominan las emociones de valencia positiva y carácter social: la
 categor\'\i{}a más frecuente es \emph{\emocionTop{}}, seguida de otras formas de
@@ -91,14 +91,9 @@ apreciablemente menores.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.72\textwidth]{frecuencia_emociones.png}
-  \caption{Frecuencia de emociones detectadas.}
+  \caption{Frecuencia de emociones detectadas en el corpus.}
   \label{fig:emo_freq}
 \end{figure}
-
-La Figura~\ref{fig:emo_anio} presenta un mapa de calor de las emociones por año, que
-permite observar la estabilidad relativa del perfil emocional a lo largo del tiempo: la
-estructura general se mantiene, con variaciones de intensidad ligadas a los ciclos
-acad\'emicos.
 
 \begin{figure}[htbp]
   \centering
@@ -107,37 +102,93 @@ acad\'emicos.
   \label{fig:emo_anio}
 \end{figure}
 
-En la plataforma interactiva SentiDataUMSA, este comportamiento se consolida en el módulo de telemetría afectiva exhibido en la Figura~\ref{fig:ui_sentimientos_global}, donde se contrastan los indicadores globales de polaridad (resaltando la predominancia de mensajes fácticos sobre la masa afectiva) junto con el escalafón jerárquico de emociones dominantes del corpus.
+En la plataforma interactiva SentiDataUMSA, este comportamiento se consolida en el módulo de telemetría afectiva exhibido en la Figura~\ref{fig:ui_sentimientos_global}, donde se contrastan los indicadores globales de polaridad junto con el escalafón jerárquico de emociones dominantes del corpus.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.90\textwidth]{figures/CAP13JNAC.png}
+  \includegraphics[width=0.90\textwidth]{figures/CAP19JNAC.png}
   \vspace{4pt}
   \caption{Módulo interactivo de telemetría afectiva, balance de polaridad y distribución de emociones en SentiDataUMSA.}
   \label{fig:ui_sentimientos_global}
 \end{figure}
 
+A nivel analítico, el sistema desagrega el catálogo en quince categorías emocionales operacionales (\textit{Gratitud}, \textit{Alegría}, \textit{Confianza}, \textit{Anticipación}, \textit{Esperanza}, \textit{Alivio}, \textit{Sorpresa}, \textit{Tristeza}, \textit{Preocupación}, \textit{Frustración}, \textit{Ansiedad}, \textit{Enojo}, \textit{Desánimo}, \textit{Cansancio} y \textit{Confusión}). Para ponderar la relevancia cuali-cuantitativa de cada dimensión, se definió una métrica de balance polar que combina la frecuencia relativa normalizada $f_{\mathrm{norm}}(e)$ con la intensidad léxica media observada $I_{\mathrm{media}}(e)$:
+\begin{equation}
+  S_{\mathrm{polar}}(e) = 0{,}60 \cdot f_{\mathrm{norm}}(e) + 0{,}40 \cdot I_{\mathrm{media}}(e).
+  \label{eq:score_polar}
+\end{equation}
+
+La Figura~\ref{fig:ui_emociones_desglose} presenta el desglose cuantitativo y porcentual de las 15 emociones almacenadas en la base de datos distribuida en Neon PostgreSQL. En la Figura~\ref{fig:ui_emociones_temporal} se ilustra la serie de tiempo apilada de las dimensiones emocionales a lo largo de las cohortes semestrales, mientras que la Figura~\ref{fig:ui_emociones_radar} grafica el perfil emocional global mediante un diagrama de radar polar normalizado de acuerdo con la Ecuación~(\ref{eq:score_polar}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.88\textwidth]{figures/CAP20JNAC.png}
+  \vspace{4pt}
+  \caption{Desglose cuantitativo y ranking de las 15 emociones detectadas en la base de datos distribuida Neon PostgreSQL.}
+  \label{fig:ui_emociones_desglose}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP21JNAC.png}
+  \vspace{4pt}
+  \caption{Evolución temporal de las emociones dominantes a lo largo de los períodos académicos (área apilada interactiva).}
+  \label{fig:ui_emociones_temporal}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figures/CAP22JNAC.png}
+  \vspace{4pt}
+  \caption{Perfil emocional multidimensional en diagrama de radar polar (ponderación 60\% frecuencia y 40\% intensidad).}
+  \label{fig:ui_emociones_radar}
+\end{figure}
+
 \subsection{Emojis y reacciones como señal afectiva}
 
-Una parte de la carga afectiva se canaliza a través de emojis, que el método conserva
-como unidades l\'exicas. La Tabla~\ref{tab:top_emojis} lista los quince emojis más
-frecuentes (identificados por un descriptor textual). La presencia de emojis con polaridad
-clara (afecto, aplauso, alegr\'\i{}a) junto a s\'\i{}mbolos de se\~nalizaci\'on confirma que
-el canal emoji cumple una doble funci\'on: expresiva y organizativa. Las reacciones
-(Tabla~\ref{tab:top_reacciones}) muestran un patrón similar, con \reactTop{} dominando
-claramente el repertorio.
+Una parte fundamental de la carga afectiva se canaliza a través de emojis y reacciones gráficas, que el método preserva como unidades léxicas y pragmáticas independientes. La Tabla~\ref{tab:top_emojis} lista los quince emojis más frecuentes (identificados por su codificación Unicode y descriptor textual estándar). La presencia de emojis con polaridad clara (afecto, aplauso, alegría) junto a símbolos de señalización y trámite confirma que el canal emoji cumple una doble función: expresiva y organizativa. Las reacciones nativas (Tabla~\ref{tab:top_reacciones}) muestran un patrón similar, con \reactTop{} dominando claramente el repertorio.
 
 \input{tables/top_emojis}
 \input{tables/top_reacciones}
 
-La Figura~\ref{fig:ui_temporal_reacciones} presenta la vista de producción donde la serie temporal spline interactiva correlaciona los picos de actividad con las franjas semestrales (Mayo--Agosto y Diciembre--Febrero) y visualiza la distribución empírica de reacciones emoji de Telegram, confirmando la supremacía de reacciones afirmativas y de gratitud.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{top_emojis.png}
+  \caption{Distribución de los emojis más recurrentes en el corpus analizado.}
+  \label{fig:top_emojis}
+\end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{figures/CAP2JNAC.png}
+  \includegraphics[width=0.72\textwidth]{top_reacciones.png}
+  \caption{Frecuencia y tipología de reacciones observadas en la mensajería.}
+  \label{fig:top_reacciones}
+\end{figure}
+
+En la plataforma SentiDataUMSA, el análisis multimodal se articula en tres vistas operativas: la Figura~\ref{fig:ui_emojis_overview} detalla la distribución global de polaridad y métricas sintácticas del canal emoji; la Figura~\ref{fig:ui_emojis_ranking} exhibe el escalafón jerárquico de símbolos visuales y su correspondencia con reacciones de Telegram; y la Figura~\ref{fig:ui_emojis_fichas} presenta el visor de fichas pragmáticas contextualizadas para los 441 emojis catalogados en el ámbito universitario.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP9JNAC.png}
   \vspace{4pt}
-  \caption{Evolución temporal continua (Spline SVG) con franjas semestrales y distribución de reacciones nativas de Telegram.}
-  \label{fig:ui_temporal_reacciones}
+  \caption{Semántica multimodal y distribución de polaridad léxica en el canal de emojis del corpus.}
+  \label{fig:ui_emojis_overview}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP10JNAC.png}
+  \vspace{4pt}
+  \caption{Ranking de emojis más frecuentes y tipología de reacciones nativas en Telegram.}
+  \label{fig:ui_emojis_ranking}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP11JNAC.png}
+  \vspace{4pt}
+  \caption{Catálogo y fichas pragmáticas contextualizadas para los 441 emojis identificados en la interacción universitaria.}
+  \label{fig:ui_emojis_fichas}
 \end{figure}
 
 \subsection{Evolución temporal}
@@ -175,16 +226,6 @@ minoritario, es persistente a lo largo de toda la historia del grupo.
   \label{fig:pol_apilada}
 \end{figure}
 
-Para profundizar en la estacionalidad académica, la Figura~\ref{fig:ui_periodos_academicos} ilustra la descomposición longitudinal a lo largo de 47 cohortes mensuales, evidenciando cómo los ciclos de matrícula y exámenes parciales modulan el volumen conversacional en la comunidad estudiantil.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.92\textwidth]{figures/CAP6JNAC.png}
-  \vspace{4pt}
-  \caption{Descomposición de la actividad conversacional por hitos académicos y cohortes mensuales.}
-  \label{fig:ui_periodos_academicos}
-\end{figure}
-
 \subsection{Modelado de tópicos}
 \label{sec:res-topicos}
 
@@ -209,7 +250,7 @@ razonablemente equilibrada, sin un tópico que absorba la mayor\'\i{}a del corpu
   \label{fig:topicos_prev}
 \end{figure}
 
-El entorno analítico de SentiDataUMSA extiende la interpretabilidad de los tópicos latentes mediante un conjunto de vistas especializadas. La Figura~\ref{fig:ui_lda_emociones} exhibe la configuración global de los cinco tópicos con sus distribuciones de probabilidad $\beta$ y el perfil afectivo asociado. En la Figura~\ref{fig:ui_topicos_metricas} se detalla la matriz de términos distintivos y las puntuaciones TF-IDF por componente temático, mientras que la Figura~\ref{fig:ui_topicos_ngrams} extrae las colocaciones sintácticas y frases multipalabra características (e.g., \emph{"pasando clases"}, \emph{"álgebra lineal"}, \emph{"grupo whatsapp"}). Asimismo, la Figura~\ref{fig:ui_topicos_tiempo} proyecta la evolución temporal histórica (2018--2026) y el balance de carga emocional intrínseco de cada tópico. Finalmente, la Figura~\ref{fig:ui_topicos_mensajes} muestra el muestreo empírico de mensajes reales anonimizados clasificados dentro de cada categoría temática desde la base de datos distribuida en Neon PostgreSQL.
+El entorno analítico de SentiDataUMSA extiende la interpretabilidad de los tópicos latentes mediante un conjunto de vistas especializadas. La Figura~\ref{fig:ui_lda_emociones} exhibe la configuración global de los cinco tópicos con sus distribuciones de probabilidad $\beta$ y el perfil afectivo asociado. En la Figura~\ref{fig:ui_topicos_mensajes} se muestra el muestreo empírico de mensajes reales anonimizados clasificados dentro de cada categoría temática desde Neon PostgreSQL. Asimismo, en la Figura~\ref{fig:ui_topicos_metricas} se detalla la matriz analítica de términos distintivos, pesos $\beta$ y puntuaciones Term-Score / TF-IDF por componente temático, mientras que la Figura~\ref{fig:ui_topicos_tiempo} proyecta la trayectoria temporal histórica (2018--2026) y el balance de carga afectiva de cada tópico.
 
 \begin{figure}[htbp]
   \centering
@@ -221,34 +262,26 @@ El entorno analítico de SentiDataUMSA extiende la interpretabilidad de los tóp
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.90\textwidth]{figures/CAP9JNAC.png}
+  \includegraphics[width=0.90\textwidth]{figures/CAP12JNAC.png}
   \vspace{4pt}
-  \caption{Matriz analítica de términos distintivos, pesos $\beta$, perplejidad y ponderación TF-IDF por tópico.}
+  \caption{Muestreo empírico de mensajes reales anonimizados clasificados en el modelo temático en Neon PostgreSQL.}
+  \label{fig:ui_topicos_mensajes}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.90\textwidth]{figures/CAP13JNAC.png}
+  \vspace{4pt}
+  \caption{Matriz analítica de términos distintivos, pesos $\beta$ y ponderación Term-Score / TF-IDF por tópico.}
   \label{fig:ui_topicos_metricas}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.90\textwidth]{figures/CAP10JNAC.png}
-  \vspace{4pt}
-  \caption{Extracción de colocaciones, frases y n-gramas frecuentes asociados a los tópicos temáticos.}
-  \label{fig:ui_topicos_ngrams}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.90\textwidth]{figures/CAP11JNAC.png}
+  \includegraphics[width=0.90\textwidth]{figures/CAP14JNAC.png}
   \vspace{4pt}
   \caption{Trayectoria temporal de prevalencia temática (2018--2026) y perfil de carga afectiva del tópico.}
   \label{fig:ui_topicos_tiempo}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.90\textwidth]{figures/CAP12JNAC.png}
-  \vspace{4pt}
-  \caption{Muestreo empírico de mensajes reales anonimizados clasificados en el modelo temático en Neon PostgreSQL.}
-  \label{fig:ui_topicos_mensajes}
 \end{figure}
 
 \subsection{Transiciones de estado (cadenas de Markov)}

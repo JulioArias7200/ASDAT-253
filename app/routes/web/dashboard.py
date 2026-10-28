@@ -28,7 +28,8 @@ from database.queries import (
     get_timeline_series_data,
     get_topicos_frecuencia_page_data,
     get_mensajes_por_topico_y_emocion,
-    get_objetos_perdidos_data
+    get_objetos_perdidos_data,
+    get_mensajes_docente_paginados
 )
 
 @web_bp.route("/")
@@ -289,8 +290,20 @@ def api_topicos_mensajes():
     return jsonify(res)
 
 
-
-
+@web_bp.route("/api/docentes/<docente_id>/mensajes")
+def api_docente_mensajes(docente_id):
+    """
+    Endpoint JSON paginado para recuperar mensajes reales y reacciones de Telegram
+    asociadas a un docente específico para la ventana modal interactiva.
+    """
+    offset = request.args.get("offset", "0")
+    limit = request.args.get("limit", "6")
+    res = get_mensajes_docente_paginados(
+        docente_id=docente_id,
+        offset=offset,
+        limit=limit
+    )
+    return jsonify(res)
 
 
 # =============================================================================

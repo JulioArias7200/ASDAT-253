@@ -80,6 +80,7 @@
                                 <th class="py-space-sm px-space-md text-right">Reacciones</th>
                                 <th class="py-space-sm px-space-md text-right">Consultas</th>
                                 <th class="py-space-sm px-space-md text-center">Estado Académico</th>
+                                <th class="py-space-sm px-space-md text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-surface-container-high/40">
@@ -117,10 +118,22 @@
                                     <span class="bg-surface-container-high text-outline font-label-sm text-[11px] px-2 py-0.5 rounded-full font-medium">Sin menciones</span>
                                     {% endif %}
                                 </td>
+                                <td class="py-space-sm px-space-md text-center">
+                                    <button type="button"
+                                            class="btn-ver-docente inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container-high hover:bg-primary/20 text-on-surface hover:text-primary transition-all border border-outline/20 hover:border-primary/40 cursor-pointer shadow-sm active:scale-95"
+                                            data-docente-id="{{ doc.docente_id }}"
+                                            data-docente-nombre="{{ doc.docente }}"
+                                            data-total-menciones="{{ doc.total_menciones }}"
+                                            data-total-reacciones="{{ doc.total_reacciones }}"
+                                            title="Ver mensajes y reacciones de {{ doc.docente }}">
+                                        <span class="material-symbols-outlined text-[17px] text-primary">visibility</span>
+                                        <span class="font-mono text-xs font-semibold">Ver</span>
+                                    </button>
+                                </td>
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="7" class="py-space-lg text-center text-outline font-body-sm">
+                                <td colspan="8" class="py-space-lg text-center text-outline font-body-sm">
                                     Cargando directorio docente desde Neon Serverless PostgreSQL...
                                 </td>
                             </tr>
@@ -132,6 +145,84 @@
                 <div class="flex items-center justify-between text-outline font-code-sm text-code-sm pt-space-xs">
                     <span>* Mostrando los docentes con menciones y consultas registradas en la carrera</span>
                     <span class="text-tertiary font-mono">Total Docentes: {{ kpis.total_docentes }}</span>
+                </div>
+            </div>
+
+            <!-- MODAL: Mensajes y Reacciones Asociadas al Docente -->
+            <div id="modal-docente-backdrop"
+                 class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 transition-all duration-200"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="modal-docente-titulo">
+                
+                <div id="modal-docente-dialog"
+                     class="bg-surface-container border border-outline/20 rounded-2xl w-full max-w-3xl max-h-[88vh] flex flex-col shadow-2xl overflow-hidden transition-all duration-200">
+                    
+                    <!-- Modal Header -->
+                    <div class="flex items-center justify-between px-space-md py- space-sm border-b border-surface-container-high/60 bg-surface-container-high/40 p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold font-mono text-sm shadow-inner" id="modal-docente-avatar">
+                                DOC
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 id="modal-docente-titulo" class="font-headline-sm text-headline-sm text-on-surface font-semibold text-base sm:text-lg">
+                                        Docente
+                                    </h3>
+                                    <span id="modal-docente-id-badge" class="font-mono text-xs px-2 py-0.5 rounded bg-surface-container-highest text-secondary border border-secondary/20">
+                                        ID
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-3 text-xs text-outline mt-0.5 font-mono">
+                                    <span id="modal-docente-menciones-badge" class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px] text-tertiary">chat</span>
+                                        <span>0 menciones</span>
+                                    </span>
+                                    <span>•</span>
+                                    <span id="modal-docente-reacciones-badge" class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px] text-primary">add_reaction</span>
+                                        <span>0 reacciones</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Close Button -->
+                        <button type="button"
+                                id="modal-docente-close"
+                                class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-outline hover:text-on-surface flex items-center justify-center transition-colors cursor-pointer"
+                                title="Cerrar modal (Esc)">
+                            <span class="material-symbols-outlined text-[20px]">close</span>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body: Mensajes List (6 por carga) -->
+                    <div id="modal-docente-mensajes-container"
+                         class="p-4 sm:p-5 flex flex-col gap-3 overflow-y-auto flex-1 min-h-[220px] max-h-[58vh]">
+                        <!-- Se llena dinámicamente con las tarjetas de mensajes y reacciones -->
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="flex items-center justify-between px-4 sm:px-5 py-3 border-t border-surface-container-high/60 bg-surface-container-low/60">
+                        <div class="text-xs text-outline font-mono" id="modal-docente-contador">
+                            Mostrando 0 mensajes
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button type="button"
+                                    id="modal-docente-cargar-mas"
+                                    class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-primary text-on-primary hover:brightness-110 font-label-md text-xs sm:text-sm font-semibold transition-all shadow-md active:scale-95 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                                <span>Mostrar más (+6)</span>
+                            </button>
+
+                            <button type="button"
+                                    id="modal-docente-cerrar-btn"
+                                    class="px-3 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs sm:text-sm transition-colors cursor-pointer">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -166,4 +257,277 @@
                         btn.innerHTML = prev;
                     });
             });
+
+            // =========================================================================
+            // LÓGICA DE LA MODAL DE MENSAJES Y REACCIONES DE DOCENTES (Paginación 6 en 6)
+            // =========================================================================
+            (function() {
+                const modalBackdrop = document.getElementById('modal-docente-backdrop');
+                const modalDialog = document.getElementById('modal-docente-dialog');
+                const modalCloseBtn = document.getElementById('modal-docente-close');
+                const modalCerrarBtn = document.getElementById('modal-docente-cerrar-btn');
+                const btnCargarMas = document.getElementById('modal-docente-cargar-mas');
+                const mensajesContainer = document.getElementById('modal-docente-mensajes-container');
+                const modalTitulo = document.getElementById('modal-docente-titulo');
+                const modalIdBadge = document.getElementById('modal-docente-id-badge');
+                const modalAvatar = document.getElementById('modal-docente-avatar');
+                const modalMencionesBadge = document.getElementById('modal-docente-menciones-badge');
+                const modalReaccionesBadge = document.getElementById('modal-docente-reacciones-badge');
+                const modalContador = document.getElementById('modal-docente-contador');
+
+                let currentDocenteId = null;
+                let currentDocenteNombre = '';
+                let currentOffset = 0;
+                const LIMIT_POR_PAGINA = 6;
+                let totalCargados = 0;
+                let totalEsperados = 0;
+
+                function getSentimientoBadge(sentimiento) {
+                    const s = (sentimiento || 'NEUTRO').toUpperCase();
+                    if (s.includes('POS')) {
+                        return '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-tertiary-container/30 text-tertiary border border-tertiary/20 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>POSITIVO</span>';
+                    } else if (s.includes('NEG')) {
+                        return '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-950/40 text-red-400 border border-red-500/20 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>NEGATIVO</span>';
+                    }
+                    return '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-surface-container-highest text-outline border border-outline/20 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-outline"></span>NEUTRO</span>';
+                }
+
+                function getEmocionBadge(emocion) {
+                    const e = (emocion || 'NEUTRAL').toUpperCase();
+                    if (!e || e === 'NONE' || e === 'INDETERMINADO') return '';
+                    return `<span class="px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-secondary/10 text-secondary border border-secondary/20">${e}</span>`;
+                }
+
+                function getMateriaBadge(codigo, materia) {
+                    const cod = (codigo || '').trim();
+                    const mat = (materia || '').trim();
+                    if (!cod && !mat) return '';
+                    
+                    let label = '';
+                    if (cod && mat && cod.toUpperCase() !== mat.toUpperCase()) {
+                        label = `${cod} • ${mat}`;
+                    } else {
+                        label = cod || mat;
+                    }
+
+                    return `
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-primary/10 text-primary border border-primary/20 shadow-xs" title="Cátedra / Materia: ${label}">
+                            <span class="material-symbols-outlined text-[12px]">school</span>
+                            <span class="truncate max-w-[200px] sm:max-w-[320px]">${label}</span>
+                        </span>
+                    `;
+                }
+
+                function renderReactionsHtml(reactions) {
+                    if (!reactions) {
+                        return '<span class="text-xs text-outline/60 italic font-mono">Sin reacciones registradas</span>';
+                    }
+                    let entries = [];
+                    if (Array.isArray(reactions)) {
+                        entries = reactions.map(r => [r.emoji, r.count]);
+                    } else if (typeof reactions === 'object') {
+                        entries = Object.entries(reactions);
+                    }
+                    if (entries.length === 0) {
+                        return '<span class="text-xs text-outline/60 italic font-mono">Sin reacciones</span>';
+                    }
+                    return entries.map(([emoji, count]) => `
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-highest/80 hover:bg-surface-container-highest border border-outline/20 text-xs font-mono font-semibold text-on-surface shadow-xs transition-transform hover:scale-105" title="${count} reacción(es) con ${emoji}">
+                            <span class="text-sm leading-none">${emoji}</span>
+                            <span class="text-primary font-bold">${count}</span>
+                        </span>
+                    `).join('');
+                }
+
+                function createMensajeCard(msg, index) {
+                    const card = document.createElement('div');
+                    card.className = 'bg-surface-container-low border border-surface-container-high/80 rounded-xl p-3.5 hover:border-outline/30 transition-all flex flex-col gap-2.5 shadow-sm';
+                    
+                    const fechaStr = msg.fecha ? new Date(msg.fecha).toLocaleString('es-BO', { 
+                        year: 'numeric', month: 'short', day: 'numeric', 
+                        hour: '2-digit', minute: '2-digit' 
+                    }) : 'Fecha no registrada';
+
+                    const sentimiento = msg.polarity_label || msg.sentimiento;
+                    const emocion = msg.dominant_emotion || msg.emocion;
+                    const reacciones = msg.reactions || msg.reacciones;
+                    const materiaBadgeHtml = getMateriaBadge(msg.codigo_materia, msg.materia || msg.materia_nombre);
+
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between gap-2 flex-wrap text-xs">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="font-mono text-outline font-semibold">#${index}</span>
+                                ${materiaBadgeHtml}
+                                ${getSentimientoBadge(sentimiento)}
+                                ${getEmocionBadge(emocion)}
+                            </div>
+                            <div class="flex items-center gap-1.5 text-outline font-mono text-[11px]">
+                                <span class="material-symbols-outlined text-[13px]">schedule</span>
+                                <span>${fechaStr}</span>
+                            </div>
+                        </div>
+
+                        <div class="text-on-surface font-body-sm text-sm leading-relaxed bg-surface-container/60 p-2.5 rounded-lg border-l-2 border-primary/60">
+                            "${msg.texto}"
+                        </div>
+
+                        <div class="flex items-center justify-between gap-2 pt-1 border-t border-surface-container-high/40 flex-wrap">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="text-[11px] font-mono text-outline uppercase tracking-wider font-semibold mr-1">Reacciones:</span>
+                                ${renderReactionsHtml(reacciones)}
+                            </div>
+                            <span class="text-[11px] font-mono text-outline/70">ID: ${msg.mensaje_id}</span>
+                        </div>
+                    `;
+                    return card;
+                }
+
+                function openModal(docId, docNombre, menciones, reacciones) {
+                    currentDocenteId = docId;
+                    currentDocenteNombre = docNombre;
+                    currentOffset = 0;
+                    totalCargados = 0;
+                    totalEsperados = parseInt(menciones, 10) || 0;
+
+                    modalTitulo.textContent = docNombre;
+                    modalIdBadge.textContent = docId;
+                    modalAvatar.textContent = docNombre.substring(0, 2).toUpperCase();
+                    modalMencionesBadge.innerHTML = `<span class="material-symbols-outlined text-[14px] text-tertiary">chat</span><span>${menciones} menciones</span>`;
+                    modalReaccionesBadge.innerHTML = `<span class="material-symbols-outlined text-[14px] text-primary">add_reaction</span><span>${reacciones} reacciones</span>`;
+                    
+                    mensajesContainer.innerHTML = `
+                        <div class="py-12 flex flex-col items-center justify-center gap-3 text-outline">
+                            <span class="material-symbols-outlined text-[36px] animate-spin text-primary">progress_activity</span>
+                            <span class="font-mono text-sm">Consultando Neon PostgreSQL (LIMIT 6)...</span>
+                        </div>
+                    `;
+
+                    btnCargarMas.disabled = true;
+                    btnCargarMas.classList.remove('hidden');
+                    modalContador.textContent = 'Cargando mensajes...';
+
+                    // Mostrar modal y bloquear scroll del body
+                    modalBackdrop.classList.remove('hidden');
+                    modalBackdrop.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+
+                    fetchMensajes(false);
+                }
+
+                function closeModal() {
+                    modalBackdrop.classList.add('hidden');
+                    modalBackdrop.classList.remove('flex');
+                    document.body.style.overflow = '';
+                    currentDocenteId = null;
+                    mensajesContainer.innerHTML = '';
+                }
+
+                function fetchMensajes(isAppend) {
+                    if (!currentDocenteId) return;
+
+                    btnCargarMas.disabled = true;
+                    const prevBtnHtml = btnCargarMas.innerHTML;
+                    btnCargarMas.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">sync</span><span>Cargando...</span>';
+
+                    const url = `/api/docentes/${encodeURIComponent(currentDocenteId)}/mensajes?offset=${currentOffset}&limit=${LIMIT_POR_PAGINA}`;
+
+                    fetch(url)
+                        .then(r => {
+                            if (!r.ok) throw new Error('Error HTTP ' + r.status);
+                            return r.json();
+                        })
+                        .then(data => {
+                            if (!isAppend) {
+                                mensajesContainer.innerHTML = '';
+                            }
+
+                            const mensajes = data.mensajes || [];
+                            if (mensajes.length === 0 && !isAppend) {
+                                mensajesContainer.innerHTML = `
+                                    <div class="py-12 flex flex-col items-center justify-center gap-2 text-outline">
+                                        <span class="material-symbols-outlined text-[32px] text-outline/50">chat_bubble_outline</span>
+                                        <p class="font-body-sm text-sm">No se encontraron mensajes registrados para este docente.</p>
+                                    </div>
+                                `;
+                                btnCargarMas.classList.add('hidden');
+                                modalContador.textContent = '0 mensajes disponibles';
+                                return;
+                            }
+
+                            mensajes.forEach((msg, idx) => {
+                                totalCargados++;
+                                const card = createMensajeCard(msg, totalCargados);
+                                mensajesContainer.appendChild(card);
+                            });
+
+                            currentOffset = data.next_offset || (currentOffset + mensajes.length);
+                            modalContador.textContent = `Mostrando ${totalCargados} de ${data.total_menciones || totalCargados} mensajes`;
+
+                            if (data.has_more) {
+                                btnCargarMas.classList.remove('hidden');
+                                btnCargarMas.disabled = false;
+                                btnCargarMas.innerHTML = '<span class="material-symbols-outlined text-[16px]">expand_more</span><span>Mostrar más (+6)</span>';
+                            } else {
+                                btnCargarMas.classList.add('hidden');
+                                modalContador.textContent = `Todos los mensajes cargados (${totalCargados} en total)`;
+                            }
+
+                            // Si se hizo append, hacer scroll suave al primer mensaje nuevo
+                            if (isAppend && mensajes.length > 0) {
+                                const newCards = mensajesContainer.children;
+                                const firstNewIndex = totalCargados - mensajes.length;
+                                if (newCards[firstNewIndex]) {
+                                    newCards[firstNewIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                }
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Error al cargar mensajes del docente:', err);
+                            if (!isAppend) {
+                                mensajesContainer.innerHTML = `
+                                    <div class="py-8 flex flex-col items-center justify-center gap-2 text-red-400">
+                                        <span class="material-symbols-outlined text-[32px]">error</span>
+                                        <p class="text-sm font-mono">Error al conectar con la base de datos.</p>
+                                        <p class="text-xs text-outline">${err.message}</p>
+                                    </div>
+                                `;
+                            }
+                            btnCargarMas.disabled = false;
+                            btnCargarMas.innerHTML = prevBtnHtml;
+                        });
+                }
+
+                // Event Listeners
+                document.querySelectorAll('.btn-ver-docente').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const docId = btn.dataset.docenteId;
+                        const docNombre = btn.dataset.docenteNombre;
+                        const menciones = btn.dataset.totalMenciones;
+                        const reacciones = btn.dataset.totalReacciones;
+                        openModal(docId, docNombre, menciones, reacciones);
+                    });
+                });
+
+                btnCargarMas?.addEventListener('click', () => {
+                    fetchMensajes(true);
+                });
+
+                modalCloseBtn?.addEventListener('click', closeModal);
+                modalCerrarBtn?.addEventListener('click', closeModal);
+
+                // Clic en el fondo translúcido fuera de la ventana modal para salir
+                modalBackdrop?.addEventListener('click', (e) => {
+                    if (e.target === modalBackdrop) {
+                        closeModal();
+                    }
+                });
+
+                // Tecla Escape para salir
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                });
+            })();
             </script>

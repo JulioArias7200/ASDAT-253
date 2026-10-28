@@ -6,7 +6,7 @@
             <span class="material-symbols-outlined text-primary text-[24px]">psychology</span>
             <div>
                 <h2 class="font-headline-md text-headline-md text-on-surface">Procesamiento de Lenguaje Natural (PLN)</h2>
-                <p class="font-body-sm text-body-sm text-outline">Modelado de Temas (LDA k=4), Descriptores TF-IDF y Análisis Dual de Emociones UMSA</p>
+                <p class="font-body-sm text-body-sm text-outline">Modelado de Temas (LDA K=5 Gibbs Sampling), Descriptores TF-IDF y Perfil Emocional UMSA</p>
             </div>
         </div>
         <div class="flex items-center gap-2 mt-2 sm:mt-0">
@@ -15,7 +15,7 @@
                 TF-IDF: {{ "{:,}".format(nlp_kpis.get('total_descriptores_tfidf', 4193)) }} descriptores
             </span>
             <span class="bg-secondary/10 text-secondary border border-secondary/20 text-xs px-2.5 py-1 rounded-full font-mono">
-                LDA Beta: {{ nlp_kpis.get('total_terminos_lda', 80) }} términos
+                LDA Beta: {{ nlp_kpis.get('total_terminos_lda', 125) }} términos
             </span>
         </div>
     </div>
@@ -30,10 +30,10 @@
                     <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
                     <h3 class="font-headline-sm text-headline-sm text-on-surface">Topic Modeling (Latent Dirichlet Allocation)</h3>
                 </div>
-                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded">k = 4 Tópicos</span>
+                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded">k = {{ lda_topics|length }} Tópicos</span>
             </div>
             <p class="font-body-sm text-body-sm text-outline mb-space-sm">
-                Distribución probabilística Dirichlet ($\beta$ palabra-tema y $\gamma$ documento-tema) ajustada sobre 23,462 mensajes.
+                Distribución probabilística Dirichlet (&beta; palabra-tema y &gamma; documento-tema) ajustada sobre 23,371 mensajes.
             </p>
 
             <!-- Lista de Tópicos Descubiertos -->
@@ -210,31 +210,31 @@
             </div>
         </div>
 
-        <!-- TF-IDF por Ciclos Académicos (Básico, Intermedio, Superior) -->
+        <!-- TF-IDF por Semestre Académico (Sin Ciclos) -->
         <div class="lg:col-span-6 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
             <div class="flex items-center justify-between pb-space-xs">
                 <div class="flex items-center gap-space-xs">
                     <span class="material-symbols-outlined text-secondary text-[20px]">school</span>
-                    <h3 class="font-headline-sm text-headline-sm text-on-surface">TF-IDF por Ciclo Académico</h3>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">TF-IDF por Semestre Académico</h3>
                 </div>
-                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded">Básico / Intermedio / Superior</span>
+                <span class="bg-surface-container-high text-secondary font-code-sm text-xs px-2 py-0.5 rounded font-mono font-semibold">1° a 10° Semestre</span>
             </div>
             <p class="font-body-sm text-body-sm text-outline mb-space-sm">
-                Evolución de las inquietudes estudiantiles según el semestre y la madurez académica del estudiante.
+                Evolución de las inquietudes e interacciones estudiantiles segmentadas explícitamente por semestre académico en el pensum.
             </p>
             <div class="flex flex-wrap gap-2 my-space-xs">
                 {% for w in top_tfidf_ciclos %}
                 <div class="bg-surface-container-low px-2.5 py-1.5 rounded-lg border border-surface-container-highest flex items-center gap-2 hover:border-secondary/50 transition-colors">
-                    <span class="text-xs text-outline font-mono text-[10px]">[{{ w.entidad_id }}]</span>
+                    <span class="text-xs text-secondary font-mono text-[10px] font-semibold bg-secondary/10 px-1.5 py-0.5 rounded">[{{ w.entidad_id }}]</span>
                     <span class="text-xs text-on-surface font-medium">{{ w.termino }}</span>
-                    <span class="text-[10px] font-mono bg-secondary/10 text-secondary px-1.5 py-0.5 rounded font-bold">{{ w.score_tfidf }}</span>
+                    <span class="text-[10px] font-mono text-outline font-bold">TF-IDF {{ w.score_tfidf }}</span>
                 </div>
                 {% else %}
-                <span class="text-outline text-xs">Cargando términos por ciclo...</span>
+                <span class="text-outline text-xs">Cargando términos por semestre...</span>
                 {% endfor %}
             </div>
             <div class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-xs">
-                <span>Segmentación Curricular UMSA</span>
+                <span>Segmentación por Semestre Curricular</span>
                 <span class="text-secondary font-mono">158 Materias</span>
             </div>
         </div>

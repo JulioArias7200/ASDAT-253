@@ -15,11 +15,39 @@ El modelo relacional está compuesto por 16 tablas organizadas en cuatro subsist
 
 \input{tables/tab_kpis_corpus}
 
+La Figura~\ref{fig:erd_neon_schema} presenta el diagrama entidad-relación (ERD) completo del modelo físico implementado en Neon PostgreSQL, detallando las relaciones de cardinalidad entre el núcleo transaccional, los catálogos y las vistas analíticas materializadas.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.88\textwidth]{figures/CAP17JNAC_db.png}
+  \vspace{4pt}
+  \caption{Diagrama Entidad-Relación (ERD) del esquema físico en Neon Serverless PostgreSQL (16 tablas y vistas analíticas).}
+  \label{fig:erd_neon_schema}
+\end{figure}
+
 \subsection{Captura de Cambios de Datos en Tiempo Real (CDC)}
 
 La trazabilidad del sistema se garantiza a nivel de motor de base de datos mediante la tabla \texttt{bitacora\_cambios} y una función disparadora genérica (\texttt{fn\_registrar\_bitacora\_cambio()}) escrita en PL/pgSQL (Listado~\ref{lst:cdc_trigger}). Ante cualquier operación de actualización (\texttt{UPDATE}) o eliminación (\texttt{DELETE}), el trigger intercepta los registros \texttt{OLD} y \texttt{NEW}, compara campo por campo utilizando funciones de introspección JSONB y genera un delta granular (\texttt{diff\_modificaciones}).
 
 \input{listings/lst_cdc_trigger}
+
+En la interfaz de supervisión de SentiDataUMSA, este subsistema de gobernanza se descompone en dos pantallas operativas: la Figura~\ref{fig:ui_pipeline_linaje} exhibe el linaje de pipelines registrado cronológicamente para cada una de las cinco fases de transformación, mientras que la Figura~\ref{fig:ui_cdc_auditoria} presenta la consola de auditoría CDC en vivo, evidenciando las mutaciones capturadas por el disparador PL/pgSQL con el diff granular de modificaciones en los campos de expresiones regulares (\texttt{alias\_regex}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP15JNAC.png}
+  \vspace{4pt}
+  \caption{Linaje de ejecución de las cinco fases del pipeline de minería y transformación de datos en la bitácora.}
+  \label{fig:ui_pipeline_linaje}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP16JNAC.png}
+  \vspace{4pt}
+  \caption{Auditoría transaccional en tiempo real con Change Data Capture (CDC) y diferenciación de mutaciones del trigger PL/pgSQL.}
+  \label{fig:ui_cdc_auditoria}
+\end{figure}
 
 \subsubsection{Optimización y Prevención de Amplificación de Escritura}
 Durante la fase experimental, la inserción masiva de 12.581 tokens y registros lingüísticos generó un fenómeno de amplificación de escritura (\emph{write amplification}), saturando la bitácora con más de 12.000 eventos atómicos. Como solución ingenieril documentada en \path{database/optimize_bitacora.py}, se desactivaron los triggers de fila sobre tablas analíticas transitorias (\texttt{tokens\_frecuencia} y \texttt{shadow\_linguistics}), canalizando la trazabilidad de lotes hacia \texttt{bitacora\_procesos\_mineria}.
@@ -32,10 +60,30 @@ El consumo de datos y la interacción del usuario se centralizan en una aplicaci
   \item \textbf{Blueprint API REST v1 (\texttt{app/routes/api\_v1}):} Endpoints de telemetría y el controlador de ingesta (\texttt{/api/v1/ingest/upload}).
 \end{itemize}
 
+La Figura~\ref{fig:ui_dashboard_ejecutivo} exhibe la pantalla de inicio del tablero de control (Dashboard C-Level), donde convergen los indicadores ejecutivos de telemetría, el gráfico interactivo donut de composición multimodal y el ranking superior de docentes con mayores menciones estudiantiles.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP1JNAC.png}
+  \vspace{4pt}
+  \caption{Panel de control ejecutivo (Dashboard C-Level) de la plataforma SentiDataUMSA.}
+  \label{fig:ui_dashboard_ejecutivo}
+\end{figure}
+
 \subsubsection{Aislamiento In-Memory para Ingesta Multimodal}
 Para proteger la integridad del corpus oficial de la UMSA, la subida de nuevos paquetes de chat (archivos JSON o archivos comprimidos ZIP de Telegram Desktop con imágenes y stickers) opera bajo un esquema de \emph{aislamiento de escritura cero} (\emph{zero-write isolation}). Tal como se aprecia en el Listado~\ref{lst:ingest_memory}, el motor en Python (\texttt{app.core.emotica}) parsea, normaliza y puntúa las emociones íntegramente en memoria RAM, realizando únicamente consultas de solo lectura (\texttt{SELECT}) a Neon PostgreSQL para contrastar el nuevo chat contra el promedio histórico.
 
 \input{listings/lst_ingest_memory}
+
+La Figura~\ref{fig:ui_ingesta_inmemory} muestra la interfaz de usuario implementada para este mecanismo, donde el usuario puede arrastrar paquetes exportados de Telegram Desktop mientras el sistema garantiza que la base de datos Neon permanezca intacta en modo de solo lectura.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP14JNAC.png}
+  \vspace{4pt}
+  \caption{Módulo de ingesta y gobernanza de datos con aislamiento de memoria y protección transaccional de escritura cero.}
+  \label{fig:ui_ingesta_inmemory}
+\end{figure}
 
 \subsubsection{Ingeniería de Motores Gráficos Especializados}
 A diferencia de tableros convencionales que delegan la representación a bibliotecas genéricas rígidas, la plataforma incorpora dos motores visuales avanzados:

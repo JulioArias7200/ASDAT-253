@@ -1,212 +1,96 @@
 \section{Metodología}
 \label{sec:metodologia}
 
-\subsection{Dise\~no general}
+\subsection{Diseño de la Investigación y Ciclo CRISP-DM}
 
-El estudio adopta un dise\~no observacional, retrospectivo y no experimental. No se
-intervino sobre la comunidad ni se modificó su comportamiento; se analizó, en cambio,
-un corpus ya existente y generado de forma natural. El enfoque es \emph{exploratorio y
-descriptivo}: su propósito es caracterizar el corpus y cuantificar patrones, no probar
-hipótesis causales.
+El estudio adopta un diseño cuantitativo, observacional, retrospectivo y no experimental sobre un corpus conversacional generado de forma espontánea en Telegram. La metodología de trabajo se estructuró siguiendo las seis fases del estándar \emph{CRISP-DM} (\emph{Cross-Industry Standard Process for Data Mining}): comprensión del negocio/contexto académico, comprensión de los datos, preparación de los datos, modelado, evaluación y despliegue (Figura~\ref{fig:pipeline_arquitectura}).
 
-La unidad de análisis es el mensaje. Para cada mensaje se calculan dos salidas: una
-etiqueta de polaridad (positivo, negativo, neutro o indeterminado) y un vector de
-activación afectiva multidimensional. Adicionalmente, cada mensaje recibe
-una marca de nivel de evidencia que documenta la cantidad de señal disponible.
+\begin{figure}[htbp]
+  \centering
+  \input{figures/pipeline_arquitectura}
+  \vspace{6pt}
+  \caption{Arquitectura del Pipeline de Minería de Datos y Flujo de Procesamiento}
+  \label{fig:pipeline_arquitectura}
+\end{figure}
 
-\subsection{Arquitectura del \emph{pipeline}}
+\subsection{Adquisición, ETL Multimodal y Jergas Estudiantiles}
 
-El \emph{pipeline} base se implementa en R \citep{rcore2024} y se compone de diez scripts
-encadenados, cada uno de los cuales consume los artefactos del anterior y produce nuevos
-artefactos. La Tabla~\ref{tab:etapas} resume las etapas.
+La exportación en formato JSON de Telegram Desktop genera estructuras heterogéneas. La fase de extracción y transformación ejecuta las siguientes operaciones:
+\begin{enumerate}
+  \item \textbf{Filtrado de Mensajes de Servicio:} Se descartan eventos del sistema (altas/bajas de usuarios, cambios de título).
+  \item \textbf{Aislamiento Multimodal:} Los contenidos con imágenes son procesados mediante reconocimiento óptico de caracteres (OCR) para recuperar texto en comunicados y boletas (1.782 mensajes enriquecidos). Se catalogan 2.180 stickers y 24 GIFs asignándoles etiquetas afectivas explícitas.
+  \item \textbf{Diccionario de Modismos Paceños (UMSA):} Se compiló un diccionario especializado de 538 jergas estudiantiles paceñas (e.g., \emph{corcho} $\to$ estudioso/confianza; \emph{raspar} $\to$ aprobar al límite/alivio; \emph{chuto} $\to$ irregular/preocupación; \emph{fletear} $\to$ prestarse trabajo/frustración), impidiendo que términos de alto valor semántico sean eliminados como ruido.
+  \item \textbf{Resolución de Entidades Docentes y Materias (SCD Tipo 2):} Mediante el script \texttt{detectar\_menciones\_umsa.py}, se compilan expresiones regulares (\texttt{alias\_regex}) para docentes y materias, resolviendo su correspondencia contextual contra la tabla \texttt{oferta\_}\allowbreak\texttt{academica\_semestral} según la fecha del mensaje.
+\end{enumerate}
+
+Para ilustrar de forma intuitiva la pérdida controlada de dimensionalidad y el saneamiento textual a lo largo del flujo de ingeniería, la Figura~\ref{fig:sankey_volumen_etl} detalla el diagrama Sankey del volumen de datos, transitando desde 1.46M de caracteres crudos hasta los tokens canónicos limpios. Complementariamente, la Figura~\ref{fig:sankey_tipologia_mensajes} exhibe la distribución estructural y la bifurcación sintáctica de los mensajes (estándar, preguntas, emojis y modismos) hacia sus respectivos módulos de procesamiento afectivo y temático.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP7JNAC.png}
+  \vspace{4pt}
+  \caption{Diagrama de flujo Sankey de la compresión y reducción de volumen textual en el pipeline ETL.}
+  \label{fig:sankey_volumen_etl}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/CAP8JNAC.png}
+  \vspace{4pt}
+  \caption{Bifurcación y ruteo metodológico según tipología de mensaje y canal multimodal.}
+  \label{fig:sankey_tipologia_mensajes}
+\end{figure}
+
+\subsection{Señales de Evidencia y Motor Léxico Multietiqueta}
+
+El clasificador discrimina tres fuentes independientes de evidencia afectiva (Tabla~\ref{tab:senales}).
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Etapas del \emph{pipeline} de análisis.}
-  \label{tab:etapas}
-  \begin{tabular}{clp{8.2cm}}
-    \toprule
-    \# & Etapa & Descripción \\
-    \midrule
-    01 & Importación & Lee el JSON de Telegram, filtra servicio y multimedia sin texto, persiste mensajes. \\
-    02 & Validación & Verifica integridad, unicidad y coherencia temporal; marca duplicados de contenido. \\
-    03 & Limpieza & Normaliza el texto (Unicode NFC, minúsculas, espacios) conservando los emojis. \\
-    04 & Sentimiento & Procesa emojis y negación; calcula polaridad, emociones y nivel de evidencia. \\
-    05 & Tópicos & Estima el modelo LDA sobre la matriz documento--término. \\
-    06 & Temporal & Agrega por día, semana y mes; series de polaridad y volumen. \\
-    07 & Markov & Estima la cadena de Markov sobre la secuencia de estados. \\
-    08 & Evaluación & Calcula cobertura y, si existen, métricas contra etiquetas manuales. \\
-    09 & Informe & Genera figuras, tablas, macros y compila el PDF. \\
-    10 & Pruebas & Ejecuta la batería de pruebas automatizadas. \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Cada etapa abre una transacción en la base de datos de auditoría SQLite y registra, al
-concluir, el número de elementos procesados, la marca de tiempo y los artefactos
-producidos. Esto garantiza la trazabilidad completa: es posible reconstruir qué versión
-del código y de los datos produjo cada figura del informe. 
-
-Para robustecer la etapa 04 y dotarla de capacidad operativa en entornos de producción, se integró el motor modular \textit{Emotica}, cuyo flujo detallado de inferencia se esquematiza en la Figura~\ref{fig:pipeline_emotica}.
-
-\input{figures/fig_pipeline}
-
-\subsection{Extracción y transformación de datos}
-
-La exportación de Telegram Desktop produce un archivo JSON con dos tipos de entradas:
-mensajes de usuario y mensajes de servicio (avisos de ingreso, cambios de título, etc.).
-La etapa de importación distingue ambos, descarta los segundos y los mensajes
-multimedia sin texto, y conserva el resto. El texto puede aparecer como una cadena de
-caracteres o como una lista de segmentos heterogéneos (texto plano, enlaces, menciones y
-emojis); el importador normaliza ambas formas a una representación textual uniforme y,
-por separado, extrae la lista de emojis y el diccionario de reacciones.
-
-Las marcas de tiempo se almacenan en UTC y se conservan también en hora local. La
-normalización del texto aplica la forma Unicode NFC, convierte a minúsculas y colapsa
-espacios en blanco, con la decisión de dise\~no crucial de \emph{no} eliminar los emojis,
-que permanecen como unidades léxicas de pleno derecho. Asimismo, se incorpora un paso previo de anonimización PII (\textit{Personally Identifiable Information}) mediante el módulo \texttt{pii.R}, sustituyendo números de teléfono, correos electrónicos y menciones por tokens neutros (\texttt{[PHONE]}, \texttt{[EMAIL]}).
-
-\subsection{Se\~nales de evidencia}
-
-El clasificador separa tres fuentes de evidencia, resumidas en la Tabla~\ref{tab:senales}.
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \caption{Se\~nales de evidencia y su papel en el clasificador.}
+  \caption{Señales de Evidencia y su Ponderación en el Clasificador}
   \label{tab:senales}
-  \begin{tabular}{lp{5.5cm}p{5.5cm}}
+  \begin{tabular}{lp{6.2cm}p{5.5cm}}
     \toprule
-    Se\~nal & Origen & Tratamiento \\
+    Señal & Origen de los Datos & Tratamiento Metodológico \\
     \midrule
-    Léxico & Palabras y frases del diccionario & Peso y polaridad por término, con inversión por negación. \\
-    Emojis & Caracteres emoji del texto & Entrada léxica propia con polaridad y emoción; peso configurable ($\alpha$). \\
-    Reacciones & Contadores de reacción de Telegram & Se registran; peso por defecto nulo para evitar doble conteo. \\
+    Léxico & Diccionario de términos en español y modismos UMSA & Puntuación ponderada con inversión sintáctica por negación. \\
+    Emojis & Caracteres Unicode en el cuerpo del mensaje & Entrada léxica con valencia y emoción; ponderación $\alpha = 1,0$. \\
+    Reacciones & Reacciones interactivas directas en Telegram & Registro desacoplado; ponderación nula por defecto para evitar doble cómputo. \\
     \bottomrule
   \end{tabular}
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize
+    \textit{Nota.} La separación estricta previene sesgos de sobreestimación cuando un mensaje recibe múltiples reacciones positivas pero su texto expresa una queja académica.
+  \end{minipage}
 \end{table}
 
-\subsection{Puntuación de polaridad}
+\subsection{Puntuación de Polaridad y Ventana de Negación}
 
-La puntuación de polaridad de un mensaje se define como la suma algebraica de los pesos
-de los términos reconocidos, más la contribución de los emojis ponderada por un
-coeficiente $\alpha$:
-
-\[
+La puntuación afectiva de un mensaje $m$ se define como:
+\begin{equation}
 \text{score}(m) \;=\; \sum_{i \in \text{l\'exico}(m)} w_i \,\cdot\, s_i
    \;+\; \alpha \sum_{j \in \text{emojis}(m)} w_j ,
-\]
-
-\noindent donde $w_i$ es la magnitud del término, $s_i \in \{-1,+1\}$ es su signo
-(invertido si cae en la ventana de negación) y $w_j$ es la polaridad del emoji. La
-etiqueta de polaridad resulta del signo del \emph{score}: positivo, negativo o neutro.
-
-\subsection{El motor afectivo Emotica: taxonomía de 15 emociones y din\'amica de opuestas}
-\label{sec:emotica_motor}
-
-Para trascender la polaridad unidimensional y mapear estados afectivos complejos, el motor \textit{Emotica} implementa una taxonomía de quince emociones discretas organizadas en dos dimensiones psicológicas: \textbf{Valencia} (positiva, negativa o ambigua) y \textbf{Activación o Arousal} (baja, media o alta), declaradas en \texttt{resources/taxonomy/emotions.yml}. La Tabla~\ref{tab:taxonomia_15} y la Figura~\ref{fig:espacio_afectivo} detallan esta distribución.
-
-\input{tables/tab_taxonomia_15}
-
-\input{figures/fig_espacio_afectivo}
-
-Un componente fundamental del motor es la \textbf{transferencia hacia emociones opuestas}. Cuando un término asociado a una emoción $e$ aparece precedido por un negador dentro de una ventana contextual de tres tokens ($w=3$), el sistema transfiere una fracción del peso a la emoción opuesta configurada ($e_{op}$):
-\begin{equation}
-    S(e_{op}) \leftarrow S(e_{op}) + \lambda_{neg} \cdot S(e, t)
-    \label{eq:opuesta}
 \end{equation}
-donde $\lambda_{neg} = 0.5$ (\texttt{factor\_negacion\_opuesta}). De este modo, una locución como \textit{"no estoy tranquila"} no se clasifica como neutra ni vacía, sino que activa directamente la categoría de \textbf{Preocupación}.
+donde $w_i \in \mathbb{R}^+$ representa el peso del término léxico, $w_j$ es la valencia asignada al emoji y $s_i \in \{-1, +1\}$ es el factor de signo. Si un término cae dentro de una ventana de $k=3$ tokens precedida por un negador (\emph{no, nunca, jamás, tampoco}), $s_i$ se invierte y la evidencia se transfiere hacia la emoción opuesta en la taxonomía (Listado~\ref{lst:negacion_motor}). Las excepciones por doble negación (\emph{"no está nada mal"}) restauran la polaridad positiva con penalización de intensidad.
 
-\subsection{Saturación no lineal y se\~nales estilísticas}
-\label{sec:saturacion}
+\subsection{Nivel de Evidencia y la Regla de Indeterminación}
 
-A fin de prevenir que mensajes extensos o repetitivos distorsionen la escala afectiva, Emotica sustituye la acumulación puramente lineal por una función de saturación exponencial normalizada en el intervalo $[0, 1]$:
+Sea $e(m)$ el número total de unidades probatorias reconocidas (términos léxicos y emojis). Se establece la función de evidencia:
 \begin{equation}
-    I(e) = 1 - \exp\left(-\frac{S(e)}{\sigma}\right) + \Delta_{estilo}
-    \label{eq:saturacion_exp}
-\end{equation}
-donde $\sigma = 2.0$ (\texttt{escala\_intensidad}) y $\Delta_{estilo} \le 0.60$ es un factor de intensificación tipográfica configurado en \texttt{config/engine.yml} (Tabla~\ref{tab:reglas_motor}), el cual premia la presencia de signos de exclamación (+0.15 hasta un tope de 3), palabras completas en mayúsculas (+0.20) y alargamiento vocálico informal (+0.15, ej. \textit{"graciaaaas"}).
-
-\input{tables/tab_reglas_motor}
-
-El valor final $I(e)$ se categoriza en los niveles discretos \textit{Leve} ($[0.30, 0.60)$), \textit{Moderada} ($[0.60, 0.85)$) y \textit{Alta / Muy Alta} ($\ge 0.85$).
-
-\subsection{Detección multipalabra de jerga regional e idioms}
-\label{sec:jerga}
-
-En el discurso universitario e informal de mensajería, gran parte de la carga emocional radica en locuciones compuestas (\textit{n-grams}) que pierden su semántica si se tokenizan como palabras aisladas. Emotica introduce una etapa de detección previa de modismos mediante los archivos \texttt{jerga\_modismos.csv} y \texttt{slang\_idioms.csv}. 
-
-El motor cubre expresiones locales del contexto universitario boliviano (UMSA) como \textit{"zafé el semestre"} (alegría/tranquilidad), \textit{"me jalaron"} (tristeza/decepción), \textit{"barco"} o \textit{"reventado"}, junto con modismos hispanoamericanos (México, España, Argentina, Chile, Colombia) y abreviaturas de chat (\textit{tqm, ntp, qepd}). Asimismo, se contemplan locuciones idiomáticas en inglés como \textit{"over the moon"}, \textit{"last straw"} o \textit{"butterflies in my stomach"}.
-
-\subsection{Extensión multilingüe y filtrado de ruido}
-\label{sec:multilingue}
-
-La arquitectura de Emotica es estrictamente modular y desacoplada del código ejecutable. Para habilitar un nuevo idioma basta con suministrar su carpeta correspondiente en \texttt{resources/}, sin alterar el núcleo del algoritmo. La Tabla~\ref{tab:cobertura_lexica} resume el inventario léxico activo en español e inglés.
-
-\input{tables/tab_cobertura_lexica}
-
-Adicionalmente, se integra un catálogo universal de 75 emojis afectivos (\texttt{\_universal/emojis.csv}) válido para cualquier lengua, y filtros heurísticos de publicidad (\texttt{resources/anuncios/\{es,en\}.txt}) que descartan mensajes comerciales y convocatorias masivas para evitar falsos positivos en emociones como alegría o esperanza.
-
-\subsection{Nivel de evidencia y la etiqueta \emph{indeterminado}}
-
-El n\'umero de pruebas $e(m)$ es el total de términos y emojis reconocidos en el
-mensaje. Se define:
-
-\[
 \text{evidencia}(m) =
 \begin{cases}
   \text{sin\_evidencia}, & e(m) = 0,\\
   \text{insuficiente},   & 0 < e(m) < \tau,\\
   \text{suficiente},     & e(m) \ge \tau,
 \end{cases}
-\]
+\end{equation}
+con umbral $\tau = 1$. Se adopta la regla epistemológica fundamental: si $\text{evidencia}(m)$ se clasifica como \emph{sin\_evidencia} o \emph{insuficiente}, la polaridad se etiqueta como \textbf{\emph{indeterminado}} y jamás como \emph{neutro}. La neutralidad se reserva estrictamente para mensajes con evidencia activa balanceada alrededor del cero.
 
-\noindent con umbral $\tau$ configurable (por defecto $\tau = 1$). Si un mensaje no
-aporta evidencia, su etiqueta de polaridad se fuerza a \emph{indeterminado} y nunca a
-\emph{neutro}. Esta regla expresa un principio metodológico: la ausencia de evidencia no
-es evidencia de ausencia, y la neutralidad debe reservarse para mensajes con se\~nal
-explícita cuyo balance es cercano a cero.
+\subsection{Modelado de Tópicos (LDA) y Cadenas de Markov}
 
-\subsection{Análisis temporal}
-
-La etapa temporal une los mensajes con sus resultados de sentimiento, reconstruye las
-marcas temporales y agrega por día, semana y mes. Para cada período se calculan el
-volumen, la polaridad media, los conteos por etiqueta, las proporciones normalizadas y
-los totales por emoción. Se aplican además medias móviles de suavizado para distinguir
-tendencia y ruido.
-
-\subsection{Modelado de tópicos}
-
-Los tópicos se estiman con LDA \citep{blei2003lda} mediante \texttt{quanteda}
-\citep{benoit2018quanteda} y \texttt{topicmodels} \citep{grun2011topicmodels}. El
-preprocesamiento construye una matriz documento--término tras eliminar puntuación,
-n\'umeros y palabras vacías del espa\~nol, con n-gramas de uno a dos términos. El
-n\'umero de tópicos $k$ se fija en la configuración y el muestreo usa una semilla fija
-para garantizar reproducibilidad. Los resultados se interpretan cualitativamente, tal
-como recomienda \citet{grimmer2013text}.
-
-\subsection{Cadenas de Markov}
-
-La secuencia de estados de polaridad se modela como una cadena de Markov de primer orden
-\citep{norris1997markov}. La matriz de transición $P$ se estima por máxima verosimilitud
-a partir de las transiciones observadas entre mensajes consecutivos. A partir de $P$ se
-calculan la distribución estacionaria $\pi$ y el tiempo medio de permanencia en cada
-estado. Estos indicadores describen la dinámica: un estado con alta permanencia act\'ua
-como un atractor del sistema.
-
-\subsection{Marco de evaluación}
-
-El dise\~no contempla la evaluación contra etiquetas manuales. La infraestructura
-almacena anotaciones humanas y calcula m\'etricas de precisi\'on, exhaustividad y
-$F_1$, as\'\i{} como la $\kappa$ de Cohen para el acuerdo entre anotadores
-\citep{cohen1960kappa,landis1977kappa}. En ausencia de etiquetas manuales, el informe
-reporta las m\'etricas internas de cobertura y de nivel de evidencia, y se\~nala
-explícitamente la necesidad de anotación futura.
-
-\subsection{Desacoplamiento arquitectónico y servicio en Python/Flask}
-\label{sec:flask_prod}
-
-Aunque la experimentación, validación estadística y modelado temporal se desarrollaron en R (\texttt{engine.R}, prototipo interactivo en Shiny \texttt{app.R}), la necesidad de servir inferencias afectivas en tiempo real con alta concurrencia condujo al desacoplamiento de la lógica hacia un microservicio REST en \textbf{Python y Flask}. 
-
-El servicio en Flask carga los recursos tabulares en memoria durante el arranque, exponiendo un endpoint parametrizado (\texttt{POST /analizar}) que recibe el texto y el código de idioma (\texttt{"lang": "es"|"en"}). Esta transición asegura tiempos de respuesta menores a 25 milisegundos por mensaje y permite integrar el clasificador determinista de 15 emociones en cualquier plataforma web moderna.
+\begin{itemize}
+  \item \textbf{Asignación Latente de Dirichlet (LDA):} Se modela la distribución probabilística de palabras en documentos bajo el supuesto de que cada mensaje es una mezcla de $K=5$ tópicos latentes, estimando las distribuciones multinomiales $\theta$ y $\beta$ mediante muestreo de Gibbs.
+  \item \textbf{Cadenas de Markov de Primer Orden:} La secuencia cronológica de estados polares $S_t \in \{\text{positivo}, \text{negativo}, \text{neutro}\}$ se modela mediante una matriz estocástica $P = [p_{ij}]$, derivando la distribución estacionaria $\pi P = \pi$, el tiempo medio de permanencia en el estado $i$ como $T_i = \frac{1}{1 - p_{ii}}$ y el tiempo de recuperación ante episodios negativos.
+\end{itemize}
